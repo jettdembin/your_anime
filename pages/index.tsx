@@ -1,82 +1,74 @@
-import type { NextPage } from "next";
-import { useEffect } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import React, { useState, useEffect } from "react";
 
-("use client");
+// The Kitsu API endpoint for fetching data.
+const API_URL: string = "https://kitsu.io/api/edge";
 
-const Home: NextPage = () => {
-  const url = "https://kitsu.io/api/edge/anime?filter[text]=naruto";
+interface Category {
+  category: string;
+}
 
-  const myHeaders = new Headers();
-  myHeaders.append("Accept", "application/vnd.api+json");
-  myHeaders.append("Content-Type", "application/vnd.api+json");
+const Home = ({ data }: { data: any }) => {
+  const [categrory, setCategory] = useState<string>("");
+  const [anime, setAnime] = useState<any[]>([]);
 
-  let req = new Request(url, {
-    method: "GET",
-    headers: myHeaders,
-  });
-  const start = async () => {
-    return await fetch(req).then((res) => res.json());
+  const handleAnimeCategorySelection = async (category: string) => {
+    const res: any = await fetch(
+      `${API_URL}/anime?filter[categories]=${category}`
+    );
+    const data: any = await res.json();
+
+    console.log(data, "data being set");
+
+    setAnime(data.data);
   };
-  useEffect(() => {
-    let ignore = false;
-    if (ignore) return;
 
-    start();
-  }, []);
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  useEffect(() => {
+    if (anime.length === 0) return;
+
+    console.log(anime);
+  }, [anime]);
+
+  useEffect(() => {
+    console.log(data, "data from initial props");
+  }, [data]);
+
+  return (
+    <div>
+      <h1>Anime from Kitsu</h1>
+      {/* Render the data here. */}
+      <select
+        onChange={(e) => {
+          handleAnimeCategorySelection(e.target.value);
+        }}
+      >
+        <option>adventure</option>
+        <option>fantasy</option>
+        <option>mystery</option>
+      </select>
+      <main>
+        {anime.map((anim) => {
+          return (
+            <h1 key={anim.attributes.canonicalTitle}>
+              {anim.attributes.canonicalTitle}
+            </h1>
+          );
+        })}
+      </main>
+    </div>
+  );
+};
+
+// The `getInitialProps` function is called by Next.js to fetch data on the server side
+// before rendering the component. It accepts the Next.js `ctx` object, which contains
+// the request context.
+Home.getInitialProps = (ctx: any) => {
+  // Fetch the data from the Kitsu API.
+  return fetch(`${API_URL}/anime`)
+    .then((res) => res.json())
+    .then((data) => {
+      // Return the data as props.
+      return { data };
+    });
 };
 
 export default Home;
-
-export const getServerSideProps = async () => {
-  const url = "https://kitsu.io/api/edge/anime?filter[text]=naruto";
-
-  const myHeaders = new Headers();
-  myHeaders.append("Accept", "application/vnd.api+json");
-  myHeaders.append("Content-Type", "application/vnd.api+json");
-
-  let req = new Request(url, {
-    method: "GET",
-    headers: myHeaders,
-  });
-
-  // Fetch data from external API
-  const res = await fetch(req);
-  const data = await res.json();
-
-  // const products = await getProducts(payments, {
-  //   includePrices: true,
-  //   activeOnly: true,
-  // })
-  //   .then((res) => res)
-  //   .catch((error) => console.log(error.message))
-
-  // const [
-  //   netflixOriginals,
-  //   trendingNow,
-  //   topRated,
-  //   actionMovies,
-  //   comedyMovies,
-  //   horrorMovies,
-  //   romanceMovies,
-  //   documentaries,
-  // ] = await Promise.all([
-  //   fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
-  //   fetch(requests.fetchTrending).then((res) => res.json()),
-  //   fetch(requests.fetchTopRated).then((res) => res.json()),
-  //   fetch(requests.fetchActionMovies).then((res) => res.json()),
-  //   fetch(requests.fetchComedyMovies).then((res) => res.json()),
-  //   fetch(requests.fetchHorrorMovies).then((res) => res.json()),
-  //   fetch(requests.fetchRomanceMovies).then((res) => res.json()),
-  //   fetch(requests.fetchDocumentaries).then((res) => res.json()),
-  // ])
-
-  return {
-    props: {
-      data,
-    },
-  };
-};
