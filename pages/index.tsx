@@ -13,13 +13,24 @@ const Home = ({ data }: { data: any }) => {
 
   const handleAnimeCategorySelection = async (category: string) => {
     const res: any = await fetch(
-      `${API_URL}/anime?filter[categories]=${category}`
+      `${API_URL}/anime?filter%5Bcategories%5D=${category}`
     );
     const data: any = await res.json();
 
     console.log(data, "data being set");
 
     setAnime(data.data);
+  };
+
+  const handleId = async () => {
+    const res: any = await fetch(
+      `https://private-anon-082fc17cbd-kitsu.apiary-mock.com/api/edge/anime/100`
+    );
+    const data: any = await res.json();
+
+    console.log(data, "data being set");
+
+    setAnime([...data.data.attributes.canonicalTitle]);
   };
 
   useEffect(() => {
@@ -35,10 +46,10 @@ const Home = ({ data }: { data: any }) => {
   return (
     <div>
       <h1>Anime from Kitsu</h1>
-      {/* Render the data here. */}
       <select
         onChange={(e) => {
           handleAnimeCategorySelection(e.target.value);
+          // handleId();
         }}
       >
         <option>adventure</option>
@@ -46,11 +57,12 @@ const Home = ({ data }: { data: any }) => {
         <option>mystery</option>
       </select>
       <main>
-        {anime.map((anim) => {
+        {anime?.map((anim) => {
           return (
-            <h1 key={anim.attributes.canonicalTitle}>
-              {anim.attributes.canonicalTitle}
-            </h1>
+            <>
+              <h1 key={anim.id}>{anim.attributes.canonicalTitle}</h1>
+              <img src={anim.attributes.posterImage.tiny} />
+            </>
           );
         })}
       </main>
