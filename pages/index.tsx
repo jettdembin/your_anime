@@ -62,9 +62,14 @@ const Home = ({ data }: { data: any }) => {
           return (
             <>
               <h1 key={anim.id}>{anim.attributes.canonicalTitle}</h1>
-              <Image
+              {/* <Image
                 width={200}
                 height={200}
+                src={anim.attributes.posterImage.tiny}
+                alt={`${anim.attributes.canonicalTitle} image`}
+                role="presentation"
+              /> */}
+              <img
                 src={anim.attributes.posterImage.tiny}
                 alt={`${anim.attributes.canonicalTitle} image`}
                 role="presentation"
