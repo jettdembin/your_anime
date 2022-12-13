@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 // The Kitsu API endpoint for fetching data.
@@ -61,7 +62,13 @@ const Home = ({ data }: { data: any }) => {
           return (
             <>
               <h1 key={anim.id}>{anim.attributes.canonicalTitle}</h1>
-              <img src={anim.attributes.posterImage.tiny} />
+              <Image
+                width={200}
+                height={200}
+                src={anim.attributes.posterImage.tiny}
+                alt={`${anim.attributes.canonicalTitle} image`}
+                role="presentation"
+              />
             </>
           );
         })}
