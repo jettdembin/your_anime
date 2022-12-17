@@ -1,5 +1,10 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEventHandler,
+} from "react";
 
 // The Kitsu API endpoint for fetching data.
 const API_URL: string = "https://kitsu.io/api/edge";
@@ -9,8 +14,23 @@ interface Category {
 }
 
 const Home = ({ data }: { data: any }) => {
+  const [search, setSearch] = useState<string>("");
   const [categrory, setCategory] = useState<string>("");
   const [anime, setAnime] = useState<any[]>([]);
+
+  const handleSearchValue = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget?.value);
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLInputElement>
+  ): Promise<any> => {
+    e.preventDefault();
+    const res = await fetch(`${API_URL}/anime?filter[text]=${search}`).then(
+      (res) => res.json()
+    );
+    setAnime(res.data);
+  };
 
   const handleAnimeCategorySelection = async (category: string) => {
     const res: any = await fetch(
@@ -58,6 +78,10 @@ const Home = ({ data }: { data: any }) => {
         <option>mystery</option>
       </select>
       <main>
+        <form onSubmit={handleSubmit}>
+          <input onChange={(e) => handleSearchValue(e)} value={search} />
+          <button type="submit">Submit</button>
+        </form>
         {anime?.map((anim) => {
           return (
             <>
