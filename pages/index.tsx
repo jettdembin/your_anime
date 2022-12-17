@@ -9,22 +9,27 @@ import React, {
 // The Kitsu API endpoint for fetching data.
 const API_URL: string = "https://kitsu.io/api/edge";
 
-interface Category {
-  category: string;
-}
+type Category = {
+  id: string;
+  attributes: {
+    canonicalTitle: string;
+    posterImage: {
+      tiny: string;
+      medium: string;
+    };
+  };
+}[];
 
 const Home = ({ data }: { data: any }) => {
-  const [search, setSearch] = useState<string>("");
-  const [categrory, setCategory] = useState<string>("");
-  const [anime, setAnime] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
+  const [categrory, setCategory] = useState("");
+  const [anime, setAnime] = useState<Category | null>(null);
 
   const handleSearchValue = (e: React.FormEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget?.value);
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLInputElement>
-  ): Promise<any> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(`${API_URL}/anime?filter[text]=${search}`).then(
       (res) => res.json()
@@ -33,10 +38,9 @@ const Home = ({ data }: { data: any }) => {
   };
 
   const handleAnimeCategorySelection = async (category: string) => {
-    const res: any = await fetch(
+    const res = await fetch(
       `${API_URL}/anime?filter%5Bcategories%5D=${category}`
-    );
-    const data: any = await res.json();
+    ).then((res) => res.json());
 
     console.log(data, "data being set");
 
@@ -55,7 +59,7 @@ const Home = ({ data }: { data: any }) => {
   };
 
   useEffect(() => {
-    if (anime.length === 0) return;
+    if (anime?.length === 0) return;
 
     console.log(anime);
   }, [anime]);
@@ -93,8 +97,10 @@ const Home = ({ data }: { data: any }) => {
                 alt={`${anim.attributes.canonicalTitle} image`}
                 role="presentation"
               /> */}
-              <img
-                src={anim.attributes.posterImage.tiny}
+              <Image
+                width={200}
+                height={100}
+                src={anim.attributes.posterImage.medium}
                 alt={`${anim.attributes.canonicalTitle} image`}
                 role="presentation"
               />
