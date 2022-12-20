@@ -4,29 +4,20 @@ import React, {
   ChangeEvent,
   FormEventHandler,
 } from "react";
-import Image from "next/image";
 
-import { ToastContainer, toast } from "react-toastify";
+import AnimeCard from "../components/AnimeCard";
+
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import { Anime } from "../utils/models";
+
+import { Query, QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { stringify } from "querystring";
 
 // The Kitsu API endpoint for fetching data.
 const API_URL: string = "https://kitsu.io/api/edge";
 
-type Anime = {
-  id: string;
-  attributes: {
-    canonicalTitle: string;
-    popularityRank: number;
-    startDate: string;
-    endDate: string;
-    posterImage: {
-      tiny: string;
-      medium: string;
-    };
-  };
-};
-
-const Home = ({ data }: { data: any }) => {
+const Home = () => {
   const [categrory, setCategory] = useState("");
 
   const [search, setSearch] = useState("");
@@ -49,7 +40,7 @@ const Home = ({ data }: { data: any }) => {
     );
     setAnime(res.data);
   };
-
+  const queryClient = new QueryClient();
   const handleAnimeCategorySelection = async (category: string) => {
     const res = await fetch(
       `${API_URL}/anime?filter%5Bcategories%5D=${category}`
@@ -71,13 +62,13 @@ const Home = ({ data }: { data: any }) => {
     setAnime([...data.data.attributes.canonicalTitle]);
   };
 
-  const notify = () => toast("Added 🙌");
+  const notifyFavorites = () => toast("Added to Favorites🙌");
 
   const handleAddToFavorites = (anime: Anime) => {
     let filtered = new Set([...favorites, anime]);
     setFavorites(filtered);
 
-    notify();
+    notifyFavorites();
   };
 
   useEffect(() => {
@@ -87,14 +78,11 @@ const Home = ({ data }: { data: any }) => {
   }, [anime]);
 
   useEffect(() => {
-    console.log(data, "data from initial props");
-  }, [data]);
-  useEffect(() => {
     console.log(favorites);
   }, [favorites]);
 
   return (
-    <div className="p-12">
+    <div className="p-12" style={{ minHeight: "100%" }}>
       <header className="flex flex-col justify-center border border-red-300">
         <h1 className="mx-auto">Anime from Kitsu</h1>
         <div className="mx-auto">
@@ -123,50 +111,21 @@ const Home = ({ data }: { data: any }) => {
           <option>mystery</option>
         </select> */}
       </header>
-      <main>
-        <div className="grid grid-cols-2 gap-4">
-          {anime?.map((anim) => {
-            return (
-              <div
-                key={anim.id}
-                className="border bg-green-50 rounded-md shadow-md p-4 "
-              >
-                <h1>{anim.attributes.canonicalTitle}</h1>
-                {/* <Image
-                width={200}
-                height={200}
-                src={anim.attributes.posterImage.tiny}
-                alt={`${anim.attributes.canonicalTitle} image`}
-                role="presentation"
-              /> */}
-                <figure className="grid grid-cols-2">
-                  <Image
-                    width={200}
-                    height={100}
-                    src={anim.attributes.posterImage.medium}
-                    alt={`${anim.attributes.canonicalTitle} image`}
-                    role="presentation"
-                  />
-                  <div className="flex flex-col border border-black p-2">
-                    <p>
-                      <b>Rank:</b> {anim.attributes.popularityRank}{" "}
-                      {anim.attributes.popularityRank < 100 && "😍"}
-                    </p>
-                    <p>Start: {anim.attributes.startDate}</p>
-                    <p>End: {anim.attributes.endDate ?? "Airing"}</p>
-                    <button
-                      className="mt-auto border bg-green-400 rounded-sm border-none p-1 text-white bg-white"
-                      onClick={() => {
-                        handleAddToFavorites(anim);
-                      }}
-                    >
-                      Add to Favorites ⭐
-                    </button>
-                  </div>
-                </figure>
-              </div>
-            );
-          })}
+      <main style={{ minHeight: "100%" }}>
+        <div className="grid grid-cols-2 gap-4" style={{ minHeight: "100%" }}>
+          <QueryClientProvider client={queryClient}>
+            {anime?.map((anim) => {
+              return (
+                <AnimeCard
+                  key={anim.id}
+                  id={anim.id}
+                  attributes={anim.attributes}
+                  handleAddToFavorites={handleAddToFavorites}
+                  search={search}
+                />
+              );
+            })}
+          </QueryClientProvider>
         </div>
       </main>
       <ToastContainer
