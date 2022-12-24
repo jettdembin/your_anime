@@ -3,7 +3,7 @@ import React from "react";
 
 const AniList = () => {
   return (
-    <div>
+    <div className="relative">
       <nav className="h-16 bg-gray-800 flex items-center justify-center">
         <ul className="mx-auto flex gap-96 text-gray-100">
           <li className="my-auto font-medium">AL</li>
@@ -127,6 +127,11 @@ const AniList = () => {
               </p>
             </div>
           </div>
+        </div>
+        <div className="absolute bottom-0 left-1/2">
+          <button className="bg-gray-50 rounded-lg px-4 py-2 mx-auto">
+            Join ⏩
+          </button>
         </div>
       </header>
     </div>
