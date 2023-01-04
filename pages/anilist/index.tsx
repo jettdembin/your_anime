@@ -3,8 +3,8 @@ import React from "react";
 
 const AniList = () => {
   return (
-    <div className="relative">
-      <nav className="h-16 bg-gray-800 flex items-center justify-center">
+    <div className="">
+      <nav className="h-16 px-6 bg-gray-800 flex items-center justify-center md:hidden">
         <ul className="mx-auto flex gap-96 text-gray-100">
           <li className="my-auto font-medium">AL</li>
           <li className="my-auto font-medium">Search</li>
@@ -18,7 +18,7 @@ const AniList = () => {
           </div>
         </ul>
       </nav>
-      <header className="mx-auto my-12 bg-gray-800 px-20 py-16 max-w-6xl rounded-3xl shadow-2xl">
+      <header className="relative bg-gray-800 px-20 py-16 max-w-6xl shadow-2xl lg:mx-10 lgmy-12 lg:rounded-3xl">
         <h1 className="text-3xl font-bold text-gray-100 mb-10 mx-auto max-w-full text-center">
           The next generation anime platform
         </h1>
@@ -134,6 +134,31 @@ const AniList = () => {
           </button>
         </div>
       </header>
+      <main className="px-6 py-6">
+        <div className="flex gap-4">
+          <h2 className="text-xl">Browse</h2>
+          <div>
+            <h2 className="text-xl">Anime ⬇</h2>
+            <ul className="rounded-md shadow-md px-2 py-2">
+              <li>
+                <h2 className="text-xl">Manga</h2>
+              </li>
+              <li>
+                <h2 className="text-xl">Characters</h2>
+              </li>
+              <li>
+                <h2 className="text-xl">Staff</h2>
+              </li>
+              <li>
+                <h2 className="text-xl">Studios</h2>
+              </li>
+              <li>
+                <h2 className="text-xl">Users</h2>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
