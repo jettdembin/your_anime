@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["media.kitsu.io", "anilist.co"],
+    domains: ["media.kitsu.io", "anilist.co", "s4.anilist.co"],
     // formats: ["image/avif", "image/webp"],
     // remotePatterns: [
     //   {

@@ -1,7 +1,68 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const TRENDING_URL = "https://graphql.anilist.co";
+
+const getTrending = () => {
+  return axios.post(TRENDING_URL, {
+    query: `
+      query {
+        Trending: Page {
+          media (type: ANIME, sort: POPULARITY_DESC) {
+            id
+            title {
+              romaji
+              english
+              native
+            }
+            coverImage {
+              large
+            }
+            format
+            episodes
+            status
+            startDate {
+              year
+              month
+              day
+            }
+            endDate {
+              year
+              month
+              day
+            }
+            synonyms
+            genres
+            averageScore
+            popularity
+          }
+        }
+      }
+    `,
+  });
+};
 
 const AniList = () => {
+  const [trending, setTrending] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect((): any => {
+    let ignore = false;
+    if (ignore) return;
+
+    const fetchData = async () => {
+      const res = await getTrending();
+      setTrending(res.data.data.Trending.media);
+      console.log(res);
+      setLoading(false);
+    };
+
+    fetchData();
+    console.log(trending);
+    return () => (ignore = true);
+  }, []);
+
   return (
     <div className="">
       <nav className="h-16 px-6 bg-gray-800 flex items-center justify-center md:hidden">
@@ -169,6 +230,58 @@ const AniList = () => {
             Menu
           </div>
         </div>
+        <div className="mt-6">
+          <h3 className="py-4">TRENDING NOW</h3>
+          <div className="flex">
+            {trending?.map((media) => (
+              <h1>test</h1>
+            ))}
+          </div>
+        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4">
+            {trending.map((media) => (
+              <a
+                href={`/anime/${media.id}`}
+                key={media.id}
+                className="group rounded-lg shadow-lg overflow-hidden"
+              >
+                <Image
+                  width={150}
+                  height={150}
+                  src={media.coverImage.large}
+                  alt={media.title.romaji}
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2 text-gray-100">
+                    {media.title.romaji}
+                  </div>
+                  <p className="text-gray-500 text-base">
+                    {media?.synopsis?.slice(0, 100)}...
+                  </p>
+                </div>
+                <div className="px-6 py-4">
+                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                    #{media.format}
+                  </span>
+                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                    {media.status}
+                  </span>
+                  {media.genres.map((genre) => (
+                    <span
+                      key={genre}
+                      className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+                    >
+                      {genre}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
