@@ -1,6 +1,9 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useRef } from "react";
+
 import axios from "axios";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const TRENDING_URL = "https://graphql.anilist.co";
 
@@ -47,6 +50,9 @@ const AniList = () => {
   const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
+  const [isBrowseAnimeOpen, setIsBrowseAnimeOpen] = useState(false);
+
   useEffect((): any => {
     let ignore = false;
     if (ignore) return;
@@ -62,6 +68,12 @@ const AniList = () => {
     console.log(trending);
     return () => (ignore = true);
   }, []);
+
+  const browseAnimeRef = useRef(null);
+
+  useClickOutside(browseAnimeRef, () => {
+    if (isBrowseAnimeOpen) setIsBrowseAnimeOpen(false);
+  });
 
   return (
     <div className="">
@@ -196,11 +208,18 @@ const AniList = () => {
         </div>
       </header>
       <main className="px-6 py-6">
-        <div className="flex gap-4">
-          <h2 className="text-xl">Browse</h2>
+        <div className="flex gap-8">
+          <h2 className="text-3xl">Browse</h2>
           <div>
-            <h2 className="text-xl">Anime ⬇</h2>
-            <ul className="rounded-md shadow-md px-2 py-2">
+            <h2 className="text-3xl">{animeBrowseFilter} ⬇</h2>
+            <ul
+              className="rounded-md shadow-md px-2 py-2 cursor-pointer"
+              onClick={(e: any) => {
+                setAnimeBrowseFilter(e.target.innerText);
+                console.log(e.target.innerText);
+              }}
+              ref={browseAnimeRef}
+            >
               <li>
                 <h2 className="text-xl">Manga</h2>
               </li>
@@ -232,11 +251,7 @@ const AniList = () => {
         </div>
         <div className="mt-6">
           <h3 className="py-4">TRENDING NOW</h3>
-          <div className="flex">
-            {trending?.map((media) => (
-              <h1>test</h1>
-            ))}
-          </div>
+          <div className="flex"></div>
         </div>
         {loading ? (
           <div>Loading...</div>
