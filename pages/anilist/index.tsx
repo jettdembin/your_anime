@@ -5,14 +5,22 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import useClickOutside from "../../hooks/useClickOutside";
 
-const TRENDING_URL = "https://graphql.anilist.co";
+const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
-const getTrending = () => {
-  return axios.post(TRENDING_URL, {
-    query: `
+
+const AniList = () => {
+  const [trending, setTrending] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
+	const [isBrowseAnimeOpen, setIsBrowseAnimeOpen] = useState(false);
+	
+	const getTrending = () => {
+		return axios.post(TRENDING_URL, {
+			query: `
       query {
         Trending: Page {
-          media (type: ANIME, sort: POPULARITY_DESC) {
+          media (type: ${animeBrowseFilter.toUpperCase()}, sort: POPULARITY_DESC) {
             id
             title {
               romaji
@@ -43,37 +51,66 @@ const getTrending = () => {
         }
       }
     `,
-  });
-};
+		});
+	};
 
-const AniList = () => {
-  const [trending, setTrending] = useState([]);
-  const [loading, setLoading] = useState(true);
+	const CHARACTERS_QUERY = `
+	query {
+		characters(page: 1, perPage: 50) {
+			edges {
+			node {
+				id
+				name {
+				first
+				last
+				}
+				description
+				image {
+				large
+				}
+			}
+			}
+		}
+	}
+	`;
 
-  const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
-  const [isBrowseAnimeOpen, setIsBrowseAnimeOpen] = useState(false);
 
   useEffect((): any => {
-    let ignore = false;
-    if (ignore) return;
+		let ignore = false;
+		if (ignore) return;
 
-    const fetchData = async () => {
-      const res = await getTrending();
-      setTrending(res.data.data.Trending.media);
-      console.log(res);
-      setLoading(false);
-    };
+		const fetchData = async () => {
+			const res = await getTrending();
+			setTrending(res.data.data.Trending.media);
+			console.log(res);
+			setLoading(false);
+		};
 
-    fetchData();
-    console.log(trending);
-    return () => (ignore = true);
-  }, []);
+		fetchData();
+		console.log(trending);
+		return () => (ignore = true);
+	}, [animeBrowseFilter]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const { data } = await axios.post(ANILIST_API_ENDPOINT, {
+					query: CHARACTERS_QUERY,
+				});
+				console.log(data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchData();
+	}, []);
 
   const browseAnimeRef = useRef(null);
 
-  useClickOutside(browseAnimeRef, () => {
-    if (isBrowseAnimeOpen) setIsBrowseAnimeOpen(false);
-  });
+//   useClickOutside(browseAnimeRef, () => {
+//     if (isBrowseAnimeOpen) setIsBrowseAnimeOpen(false);
+//   });
 
   return (
 		<div className="">
@@ -227,6 +264,9 @@ const AniList = () => {
 								ref={browseAnimeRef}
 							>
 								<li>
+									<h2 className="text-xl">Anime</h2>
+								</li>
+								<li>
 									<h2 className="text-xl">Manga</h2>
 								</li>
 								<li>
@@ -249,7 +289,7 @@ const AniList = () => {
 					<div className="flex flex-grow basis-full py-2 border rounded rounded-md bg-white shadow-lg">
 						<div>
 							<span className="px-2">🔎</span>
-							<input placeholder="Search" />
+							<input className="border border-none focus:outline-none" placeholder="Search" />
 						</div>
 					</div>
 					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg">
