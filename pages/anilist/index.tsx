@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import React, { useEffect, useState, useRef } from "react";
@@ -7,16 +9,15 @@ import useClickOutside from "../../hooks/useClickOutside";
 
 const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
-
 const AniList = () => {
-  const [trending, setTrending] = useState([]);
-  const [loading, setLoading] = useState(true);
+	const [trending, setTrending] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-  const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
+	const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
 	const [isBrowseAnimeOpen, setIsBrowseAnimeOpen] = useState(false);
-	
+
 	const getTrending = () => {
-		return axios.post(TRENDING_URL, {
+		return axios.post(ANILIST_API_ENDPOINT, {
 			query: `
       query {
         Trending: Page {
@@ -74,45 +75,43 @@ const AniList = () => {
 	}
 	`;
 
-
-  useEffect((): any => {
+	useEffect((): any => {
 		let ignore = false;
 		if (ignore) return;
 
 		const fetchData = async () => {
 			const res = await getTrending();
-			setTrending(res.data.data.Trending.media);
+			setTrending(res.data.data.Trending.media.slice(0, 24));
 			console.log(res);
 			setLoading(false);
 		};
 
 		fetchData();
-		console.log(trending);
 		return () => (ignore = true);
 	}, [animeBrowseFilter]);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const { data } = await axios.post(ANILIST_API_ENDPOINT, {
-					query: CHARACTERS_QUERY,
-				});
-				console.log(data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		try {
+	// 			const { data } = await axios.post(ANILIST_API_ENDPOINT, {
+	// 				query: CHARACTERS_QUERY,
+	// 			});
+	// 			console.log(data);
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	};
 
-		fetchData();
-	}, []);
+	// 	fetchData();
+	// }, []);
 
-  const browseAnimeRef = useRef(null);
+	const browseAnimeRef = useRef(null);
 
-//   useClickOutside(browseAnimeRef, () => {
-//     if (isBrowseAnimeOpen) setIsBrowseAnimeOpen(false);
-//   });
+	// useClickOutside(browseAnimeRef, () => {
+	// 	if (isBrowseAnimeOpen) setIsBrowseAnimeOpen(false);
+	// });
 
-  return (
+	return (
 		<div className="">
 			<nav className="h-16 px-6 bg-gray-800 flex items-center justify-center md:hidden">
 				<ul className="mx-auto flex gap-96 text-gray-100">
@@ -289,7 +288,10 @@ const AniList = () => {
 					<div className="flex flex-grow basis-full py-2 border rounded rounded-md bg-white shadow-lg">
 						<div>
 							<span className="px-2">🔎</span>
-							<input className="border border-none focus:outline-none" placeholder="Search" />
+							<input
+								className="border border-none focus:outline-none"
+								placeholder="Search"
+							/>
 						</div>
 					</div>
 					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg">

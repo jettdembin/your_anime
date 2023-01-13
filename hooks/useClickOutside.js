@@ -7,6 +7,6 @@ export default function useClickOutside(ref, cb) {
 			if (ref.current == null || ref.current.contains(e.target)) return;
 			cb(e);
 		},
-		window
+		document
 	);
 }
