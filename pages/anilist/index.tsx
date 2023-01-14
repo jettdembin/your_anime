@@ -305,44 +305,46 @@ const AniList = () => {
 				{loading ? (
 					<div>Loading...</div>
 				) : (
-					<div className="grid grid-cols-4 gap-4">
+					<div className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
 						{trending.map((media) => (
-							<a
-								href={`/anime/${media.id}`}
-								key={media.id}
-								className="group rounded-lg shadow-lg overflow-hidden transition duration-500 hover:scale-105"
-							>
-								<Image
-									width={220}
-									height={150}
-									src={media.coverImage.large}
-									alt={media.title.romaji}
-								/>
-								<div className="px-6">
-									<div className="font-bold text-xl mb-2 text-gray-100">
-										{media.title.romaji}
+							<div className="flex">
+								<a
+									href={`/anime/${media.id}`}
+									key={media.id}
+									className="group rounded-lg shadow-lg overflow-hidden transition duration-500 hover:scale-105"
+								>
+									<Image
+										width={350}
+										height={150}
+										src={media.coverImage.large}
+										alt={media.title.romaji}
+									/>
+									<div className="px-6">
+										<div className="font-bold text-xl mb-2 text-gray-100">
+											{media.title.romaji}
+										</div>
+										<p className="text-gray-500 text-base">
+											{media?.synonyms?.slice(0, 100)}...
+										</p>
 									</div>
-									<p className="text-gray-500 text-base">
-										{media?.synonyms?.slice(0, 100)}...
-									</p>
-								</div>
-								<div className="flex flex-wrap px-6 py-4">
-									<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-										#{media.format}
-									</span>
-									<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-										{media.status}
-									</span>
-									{media.genres.map((genre) => (
-										<span
-											key={genre}
-											className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-										>
-											{genre}
+									<div className="flex flex-wrap px-6 py-4">
+										<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+											#{media.format}
 										</span>
-									))}
-								</div>
-							</a>
+										<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+											{media.status}
+										</span>
+										{media.genres.map((genre) => (
+											<span
+												key={genre}
+												className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+											>
+												{genre}
+											</span>
+										))}
+									</div>
+								</a>
+							</div>
 						))}
 					</div>
 				)}
