@@ -286,13 +286,11 @@ const AniList = () => {
 				</div>
 				<div className="flex py-12">
 					<div className="flex flex-grow basis-full py-2 border rounded rounded-md bg-white shadow-lg">
-						<div>
-							<span className="px-2">🔎</span>
-							<input
-								className="border border-none focus:outline-none"
-								placeholder="Search"
-							/>
-						</div>
+						<span className="px-2">🔎</span>
+						<input
+							className="border border-red focus:outline-none w-full"
+							placeholder="Search"
+						/>
 					</div>
 					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg">
 						Menu
