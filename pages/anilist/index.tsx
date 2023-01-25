@@ -113,10 +113,14 @@ const AniList = () => {
 
 	return (
 		<div className="">
-			<nav className="h-16 px-6 bg-gray-800 flex items-center justify-center md:hidden">
-				<ul className="mx-auto flex gap-96 text-gray-100">
+			<nav className="h-20 px-8 bg-gray-800 lg:flex items-center justify-center hidden">
+				<ul className="flex gap-60 text-gray-100">
 					<li className="my-auto font-medium">AL</li>
-					<li className="my-auto font-medium">Search</li>
+					<div className="flex gap-10">
+						<li className="my-auto font-medium">Search</li>
+						<li className="my-auto font-medium">Social</li>
+						<li className="my-auto font-medium">Forum</li>
+					</div>
 					<div className="flex gap-4">
 						<li className="my-auto font-medium">Login</li>
 						<li>
@@ -127,7 +131,7 @@ const AniList = () => {
 					</div>
 				</ul>
 			</nav>
-			<header className="relative bg-gray-800 px-20 py-16 max-w-6xl shadow-2xl lg:mx-10 lgmy-12 lg:rounded-3xl">
+			<header className="mx-auto relative bg-gray-800 px-20 py-16 max-w-6xl shadow-2xl  lg:my-12 lg:rounded-3xl">
 				<h1 className="text-3xl font-bold text-gray-100 mb-10 mx-auto max-w-full text-center">
 					The next generation anime platform
 				</h1>
@@ -222,7 +226,7 @@ const AniList = () => {
 						<Image
 							width={100}
 							height={100}
-							src="	https://anilist.co/img/landing/custom.svg"
+							src="https://anilist.co/img/landing/custom.svg"
 							alt="pic"
 							role="presentation"
 						/>
