@@ -259,7 +259,7 @@ const AniList = () => {
 						</h2>
 						{isBrowseAnimeOpen && (
 							<ul
-								className="rounded-md shadow-md px-2 py-2 mt-2 cursor-pointer bg-white absolute transition-all"
+								className="rounded-md shadow-md  pl-2 pr-4 py-2 mt-2 cursor-pointer bg-white absolute transition-all"
 								onClick={(e: any) => {
 									setAnimeBrowseFilter(e.target.innerText);
 									console.log(e.target.innerText);
@@ -289,14 +289,14 @@ const AniList = () => {
 					</div>
 				</div>
 				<div className="flex py-12">
-					<div className="flex flex-grow basis-full py-2 border rounded rounded-md bg-white shadow-lg">
+					<div className="flex flex-grow basis-full py-2 border rounded-md bg-white shadow-lg">
 						<span className="px-2">🔎</span>
 						<input
 							className="border border-red focus:outline-none w-full"
 							placeholder="Search"
 						/>
 					</div>
-					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg">
+					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg cursor-pointer">
 						Menu
 					</div>
 				</div>
