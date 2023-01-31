@@ -1,15 +1,65 @@
-"use client";
-
+// "use client";
 import Image from "next/image";
 
 import React, { useEffect, useState, useRef } from "react";
+import { gql } from "@apollo/client";
+import client from "../../apollo-client";
 
 import axios from "axios";
 import useClickOutside from "../../hooks/useClickOutside";
 
 const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
-const AniList = () => {
+export async function getStaticProps() {
+	const { data } = await client.query({
+		query: gql`
+			query {
+				Trending: Page {
+					media(type: ANIME, sort: POPULARITY_DESC) {
+						id
+						title {
+							romaji
+							english
+							native
+						}
+						coverImage {
+							large
+						}
+						format
+						episodes
+						status
+						startDate {
+							year
+							month
+							day
+						}
+						endDate {
+							year
+							month
+							day
+						}
+						synonyms
+						genres
+						averageScore
+						popularity
+					}
+				}
+			}
+		`,
+	});
+
+	debugger;
+	console.log(data.Trending, "data");
+	console.log(data.Trending.media, "data media");
+	return {
+		props: {
+			media: data.Trending.media,
+		},
+	};
+}
+
+const AniList = ({ media }) => {
+	console.log(media, "media from props");
 	const [trending, setTrending] = useState([]);
 	const [loading, setLoading] = useState(true);
 
