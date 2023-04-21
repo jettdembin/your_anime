@@ -8,6 +8,7 @@ export const metadata = {
 
 import { gql } from "@apollo/client";
 import client from "@/apollo-client";
+import PopularAnime from "../components/PopularAnime";
 
 export default async function Home() {
 	const { data } = await client.query({
@@ -184,6 +185,9 @@ export default async function Home() {
 				</div>
 			</header>
 			<Browse media={data.Trending.media} />
+
+			<h1>Popular Anime</h1>
+			<PopularAnime />
 		</div>
 	);
 }
