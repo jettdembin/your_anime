@@ -7,6 +7,8 @@ import client from "../../apollo-client";
 
 import axios from "axios";
 import useClickOutside from "../../hooks/useClickOutside";
+import "../../types/anime.ts";
+import { Anime } from "../../types/anime";
 
 const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
@@ -60,8 +62,8 @@ export async function getStaticProps() {
 
 const AniList = ({ media }) => {
 	console.log(media, "media from props");
-	const [trending, setTrending] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [trending, setTrending] = useState(media);
+	const [loading, setLoading] = useState(false);
 
 	const [animeBrowseFilter, setAnimeBrowseFilter] = useState("Anime");
 	const [isBrowseAnimeOpen, setIsBrowseAnimeOpen] = useState(false);
@@ -125,20 +127,20 @@ const AniList = ({ media }) => {
 	}
 	`;
 
-	useEffect((): any => {
-		let ignore = false;
-		if (ignore) return;
+	// useEffect((): any => {
+	// 	let ignore = false;
+	// 	if (ignore) return;
 
-		const fetchData = async () => {
-			const res = await getTrending();
-			setTrending(res.data.data.Trending.media.slice(0, 24));
-			console.log(res);
-			setLoading(false);
-		};
+	// 	const fetchData = async () => {
+	// 		const res = await getTrending();
+	// 		setTrending(res.data.data.Trending.media.slice(0, 24));
+	// 		console.log(res);
+	// 		setLoading(false);
+	// 	};
 
-		fetchData();
-		return () => (ignore = true);
-	}, [animeBrowseFilter]);
+	// 	fetchData();
+	// 	return () => (ignore = true);
+	// }, [animeBrowseFilter]);
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
@@ -303,11 +305,16 @@ const AniList = ({ media }) => {
 					<div className="relative">
 						<h2
 							className="text-3xl cursor-pointer"
-							onClick={() => setIsBrowseAnimeOpen(!isBrowseAnimeOpen)}
+							onClick={() => {
+								setIsBrowseAnimeOpen(!isBrowseAnimeOpen);
+								// debugger;
+								console.log("clicked");
+								console.log(isBrowseAnimeOpen);
+							}}
 						>
 							{animeBrowseFilter} ⬇
 						</h2>
-						{isBrowseAnimeOpen && (
+						{!!isBrowseAnimeOpen && (
 							<ul
 								className="rounded-md shadow-md  pl-2 pr-4 py-2 mt-2 cursor-pointer bg-white absolute transition-all"
 								onClick={(e: any) => {
@@ -341,10 +348,7 @@ const AniList = ({ media }) => {
 				<div className="flex py-12">
 					<div className="flex flex-grow basis-full py-2 border rounded-md bg-white shadow-lg">
 						<span className="px-2">🔎</span>
-						<input
-							className="border border-red focus:outline-none w-full"
-							placeholder="Search"
-						/>
+						<input className="focus:outline-none w-full" placeholder="Search" />
 					</div>
 					<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg cursor-pointer">
 						Menu
