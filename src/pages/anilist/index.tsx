@@ -2,13 +2,11 @@
 import Image from "next/image";
 
 import React, { useEffect, useState, useRef } from "react";
-import { gql } from "@apollo/client";
-import client from "../../apollo-client";
+import { gql } from "@/apollo-client";
+import client from "@/apollo-client";
 
 import axios from "axios";
-import useClickOutside from "../../hooks/useClickOutside";
-import "../../types/anime.ts";
-import { Anime } from "../../types/anime";
+import { Anime } from "@/src/types/anime";
 
 const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
