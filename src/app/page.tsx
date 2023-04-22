@@ -184,10 +184,9 @@ export default async function Home() {
 					</button>
 				</div>
 			</header>
-			<Browse media={data.Trending.media} />
-
 			<h1>Popular Anime</h1>
 			<PopularAnime />
+			<Browse media={data.Trending.media} />
 		</div>
 	);
 }

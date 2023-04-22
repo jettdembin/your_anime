@@ -1,7 +1,5 @@
 import "@/src/styles/globals.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
+import Providers from "./providers";
 
 export default function RootLayout({
 	// Layouts must accept a children prop.
@@ -12,10 +10,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<head />
 			<body>
-				<QueryClientProvider client={queryClient}>
-					{children}
-				</QueryClientProvider>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);

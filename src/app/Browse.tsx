@@ -52,26 +52,6 @@ export default function Browse({ media }) {
 		});
 	};
 
-	const CHARACTERS_QUERY = `
-	query {
-		characters(page: 1, perPage: 50) {
-			edges {
-			node {
-				id
-				name {
-				first
-				last
-				}
-				description
-				image {
-				large
-				}
-			}
-			}
-		}
-	}
-	`;
-
 	const browseAnimeRef = useRef(null);
 
 	return (

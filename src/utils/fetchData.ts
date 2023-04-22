@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetchData(query: string) {
+export const fetchData = async (query: string) => {
 	try {
 		const response = await axios.post(
 			"https://graphql.anilist.co",
@@ -8,6 +8,7 @@ export async function fetchData(query: string) {
 			{
 				headers: {
 					"Content-Type": "application/json",
+					Accept: "application/json",
 				},
 			}
 		);
@@ -16,4 +17,4 @@ export async function fetchData(query: string) {
 	} catch (error) {
 		throw error;
 	}
-}
+};
