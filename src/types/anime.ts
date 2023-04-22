@@ -32,29 +32,45 @@ export type Anime = {
 	};
 };
 
-// id
-// 						title {
-// 							romaji
-// 							english
-// 							native
-// 						}
-// 						coverImage {
-// 							large
-// 						}
-// 						format
-// 						episodes
-// 						status
-// 						startDate {
-// 							year
-// 							month
-// 							day
-// 						}
-// 						endDate {
-// 							year
-// 							month
-// 							day
-// 						}
-// 						synonyms
-// 						genres
-// 						averageScore
-// 						popularity
+export interface Title {
+	english?: string;
+	native?: string;
+	romaji?: string;
+}
+
+export interface CoverImage {
+	large: string;
+}
+
+export interface Media {
+	id: number;
+	title: Title;
+	coverImage: CoverImage;
+	format?: string;
+	episodes?: number;
+	status?: string;
+	startDate?: DateProps;
+	endDate?: DateProps;
+	synonyms?: string[];
+	genres?: string[];
+	averageScore?: number;
+	popularity?: number;
+}
+
+export interface DateProps {
+	year: number;
+	month: number;
+	day: number;
+}
+
+export interface Page {
+	media: Media[];
+}
+
+export interface GetPopularAnimeResponse {
+	Page: Page;
+}
+
+export interface GetTrendingResponse {
+	Trending: Page;
+}

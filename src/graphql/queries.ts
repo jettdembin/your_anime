@@ -1,5 +1,6 @@
-// queries.js or queries.ts
 import { gql } from "@apollo/client";
+
+// media (type: ${animeBrowseFilter.toUpperCase()}, sort: POPULARITY_DESC) {
 
 export const GET_POPULAR_ANIME = gql`
 	query GetPopularAnime {
@@ -13,6 +14,41 @@ export const GET_POPULAR_ANIME = gql`
 				coverImage {
 					large
 				}
+			}
+		}
+	}
+`;
+
+export const GET_TRENDING = gql`
+	query {
+		Trending: Page {
+			media(type: ANIME, sort: POPULARITY_DESC) {
+				id
+				title {
+					romaji
+					english
+					native
+				}
+				coverImage {
+					large
+				}
+				format
+				episodes
+				status
+				startDate {
+					year
+					month
+					day
+				}
+				endDate {
+					year
+					month
+					day
+				}
+				synonyms
+				genres
+				averageScore
+				popularity
 			}
 		}
 	}

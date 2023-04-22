@@ -1,25 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import axios from "axios";
 
 import client from "@/apollo-client";
 import { GET_POPULAR_ANIME } from "@/src/graphql/queries";
-import Image from "next/image";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "../util/fetchData";
 
 export default function PopularAnime() {
-	const [anime, setAnime] = useState([]);
-	// const fetchAnime = async () => {
-	// 	const { data } = await client.query({
-	// 		query: GET_POPULAR_ANIME,
-	// 	});
-	// 	return setAnime(data);
-	// };
-
-	const animePost = async () => {
+	const popularAnimePost = async () => {
 		try {
 			const { data } = await client.query({
 				query: GET_POPULAR_ANIME,
@@ -32,7 +23,7 @@ export default function PopularAnime() {
 
 	const { isLoading, isError, error, data } = useQuery({
 		queryKey: ["popularAnime"],
-		queryFn: animePost,
+		queryFn: popularAnimePost,
 	});
 
 	if (data) console.log(data, "data");
@@ -42,8 +33,7 @@ export default function PopularAnime() {
 	}
 
 	return (
-		<div>
-			<h1>Data from React QUery</h1>
+		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
 			{data.Page.media.map((anime) => (
 				<div key={anime.id}>
 					<h3>{anime.title.english || anime.title.native}</h3>
@@ -53,6 +43,6 @@ export default function PopularAnime() {
 					/>
 				</div>
 			))}
-		</div>
+		</section>
 	);
 }
