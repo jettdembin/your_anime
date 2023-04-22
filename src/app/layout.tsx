@@ -1,5 +1,5 @@
 import "@/src/styles/globals.css";
-import Providers from "./providers";
+import Providers from "../util/providers";
 
 export default function RootLayout({
 	// Layouts must accept a children prop.
@@ -13,6 +13,7 @@ export default function RootLayout({
 			<head />
 			<body>
 				<Providers>{children}</Providers>
+				{/* {children} */}
 			</body>
 		</html>
 	);

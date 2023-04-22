@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { Anime } from "../utils/models";
+import { Anime } from "../util/models";
 
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 

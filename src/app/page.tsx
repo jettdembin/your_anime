@@ -1,52 +1,81 @@
-import Image from "next/image";
-
-import Browse from "./Browse";
-
 export const metadata = {
-	title: "My Page Title",
+	title: "Your Anime",
 };
+
+import Image from "next/image";
+import Browse from "../components/Browse";
+import PopularAnime from "../components/PopularAnime";
 
 import { gql } from "@apollo/client";
 import client from "@/apollo-client";
-import PopularAnime from "../components/PopularAnime";
+
+import getQueryClient from "./getQueryClient";
+import { dehydrate } from "@tanstack/query-core";
+import Hydrate from "../util/HydrateClient";
+
+import { GET_POPULAR_ANIME } from "@/src/graphql/queries";
+import axios from "axios";
+
+// const fetchAnime = async () => {
+// 	const { data } = await client.query({
+// 		query: GET_POPULAR_ANIME,
+// 	});
+// };
+
+const animePost = async () => {
+	try {
+		const { data } = await client.query({
+			query: GET_POPULAR_ANIME,
+		});
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};
 
 export default async function Home() {
-	const { data } = await client.query({
-		query: gql`
-			query {
-				Trending: Page {
-					media(type: ANIME, sort: POPULARITY_DESC) {
-						id
-						title {
-							romaji
-							english
-							native
-						}
-						coverImage {
-							large
-						}
-						format
-						episodes
-						status
-						startDate {
-							year
-							month
-							day
-						}
-						endDate {
-							year
-							month
-							day
-						}
-						synonyms
-						genres
-						averageScore
-						popularity
-					}
-				}
-			}
-		`,
-	});
+	const queryClient = getQueryClient();
+
+	await queryClient.prefetchQuery(["popularAnime"], animePost);
+
+	const dehydratedState = dehydrate(queryClient);
+
+	// const { data } = await client.query({
+	// 	query: gql`
+	// 		query {
+	// 			Trending: Page {
+	// 				media(type: ANIME, sort: POPULARITY_DESC) {
+	// 					id
+	// 					title {
+	// 						romaji
+	// 						english
+	// 						native
+	// 					}
+	// 					coverImage {
+	// 						large
+	// 					}
+	// 					format
+	// 					episodes
+	// 					status
+	// 					startDate {
+	// 						year
+	// 						month
+	// 						day
+	// 					}
+	// 					endDate {
+	// 						year
+	// 						month
+	// 						day
+	// 					}
+	// 					synonyms
+	// 					genres
+	// 					averageScore
+	// 					popularity
+	// 				}
+	// 			}
+	// 		}
+	// 	`,
+	// });
 
 	return (
 		<div className="">
@@ -185,8 +214,12 @@ export default async function Home() {
 				</div>
 			</header>
 			<h1>Popular Anime</h1>
-			<PopularAnime />
-			<Browse media={data.Trending.media} />
+
+			<Hydrate state={dehydratedState}>
+				<PopularAnime />
+			</Hydrate>
+
+			{/* <Browse media={data.Trending.media} /> */}
 		</div>
 	);
 }
