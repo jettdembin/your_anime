@@ -51,57 +51,6 @@ export default function Browse() {
 				<div className="flex"></div>
 			</div>
 
-			{/* <section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
-				{data.Trending.media.map((media: Media, i: number) => (
-					<div className="flex overflow-y-scroll overflow-x-hidden" key={i}>
-						<a
-							href={`/anime/${media.id}`}
-							key={media.id}
-							className="group rounded-lg shadow-lg overflow-hidden transition duration-500 hover:scale-105"
-						>
-							<div
-								style={{
-									width: "100%",
-									height: "50%",
-									position: "relative",
-								}}
-							>
-								<img
-									layout="fill"
-									src={media.coverImage.large}
-									alt={media.title.romaji}
-								/>
-							</div>
-							<div className="py-1">
-								<div className="px-6">
-									<div className="font-bold text-xl mb-2 text-gray-800">
-										{media.title.romaji}
-									</div>
-									<p className="text-grey-700 text-base">
-										{media?.synonyms?.slice(0, 100)}...
-									</p>
-								</div>
-								<div className="flex flex-wrap px-6 py-4">
-									<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-										#{media.format}
-									</span>
-									<span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-										{media.status}
-									</span>
-									{media.genres.map((genre) => (
-										<span
-											key={genre}
-											className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-										>
-											{genre}
-										</span>
-									))}
-								</div>
-							</div>
-						</a>
-					</div>
-				))}
-			</section> */}
 			<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
 				{data.Trending.media.map((media: Media, i: number) => (
 					<div

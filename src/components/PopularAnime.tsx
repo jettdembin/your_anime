@@ -9,6 +9,7 @@ import { GET_POPULAR_ANIME } from "@/src/graphql/queries";
 
 import { useQuery } from "@tanstack/react-query";
 import AnimeDetails from "./Pages/Home/AnimeDetails";
+import { Media } from "../types/anime";
 
 const popularAnimePost = async () => {
 	try {
@@ -55,14 +56,14 @@ export default function PopularAnime() {
 		// 	))}
 		// </section>
 		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 ">
-			{data.Page.media.map((anime) => (
+			{data.Page.media.map((anime: Media) => (
 				<div
 					key={anime.id}
-					className="relative w-full h-48 bg-gray-700 rounded-md group cursor-pointer"
+					className="relative w-full h-48 bg-gray-700 rounded-lg group cursor-pointer"
 					onMouseEnter={() => handleMouseEnter(anime.id)}
 					onMouseLeave={handleMouseLeave}
 				>
-					<div className="w-full h-full overflow-hidden">
+					<div className="w-full h-full overflow-hidden rounded-md">
 						<img
 							src={anime.coverImage.large}
 							alt={anime.title.english || anime.title.native}
@@ -85,13 +86,6 @@ export default function PopularAnime() {
 								studioName="Studio Name" // Replace with actual data
 							/>
 						</div>
-						// <div className="absolute top-0 left-full">
-						// 	<AnimeDetails
-						// 		nextEpisodeDays={7} // Replace with actual data
-						// 		likedPercentage={90} // Replace with actual data
-						// 		studioName="Studio Name" // Replace with actual data
-						// 	/>
-						// </div>
 					)}
 				</div>
 			))}

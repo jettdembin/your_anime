@@ -1,10 +1,13 @@
 import "@/src/styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 import Providers from "../util/providers";
 
 export default function RootLayout({
 	// Layouts must accept a children prop.
 	// This will be populated with nested layouts or pages
 	children,
+	session,
+	...pageProps
 }: {
 	children: React.ReactNode;
 }) {
@@ -12,8 +15,9 @@ export default function RootLayout({
 		<html lang="en">
 			<head />
 			<body>
-				<Providers>{children}</Providers>
-				{/* {children} */}
+				<SessionProvider session={session}>
+					<Providers>{children}</Providers>
+				</SessionProvider>
 			</body>
 		</html>
 	);
