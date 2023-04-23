@@ -9,7 +9,17 @@ module.exports = {
 		"./src/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			keyframes: {
+				appear: {
+					"0%": { opacity: "0", scale: 10 },
+					"100%": { opacity: "100", scale: 100 },
+				},
+			},
+			animation: {
+				"appearing-card": "appear .3s ease-in-out forwards",
+			},
+		},
 	},
 	plugins: [],
 };
