@@ -6,8 +6,6 @@ export default function RootLayout({
 	// Layouts must accept a children prop.
 	// This will be populated with nested layouts or pages
 	children,
-	session,
-	...pageProps
 }: {
 	children: React.ReactNode;
 }) {
@@ -15,9 +13,7 @@ export default function RootLayout({
 		<html lang="en">
 			<head />
 			<body>
-				<SessionProvider session={session}>
-					<Providers>{children}</Providers>
-				</SessionProvider>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
