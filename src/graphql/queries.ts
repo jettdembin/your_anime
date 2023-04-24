@@ -78,14 +78,29 @@ export const GET_TRENDING = gql`
 export const GET_TOP_100_ANIME = gql`
 	query GetTop100Anime {
 		Page(page: 1, perPage: 100) {
-			media(sort: SCORE_DESC, type: ANIME, status: FINISHED, isAdult: false) {
+			media(
+				sort: SCORE_DESC
+				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
+			) {
+				id
 				id
 				title {
 					english
 				}
 				coverImage {
-					large
+					medium
 				}
+				startDate {
+					year
+					month
+					day
+				}
+				format
+				episodes
+				duration
+				genres
+				averageScore
+				popularity
 			}
 		}
 	}

@@ -40,6 +40,12 @@ export interface Title {
 	romaji?: string;
 }
 
+export interface DateProps {
+	year: number;
+	month: number;
+	day: number;
+}
+
 export interface CoverImage {
 	large: string;
 }
@@ -90,3 +96,5 @@ export interface GetPopularAnimeResponse {
 export interface GetTrendingResponse {
 	Trending: Page;
 }
+
+//top 100 anime

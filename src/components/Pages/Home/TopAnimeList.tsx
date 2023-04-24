@@ -6,6 +6,7 @@ import client from "@/apollo-client";
 import { useQuery } from "@tanstack/react-query";
 
 import { GET_TOP_100_ANIME } from "@/src/graphql/queries";
+import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
 
 interface TopAnimeListProps {
 	animes: Media[];
@@ -33,27 +34,51 @@ export default function TopAnimeList() {
 		return <p>Error: {error.message}</p>;
 	}
 	return (
-		<div className="bg-white p-4 rounded-md shadow-md">
-			<div className="flex justify-between items-center mb-4">
-				<h2 className="text-xl font-semibold">Top 100 Anime</h2>
-				<Link href="/top-100" className="text-blue-600">
-					View All
-				</Link>
-			</div>
-			<div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-				{data.Page.media.map((anime, index) => (
-					<div key={anime.id} className="flex flex-col items-center">
-						<img
-							src={anime.coverImage.large}
-							alt={anime.title.english}
-							className="w-24 h-32 rounded-md shadow-sm"
-						/>
-						<p className="mt-2 text-sm text-center">
-							{index + 1}. {anime.title.english}
-						</p>
-					</div>
+		<div className="max-w-7xl mx-auto">
+			<ul>
+				{data.Page.media.slice(0, 10).map((anime, index) => (
+					<li key={anime.id} className="flex items-center mb-4">
+						<span className="w-8 mr-4 font-bold text-xl text-8ba0b2">
+							#{index + 1}
+						</span>
+						<div className="flex flex-grow items-center bg-white rounded-md shadow-box p-4">
+							<img
+								className="w-20 h-28 object-cover mr-4"
+								src={anime.coverImage.medium}
+								alt={anime.title.english || "Anime Cover"}
+							/>
+							<div>
+								<h3 className="font-semibold text-lg">{anime.title.english}</h3>
+								<p className="text-sm">{formatGenres(anime.genres)}</p>
+							</div>
+							<div className="ml-auto">
+								<p>{`${anime.averageScore}%`}</p>
+								<p className="text-sm">{`${anime.popularity} users`}</p>
+							</div>
+							<div className="ml-4">
+								<p>{formatMediaType(anime.format)}</p>
+								<p className="text-sm">{`${anime.episodes} eps`}</p>
+							</div>
+							<div className="flex flex-col ml-4">
+								<span>
+									{formatDate(anime.endDate || anime.startDate, "seasonYear")}
+								</span>
+								{anime.status === "RELEASING" && anime.nextAiringEpisode ? (
+									<span className="text-sm text-gray-500">
+										Ep {anime.nextAiringEpisode.episode} airing in{" "}
+										{Math.floor(
+											anime.nextAiringEpisode.timeUntilAiring / 86400
+										)}{" "}
+										days
+									</span>
+								) : (
+									<span className="text-sm text-gray-500">{anime.status}</span>
+								)}
+							</div>
+						</div>
+					</li>
 				))}
-			</div>
+			</ul>
 		</div>
 	);
 }
