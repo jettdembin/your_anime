@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 
 interface AnimeDetailsProps {
 	isVisible: boolean;
-	nextEpisodeDays: number;
+	nextEpisodeDays: number | null;
 	likedPercentage: number;
 	studioName: string;
+	currentEpisode: number | null;
+	totalEpisodes: number | null;
+	genres: string[];
 }
 
 const AnimeDetails: React.FC<AnimeDetailsProps> = ({
@@ -13,6 +16,9 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	nextEpisodeDays,
 	likedPercentage,
 	studioName,
+	currentEpisode,
+	totalEpisodes,
+	genres,
 }) => {
 	return (
 		<div
@@ -20,8 +26,14 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 				isVisible && "animate-appearing-card"
 			}`}
 		>
-			<div className="absolute -left-2 top-4 w-0 h-0 border-4 border-transparent border-r-white"></div>
-			<p>Next episode in {nextEpisodeDays} days</p>
+			{nextEpisodeDays ? (
+				<p>Next episode in {nextEpisodeDays} days</p>
+			) : (
+				<p>Next episode date not available</p>
+			)}
+			<p>Current Episode: {currentEpisode || "Unknown"}</p>
+			<p>Total Episodes: {totalEpisodes || "Unknown"}</p>
+			<p>Genres: {genres.join(", ")}</p>
 			<p className="text-right">{likedPercentage}% liked</p>
 			<p>Studio: {studioName}</p>
 		</div>

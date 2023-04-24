@@ -1,6 +1,6 @@
 export type Anime = {
 	_type: string;
-	averagScore: number;
+	averageScore: number; // Fixed typo in the property name
 	coverImage: {
 		_typeName: string;
 		large: string;
@@ -30,6 +30,8 @@ export type Anime = {
 		native: string;
 		romaji: string;
 	};
+	nextAiringEpisode: AiringSchedule | null;
+	studios: Studio;
 };
 
 export interface Title {
@@ -40,6 +42,18 @@ export interface Title {
 
 export interface CoverImage {
 	large: string;
+}
+
+export interface AiringSchedule {
+	timeUntilAiring: number;
+}
+
+export interface StudioNode {
+	name: string;
+}
+
+export interface Studio {
+	nodes: StudioNode[];
 }
 
 export interface Media {
@@ -55,6 +69,8 @@ export interface Media {
 	genres?: string[];
 	averageScore?: number;
 	popularity?: number;
+	nextAiringEpisode: AiringSchedule | null;
+	studios: Studio;
 }
 
 export interface DateProps {

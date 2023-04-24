@@ -14,6 +14,19 @@ export const GET_POPULAR_ANIME = gql`
 				coverImage {
 					large
 				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
+				}
+				averageScore
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
 			}
 		}
 	}
@@ -49,6 +62,30 @@ export const GET_TRENDING = gql`
 				genres
 				averageScore
 				popularity
+				nextAiringEpisode {
+					timeUntilAiring
+				}
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const GET_TOP_100_ANIME = gql`
+	query GetTop100Anime {
+		Page(page: 1, perPage: 100) {
+			media(sort: SCORE_DESC, type: ANIME, status: FINISHED, isAdult: false) {
+				id
+				title {
+					english
+				}
+				coverImage {
+					large
+				}
 			}
 		}
 	}
