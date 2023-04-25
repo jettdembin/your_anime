@@ -21,6 +21,7 @@ import { ContentLayout } from "../components/Layout/ContentLayout";
 import TopAnimeList from "../components/Pages/Home/TopAnimeList";
 import Browse from "../components/Browse";
 import PopularAnime from "../components/PopularAnime";
+import Search from "../components/Search";
 
 // const fetchAnime = async () => {
 // 	const { data } = await client.query({
@@ -78,24 +79,7 @@ export default async function Home() {
 			</header>
 
 			<main className="mx-16">
-				<section className="mx-8 mt-16 mb-8">
-					<div className="mt-6 ">
-						<h3 className="pb-4 text-md font-semibold text-gray-900">Browse</h3>
-						<div className="flex"></div>
-					</div>
-					<div className="flex">
-						<div className="flex flex-grow basis-full py-2 border rounded-md bg-white shadow-lg">
-							<span className="px-2">🔎</span>
-							<input
-								className="focus:outline-none w-full"
-								placeholder="Search"
-							/>
-						</div>
-						<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg cursor-pointer">
-							Menu
-						</div>
-					</div>
-				</section>
+				<Search />
 
 				<ContentLayout title="TRENDING NOW">
 					<Hydrate state={dehydratedState}>
