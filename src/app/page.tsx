@@ -73,24 +73,43 @@ export default async function Home() {
 			<nav className="h-20 px-8 bg-gray-800 lg:flex items-center justify-center hidden">
 				<Nav />
 			</nav>
-			<header className="max-w-7xl sm:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:my-12 lg:rounded-3xl">
+			<header className="max-w-7xl sm:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
 				<Header />
 			</header>
 
 			<main className="mx-16">
-				<ContentLayout title="Popular Anime">
-					<Hydrate state={dehydratedState}>
-						<PopularAnime />
-					</Hydrate>
-				</ContentLayout>
+				<section className="mx-8 mt-16 mb-8">
+					<div className="mt-6 ">
+						<h3 className="pb-4 text-md font-semibold text-gray-900">Browse</h3>
+						<div className="flex"></div>
+					</div>
+					<div className="flex">
+						<div className="flex flex-grow basis-full py-2 border rounded-md bg-white shadow-lg">
+							<span className="px-2">🔎</span>
+							<input
+								className="focus:outline-none w-full"
+								placeholder="Search"
+							/>
+						</div>
+						<div className="flex items-center justify-center flex-grow ml-2 px-2 bg-white rounded-md border shadow-lg cursor-pointer">
+							Menu
+						</div>
+					</div>
+				</section>
 
-				<ContentLayout title="Browse">
+				<ContentLayout title="TRENDING NOW">
 					<Hydrate state={dehydratedState}>
 						<Browse />
 					</Hydrate>
 				</ContentLayout>
 
-				<ContentLayout title="Top 100 Anime">
+				<ContentLayout title="POPULAR ANIME">
+					<Hydrate state={dehydratedState}>
+						<PopularAnime />
+					</Hydrate>
+				</ContentLayout>
+
+				<ContentLayout title="TOP 100 ANIME">
 					<Hydrate state={dehydratedState}>
 						<TopAnimeList />
 					</Hydrate>
