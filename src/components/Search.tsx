@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SelectWrapper from "./Elements/Select";
+import Filter from "./Elements/Filter";
 
 export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState<number | null>(null);
+	const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
+
+	const filterRef = useRef();
 
 	const selectData = [
 		{
@@ -58,7 +62,29 @@ export default function Search() {
 						onChange={handleChange}
 					/>
 				))}
-				<button>test</button>
+				<div className="relative">
+					<button
+						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+						onClick={() => setIsFilterVisible(!isFilterVisible)}
+					>
+						Filter
+					</button>
+					{isFilterVisible && (
+						<div
+							ref={filterRef}
+							className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+						>
+							<Filter
+								isOpen={openedSelect === isFilterVisible}
+								onToggle={() =>
+									setOpenedSelect((prev) =>
+										prev === "filter" ? null : "filter"
+									)
+								}
+							/>
+						</div>
+					)}
+				</div>
 			</div>
 		</section>
 	);
