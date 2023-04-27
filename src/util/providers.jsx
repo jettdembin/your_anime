@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import client from "@/apollo-client";
+import { ApolloProvider } from "@apollo/client";
 
 export default function Providers({ children }) {
-	const [queryClient] = useState(() => new QueryClient());
+	// const [queryClient] = useState(() => new QueryClient());
 
-	return (
-		<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-	);
+	return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

@@ -1,43 +1,23 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import Image from "next/image";
-// import axios from "axios";
-
-import client from "@/apollo-client";
 import { GET_POPULAR_ANIME, GET_TRENDING } from "@/src/graphql/queries";
 
-import { useQuery } from "@tanstack/react-query";
 import { Media } from "../types/anime";
+import { useAnilistAPI } from "../hooks/useAnilistAPI";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
 export default function Browse() {
-	const trendingAnimePost = async () => {
-		try {
-			const { data } = await client.query({
-				query: GET_TRENDING,
-			});
-			return data || {};
-		} catch (err) {
-			console.error(err);
-		}
-	};
-
-	const { isLoading, isError, error, data } = useQuery({
-		queryKey: ["trendingAnime"],
-		queryFn: trendingAnimePost,
-	});
+	const { error, loading, data } = useAnilistAPI(GET_TRENDING);
 
 	if (data) console.log(data, "data");
-	if (isLoading) return <p>Loading...</p>;
-	if (isError) {
+	if (loading) return <p>Loading...</p>;
+	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
 
 	return (
 		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
-			{data.Trending.media.slice(0, 8).map((media: Media, i: number) => (
+			{data.Trending.media.slice(0, 8)?.map((media: Media, i: number) => (
 				<div
 					key={media.id}
 					className="relative w-full h-48 bg-gray-700 rounded-md overflow-hidden group"
