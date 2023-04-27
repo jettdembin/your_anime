@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 // media (type: ${animeBrowseFilter.toUpperCase()}, sort: POPULARITY_DESC) {
 
 export const GET_POPULAR_ANIME = gql`
-	query GetPopularAnime {
+	query GetPopularAnime($page: number?) {
 		Page(page: 1, perPage: 10) {
 			media(sort: POPULARITY_DESC) {
 				id
