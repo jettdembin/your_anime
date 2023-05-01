@@ -61,29 +61,29 @@ const topAnimePost = async () => {
 };
 
 export default async function Home() {
-	// const queryClient = getQueryClient();
-
-	// await queryClient.prefetchQuery(["popularAnime"], popularAnimePost);
-	// await queryClient.prefetchQuery(["trendingAnime"], trendingAnimePost);
-	// await queryClient.prefetchQuery(["topAnime"], topAnimePost);
-
-	// const dehydratedState = dehydrate(queryClient);
-
 	return (
 		<div>
-			<nav className="h-20 px-8 bg-gray-800 lg:flex items-center justify-center hidden">
+			<nav className="h-20 px-8 bg-gray-800 flex items-center justify-center">
 				<Nav />
 			</nav>
-			<header className="max-w-7xl sm:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
+			<header className="max-w-7xl sm:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl mt-12 lg:rounded-3xl">
 				<Header />
 			</header>
 
 			<main className="mx-16">
 				<Search />
 
-				<Browse />
-				{/* <PopularAnime />
-				<TopAnimeList /> */}
+				<ContentLayout title="TRENDING NOW">
+					<Browse />
+				</ContentLayout>
+
+				<ContentLayout title="POPULAR ANIME">
+					<PopularAnime />
+				</ContentLayout>
+
+				<ContentLayout title="TOP 100 ANIME">
+					<TopAnimeList />
+				</ContentLayout>
 			</main>
 		</div>
 	);

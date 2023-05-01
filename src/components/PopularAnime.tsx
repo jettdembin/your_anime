@@ -3,12 +3,13 @@
 import { useState } from "react";
 
 import client from "@/apollo-client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@apollo/client";
 
 import AnimeDetails from "./Pages/Home/AnimeDetails";
 
 import { Media } from "../types/anime";
-import { GET_POPULAR_ANIME } from "@/src/graphql/queries";
+import { GET_POPULAR_ANIME, usePopularAnime } from "@/src/graphql/queries";
+import { useAnilistAPI } from "../hooks/useAnilistAPI";
 
 const popularAnimePost = async () => {
 	try {
@@ -21,6 +22,8 @@ const popularAnimePost = async () => {
 	}
 };
 export default function PopularAnime() {
+	const { error, loading, data } = usePopularAnime(5);
+
 	const [hoveredAnime, setHoveredAnime] = useState<number | null>(null);
 
 	const handleMouseEnter = (animeId: number) => {
@@ -31,15 +34,13 @@ export default function PopularAnime() {
 		setHoveredAnime(null);
 	};
 
-	const { isLoading, isError, error, data } = useQuery({
-		queryKey: ["popularAnime"],
-		queryFn: popularAnimePost,
-	});
-
-	if (isLoading) return <p>Loading...</p>;
-	if (isError) {
+	if (loading) return <p>Loading...</p>;
+	if (error) {
+		console.log(error, "error");
 		return <p>Error: {error.message}</p>;
 	}
+
+	console.log(data, "test");
 
 	return (
 		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 ">

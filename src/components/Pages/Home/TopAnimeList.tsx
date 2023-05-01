@@ -7,32 +7,21 @@ import { useQuery } from "@tanstack/react-query";
 
 import { GET_TOP_100_ANIME } from "@/src/graphql/queries";
 import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
+import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 
 interface TopAnimeListProps {
 	animes: Media[];
 }
 
-const topAnimePost = async () => {
-	try {
-		const { data } = await client.query({
-			query: GET_TOP_100_ANIME,
-		});
-		return data;
-	} catch (err) {
-		console.error(err);
-	}
-};
-
 export default function TopAnimeList() {
-	const { isLoading, isError, error, data } = useQuery({
-		queryKey: ["topAnime"],
-		queryFn: topAnimePost,
-	});
+	const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);
 
-	if (isLoading) return <p>Loading...</p>;
-	if (isError) {
+	// if (data) console.log(data, "data");
+	if (loading) return <p>Loading...</p>;
+	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
+
 	return (
 		<div className="max-w-7xl mx-auto">
 			<ul>

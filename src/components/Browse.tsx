@@ -9,7 +9,6 @@ import { useAnilistAPI } from "../hooks/useAnilistAPI";
 export default function Browse() {
 	const { error, loading, data } = useAnilistAPI(GET_TRENDING);
 
-	if (data) console.log(data, "data");
 	if (loading) return <p>Loading...</p>;
 	if (error) {
 		return <p>Error: {error.message}</p>;

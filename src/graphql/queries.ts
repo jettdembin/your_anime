@@ -1,10 +1,11 @@
 import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 // media (type: ${animeBrowseFilter.toUpperCase()}, sort: POPULARITY_DESC) {
 
 export const GET_POPULAR_ANIME = gql`
-	query GetPopularAnime($page: number?) {
-		Page(page: 1, perPage: 10) {
+	query GetPopularAnime($page: Int) {
+		Page(page: $page, perPage: 100) {
 			media(sort: POPULARITY_DESC) {
 				id
 				title {
@@ -31,6 +32,16 @@ export const GET_POPULAR_ANIME = gql`
 		}
 	}
 `;
+
+export const usePopularAnime = (page: any) => {
+	const { error, loading, data } = useQuery(GET_POPULAR_ANIME, {
+		variables: {
+			page,
+		},
+	});
+
+	return { error, loading, data };
+};
 
 export const GET_TRENDING = gql`
 	query {
