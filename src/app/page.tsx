@@ -20,6 +20,7 @@ import { ContentLayout } from "../components/Layout/ContentLayout";
 
 import TopAnimeList from "../components/Pages/Home/TopAnimeList";
 import Browse from "../components/Browse";
+import Trending from "../components/Trending";
 import PopularAnime from "../components/PopularAnime";
 import Search from "../components/Search";
 

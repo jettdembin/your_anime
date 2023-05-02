@@ -86,6 +86,73 @@ export const GET_TRENDING = gql`
 	}
 `;
 
+export const useTrendingAnime = () => {
+	const { error, loading, data } = useQuery(GET_TRENDING);
+
+	return { error, loading, data };
+};
+
+export const GET_BROWSE_FILTERS = gql`
+	query GetAnimes(
+		$category: String
+		$status: MediaStatus
+		$season: MediaSeason
+		$year: Int
+	) {
+		Page(page: 1, perPage: 10) {
+			media(
+				genre: $category
+				status: $status
+				season: $season
+				seasonYear: $year
+				type: ANIME
+			) {
+				id
+				title {
+					romaji
+					english
+					native
+				}
+				startDate {
+					year
+					month
+					day
+				}
+				endDate {
+					year
+					month
+					day
+				}
+				status
+				episodes
+				duration
+				coverImage {
+					large
+				}
+				genres
+			}
+		}
+	}
+`;
+
+export const useBrowseAnime = (
+	category: string,
+	status: string,
+	season: string,
+	year: number
+) => {
+	const { error, loading, data } = useQuery(GET_BROWSE_FILTERS, {
+		variables: {
+			category,
+			status,
+			season,
+			year,
+		},
+	});
+
+	return { error, loading, data };
+};
+
 export const GET_TOP_100_ANIME = gql`
 	query GetTop100Anime {
 		Page(page: 1, perPage: 100) {

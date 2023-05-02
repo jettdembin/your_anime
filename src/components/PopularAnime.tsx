@@ -22,7 +22,7 @@ const popularAnimePost = async () => {
 	}
 };
 export default function PopularAnime() {
-	const { error, loading, data } = usePopularAnime(5);
+	const { error, loading, data } = usePopularAnime(1);
 
 	const [hoveredAnime, setHoveredAnime] = useState<number | null>(null);
 
@@ -40,7 +40,7 @@ export default function PopularAnime() {
 		return <p>Error: {error.message}</p>;
 	}
 
-	console.log(data, "test");
+	// console.log(data, "test");
 
 	return (
 		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 ">
