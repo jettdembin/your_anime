@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 export default async function Nav() {
-	const session = await getServerSession(authOptions);
-	console.log(session);
+	// const session = await getServerSession(authOptions);
+	// console.log(session);
 	return (
 		<ul className="flex gap-60 text-gray-100">
 			<li className="my-auto font-medium">AL</li>
