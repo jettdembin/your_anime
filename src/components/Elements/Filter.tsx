@@ -49,8 +49,8 @@ const Filter = ({ onToggle }) => {
 	});
 
 	return (
-		<section className="mx-8 mt-16 mb-8" ref={selectRef}>
-			<div className="mt-6 ">
+		<section className="mt-16 mb-8" ref={selectRef}>
+			<div className="mt-6">
 				<h3 className="pb-4 text-md font-semibold text-gray-900">Filters</h3>
 				<div className="flex gap-6 flex-wrap">
 					{filterData.map((filter, i) => (

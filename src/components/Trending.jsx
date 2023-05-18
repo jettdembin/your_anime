@@ -5,7 +5,7 @@ import { Media } from "../types/anime";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
-export default function Browse() {
+export default function Trending() {
 	const { error, loading, data } = useTrendingAnime();
 
 	if (loading) return <p>Loading...</p>;

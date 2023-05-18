@@ -71,7 +71,7 @@ export default async function Home() {
 				<Header />
 			</header>
 
-			<main className="mx-16">
+			<main className="max-w-7xl sm:mx-20 xl:mx-auto relative">
 				<Search />
 
 				<ContentLayout title="TRENDING NOW">
