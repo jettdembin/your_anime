@@ -20,9 +20,14 @@ const SelectWrapper: React.FC<Props> = ({
 	onChange,
 	onToggle,
 	isOpen,
+	value,
 }) => {
-	const [selectedOption, setSelectedOption] = useState();
+	const [selectedOption, setSelectedOption] = useState<Option | undefined>();
 	const [isExpanded, setIsExpanded] = useState(false);
+
+	useEffect(() => {
+		setSelectedOption(options.find((option) => option.value === value));
+	}, [value, options]);
 
 	useEffect(() => {
 		setIsExpanded(isOpen);

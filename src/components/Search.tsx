@@ -121,6 +121,7 @@ export default function Search() {
 							options={select.options}
 							label={select.label}
 							onChange={handleChange}
+							value={search[select.options[0].parent]}
 						/>
 					))}
 
