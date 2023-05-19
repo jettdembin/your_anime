@@ -2,6 +2,7 @@ import Link from "next/link";
 import Login from "../Elements/Login";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { UserButton } from "@clerk/nextjs";
 
 export default async function Nav() {
 	// const session = await getServerSession(authOptions);
