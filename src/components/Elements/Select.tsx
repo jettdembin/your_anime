@@ -21,7 +21,7 @@ const SelectWrapper: React.FC<Props> = ({
 	onToggle,
 	isOpen,
 }) => {
-	const [selectedOption, setSelectedOption] = useState(options[0]);
+	const [selectedOption, setSelectedOption] = useState();
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
@@ -30,7 +30,8 @@ const SelectWrapper: React.FC<Props> = ({
 
 	const handleChange = (option: Option) => {
 		setSelectedOption(option);
-		onChange(option.value);
+		debugger;
+		onChange(option);
 	};
 
 	//listens to user click to close div if button click not contained in div
@@ -43,7 +44,7 @@ const SelectWrapper: React.FC<Props> = ({
 	});
 
 	return (
-		<div className="relative inline-block text-left w-48" ref={selectRef}>
+		<div className="relative inline-block text-left w-full" ref={selectRef}>
 			<button
 				className="inline-flex justify-between w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
 				id="options-menu"
@@ -54,7 +55,7 @@ const SelectWrapper: React.FC<Props> = ({
 					setIsExpanded(!isExpanded);
 				}}
 			>
-				{selectedOption.label}
+				{selectedOption?.label}
 				<svg
 					className="h-4 w-4 ml-2 text-blue-500"
 					xmlns="http://www.w3.org/2000/svg"

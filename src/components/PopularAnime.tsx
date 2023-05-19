@@ -44,7 +44,7 @@ export default function PopularAnime() {
 
 	return (
 		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 ">
-			{data.Page.media.map((anime: Media) => {
+			{data.Page.media.slice(0, 12).map((anime: Media) => {
 				const nextEpisodeDays = anime.nextAiringEpisode
 					? Math.floor(anime.nextAiringEpisode.timeUntilAiring / 86400)
 					: null;

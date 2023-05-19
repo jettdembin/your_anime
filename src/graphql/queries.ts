@@ -149,7 +149,6 @@ export const useBrowseAnime = (
 			year,
 		},
 	});
-
 	return { error, loading, data };
 };
 
