@@ -38,6 +38,8 @@ export default function Search() {
 			options: [
 				{ value: "SPRING", label: "Spring", parent: "season" },
 				{ value: "SUMMER", label: "Summer", parent: "season" },
+				{ value: "WINTER", label: "Winter", parent: "season" },
+				{ value: "FALL", label: "Fall", parent: "season" },
 			],
 		},
 		{

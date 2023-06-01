@@ -64,14 +64,14 @@ const topAnimePost = async () => {
 export default async function Home() {
 	return (
 		<div>
-			<nav className="h-20 px-8 bg-gray-800 flex items-center justify-center">
+			<nav className="hidden lg:flex h-20 px-8 bg-gray-800 flex items-center justify-center relative">
 				<Nav />
 			</nav>
-			<header className="max-w-7xl sm:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl mt-12 lg:rounded-3xl">
+			<header className="max-w-7xl  xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
 				<Header />
 			</header>
 
-			<main className="max-w-7xl sm:mx-20 xl:mx-auto relative">
+			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
 				<Search />
 
 				<ContentLayout title="TRENDING NOW">
