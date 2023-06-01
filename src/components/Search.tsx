@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useRef } from "react";
+
 import SelectWrapper from "./Elements/Select";
+import SelectedFilters from "./SelectedFilters";
 import Filter from "./Elements/Filter";
-import { useBrowseAnime } from "../graphql/queries";
 import AnimeCard from "./Layout/AnimeCard";
+
+import { useBrowseAnime } from "../graphql/queries";
 
 export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState<number | null>(null);
@@ -60,6 +63,16 @@ export default function Search() {
 		setSearch({ ...search, [categorySwitched]: option.value });
 	};
 
+	const removeFilter = (parent: string, value: string | number) => {
+		setSearch((prevState) => {
+			let newSelections = { ...prevState };
+			newSelections[parent] = newSelections[parent].filter(
+				(val) => val !== value
+			);
+			return newSelections;
+		});
+	};
+
 	const [search, setSearch] = useState({
 		category: "Action",
 		status: "FINISHED",
@@ -110,6 +123,7 @@ export default function Search() {
 						</div>
 					)}
 				</div>
+				<SelectedFilters filters={search} onRemoveFilter={removeFilter} />
 				<div className="w-full flex gap-6">
 					{selectData.map((select, i) => (
 						<SelectWrapper

@@ -6,7 +6,7 @@ export default function HomeHeader() {
 			<h1 className="text-3xl font-bold text-gray-100 mb-10 mx-auto max-w-full text-center">
 				The next generation anime platform
 			</h1>
-			<h2 className="max-w-full text-xl text-center text-emerald-200">
+			<h2 className="max-w-full text-xl text-center text-blue-200">
 				Track, share, and discover your favorite anime and manga with
 				YourAnime😍
 			</h2>
@@ -30,7 +30,7 @@ export default function HomeHeader() {
 						<h3 className="text-lg font-semibold text-gray-100">
 							Discover your obsessions<span className="ml-2">🔎</span>
 						</h3>
-						<p className="text-md text-emerald-200">
+						<p className="text-md text-blue-200">
 							What are your highest rated genres or most watched voice actors?
 							Follow your watching habits over time with in-depth statistics.
 						</p>
@@ -55,7 +55,7 @@ export default function HomeHeader() {
 						<h3 className="text-lg font-semibold text-gray-100">
 							Bring YourAnime anywhere <span className="ml-2">🌎</span>
 						</h3>
-						<p className="text-md text-emerald-200">
+						<p className="text-md text-blue-200">
 							What are your highest rated genres or most watched voice actors?
 							Follow your watching habits over time with in-depth statistics.
 						</p>
@@ -78,9 +78,9 @@ export default function HomeHeader() {
 					/>
 					<div>
 						<h3 className="text-lg font-semibold text-gray-100">
-							Join the conversation <span className="ml-2"> 📝</span>
+							Join the conversation <span className="ml-2">📝</span>
 						</h3>
-						<p className="text-md text-emerald-200">
+						<p className="text-md text-blue-200">
 							What are your highest rated genres or most watched voice actors?
 							Follow your watching habits over time with in-depth statistics.
 						</p>
@@ -105,7 +105,7 @@ export default function HomeHeader() {
 						<h3 className="text-lg font-semibold text-gray-100">
 							Tweak it to your liking <span className="ml-2">💕</span>
 						</h3>
-						<p className="text-md text-emerald-200">
+						<p className="text-md text-blue-200">
 							What are your highest rated genres or most watched voice actors?
 							Follow your watching habits over time with in-depth statistics.
 						</p>
