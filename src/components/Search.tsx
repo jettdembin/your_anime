@@ -22,6 +22,10 @@ export default function Search() {
 			options: [
 				{ value: "Action", label: "Action", parent: "category" },
 				{ value: "Adventure", label: "Adventure", parent: "category" },
+				{ value: "Mystery", label: "Mystery", parent: "category" },
+				{ value: "Romance", label: "Romance", parent: "category" },
+				{ value: "Slice of Life", label: "Slice of Life", parent: "category" },
+				{ value: "Thriller", label: "Thriller", parent: "category" },
 			],
 		},
 		{
@@ -148,9 +152,6 @@ export default function Search() {
 			</>
 		);
 	}
-	if (!loading) {
-		debugger;
-	}
 	if (error) {
 		console.log(error.networkError?.result, "error object");
 		return <p>Error: {error.message}</p>;
@@ -165,15 +166,15 @@ export default function Search() {
 				</div>
 				<div className="flex gap-8 mb-6">
 					<input
-						className="w-full px-6 py-4"
+						className="w-full px-6 py-4 shadow-custom"
 						type="text"
 						placeholder="Search"
 					/>
 					<button
-						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 bg-white border-none"
+						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 bg-white border-none shadow-custom"
 						onClick={() => setIsFilterVisible(!isFilterVisible)}
 					>
-						<span className="material-icons" alt="filter">
+						<span className="material-icons text-gray-800" alt="filter">
 							menu
 						</span>
 					</button>

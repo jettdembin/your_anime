@@ -35,7 +35,6 @@ const SelectWrapper: React.FC<Props> = ({
 
 	const handleChange = (option: Option) => {
 		setSelectedOption(option);
-		debugger;
 		onChange(option);
 	};
 
@@ -51,7 +50,7 @@ const SelectWrapper: React.FC<Props> = ({
 	return (
 		<div className="relative inline-block text-left w-full" ref={selectRef}>
 			<button
-				className="inline-flex justify-between w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+				className="inline-flex justify-between w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 shadow-custom"
 				id="options-menu"
 				aria-haspopup="true"
 				aria-expanded="true"
@@ -62,7 +61,7 @@ const SelectWrapper: React.FC<Props> = ({
 			>
 				{selectedOption?.label}
 				<svg
-					className="h-4 w-4 ml-2 text-blue-500"
+					className="h-4 w-4 ml-2 text-gray-800"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
