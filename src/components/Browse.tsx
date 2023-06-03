@@ -1,20 +1,23 @@
 "use client";
-import { useTrendingAnime } from "@/src/graphql/queries";
 
 import { Media } from "../types/anime";
+
+import { useTrendingAnime } from "@/src/graphql/queries";
+
+import { CardSectionLoader } from "./Elements/LoadingSection";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
 export default function Browse() {
 	const { error, loading, data } = useTrendingAnime();
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <CardSectionLoader />;
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
 
 	return (
-		<section className=" grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
+		<section className="grid sm:grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-8 gap-4">
 			{data.Trending.media.slice(0, 8)?.map((media: Media, i: number) => (
 				<div
 					key={media.id}

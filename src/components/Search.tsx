@@ -2,12 +2,13 @@
 
 import { useState, useRef } from "react";
 
+import { useBrowseAnime } from "../graphql/queries";
+
+import { CardSectionLoader } from "./Elements/LoadingSection.tsx";
 import SelectWrapper from "./Elements/Select";
 import SelectedFilters from "./SelectedFilters";
 import Filter from "./Elements/Filter";
-import AnimeCard from "./Layout/AnimeCard";
-
-import { useBrowseAnime } from "../graphql/queries";
+import AnimeCard from "./Elements/AnimeCard";
 
 export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState<number | null>(null);
@@ -84,7 +85,72 @@ export default function Search() {
 
 	const { error, loading, data } = useBrowseAnime(...Object.values(search));
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) {
+		return (
+			// <div>testing</div>
+			<>
+				<section className="mt-16 mb-8">
+					{/* <form onSubmit={() => {}}> */}
+					<div className="mt-6">
+						<h3 className="pb-4 text-3xl font-semibold text-gray-900">
+							Browse
+						</h3>
+					</div>
+					<div className="flex gap-8 mb-6">
+						<input
+							className="w-full px-6 py-4"
+							type="text"
+							placeholder="Search"
+						/>
+						<button
+							className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+							onClick={() => setIsFilterVisible(!isFilterVisible)}
+						>
+							Filter
+						</button>
+						{isFilterVisible && (
+							<div
+								ref={filterRef}
+								className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+							>
+								<Filter
+									isOpen={openedSelect === isFilterVisible}
+									onToggle={() =>
+										setOpenedSelect((prev) =>
+											prev === "filter" ? null : "filter"
+										)
+									}
+								/>
+							</div>
+						)}
+					</div>
+					<SelectedFilters filters={search} onRemoveFilter={removeFilter} />
+					<div className="w-full flex gap-6">
+						{selectData.map((select, i) => (
+							<SelectWrapper
+								key={i}
+								isOpen={openedSelect === i}
+								onToggle={() =>
+									setOpenedSelect((prev) => (prev === i ? null : i))
+								}
+								options={select.options}
+								label={select.label}
+								onChange={handleChange}
+								value={search[select.options[0].parent]}
+							/>
+						))}
+
+						<div>{/* <button type="submit"></button> */}</div>
+					</div>
+					{/* </form> */}
+				</section>
+				<CardSectionLoader />
+			</>
+		);
+	}
+	if (!loading) {
+		debugger;
+	}
 	if (error) {
 		console.log(error.networkError?.result, "error object");
 		return <p>Error: {error.message}</p>;

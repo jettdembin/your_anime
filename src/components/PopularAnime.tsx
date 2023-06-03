@@ -5,11 +5,13 @@ import { useState } from "react";
 import client from "@/apollo-client";
 import { useQuery } from "@apollo/client";
 
-import AnimeDetails from "./Pages/Home/AnimeDetails";
-
 import { Media } from "../types/anime";
 import { GET_POPULAR_ANIME, usePopularAnime } from "@/src/graphql/queries";
+
 import { useAnilistAPI } from "../hooks/useAnilistAPI";
+
+import AnimeDetails from "./Pages/Home/AnimeDetails";
+import { CardSectionLoader } from "./Elements/LoadingSection.tsx";
 
 const popularAnimePost = async () => {
 	try {
@@ -34,7 +36,7 @@ export default function PopularAnime() {
 		setHoveredAnime(null);
 	};
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <CardSectionLoader />;
 	if (error) {
 		console.log(error, "error");
 		return <p>Error: {error.message}</p>;

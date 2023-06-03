@@ -9,6 +9,8 @@ import { GET_TOP_100_ANIME } from "@/src/graphql/queries";
 import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
 import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 
+import { CardSectionLoader } from "../../Elements/LoadingSection";
+
 interface TopAnimeListProps {
 	animes: Media[];
 }
@@ -17,7 +19,7 @@ export default function TopAnimeList() {
 	const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);
 
 	// if (data) console.log(data, "data");
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <CardSectionLoader />;
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
