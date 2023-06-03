@@ -5,7 +5,13 @@ const SkeletonLoader: React.FC<DivProps> = ({
 	...props
 }) => {
 	return (
-		<div className={["animate-pulse", className].join(" ")} {...props}>
+		<div
+			className={[
+				"bg-shine-effect bg-no-repeat bg-200% animate-pulse",
+				className,
+			].join(" ")}
+			{...props}
+		>
 			{children}
 		</div>
 	);
@@ -19,7 +25,9 @@ const searchLoader = <div className="h-16 w-full bg-gray-700"></div>;
 
 const filterLoader = <div className="w-24 h-16 bg-gray-700"></div>;
 
-const selectLoader = <div className="h-10 w-full bg-gray-700"></div>;
+const selectLoader = (
+	<div className="h-10 w-full bg-gray-700 bg-shine-effect bg-no-repeat bg-200% animate-shine"></div>
+);
 
 const selectLoaders = (
 	<div className="w-full flex gap-6 mt-8">
@@ -28,7 +36,7 @@ const selectLoaders = (
 );
 
 const boxLoader = (
-	<div className="relative w-full h-48 bg-gray-700 rounded-md overflow-hidden group"></div>
+	<div className="relative w-full h-48 bg-gray-700 bg-shine-effect bg-no-repeat bg-200% animate-shine rounded-md overflow-hidden group"></div>
 );
 
 export const CardSectionLoader = () => {

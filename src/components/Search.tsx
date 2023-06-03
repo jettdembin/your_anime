@@ -103,7 +103,7 @@ export default function Search() {
 							placeholder="Search"
 						/>
 						<button
-							className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+							className="py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
 							onClick={() => setIsFilterVisible(!isFilterVisible)}
 						>
 							Filter
@@ -170,10 +170,12 @@ export default function Search() {
 						placeholder="Search"
 					/>
 					<button
-						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 bg-white border-none"
 						onClick={() => setIsFilterVisible(!isFilterVisible)}
 					>
-						Filter
+						<span className="material-icons" alt="filter">
+							menu
+						</span>
 					</button>
 					{isFilterVisible && (
 						<div

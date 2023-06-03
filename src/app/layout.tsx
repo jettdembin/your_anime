@@ -18,7 +18,12 @@ export default function RootLayout({
 	return (
 		<ClerkProvider>
 			<html lang="en">
-				<head />
+				<head>
+					<link
+						href="https://fonts.googleapis.com/icon?family=Material+Icons"
+						rel="stylesheet"
+					/>
+				</head>
 				<body className={inter.className}>
 					<Providers>{children}</Providers>
 				</body>
