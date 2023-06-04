@@ -4,8 +4,9 @@ import { Media } from "../types/anime";
 
 import { useTrendingAnime } from "@/src/graphql/queries";
 
-import { CardSectionLoader } from "./Elements/LoadingSection";
+import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 import AnimeCard from "./Elements/AnimeCard";
+import { CardSectionLoader } from "./Elements/LoadingSection";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
@@ -18,10 +19,10 @@ export default function Browse() {
 	}
 
 	return (
-		<section className="grid sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-2 gap-4">
+		<AnimeCardLayout>
 			{data.Trending.media.slice(0, 8)?.map((media: Media, i: number) => (
 				<AnimeCard key={i} media={media} />
 			))}
-		</section>
+		</AnimeCardLayout>
 	);
 }

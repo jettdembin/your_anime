@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useRef } from "react";
 
 import { SignUp } from "@clerk/clerk-react";

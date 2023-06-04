@@ -67,7 +67,7 @@ export default async function Home() {
 			<nav className="hidden lg:flex h-20 px-8 bg-gray-800 flex items-center justify-center relative">
 				<Nav />
 			</nav>
-			<header className="max-w-7xl  xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
+			<header className="max-w-7xl mx-0 lg:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
 				<Header />
 			</header>
 
