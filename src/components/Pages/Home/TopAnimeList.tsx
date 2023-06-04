@@ -32,7 +32,7 @@ export default function TopAnimeList() {
 						<span className="w-8 mr-4 font-bold text-xl text-8ba0b2">
 							#{index + 1}
 						</span>
-						<div className="flex flex-grow items-center bg-white rounded-md shadow-box p-4">
+						<div className="flex flex-grow items-center bg-white rounded-md shadow-box p-4 shadow-custom">
 							<img
 								className="w-20 h-28 object-cover mr-4"
 								src={anime.coverImage.medium}

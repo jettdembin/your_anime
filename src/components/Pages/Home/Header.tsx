@@ -117,7 +117,7 @@ export default function HomeHeader() {
 				</div>
 			</div>
 			<LoginWrapper>
-				<div className="absolute -bottom-8 left-1/2 -translate-x-1/2">
+				<div className="absolute -bottom-8 left-1/2 -translate-x-1/2 cursor-pointer">
 					<div
 						// href="/signup"
 						className="flex w-72 items-center justify-around pl-14  py-4 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-200"
