@@ -1,39 +1,3 @@
-export type Anime = {
-	_type: string;
-	averageScore: number; // Fixed typo in the property name
-	coverImage: {
-		_typeName: string;
-		large: string;
-	};
-	endDate: {
-		__typename: string;
-		day: number;
-		month: number;
-		year: number;
-	};
-	episodes: number;
-	format: string;
-	genres: [string];
-	id: number;
-	popularity: number;
-	startDate: {
-		__typename: string;
-		day: number;
-		month: number;
-		year: number;
-	};
-	status: string;
-	synonyms: [string];
-	title: {
-		__typename: string;
-		english: string;
-		native: string;
-		romaji: string;
-	};
-	nextAiringEpisode: AiringSchedule | null;
-	studios: Studio;
-};
-
 export interface Title {
 	english?: string;
 	native?: string;
@@ -52,6 +16,7 @@ export interface CoverImage {
 
 export interface AiringSchedule {
 	timeUntilAiring: number;
+	episode: number | null;
 }
 
 export interface StudioNode {
@@ -79,12 +44,6 @@ export interface Media {
 	studios: Studio;
 }
 
-export interface DateProps {
-	year: number;
-	month: number;
-	day: number;
-}
-
 export interface Page {
 	media: Media[];
 }
@@ -97,4 +56,17 @@ export interface GetTrendingResponse {
 	Trending: Page;
 }
 
-//top 100 anime
+export interface MediaNextAiringEpisode {
+	timeUntilAiring: number | null;
+	episode: number | null;
+}
+
+export interface MediaStudio {
+	name: string | null;
+}
+
+export interface GetPopularAnimeVariables {
+	page: number | null;
+}
+
+export default GetPopularAnimeResponse;

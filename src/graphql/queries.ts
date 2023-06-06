@@ -28,6 +28,8 @@ export const GET_POPULAR_ANIME = gql`
 				episodes
 				genres
 				status
+				season
+				seasonYear
 			}
 		}
 	}

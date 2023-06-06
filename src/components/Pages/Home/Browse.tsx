@@ -1,12 +1,12 @@
 "use client";
 
-import { Media } from "../types/anime";
+import { Media } from "../../../types/anime";
 
 import { useTrendingAnime } from "@/src/graphql/queries";
 
-import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
-import AnimeCard from "./Elements/AnimeCard";
-import { CardSectionLoader } from "./Elements/LoadingSection";
+import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
+import AnimeCard from "../../Elements/AnimeCard";
+import { CardSectionLoader } from "../../Elements/LoadingSection";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 

@@ -3,7 +3,7 @@
 import { Anime } from "../../util/models";
 
 import { useShowAnimeInfo } from "@/src/hooks/useShowAnimeInfo";
-import AnimeDetails from "../Pages/Home/AnimeDetails";
+import AnimeDetails from "./AnimeCard/AnimeDetails";
 import { useEffect } from "react";
 
 const titleStudioOverlay = (
@@ -60,16 +60,7 @@ export default function AnimeCard({
 				>
 					<AnimeDetails
 						isVisible={hoveredAnime === media.id}
-						nextEpisodeDays={nextEpisodeDays}
-						likedPercentage={media.averageScore}
-						studioName={studioName}
-						currentEpisode={
-							media.nextAiringEpisode?.episode
-								? media.nextAiringEpisode.episode - 1
-								: null
-						}
-						totalEpisodes={media.episodes}
-						genres={media.genres}
+						animeDetails={media || {}}
 						isLastCard={isLastCard}
 					/>
 				</div>

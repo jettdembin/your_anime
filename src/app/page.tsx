@@ -19,9 +19,9 @@ import Nav from "../components/Layout/Nav";
 import { ContentLayout } from "../components/Layout/ContentLayout";
 
 import TopAnimeList from "../components/Pages/Home/TopAnimeList";
-import Browse from "../components/Browse";
+import Browse from "../components/Pages/Home/Browse";
 import Trending from "../components/Trending";
-import PopularAnime from "../components/PopularAnime";
+import PopularAnime from "../components/Pages/Home/PopularAnime";
 import Search from "../components/Search";
 
 // const fetchAnime = async () => {

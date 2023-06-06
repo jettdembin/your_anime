@@ -19,7 +19,7 @@ export const AnimeCardLayout = ({ children }: AnimeCardLayoutProps) => {
 					
 					if (window.innerWidth >= 768 && window.innerWidth < 1280) {
 						isLastCard = (index + 2) % 4 >= 2
-						debugger;
+					
 					}
 					if (React.isValidElement(child)) {
 						return React.cloneElement(child, {

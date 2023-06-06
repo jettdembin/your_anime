@@ -5,16 +5,16 @@ import { useState } from "react";
 import client from "@/apollo-client";
 import { useQuery } from "@apollo/client";
 
-import { Media } from "../types/anime";
+import { Media } from "../../../types/anime";
 import { GET_POPULAR_ANIME, usePopularAnime } from "@/src/graphql/queries";
 
 import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 import { useShowAnimeInfo } from "@/src/hooks/useShowAnimeInfo";
 
-import AnimeDetails from "./Pages/Home/AnimeDetails";
-import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
-import { CardSectionLoader } from "./Elements/LoadingSection.tsx";
-import AnimeCard from "./Elements/AnimeCard";
+import AnimeDetails from "../../Elements/AnimeCard/AnimeDetails";
+import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
+import { CardSectionLoader } from "../../Elements/LoadingSection";
+import AnimeCard from "../../Elements/AnimeCard";
 
 const popularAnimePost = async () => {
 	try {
@@ -38,19 +38,7 @@ export default function PopularAnime() {
 	return (
 		<AnimeCardLayout>
 			{data.Page.media.slice(0, 12).map((anime: Media, i) => {
-				const nextEpisodeDays = anime.nextAiringEpisode
-					? Math.floor(anime.nextAiringEpisode.timeUntilAiring / 86400)
-					: null;
-				const studioName = anime.studios.nodes[0]?.name || "Unknown";
-
-				return (
-					<AnimeCard
-						key={i}
-						media={anime}
-						studioName={studioName}
-						nextEpisodeDays={nextEpisodeDays}
-					/>
-				);
+				return <AnimeCard key={i} media={anime} />;
 			})}
 		</AnimeCardLayout>
 	);

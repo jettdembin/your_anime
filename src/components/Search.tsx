@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { useBrowseAnime } from "../graphql/queries";
 import { selectData } from "../consts";
 
-import { CardSectionLoader } from "./Elements/LoadingSection.tsx";
+import { CardSectionLoader } from "./Elements/LoadingSection";
 import SelectWrapper from "./Elements/Select";
 import SelectedFilters from "./SelectedFilters";
 import Filter from "./Elements/Filter";
