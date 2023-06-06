@@ -10,15 +10,15 @@ const titleStudioOverlay = (
 	<div className="hidden xl:block z-20 w-full bg-gray-900 h-36 absolute bottom-0 opacity-70"></div>
 );
 
-export default function AnimeCard({ media, studioName, nextEpisodeDays }) {
+export default function AnimeCard({
+	media,
+	studioName,
+	nextEpisodeDays,
+	isLastCard,
+}) {
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
 		useShowAnimeInfo();
 
-	useEffect(() => {
-		if (!hoveredAnime) return;
-		const anime = hoveredAnime;
-		debugger;
-	}, [hoveredAnime]);
 	return (
 		<div className="relative">
 			<div
@@ -50,7 +50,14 @@ export default function AnimeCard({ media, studioName, nextEpisodeDays }) {
 				</div>
 			</div>
 			{hoveredAnime === media.id && (
-				<div className="xl:hidden absolute top-0 right-2">
+				<div
+					className={`xl:hidden absolute top-0 ${
+						!!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
+					}`}
+					// className={`xl:hidden absolute top-0 ${
+					// 	isLastCard ? "left-2" : "right-2"
+					// }`}
+				>
 					<AnimeDetails
 						isVisible={hoveredAnime === media.id}
 						nextEpisodeDays={nextEpisodeDays}
@@ -63,6 +70,7 @@ export default function AnimeCard({ media, studioName, nextEpisodeDays }) {
 						}
 						totalEpisodes={media.episodes}
 						genres={media.genres}
+						isLastCard={isLastCard}
 					/>
 				</div>
 			)}
