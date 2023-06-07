@@ -31,16 +31,61 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 			? animeDetails.nextAiringEpisode.episode - 1
 			: null;
 
-	const { episodes, genres, status, season, seasonYear } = animeDetails;
+	const { episodes, genres = [], status, season, seasonYear } = animeDetails;
 
 	const totalEpisodes = episodes || null;
+
+	const emoji = (percent: number | undefined) => {
+		if (!percent) return;
+		switch (true) {
+			case percent >= 75:
+				return "😍";
+			case percent < 75 && percent >= 50:
+				return "😐";
+			case percent < 50:
+				return "😒";
+			default:
+				"😶";
+		}
+	};
 
 	if (status === "FINISHED") {
 		return (
 			<AnimeDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
-				<div className="flex flex-wr">
-					{likedPercentage} {episodes}, {genres}, {status}, {season},{" "}
-					{`${seasonYear}`}
+				<div className="flex flex-col flex-wr">
+					<div className="w-full flex items-center justify-between font-medium">
+						<div className="flex gap-1 text-gray-700">
+							<h6 className="text-base">
+								{season?.split("")[0] + season?.slice(1).toLowerCase()}
+							</h6>{" "}
+							{`${seasonYear}`}
+						</div>
+						<div>
+							{emoji(likedPercentage)} {likedPercentage}%
+						</div>
+					</div>
+					<div className="w-full pt-4 pb-6">
+						<h6 className="text-xs text-gray-800 font-semibold">
+							{studioName}
+						</h6>
+						<div className="w-full flex gap-2 text-gray-800">
+							<p className="text-xs">TV SHOW</p>
+							<span
+								className="material-icons pt-1 grid place-items-center text-gray-800"
+								style={{ fontSize: "7px" }}
+							>
+								fiber_manual_record
+							</span>
+							<p className="text-xs">{totalEpisodes} episodes</p>
+						</div>
+					</div>
+					<div className="w-full  flex flex-wrap gap-2">
+						{genres.slice(0, 3).map((genre) => (
+							<p className="text-xs bg-yellow-300 rounded-3xl px-2 py-1">
+								{genre?.toLowerCase()}
+							</p>
+						))}
+					</div>
 				</div>
 			</AnimeDetailsWrapper>
 		);
