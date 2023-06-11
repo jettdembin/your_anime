@@ -54,9 +54,6 @@ export default function AnimeCard({
 					className={`xl:hidden absolute top-0 ${
 						!!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
 					}`}
-					// className={`xl:hidden absolute top-0 ${
-					// 	isLastCard ? "left-2" : "right-2"
-					// }`}
 				>
 					<AnimeDetails
 						isVisible={hoveredAnime === media.id}

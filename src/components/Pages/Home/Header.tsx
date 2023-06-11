@@ -6,7 +6,7 @@ import LoginWrapper from "../../Elements/LoginWrapper";
 
 export default function HomeHeader() {
 	return (
-		<>
+		<header className="max-w-7xl mx-0 lg:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
 			<h1 className="text-3xl font-bold text-gray-100 mb-10 mx-auto max-w-full text-center">
 				The next generation anime platform
 			</h1>
@@ -143,6 +143,6 @@ export default function HomeHeader() {
 					</div>
 				</div>
 			</LoginWrapper>
-		</>
+		</header>
 	);
 }

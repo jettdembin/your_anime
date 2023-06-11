@@ -23,6 +23,7 @@ import Browse from "../components/Pages/Home/Browse";
 import Trending from "../components/Trending";
 import PopularAnime from "../components/Pages/Home/PopularAnime";
 import Search from "../components/Search";
+import Footer from "../components/Layout/Footer";
 
 // const fetchAnime = async () => {
 // 	const { data } = await client.query({
@@ -64,12 +65,8 @@ const topAnimePost = async () => {
 export default async function Home() {
 	return (
 		<div>
-			<nav className="hidden lg:flex h-20 px-8 bg-gray-800 flex items-center justify-center relative">
-				<Nav />
-			</nav>
-			<header className="max-w-7xl mx-0 lg:mx-20 xl:mx-auto relative bg-gray-800 py-16 px-10 shadow-2xl lg:mt-12 lg:rounded-3xl">
-				<Header />
-			</header>
+			<Nav />
+			<Header />
 
 			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
 				<Search />
@@ -78,7 +75,7 @@ export default async function Home() {
 					<Browse />
 				</ContentLayout>
 
-				<ContentLayout title="POPULAR ANIME">
+				<ContentLayout title="ALL TIME POPULAR">
 					<PopularAnime />
 				</ContentLayout>
 
@@ -86,6 +83,8 @@ export default async function Home() {
 					<TopAnimeList />
 				</ContentLayout>
 			</main>
+
+			<Footer />
 		</div>
 	);
 }

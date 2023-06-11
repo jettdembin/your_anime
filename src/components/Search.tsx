@@ -23,7 +23,8 @@ export default function Search() {
 		year: 2022,
 	});
 
-	const { error, loading, data } = useBrowseAnime(...Object.values(search));
+	// const { error, loading, data } = useBrowseAnime(...Object.values(search));
+	const { error, loading, data } = useBrowseAnime();
 
 	if (error) {
 		console.log(error.networkError?.result, "error object");
@@ -108,7 +109,7 @@ export default function Search() {
 				</div>
 				{/* </form> */}
 			</section>
-			{loading ? (
+			{/* {loading ? (
 				<CardSectionLoader />
 			) : (
 				<AnimeCardLayout>
@@ -116,7 +117,7 @@ export default function Search() {
 						<AnimeCard key={i} media={media} />
 					))}
 				</AnimeCardLayout>
-			)}
+			)} */}
 		</>
 	);
 }

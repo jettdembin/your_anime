@@ -48,7 +48,7 @@ export const usePopularAnime = (page: any) => {
 export const GET_TRENDING = gql`
 	query {
 		Trending: Page {
-			media(type: ANIME, sort: POPULARITY_DESC) {
+			media(type: ANIME, sort: POPULARITY_DESC, status: RELEASING) {
 				id
 				title {
 					romaji
@@ -77,6 +77,8 @@ export const GET_TRENDING = gql`
 				popularity
 				nextAiringEpisode {
 					timeUntilAiring
+					episode
+					airingAt
 				}
 				studios(isMain: true) {
 					nodes {
