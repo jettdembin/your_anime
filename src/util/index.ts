@@ -12,4 +12,18 @@ const getEmoji = (percent: number | undefined) => {
 	}
 };
 
-export { getEmoji };
+function convertTimeUntilAiring(timeUntilAiring: number): string {
+	const days = Math.floor(timeUntilAiring / (24 * 60 * 60)); // Convert seconds to days
+	const hours = Math.floor((timeUntilAiring % (24 * 60 * 60)) / (60 * 60)); // Convert remaining seconds to hours
+
+	let result = "";
+	if (days > 0) {
+		result += `${days} days `;
+	}
+	if (hours > 0) {
+		result += `${hours} hours`;
+	}
+	return result;
+}
+
+export { getEmoji, convertTimeUntilAiring };
