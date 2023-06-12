@@ -1,3 +1,5 @@
+// creates animated wrapper for the anime card details to show left or right depending on amount of cards and its index
+
 import React from "react";
 
 const AnimeCardWrapper = ({ children, isLastCard, isVisible }) => {

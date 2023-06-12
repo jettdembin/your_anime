@@ -40,6 +40,15 @@ module.exports = {
 				custom:
 					"0 14px 30px rgba(103,132,187,.15),0 4px 4px rgba(103,132,187,.1)",
 			},
+			backgroundColor: {
+				genre: "#eff6ff",
+			},
+			fontSize: {
+				xxs: ".65rem",
+			},
+			color: {
+				genre: "#eff6ff",
+			},
 		},
 	},
 	plugins: [],

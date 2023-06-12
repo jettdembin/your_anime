@@ -1,10 +1,12 @@
 import React from "react";
+
 import {
 	GetPopularAnimeResponse,
 	Media,
 	MediaNextAiringEpisode,
 	MediaStudio,
 } from "@/src/types/anime";
+import { getEmoji } from "@/src/util";
 
 import AnimeDetailsWrapper from "@/src/components/Elements/AnimeCard/AnimeDetailsWrapper";
 
@@ -12,16 +14,18 @@ interface AnimeDetailsProps {
 	isVisible: boolean;
 	animeDetails: Media | null;
 	isLastCard: boolean;
+	nextEpisodeDays: number | null;
 }
 
 const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	isVisible,
 	animeDetails,
 	isLastCard,
+	nextEpisodeDays,
 }) => {
-	const nextEpisodeDays = animeDetails?.nextAiringEpisode
-		? Math.floor(animeDetails.nextAiringEpisode.timeUntilAiring / 86400)
-		: null;
+	// const nextEpisodeDays = animeDetails?.nextAiringEpisode
+	// 	? Math.floor(animeDetails.nextAiringEpisode.timeUntilAiring / 86400)
+	// 	: null;
 	const currentEpisode =
 		animeDetails?.nextAiringEpisode?.episode &&
 		animeDetails.nextAiringEpisode.episode > 1
@@ -33,23 +37,13 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	const studioName = animeDetails?.studios?.nodes[0]?.name || "Unknown";
 	const likedPercentage = animeDetails?.averageScore;
 
-	const { episodes, genres = [], status, season, seasonYear } = animeDetails;
-
-	const totalEpisodes = episodes || null;
-
-	const emoji = (percent: number | undefined) => {
-		if (!percent) return;
-		switch (true) {
-			case percent >= 75:
-				return "😍";
-			case percent < 75 && percent >= 50:
-				return "😐";
-			case percent < 50:
-				return "😒";
-			default:
-				"😶";
-		}
-	};
+	const {
+		episodes: totalEpisodes,
+		genres = [],
+		status,
+		season,
+		seasonYear,
+	} = animeDetails;
 
 	if (status === "FINISHED") {
 		return (
@@ -61,7 +55,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 							<h6>{`${seasonYear}`}</h6>
 						</div>
 						<div>
-							{emoji(likedPercentage)} {likedPercentage}%
+							{getEmoji(likedPercentage)} {likedPercentage}%
 						</div>
 					</div>
 					<div className="w-full pt-4 pb-6">
@@ -103,16 +97,18 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	return (
 		<AnimeDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
 			<div className="flex flex-col flex-wr">
-				<div className="w-full flex items-center justify-between font-medium">
-					<h6 className="text-lg text-gray-800">
-						Ep {!!currentEpisode && currentEpisode + 1} airing in
-						{nextEpisodeDays === 0
-							? ` ${hoursUntilNextEpisode} hours`
-							: ` ${nextEpisodeDays} days`}
-					</h6>
-					<div>
-						{emoji(likedPercentage)} {likedPercentage}%
+				<div className="w-full flex justify-between font-medium">
+					<div className="w-3/4">
+						<h6 className="text-lg text-gray-800">
+							Ep {!!currentEpisode && currentEpisode + 1} airing in
+							{nextEpisodeDays === 0
+								? ` ${hoursUntilNextEpisode} hours`
+								: ` ${nextEpisodeDays} days`}
+						</h6>
 					</div>
+					<span>
+						{getEmoji(likedPercentage)} {likedPercentage}%
+					</span>
 				</div>
 			</div>
 			<div className="w-full pt-4 pb-6">

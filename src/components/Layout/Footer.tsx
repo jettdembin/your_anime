@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
 		>
 			<div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between">
 				<div className="mb-4 md:mb-0">
-					<h3 className="text-lg font-bold">AniList</h3>
+					<h3 className="text-lg font-bold">YourAnime</h3>
 					<p className="mt-2">Discover new anime and track your progress.</p>
 				</div>
 				<div className="flex items-center">
