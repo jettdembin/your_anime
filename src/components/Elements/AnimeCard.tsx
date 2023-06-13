@@ -18,14 +18,17 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
 		useShowAnimeInfo();
 
+	const studioName = media?.studios?.nodes[0]?.name || "Unknown";
+
 	const nextEpisodeDays = media?.nextAiringEpisode
 		? Math.floor(media.nextAiringEpisode.timeUntilAiring / 86400)
 		: null;
 
 	const titleStudioOverlay = (
-		<div className="hidden xl:block z-20 w-full bg-gray-900 h-36 absolute bottom-0 opacity-70 p-4">
-			<h3 className="opacity-0 text-white font-semibold text-base">
+		<div className="hidden xl:block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
+			<h3 className="opacity-0 text-white font-semibold text-base flex flex-col">
 				{media.title.english || media.title.native}
+				<span>{studioName}</span>
 			</h3>
 		</div>
 	);
@@ -40,7 +43,7 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 				onMouseLeave={handleMouseLeave}
 			>
 				<div className="relative">
-					<div className="overflow-hidden">
+					<div className="overflow-hidden max-h-[290px]">
 						<img
 							src={media.coverImage.large}
 							alt={media.title.english || media.title.native}
@@ -49,9 +52,10 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 					</div>
 					{titleStudioOverlay}
 					{/* Title past large screens and up*/}
-					<div className="hidden p-4 z-30 xl:block absolute w-full h-36 bottom-0">
-						<h3 className="text-white font-semibold text-base">
+					<div className="hidden p-4 z-30 xl:block absolute w-full h-fit bottom-0">
+						<h3 className="h-full flex flex-col justify-between text-white font-semibold text-base">
 							{media.title.english || media.title.native}
+							<span className="text-blue-300 text-sm">{studioName}</span>
 						</h3>
 					</div>
 				</div>
