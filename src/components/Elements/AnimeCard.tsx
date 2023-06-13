@@ -9,6 +9,8 @@ import AnimeDetails from "./AnimeCard/AnimeDetails";
 
 interface AnimeCardProps {
 	media: Media;
+	// studioName: string;
+	// nextEpisodeDays: number | null;
 	isLastCard: boolean;
 }
 
@@ -21,7 +23,11 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 		: null;
 
 	const titleStudioOverlay = (
-		<div className="hidden xl:block z-20 w-full bg-gray-900 h-36 absolute bottom-0 opacity-70"></div>
+		<div className="hidden xl:block z-20 w-full bg-gray-900 h-36 absolute bottom-0 opacity-70 p-4">
+			<h3 className="opacity-0 text-white font-semibold text-base">
+				{media.title.english || media.title.native}
+			</h3>
+		</div>
 	);
 
 	return (
@@ -42,12 +48,14 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 						/>
 					</div>
 					{titleStudioOverlay}
+					{/* Title past large screens and up*/}
 					<div className="hidden p-4 z-30 xl:block absolute w-full h-36 bottom-0">
 						<h3 className="text-white font-semibold text-base">
 							{media.title.english || media.title.native}
 						</h3>
 					</div>
 				</div>
+				{/* Title on screens up to large */}
 				<div className="absolute inset-0 bg-gradient-to-t from-black opacity-40 transition-opacity duration-300 ease-in-out group-hover:opacity-0 xl:bg-transparent xl:opacity-0"></div>
 				<div className="absolute bottom-0 left-0 w-full p-2 text-white transition-all duration-300 ease-in-out group-hover:bottom-2 xl:group-hover:bottom-0  xl:relative xl:p-4 ">
 					<h3 className="text-sm font-semibold lg:text-base">
@@ -57,7 +65,6 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 				</div>
 			</div>
 
-			{/* Content div related to the image shown on screens up to large screens */}
 			{hoveredAnime === media.id && (
 				<div
 					className={`xl:hidden absolute top-0 ${
@@ -73,7 +80,7 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 				</div>
 			)}
 
-			{/* Content div related to the image shown on large screens and up*/}
+			{/* Content div related to the image */}
 			<AnimeDetailsLarge media={media} />
 		</div>
 	);
