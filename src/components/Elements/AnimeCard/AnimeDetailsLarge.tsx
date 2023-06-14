@@ -113,16 +113,34 @@ const AnimeDetailsLarge = ({ media }: AnimeCardProps) => {
 				</div>
 			</div>
 			<div className="pl-4">
-				{!!id && (
+				{!!id && site === "youtube" && (
 					<>
-						<button onClick={handleTrailerClick}>Watch Trailer</button>
+						{!!thumbnail && (
+							<div role="button" onClick={handleTrailerClick}>
+								<Image
+									src={thumbnail}
+									alt="Trailer Thumbnail"
+									width={100}
+									height={50}
+								/>
+							</div>
+						)}
 						{isExpanded && (
 							<section
 								className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
 								onClick={handleBackdropClick}
 							>
 								<div className="relative aspect-w-16 aspect-h-9 max-w-screen-xl">
-									<YouTube videoId={id} />
+									<YouTube
+										videoId={id}
+										opts={{
+											playerVars: {
+												autoplay: 1,
+												controls: 1,
+												modestbranding: 1,
+											},
+										}}
+									/>
 								</div>
 							</section>
 						)}
