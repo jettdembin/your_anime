@@ -2,10 +2,11 @@
 
 import { Media } from "../../../types/anime";
 
+import { usePopularAnime } from "@/src/graphql/queries";
+
 import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
 import { CardSectionLoader } from "../../Elements/LoadingSection";
 import AnimeCard from "../../Elements/AnimeCard";
-import { usePopularAnime } from "@/src/graphql/queries";
 
 export default function PopularAnime() {
 	const { error, loading, data } = usePopularAnime(1);

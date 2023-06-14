@@ -15,6 +15,11 @@ export const GET_POPULAR_ANIME = gql`
 				coverImage {
 					large
 				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
 				nextAiringEpisode {
 					timeUntilAiring
 					episode

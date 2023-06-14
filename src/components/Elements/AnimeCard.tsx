@@ -9,8 +9,6 @@ import AnimeDetails from "./AnimeCard/AnimeDetails";
 
 interface AnimeCardProps {
 	media: Media;
-	// studioName: string;
-	// nextEpisodeDays: number | null;
 	isLastCard: boolean;
 }
 
@@ -26,9 +24,10 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 
 	const titleStudioOverlay = (
 		<div className="hidden xl:block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
-			<h3 className="opacity-0 text-white font-semibold text-base flex flex-col">
+			{/* used as a spacer for the opaque background */}
+			<h3 className="opacity-0 text-white font-semibold text-base flex flex-col gap-2">
 				{media.title.english || media.title.native}
-				<span>{studioName}</span>
+				<span className="text-xs">{studioName}</span>
 			</h3>
 		</div>
 	);
@@ -51,11 +50,11 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 						/>
 					</div>
 					{titleStudioOverlay}
-					{/* Title past large screens and up*/}
+					{/* Title for large screens and up*/}
 					<div className="hidden p-4 z-30 xl:block absolute w-full h-fit bottom-0">
-						<h3 className="h-full flex flex-col justify-between text-white font-semibold text-base">
+						<h3 className="h-full flex flex-col gap-2 text-white font-semibold text-base">
 							{media.title.english || media.title.native}
-							<span className="text-blue-300 text-sm">{studioName}</span>
+							<span className="text-blue-300 text-xs">{studioName}</span>
 						</h3>
 					</div>
 				</div>
@@ -65,7 +64,6 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 					<h3 className="text-sm font-semibold lg:text-base">
 						{media.title.english || media.title.native}
 					</h3>
-					{/* Add more information here as needed for large screens */}
 				</div>
 			</div>
 

@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-	GetPopularAnimeResponse,
-	Media,
-	MediaNextAiringEpisode,
-	MediaStudio,
-} from "@/src/types/anime";
+import { Media } from "@/src/types/anime";
 import { getEmoji, convertTimeUntilAiring } from "@/src/util";
 
 import AnimeDetailsWrapper from "@/src/components/Elements/AnimeCard/AnimeDetailsWrapper";
