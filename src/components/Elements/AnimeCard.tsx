@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Media } from "@/src/types/anime";
 
 import { useShowAnimeInfo } from "@/src/hooks/useShowAnimeInfo";
@@ -13,6 +15,7 @@ interface AnimeCardProps {
 }
 
 export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
+	const [isCardHovered, setIsCardHovered] = useState(false);
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
 		useShowAnimeInfo();
 
@@ -33,7 +36,11 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 	);
 
 	return (
-		<div className="relative flex">
+		<div
+			className="relative flex"
+			onMouseEnter={() => setIsCardHovered(true)}
+			onMouseLeave={() => setIsCardHovered(false)}
+		>
 			<div
 				className="relative w-full h-48 xl:h-72 xl:grid xl:grid-cols-[auto,1fr] bg-gray-700 xl:bg-white rounded-md overflow-hidden group xl:shadow-custom"
 				onMouseEnter={() => {
@@ -83,7 +90,11 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 			)}
 
 			{/* Content div related to the image */}
-			<AnimeDetailsLarge media={media} />
+			<AnimeDetailsLarge
+				media={media}
+				isCardHovered={isCardHovered}
+				setIsCardHovered={setIsCardHovered}
+			/>
 		</div>
 	);
 }
