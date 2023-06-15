@@ -30,7 +30,22 @@ const AnimeDetailsLarge = ({
 		return `${days} days ${remainingHours} hours`;
 	};
 
-	const { epsiodes, genres = [], status, season, seasonYear, trailer } = media;
+	const {
+		description,
+		genres = [],
+		status,
+		season,
+		seasonYear,
+		trailer,
+	} = media;
+
+	const MAX_DESCRIPTION_LENGTH = 100;
+
+	// Get the truncated description
+	const truncatedDescription =
+		description?.length > MAX_DESCRIPTION_LENGTH
+			? `${description.slice(0, MAX_DESCRIPTION_LENGTH)}...`
+			: description;
 
 	const { id, site, thumbnail } = trailer || {
 		id: null,
@@ -76,8 +91,14 @@ const AnimeDetailsLarge = ({
 	return (
 		<AnimatePresence>
 			<div className="hidden xl:flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
-				<div className="m-4 overflow-hidden">
-					<div className="flex flex-col flex-wr">
+				<div
+					className={`m-4 h-60 ${
+						isCardHovered
+							? "overflow-y-scroll overflow-x-hidden"
+							: "overflow-hidden"
+					}`}
+				>
+					{/* <div className="flex flex-col flex-wr">
 						<div className="w-full flex justify-between font-medium">
 							{status === "FINISHED" ? (
 								<>
@@ -111,7 +132,7 @@ const AnimeDetailsLarge = ({
 								</>
 							)}
 						</div>
-					</div>
+					</div> */}
 					<motion.div
 						role="button"
 						onClick={handleTrailerClick}
@@ -121,8 +142,8 @@ const AnimeDetailsLarge = ({
 						}}
 						transition={{ duration: 0.3, delay: 0.2, type: "tween" }}
 					>
-						<div className="w-full flex items-center justify-between font-medium">
-							<div className="text-lg flex gap-1 text-gray-700">
+						<div className="w-full flex  justify-between font-medium">
+							<div className="text-lg flex  gap-1 text-gray-700">
 								<h6>{season?.split("")[0] + season?.slice(1).toLowerCase()}</h6>{" "}
 								<h6>{`${seasonYear}`}</h6>
 							</div>
@@ -146,6 +167,13 @@ const AnimeDetailsLarge = ({
 							</>
 						)}
 					</motion.div>
+					<div
+						dangerouslySetInnerHTML={
+							!isCardHovered
+								? { __html: truncatedDescription + "..." }
+								: { __html: description }
+						}
+					></div>
 				</div>
 				<div className="px-4 py-2 flex justify-between mt-auto bg-genre">
 					<div className="flex flex-wrap justify-between gap-2">

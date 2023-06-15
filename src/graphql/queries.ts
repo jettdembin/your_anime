@@ -14,13 +14,6 @@ export const GET_POPULAR_ANIME = gql`
 				}
 				description
 				source
-				isAdult
-				isFavourite
-				isLicensed
-				genres
-				tags {
-					name
-				}
 				coverImage {
 					large
 				}
@@ -40,33 +33,10 @@ export const GET_POPULAR_ANIME = gql`
 					}
 				}
 				episodes
+				genres
 				status
 				season
 				seasonYear
-				sequel {
-					nodes {
-						id
-						title {
-							english
-							native
-						}
-						coverImage {
-							large
-						}
-						startDate {
-							year
-							month
-							day
-						}
-						endDate {
-							year
-							month
-							day
-						}
-						episodes
-						status
-					}
-				}
 			}
 		}
 	}
