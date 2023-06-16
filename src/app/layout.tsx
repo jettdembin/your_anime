@@ -23,6 +23,10 @@ export default function RootLayout({
 						href="https://fonts.googleapis.com/icon?family=Material+Icons"
 						rel="stylesheet"
 					/>
+					<link
+						rel="stylesheet"
+						href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+					/>
 				</head>
 				<body className={inter.className}>
 					<Providers>{children}</Providers>

@@ -26,4 +26,27 @@ function convertTimeUntilAiring(timeUntilAiring: number): string {
 	return result;
 }
 
-export { getEmoji, convertTimeUntilAiring };
+function getMonthName(monthNumber: number): string {
+	// Array of month names
+	const monthNames: string[] = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	];
+
+	// Adjust for zero-indexed array (January is 0, December is 11)
+	let adjustedMonthNumber: number = monthNumber - 1;
+
+	return monthNames[adjustedMonthNumber];
+}
+
+export { getEmoji, convertTimeUntilAiring, getMonthName };

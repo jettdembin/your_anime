@@ -26,6 +26,11 @@ export const GET_POPULAR_ANIME = gql`
 					timeUntilAiring
 					episode
 				}
+				startDate {
+					year
+					month
+					day
+				}
 				averageScore
 				studios(isMain: true) {
 					nodes {
@@ -38,6 +43,9 @@ export const GET_POPULAR_ANIME = gql`
 				season
 				seasonYear
 			}
+			# socialMedia {
+			# 	twitter
+			# }
 		}
 	}
 `;

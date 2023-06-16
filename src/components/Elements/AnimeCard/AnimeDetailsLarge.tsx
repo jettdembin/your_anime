@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Media } from "@/src/types/anime";
 
-import { getEmoji, convertTimeUntilAiring } from "@/src/util";
+import { getEmoji, convertTimeUntilAiring, getMonthName } from "@/src/util";
 
 interface AnimeCardProps {
 	media: Media;
@@ -31,15 +31,18 @@ const AnimeDetailsLarge = ({
 	};
 
 	const {
+		episodes,
+		startDate,
 		description,
 		genres = [],
 		status,
 		season,
 		seasonYear,
 		trailer,
+		title,
 	} = media;
 
-	const MAX_DESCRIPTION_LENGTH = 100;
+	const MAX_DESCRIPTION_LENGTH = 220;
 
 	// Get the truncated description
 	const truncatedDescription =
@@ -92,7 +95,7 @@ const AnimeDetailsLarge = ({
 		<AnimatePresence>
 			<div className="hidden xl:flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
 				<div
-					className={`m-4 h-60 ${
+					className={`mt-6 mr-6 ml-6 h-60 ${
 						isCardHovered
 							? "overflow-y-scroll overflow-x-hidden"
 							: "overflow-hidden"
@@ -136,16 +139,26 @@ const AnimeDetailsLarge = ({
 					<motion.div
 						role="button"
 						onClick={handleTrailerClick}
-						className="w-[200%] grid grid-cols-2"
+						className="w-[201%] grid grid-cols-2"
 						animate={{
 							x: isCardHovered ? "-50%" : "0%",
 						}}
-						transition={{ duration: 0.3, delay: 0.2, type: "tween" }}
+						transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
 					>
 						<div className="w-full flex  justify-between font-medium">
-							<div className="text-lg flex  gap-1 text-gray-700">
-								<h6>{season?.split("")[0] + season?.slice(1).toLowerCase()}</h6>{" "}
-								<h6>{`${seasonYear}`}</h6>
+							<div className="flex flex-col gap-1 text-gray-700">
+								<div className="flex">
+									<h6 className="text-xs">
+										{episodes} episodes aired in{" "}
+										{season?.split("")[0] + season?.slice(1).toLowerCase()}
+									</h6>
+								</div>
+								<div className="flex gap-1 text-lg">
+									<h6>
+										{getMonthName(startDate?.month)} {startDate?.day},{" "}
+										{startDate?.year}{" "}
+									</h6>
+								</div>
 							</div>
 							<div>
 								{getEmoji(likedPercentage)} {likedPercentage}%
@@ -154,26 +167,40 @@ const AnimeDetailsLarge = ({
 						{!!id && site === "youtube" && (
 							<>
 								{!!thumbnail && (
-									<div>
-										<Image
-											ref={thumbnailRef}
-											src={thumbnail}
-											alt="Trailer Thumbnail"
-											width={100}
-											height={50}
-										/>
+									<div className="relative flex justify-between gap-2 pr-2">
+										<h6 className="text-lg">
+											<span className="text-2xl font-bold">#</span>
+											{title?.native}
+										</h6>
+										<div
+											className="relative"
+											style={{ width: "175px", height: "75px" }}
+										>
+											<Image
+												ref={thumbnailRef}
+												src={thumbnail}
+												alt="Trailer Thumbnail"
+												layout="fill"
+												objectFit="cover"
+											/>
+											<div className="absolute inset-0 flex items-center justify-center">
+												<i className="fas fa-play text-white"></i>
+											</div>
+										</div>
 									</div>
 								)}
 							</>
 						)}
 					</motion.div>
-					<div
-						dangerouslySetInnerHTML={
-							!isCardHovered
-								? { __html: truncatedDescription + "..." }
-								: { __html: description }
-						}
-					></div>
+					<div className="mt-4 text-sm">
+						<div
+							dangerouslySetInnerHTML={
+								!isCardHovered
+									? { __html: truncatedDescription + "..." }
+									: { __html: description }
+							}
+						></div>
+					</div>
 				</div>
 				<div className="px-4 py-2 flex justify-between mt-auto bg-genre">
 					<div className="flex flex-wrap justify-between gap-2">
