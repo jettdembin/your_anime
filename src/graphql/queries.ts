@@ -66,40 +66,39 @@ export const GET_TRENDING = gql`
 			media(type: ANIME, sort: POPULARITY_DESC, status: RELEASING) {
 				id
 				title {
-					romaji
 					english
 					native
 				}
+				description
+				source
 				coverImage {
 					large
 				}
-				format
-				episodes
-				status
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
+				}
 				startDate {
 					year
 					month
 					day
 				}
-				endDate {
-					year
-					month
-					day
-				}
-				synonyms
-				genres
 				averageScore
-				popularity
-				nextAiringEpisode {
-					timeUntilAiring
-					episode
-					airingAt
-				}
 				studios(isMain: true) {
 					nodes {
 						name
 					}
 				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
 			}
 		}
 	}

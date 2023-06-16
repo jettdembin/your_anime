@@ -149,7 +149,9 @@ const AnimeDetailsLarge = ({
 							<div className="flex flex-col gap-1 text-gray-700">
 								<div className="flex">
 									<h6 className="text-xs">
-										{episodes} episodes aired in{" "}
+										{episodes
+											? `${episodes} episodes aired in`
+											: "Ongoing, aired in "}
 										{season?.split("")[0] + season?.slice(1).toLowerCase()}
 									</h6>
 								</div>
@@ -167,7 +169,7 @@ const AnimeDetailsLarge = ({
 						{!!id && site === "youtube" && (
 							<>
 								{!!thumbnail && (
-									<div className="relative flex justify-between gap-2 pr-2">
+									<div className="relative flex justify-between gap-2 pr-2 pb-1">
 										<h6 className="text-lg">
 											<span className="text-2xl font-bold">#</span>
 											{title?.native}
@@ -192,7 +194,7 @@ const AnimeDetailsLarge = ({
 							</>
 						)}
 					</motion.div>
-					<div className="mt-4 text-sm">
+					<div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
 						<div
 							dangerouslySetInnerHTML={
 								!isCardHovered
