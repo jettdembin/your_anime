@@ -8,7 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Media } from "@/src/types/anime";
 
-import { getEmoji, convertTimeUntilAiring, getMonthName } from "@/src/util";
+import { getEmoji, getMonthName } from "@/src/util";
+
+import AnimeHoverOptions from "./AnimeDetailsLarge/AnimeHoverOptions";
 
 interface AnimeCardProps {
 	media: Media;
@@ -22,13 +24,16 @@ const AnimeDetailsLarge = ({
 	isCardHovered,
 	setIsCardHovered,
 }: AnimeCardProps) => {
-	const convertTimeUntilAiring = (hours: number): string => {
-		// Convert hours to days
-		const days = Math.floor(hours / 24);
-		const remainingHours = hours % 24;
+	// const convertTimeUntilAiring = (hours: number): string => {
+	// 	// Convert hours to days
+	// 	const days = Math.floor(hours / 24);
+	// 	const remainingHours = hours % 24;
 
-		return `${days} days ${remainingHours} hours`;
-	};
+	// 	return `${days} days ${remainingHours} hours`;
+	// };
+
+	const [isAnimeHoverOptionsHovered, setIsAnimeHoverOptionsHovered] =
+		useState(false);
 
 	const {
 		episodes,
@@ -215,9 +220,27 @@ const AnimeDetailsLarge = ({
 							</span>
 						))}
 					</div>
-					<span className="material-icons cursor-pointer text-blue-100">
-						loupe
-					</span>
+					<div
+						onMouseEnter={() => setIsAnimeHoverOptionsHovered(true)}
+						onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
+					>
+						<span className="material-icons cursor-pointer text-blue-100 relative">
+							loupe
+							<AnimatePresence>
+								{isAnimeHoverOptionsHovered && (
+									<motion.div
+										initial={{ opacity: 0, y: "-100%" }}
+										animate={{ opacity: 1, y: "-120%" }}
+										exit={{ opacity: 0, y: "-100%" }}
+										transition={{ duration: 0.2 }}
+										className="absolute top-0 rounded-lg shadow-md bg-white z-40"
+									>
+										<AnimeHoverOptions />
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</span>
+					</div>
 				</div>
 			</div>
 			{isExpanded && (
@@ -232,8 +255,6 @@ const AnimeDetailsLarge = ({
 						animate={{
 							top: "50%",
 							left: "50%",
-							width: "40%",
-							height: "20%",
 							x: "-50%",
 							y: "-50%",
 						}}
@@ -244,7 +265,7 @@ const AnimeDetailsLarge = ({
 							height: thumbnailBounds?.height || "0",
 						}}
 						transition={{ duration: 0.5 }}
-						className="fixed z-50"
+						className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
 						// style={{
 						// 	position: "fixed",
 						// 	zIndex: 100,
@@ -271,7 +292,7 @@ const AnimeDetailsLarge = ({
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 0.9 }}
 						transition={{ duration: 1, delay: 0.5 }}
-						className="relative aspect-w-16 aspect-h-9 max-w-screen-xl"
+						className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
 					>
 						<YouTube
 							videoId={id}
