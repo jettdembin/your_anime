@@ -32,41 +32,54 @@ export default function TopAnimeList() {
 						<span className="w-8 mr-4 font-bold text-xl text-8ba0b2">
 							#{index + 1}
 						</span>
-						<div className="flex flex-grow items-center bg-white rounded-md shadow-box p-4 shadow-custom">
-							<img
-								className="w-20 h-28 object-cover mr-4"
-								src={anime.coverImage.medium}
-								alt={anime.title.english || "Anime Cover"}
-							/>
-							<div>
-								<h3 className="font-semibold text-lg">{anime.title.english}</h3>
-								<p className="text-sm">{formatGenres(anime.genres)}</p>
-							</div>
-							<div className="ml-auto">
-								<p>{`${anime.averageScore}%`}</p>
-								<p className="text-sm">{`${anime.popularity} users`}</p>
-							</div>
-							<div className="ml-4">
-								<p>{formatMediaType(anime.format)}</p>
-								<p className="text-sm">{`${anime.episodes} eps`}</p>
-							</div>
-							<div className="flex flex-col ml-4">
-								<span>
-									{formatDate(anime.endDate || anime.startDate, "seasonYear")}
-								</span>
-								{anime.status === "RELEASING" && anime.nextAiringEpisode ? (
-									<span className="text-sm text-gray-500">
-										Ep {anime.nextAiringEpisode.episode} airing in{" "}
-										{Math.floor(
-											anime.nextAiringEpisode.timeUntilAiring / 86400
-										)}{" "}
-										days
-									</span>
-								) : (
-									<span className="text-sm text-gray-500">{anime.status}</span>
-								)}
-							</div>
-						</div>
+						<table className="w-full bg-white rounded-md shadow-box  shadow-custom">
+							<tbody>
+								<tr>
+									<td className="w-1/6 p-4">
+										<img
+											className="w-20 h-28 object-cover"
+											src={anime.coverImage.medium}
+											alt={anime.title.english || "Anime Cover"}
+										/>
+									</td>
+									<td className="w-1/3">
+										<h3 className="font-semibold text-lg">
+											{anime.title.english}
+										</h3>
+										<p className="text-sm">{formatGenres(anime.genres)}</p>
+									</td>
+									<td className="w-1/6">
+										<p>{`${anime.averageScore}%`}</p>
+										<p className="text-sm">{`${anime.popularity} users`}</p>
+									</td>
+									<td className="w-1/6">
+										<p>{formatMediaType(anime.format)}</p>
+										<p className="text-sm">{`${anime.episodes} eps`}</p>
+									</td>
+									<td className="w-1/6">
+										<span>
+											{formatDate(
+												anime.endDate || anime.startDate,
+												"seasonYear"
+											)}
+										</span>
+										{anime.status === "RELEASING" && anime.nextAiringEpisode ? (
+											<span className="text-sm text-gray-500">
+												Ep {anime.nextAiringEpisode.episode} airing in{" "}
+												{Math.floor(
+													anime.nextAiringEpisode.timeUntilAiring / 86400
+												)}{" "}
+												days
+											</span>
+										) : (
+											<span className="text-sm text-gray-500">
+												{anime.status}
+											</span>
+										)}
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</li>
 				))}
 			</ul>
