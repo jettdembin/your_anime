@@ -175,7 +175,7 @@ const AnimeDetailsLarge = ({
 							<>
 								{!!thumbnail && (
 									<div className="relative flex justify-between gap-2 pr-2 pb-1">
-										<h6 className="text-lg">
+										<h6 className="text-lg w-1/2">
 											<span className="text-2xl font-bold">#</span>
 											{title?.native}
 										</h6>
@@ -224,22 +224,7 @@ const AnimeDetailsLarge = ({
 						onMouseEnter={() => setIsAnimeHoverOptionsHovered(true)}
 						onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
 					>
-						<span className="material-icons cursor-pointer text-blue-100 relative">
-							loupe
-							<AnimatePresence>
-								{isAnimeHoverOptionsHovered && (
-									<motion.div
-										initial={{ opacity: 0, y: "-100%" }}
-										animate={{ opacity: 1, y: "-120%" }}
-										exit={{ opacity: 0, y: "-100%" }}
-										transition={{ duration: 0.2 }}
-										className="absolute top-0 rounded-lg shadow-md bg-white z-40"
-									>
-										<AnimeHoverOptions />
-									</motion.div>
-								)}
-							</AnimatePresence>
-						</span>
+						<AnimeHoverOptions />
 					</div>
 				</div>
 			</div>
@@ -289,7 +274,7 @@ const AnimeDetailsLarge = ({
 				>
 					<motion.section
 						initial={{ opacity: 0 }}
-						animate={{ opacity: 1, scale: 1 }}
+						animate={{ opacity: 1, scale: 2 }}
 						exit={{ opacity: 0, scale: 0.9 }}
 						transition={{ duration: 1, delay: 0.5 }}
 						className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
