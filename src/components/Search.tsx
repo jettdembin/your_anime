@@ -9,7 +9,7 @@ import { CardSectionLoader } from "./Elements/LoadingSection";
 import SelectWrapper from "./Elements/Select";
 import SelectedFilters from "./SelectedFilters";
 import Filter from "./Elements/Filter";
-import AnimeCard from "./Elements/AnimeCard";
+import AnimeCard from "./Pages/Home/ui/AnimeCard";
 import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 
 export default function Search() {

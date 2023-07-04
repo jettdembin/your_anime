@@ -6,7 +6,7 @@ import { usePopularAnime } from "@/src/graphql/queries";
 
 import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
 import { CardSectionLoader } from "../../Elements/LoadingSection";
-import AnimeCard from "../../Elements/AnimeCard";
+import AnimeCard from "./ui/AnimeCard";
 
 export default function PopularAnime() {
 	const { error, loading, data } = usePopularAnime(1);

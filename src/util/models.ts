@@ -1,4 +1,4 @@
-import AnimeCard from "../components/Elements/AnimeCard";
+import AnimeCard from "../components/Pages/Home/ui/AnimeCard";
 
 export type Anime = {
 	id: string;

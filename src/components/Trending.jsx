@@ -2,7 +2,7 @@
 import { useTrendingAnime } from "@/src/graphql/queries";
 
 import { Media } from "../types/anime";
-import AnimeCard from "./Elements/AnimeCard";
+import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
