@@ -73,7 +73,7 @@ export default function Search() {
 							menu
 						</span>
 					</button>
-					{isFilterVisible && (
+					{/* {isFilterVisible && (
 						<div
 							ref={filterRef}
 							className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
@@ -87,26 +87,29 @@ export default function Search() {
 								}
 							/>
 						</div>
-					)}
+					)} */}
 				</div>
-				<SelectedFilters filters={search} onRemoveFilter={removeFilter} />
-				<div className="w-full flex gap-6">
-					{selectData.map((select, i) => (
-						<SelectWrapper
-							key={i}
-							isOpen={openedSelect === i}
-							onToggle={() =>
-								setOpenedSelect((prev) => (prev === i ? null : i))
-							}
-							options={select.options}
-							label={select.label}
-							onChange={handleChange}
-							value={search[select.options[0].parent]}
-						/>
-					))}
+				{!!isFilterVisible && isFilterVisible && (
+					<div className="w-full flex gap-6">
+						{selectData.map((select, i) => (
+							<SelectWrapper
+								key={i}
+								isOpen={openedSelect === i}
+								onToggle={() =>
+									setOpenedSelect((prev) => (prev === i ? null : i))
+								}
+								options={select.options}
+								label={select.label}
+								onChange={handleChange}
+								value={search[select.options[0].parent]}
+							/>
+						))}
 
-					<div>{/* <button type="submit"></button> */}</div>
-				</div>
+						<div>{/* <button type="submit"></button> */}</div>
+					</div>
+				)}
+				{/* <SelectedFilters filters={search} onRemoveFilter={removeFilter} /> */}
+
 				{/* </form> */}
 			</section>
 			{/* {loading ? (
