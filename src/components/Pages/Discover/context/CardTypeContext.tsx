@@ -1,24 +1,17 @@
+"use client";
+
 import React, { createContext, useContext, ReactNode } from "react";
 
 import useCardType from "../hooks/useCardType";
 
-type CardType = string; // Replace with the actual type for card type
-
-interface CardTypeContextProps {
-	value: CardType;
+type CardType = {};
+interface CardTypeProviderProps {
+	children: ReactNode;
 }
 
 const CardTypeContext = createContext<CardType | null>(null);
 
-interface CardTypeProviderProps {
-	children: ReactNode;
-	value: CardType;
-}
-
-const CardTypeProvider: React.FC<CardTypeProviderProps> = ({
-	children,
-	value,
-}) => {
+const CardTypeProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
 	const cardType = useCardType();
 	return (
 		<CardTypeContext.Provider value={cardType}>
