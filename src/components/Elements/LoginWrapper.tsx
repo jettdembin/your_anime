@@ -7,7 +7,11 @@ import { signIn } from "next-auth/react";
 
 import useClickOutside from "@/src/hooks/useClickOutside";
 
-const LoginWrapper = ({ children }) => {
+interface FilterProps {
+	children?: any;
+}
+
+const LoginWrapper: React.FC<FilterProps> = ({ children }) => {
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const signUpFormRef = useRef(null);
 

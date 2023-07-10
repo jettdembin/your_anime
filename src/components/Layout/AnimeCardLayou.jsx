@@ -1,10 +1,10 @@
 import React from "react";
 
-type AnimeCardLayoutProps = {
-	children: React.ReactNode;
-};
+// type AnimeCardLayoutProps = {
+// 	children: React.ReactNode;
+// };
 
-export const AnimeCardLayout = ({ children }: AnimeCardLayoutProps) => {
+export const AnimeCardLayout = ({ children }) => {
 	const childrenArray = React.Children.toArray(children);
 
 	return (

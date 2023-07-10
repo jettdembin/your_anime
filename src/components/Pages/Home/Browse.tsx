@@ -4,7 +4,7 @@ import { Media } from "../../../types/anime";
 
 import { useTrendingAnime } from "@/src/graphql/queries";
 
-import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
+import { AnimeCardLayout } from "../../Layout/AnimeCardLayou";
 import AnimeCard from "./ui/AnimeCard";
 import { CardSectionLoader } from "../../Elements/LoadingSection";
 

@@ -7,8 +7,7 @@ type Option = {
 };
 
 type Props = {
-	// options: Option[];
-	options: any;
+	options: Option[];
 	isOpen: boolean;
 	label: string;
 	onChange?: (value: string) => void;

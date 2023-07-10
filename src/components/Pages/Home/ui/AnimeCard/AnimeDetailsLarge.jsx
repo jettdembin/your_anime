@@ -12,18 +12,14 @@ import { getEmoji, getMonthName } from "@/src/util";
 
 import AnimeHoverOptions from "./AnimeDetailsLarge/AnimeHoverOptions";
 
-interface AnimeCardProps {
-	media: Media;
-	isLastCard?: boolean;
-	isCardHovered: boolean;
-	setIsCardHovered: (isCardHovered: boolean) => void;
-}
+// interface AnimeCardProps {
+// 	media: Media;
+// 	isLastCard?: boolean;
+// 	isCardHovered: boolean;
+// 	setIsCardHovered: (isCardHovered: boolean) => void;
+// }
 
-const AnimeDetailsLarge = ({
-	media,
-	isCardHovered,
-	setIsCardHovered,
-}: AnimeCardProps) => {
+const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
 	// const convertTimeUntilAiring = (hours: number): string => {
 	// 	// Convert hours to days
 	// 	const days = Math.floor(hours / 24);
@@ -77,7 +73,7 @@ const AnimeDetailsLarge = ({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [thumbnailBounds, setThumbnailBounds] = useState(null);
 	const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
-	const thumbnailRef = useRef<any>(null);
+	const thumbnailRef = useRef < any > null;
 
 	const handleBackdropClick = () => {
 		setIsExpanded(false);

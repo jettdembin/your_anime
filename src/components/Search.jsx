@@ -8,8 +8,8 @@ import { selectData } from "../consts";
 import SelectWrapper from "./Elements/Select";
 
 export default function Search() {
-	const [openedSelect, setOpenedSelect] = useState<number | null>(null);
-	const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
+	const [openedSelect, setOpenedSelect] = useState(null);
+	const [isFilterVisible, setIsFilterVisible] = useState < boolean > false;
 
 	const [search, setSearch] = useState({
 		category: "Action",
@@ -27,7 +27,7 @@ export default function Search() {
 
 	// const filterRef = useRef();
 
-	const handleChange = (option: any) => {
+	const handleChange = (option) => {
 		// Handle the change here
 		const categorySwitched = Object.keys(search).filter(
 			(key) => key == option.parentresult

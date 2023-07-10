@@ -30,7 +30,11 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/util/providers.jsx"
-, "src/pages/api/auth/[...nextauth].js"	],
+		"src/util/providers.jsx",
+		"src/pages/api/auth/[...nextauth].js",
+		"src/components/Layout/AnimeCardLayou.jsx",
+		"src/components/Elements/LoadingSection.jsx",
+		"src/components/Pages/Home/ui/AnimeCardLong.jsx"
+	],
 	"exclude": ["node_modules"]
 }
