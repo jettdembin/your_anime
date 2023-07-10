@@ -1,9 +1,5 @@
 // Define the component. this is basically a div wrapper with a pulse animation for the skeleton loading
-const SkeletonLoader: React.FC<DivProps> = ({
-	children,
-	className,
-	...props
-}) => {
+const SkeletonLoader = ({ children, className, ...props }) => {
 	return (
 		<div
 			className={[
