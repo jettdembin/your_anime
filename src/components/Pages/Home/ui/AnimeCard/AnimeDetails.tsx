@@ -93,11 +93,12 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 				</div>
 			</div>
 			<div className="w-full  flex flex-wrap gap-2">
-				{genres.slice(0, 3).map((genre: any, i: number) => (
-					<p className="text-xs bg-yellow-300 rounded-3xl px-2 py-1" key={i}>
-						{genre?.toLowerCase()}
-					</p>
-				))}
+				{!!animeDetails &&
+					animeDetails?.genres?.slice(0, 3).map((genre: any, i: number) => (
+						<p className="text-xs bg-yellow-300 rounded-3xl px-2 py-1" key={i}>
+							{genre?.toLowerCase()}
+						</p>
+					))}
 			</div>
 		</AnimeDetailsWrapper>
 	);
