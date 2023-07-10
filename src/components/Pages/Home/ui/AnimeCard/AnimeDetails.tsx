@@ -8,7 +8,7 @@ import AnimeDetailsWrapper from "@/src/components/Pages/Home/ui/AnimeCard/AnimeD
 interface AnimeDetailsProps {
 	isVisible: boolean;
 	animeDetails: Media | null;
-	isLastCard: boolean;
+	isLastCard: boolean | undefined;
 	nextEpisodeDays: number | null;
 }
 
