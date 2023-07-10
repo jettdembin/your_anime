@@ -26,7 +26,7 @@ export default function Search() {
 		return <p>Error: {error.message}</p>;
 	}
 
-	const filterRef = useRef();
+	// const filterRef = useRef();
 
 	const handleChange = (option) => {
 		// Handle the change here
@@ -37,15 +37,15 @@ export default function Search() {
 		setSearch({ ...search, [categorySwitched]: option.value });
 	};
 
-	const removeFilter = (parent: string, value: string | number) => {
-		setSearch((prevState) => {
-			let newSelections = { ...prevState };
-			newSelections[parent] = newSelections[parent].filter(
-				(val) => val !== value
-			);
-			return newSelections;
-		});
-	};
+	// const removeFilter = (parent: string, value: string | number) => {
+	// 	setSearch((prevState) => {
+	// 		let newSelections = { ...prevState };
+	// 		newSelections[parent] = newSelections[parent].filter(
+	// 			(val) => val !== value
+	// 		);
+	// 		return newSelections;
+	// 	});
+	// };
 
 	return (
 		<>
