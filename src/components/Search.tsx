@@ -22,16 +22,15 @@ export default function Search() {
 	const { error, loading, data } = useBrowseAnime();
 
 	if (error) {
-		console.log(error.networkError?.result, "error object");
 		return <p>Error: {error.message}</p>;
 	}
 
 	// const filterRef = useRef();
 
-	const handleChange = (option) => {
+	const handleChange = (option: any) => {
 		// Handle the change here
 		const categorySwitched = Object.keys(search).filter(
-			(key) => key == option.parent
+			(key) => key == option.parentresult
 		);
 
 		setSearch({ ...search, [categorySwitched]: option.value });

@@ -7,11 +7,13 @@ type Option = {
 };
 
 type Props = {
-	options: Option[];
+	// options: Option[];
+	options: any;
 	isOpen: boolean;
 	label: string;
-	onChange: (value: string) => void;
+	onChange?: (value: string) => void;
 	onToggle: () => void;
+	value?: any;
 };
 
 const SelectWrapper: React.FC<Props> = ({
@@ -35,7 +37,7 @@ const SelectWrapper: React.FC<Props> = ({
 
 	const handleChange = (option: Option) => {
 		setSelectedOption(option);
-		onChange(option);
+		// onChange(option);
 	};
 
 	//listens to user click to close div if button click not contained in div

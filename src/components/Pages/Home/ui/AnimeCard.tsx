@@ -11,7 +11,7 @@ import AnimeDetails from "./AnimeCard/AnimeDetails";
 
 interface AnimeCardProps {
 	media: Media;
-	isLastCard: boolean;
+	isLastCard?: boolean;
 }
 
 export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {

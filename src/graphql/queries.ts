@@ -154,10 +154,10 @@ export const GET_BROWSE_FILTERS = gql`
 `;
 
 export const useBrowseAnime = (
-	category: string,
-	status: string,
-	season: string,
-	year: number
+	category?: string,
+	status?: string,
+	season?: string,
+	year?: number
 ) => {
 	const { error, loading, data } = useQuery(GET_BROWSE_FILTERS, {
 		variables: {

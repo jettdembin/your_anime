@@ -19,7 +19,7 @@ export default function TopAnimeList() {
 	return (
 		<div className="max-w-7xl mx-auto">
 			<ul>
-				{data.Page.media.slice(0, 10).map((anime, index) => (
+				{data.Page.media.slice(0, 10).map((anime: any, index: number) => (
 					<AnimeCardLong key={anime.id} anime={anime} index={index} />
 				))}
 			</ul>
