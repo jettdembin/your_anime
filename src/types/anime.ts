@@ -33,6 +33,12 @@ export interface Media {
 	coverImage: CoverImage;
 	format?: string;
 	episodes?: number;
+	description?: string;
+	trailer?: {
+		id: string;
+		site: string;
+		thumbnail: string;
+	};
 	status?: string;
 	startDate?: DateProps;
 	endDate?: DateProps;
@@ -42,6 +48,8 @@ export interface Media {
 	popularity?: number;
 	nextAiringEpisode: AiringSchedule | null;
 	studios: Studio;
+	season: string | null;
+	seasonYear?: string | null;
 }
 
 export interface Page {

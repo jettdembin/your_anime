@@ -31,13 +31,13 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	const studioName = animeDetails?.studios?.nodes[0]?.name || "Unknown";
 	const likedPercentage = animeDetails?.averageScore;
 
-	const {
-		episodes: totalEpisodes,
-		genres = [],
-		status,
-		season,
-		seasonYear,
-	} = animeDetails;
+	// const {
+	// 	episodes: totalEpisodes,
+	// 	genres = [],
+	// 	status,
+	// 	season,
+	// 	seasonYear,
+	// } = animeDetails;
 
 	return (
 		<AnimeDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
@@ -48,9 +48,11 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 							<div className="w-full flex items-center justify-between font-medium">
 								<div className="text-lg flex gap-1 text-gray-700">
 									<h6>
-										{season?.split("")[0] + season?.slice(1).toLowerCase()}
+										{!!animeDetails?.season &&
+											animeDetails?.season?.split("")[0] +
+												animeDetails?.season?.slice(1).toLowerCase()}
 									</h6>{" "}
-									<h6>{`${seasonYear}`}</h6>
+									<h6>{`${animeDetails?.seasonYear}`}</h6>
 								</div>
 								<div>
 									{getEmoji(likedPercentage)} {likedPercentage}%
@@ -64,7 +66,10 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 									Ep {!!currentEpisode && currentEpisode + 1} airing in
 									{nextEpisodeDays
 										? ` ${nextEpisodeDays} days`
-										: ` ${convertTimeUntilAiring(hoursUntilNextEpisode)} hours`}
+										: ` ${
+												!!hoursUntilNextEpisode &&
+												convertTimeUntilAiring(hoursUntilNextEpisode)
+										  } hours`}
 								</h6>
 							</div>
 							<span>
@@ -84,7 +89,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 					>
 						fiber_manual_record
 					</span>
-					<p className="text-xs">{totalEpisodes} episodes</p>
+					<p className="text-xs">{animeDetails?.episodes} episodes</p>
 				</div>
 			</div>
 			<div className="w-full  flex flex-wrap gap-2">

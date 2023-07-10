@@ -14,7 +14,7 @@ import AnimeHoverOptions from "./AnimeDetailsLarge/AnimeHoverOptions";
 
 interface AnimeCardProps {
 	media: Media;
-	isLastCard: boolean;
+	isLastCard?: boolean;
 	isCardHovered: boolean;
 	setIsCardHovered: (isCardHovered: boolean) => void;
 }
@@ -51,7 +51,7 @@ const AnimeDetailsLarge = ({
 
 	// Get the truncated description
 	const truncatedDescription =
-		description?.length > MAX_DESCRIPTION_LENGTH
+		!!description && description?.length > MAX_DESCRIPTION_LENGTH
 			? `${description.slice(0, MAX_DESCRIPTION_LENGTH)}...`
 			: description;
 
@@ -77,7 +77,7 @@ const AnimeDetailsLarge = ({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [thumbnailBounds, setThumbnailBounds] = useState(null);
 	const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
-	const thumbnailRef = useRef(null);
+	const thumbnailRef = useRef<any>(null);
 
 	const handleBackdropClick = () => {
 		setIsExpanded(false);

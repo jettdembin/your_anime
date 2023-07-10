@@ -4,7 +4,11 @@ import { useRef, useState } from "react";
 import SelectWrapper from "./Select";
 import useClickOutside from "@/src/hooks/useClickOutside";
 
-const Filter = ({ onToggle }) => {
+interface FilterProps {
+	onToggle?: () => void;
+}
+
+const Filter: React.FC<FilterProps> = ({ onToggle }) => {
 	const [openedSelect, setOpenedSelect] = useState<number | null>(null);
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -42,6 +46,7 @@ const Filter = ({ onToggle }) => {
 	//listens to user click to close div if button click not contained in div
 	const selectRef = useRef(null);
 	useClickOutside(selectRef, () => {
+		if (!onToggle) return;
 		if (isExpanded) {
 			onToggle();
 			setIsExpanded(false);
