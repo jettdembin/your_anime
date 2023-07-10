@@ -73,7 +73,7 @@ const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [thumbnailBounds, setThumbnailBounds] = useState(null);
 	const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
-	const thumbnailRef = useRef < any > null;
+	const thumbnailRef = useRef(null);
 
 	const handleBackdropClick = () => {
 		setIsExpanded(false);
@@ -207,7 +207,7 @@ const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
 				</div>
 				<div className="px-4 py-2 flex justify-between mt-auto bg-genre">
 					<div className="flex flex-wrap justify-between gap-2">
-						{genres.slice(0, 4).map((genre: any, i: number) => (
+						{genres.slice(0, 4).map((genre, i) => (
 							<span
 								className="text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
 								key={i}

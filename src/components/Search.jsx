@@ -9,7 +9,7 @@ import SelectWrapper from "./Elements/Select";
 
 export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState(null);
-	const [isFilterVisible, setIsFilterVisible] = useState < boolean > false;
+	const [isFilterVisible, setIsFilterVisible] = useState(false);
 
 	const [search, setSearch] = useState({
 		category: "Action",
