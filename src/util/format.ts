@@ -18,7 +18,7 @@ export function formatMediaType(mediaType: string | undefined): string {
 	}
 }
 
-export const formatDate = (fuzzyDate, format = "default"): string => {
+export const formatDate = (fuzzyDate: any, format = "default"): string => {
 	const { year, month, day } = fuzzyDate;
 
 	if (format === "seasonYear") {
