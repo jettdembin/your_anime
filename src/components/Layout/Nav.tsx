@@ -1,6 +1,6 @@
 import Login from "../Elements/Login";
 
-export default async function Nav() {
+export default function Nav() {
 	return (
 		<nav className="hidden lg:flex h-20 px-8 bg-gray-800  items-center justify-center sticky top-0">
 			<ul className="flex gap-60 text-gray-100">

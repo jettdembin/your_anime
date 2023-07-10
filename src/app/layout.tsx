@@ -4,7 +4,7 @@ import Providers from "../util/providers";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../components/Layout/Footer";
-import Nav from "../components/Layout/Nav";
+import Navbar from "../components/Layout/Nav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 				</head>
 				<body className={inter.className}>
 					<Providers>
-						<Nav />
+						<Navbar />
 						{children}
 						<Footer />
 					</Providers>
