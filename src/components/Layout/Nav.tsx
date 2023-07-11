@@ -2,7 +2,7 @@ import Login from "../Elements/Login";
 
 export default function Nav() {
 	return (
-		<nav className="hidden lg:flex h-20 px-8 bg-gray-800  items-center justify-center sticky top-0">
+		<nav className="hidden lg:flex h-20 px-8 bg-gray-800 items-center justify-center sticky top-0 z-50">
 			<ul className="flex gap-60 text-gray-100">
 				<li className="my-auto font-medium">YAnime</li>
 				<div className="flex gap-10">
