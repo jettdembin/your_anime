@@ -2,19 +2,20 @@
 
 import React, { createContext, useContext, ReactNode } from "react";
 
-import useCardType from "../hooks/useCardType";
-
 type CardType = {};
 interface CardTypeProviderProps {
 	children: ReactNode;
+	value: CardType;
 }
 
 const CardTypeContext = createContext<CardType | null>(null);
 
-const CardTypeProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
-	const cardType = useCardType();
+const CardTypeProvider: React.FC<CardTypeProviderProps> = ({
+	children,
+	value,
+}) => {
 	return (
-		<CardTypeContext.Provider value={cardType}>
+		<CardTypeContext.Provider value={value}>
 			{children}
 		</CardTypeContext.Provider>
 	);

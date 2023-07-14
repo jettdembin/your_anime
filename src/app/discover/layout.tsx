@@ -1,21 +1,23 @@
+"use client";
+
 import Search from "@/src/components/Search";
 
 import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
+import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
 export default async function DiscoverLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const cardType = useCardType();
 	return (
-		<div>
-			{/* <CardTypeProvider> */}
+		<CardTypeProvider value={cardType}>
 			<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
 				<Search />
 			</header>
 
 			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">{children}</main>
-			{/* </CardTypeProvider> */}
-		</div>
+		</CardTypeProvider>
 	);
 }

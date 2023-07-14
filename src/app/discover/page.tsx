@@ -5,8 +5,9 @@ import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
 export default async function Discover() {
 	// const { cardType } = useCardTypeContext();
+	const cardType = useCardTypeContext();
 
-	// console.log(cardType);
+	console.log(cardType);
 	return (
 		<section>
 			<header className="flex items-center justify-end">
