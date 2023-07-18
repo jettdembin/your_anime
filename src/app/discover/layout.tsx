@@ -5,7 +5,7 @@ import Search from "@/src/components/Search";
 import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
-export default async function DiscoverLayout({
+export default function DiscoverLayout({
 	children,
 }: {
 	children: React.ReactNode;
