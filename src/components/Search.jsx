@@ -6,20 +6,23 @@ import { useBrowseAnime } from "../graphql/queries";
 import { selectData } from "../consts";
 
 import SelectWrapper from "./Elements/Select";
+import { CardSectionLoader } from "./Elements/LoadingSection";
+import { AnimeCardLayout } from "./Layout/AnimeCardLayou";
+import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState(null);
-	const [isFilterVisible, setIsFilterVisible] = useState(false);
+	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
 	const [search, setSearch] = useState({
-		category: "Action",
+		category: "Romance",
 		status: "FINISHED",
 		season: "WINTER",
 		year: 2022,
 	});
 
-	// const { error, loading, data } = useBrowseAnime(...Object.values(search));
-	const { error, loading, data } = useBrowseAnime();
+	const { error, loading, data } = useBrowseAnime(...Object.values(search));
+	// const { error, loading, data } = useBrowseAnime(search);
 
 	if (error) {
 		return <p>Error: {error.message}</p>;
@@ -34,6 +37,7 @@ export default function Search() {
 		);
 
 		setSearch({ ...search, [categorySwitched]: option.value });
+		debugger;
 	};
 
 	// const removeFilter = (parent: string, value: string | number) => {
@@ -83,7 +87,7 @@ export default function Search() {
 						</div>
 					)} */}
 				</div>
-				{!!isFilterVisible && isFilterVisible && (
+				{!!isFilterVisible && (
 					<div className="w-full flex gap-6">
 						{selectData.map((select, i) => (
 							<SelectWrapper
@@ -106,15 +110,15 @@ export default function Search() {
 
 				{/* </form> */}
 			</section>
-			{/* {loading ? (
+			{loading ? (
 				<CardSectionLoader />
 			) : (
 				<AnimeCardLayout>
-					{data.Page.media.slice(0, 8)?.map((media: Media, i: number) => (
+					{data.Page.media.slice(0, 8)?.map((media, i) => (
 						<AnimeCard key={i} media={media} />
 					))}
 				</AnimeCardLayout>
-			)} */}
+			)}
 		</>
 	);
 }

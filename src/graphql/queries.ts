@@ -127,27 +127,39 @@ export const GET_BROWSE_FILTERS = gql`
 			) {
 				id
 				title {
-					romaji
 					english
 					native
+				}
+				description
+				source
+				coverImage {
+					large
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
 				}
 				startDate {
 					year
 					month
 					day
 				}
-				endDate {
-					year
-					month
-					day
+				averageScore
+				studios(isMain: true) {
+					nodes {
+						name
+					}
 				}
-				status
 				episodes
-				duration
-				coverImage {
-					large
-				}
 				genres
+				status
+				season
+				seasonYear
 			}
 		}
 	}
