@@ -14,15 +14,18 @@ export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-	const [search, setSearch] = useState({
+	const [searchValues, setSearchValues] = useState({
+		search: "",
 		category: "Romance",
 		status: "FINISHED",
 		season: "WINTER",
 		year: 2022,
 	});
 
-	const { error, loading, data } = useBrowseAnime(...Object.values(search));
-	// const { error, loading, data } = useBrowseAnime(search);
+	const { error, loading, data } = useBrowseAnime(
+		...Object.values(searchValues)
+	);
+	// const { error, loading, data } = useBrowseAnime(searchValues);
 
 	if (error) {
 		return <p>Error: {error.message}</p>;
@@ -32,16 +35,16 @@ export default function Search() {
 
 	const handleChange = (option) => {
 		// Handle the change here
-		const categorySwitched = Object.keys(search).filter(
+		const categorySwitched = Object.keys(searchValues).filter(
 			(key) => key == option.parent
 		);
 
-		setSearch({ ...search, [categorySwitched]: option.value });
+		setSearchValues({ ...searchValues, [categorySwitched]: option.value });
 		debugger;
 	};
 
 	// const removeFilter = (parent: string, value: string | number) => {
-	// 	setSearch((prevState) => {
+	// 	setSearchValues((prevState) => {
 	// 		let newSelections = { ...prevState };
 	// 		newSelections[parent] = newSelections[parent].filter(
 	// 			(val) => val !== value
@@ -62,6 +65,10 @@ export default function Search() {
 						className="w-full px-6 py-4 shadow-custom focus:outline-none"
 						type="text"
 						placeholder="Search"
+						value={searchValues.search}
+						onChange={(e) => {
+							setSearchValues({ ...searchValues, search: e.target.value });
+						}}
 					/>
 					<button
 						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 bg-white border-none shadow-custom"
@@ -99,14 +106,14 @@ export default function Search() {
 								options={select.options}
 								label={select.label}
 								onChange={handleChange}
-								value={search[select.options[0].parent]}
+								value={searchValues[select.options[0].parent]}
 							/>
 						))}
 
 						<div>{/* <button type="submit"></button> */}</div>
 					</div>
 				)}
-				{/* <SelectedFilters filters={search} onRemoveFilter={removeFilter} /> */}
+				{/* <SelectedFilters filters={searchValues} onRemoveFilter={removeFilter} /> */}
 
 				{/* </form> */}
 			</section>

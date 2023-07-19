@@ -2,6 +2,7 @@ export const selectData = [
 	{
 		label: "Genres",
 		options: [
+			{ value: "Any", label: "Genre", parent: "category" },
 			{ value: "Action", label: "Action", parent: "category" },
 			{ value: "Adventure", label: "Adventure", parent: "category" },
 			{ value: "Mystery", label: "Mystery", parent: "category" },
@@ -13,6 +14,7 @@ export const selectData = [
 	{
 		label: "Status",
 		options: [
+			{ value: "Any", label: "Status", parent: "status" },
 			{ value: "FINISHED", label: "Finished", parent: "status" },
 			{ value: "RELEASING", label: "Ongoing", parent: "status" },
 			{ value: "NOT_YET_RELEASED", label: "Coming Soon", parent: "status" },
@@ -23,6 +25,7 @@ export const selectData = [
 	{
 		label: "Season",
 		options: [
+			{ value: "Any", label: "Year", parent: "season" },
 			{ value: "SPRING", label: "Spring", parent: "season" },
 			{ value: "SUMMER", label: "Summer", parent: "season" },
 			{ value: "WINTER", label: "Winter", parent: "season" },
@@ -32,13 +35,13 @@ export const selectData = [
 	{
 		label: "Year",
 		options: [
-			{ value: 2018, label: "2018", parent: "year" },
-			{ value: 2019, label: "2019", parent: "year" },
-			{ value: 2020, label: "2020", parent: "year" },
-			{ value: 2021, label: "2021", parent: "year" },
-			{ value: 2022, label: "2022", parent: "year" },
-			{ value: 2023, label: "2023", parent: "year" },
 			{ value: 2024, label: "2024", parent: "year" },
+			{ value: 2023, label: "2023", parent: "year" },
+			{ value: 2022, label: "2022", parent: "year" },
+			{ value: 2021, label: "2021", parent: "year" },
+			{ value: 2020, label: "2020", parent: "year" },
+			{ value: 2019, label: "2019", parent: "year" },
+			{ value: 2018, label: "2018", parent: "year" },
 		],
 	},
 ];

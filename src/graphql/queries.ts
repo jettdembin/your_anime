@@ -165,14 +165,71 @@ export const GET_BROWSE_FILTERS = gql`
 	}
 `;
 
+export const SEARCH_ANIMES = gql`
+	query SearchAnimes($search: String) # $category: String
+	# $status: MediaStatus
+	# $season: MediaSeason
+	# $year: Int
+	{
+		Page(page: 1, perPage: 10) {
+			media(
+				search: $search
+				# genre: $category
+				# status: $status
+				# season: $season
+				# seasonYear: $year
+				type: ANIME
+			) {
+				id
+				title {
+					english
+					native
+				}
+				description
+				source
+				coverImage {
+					large
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
+				}
+				startDate {
+					year
+					month
+					day
+				}
+				averageScore
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
+			}
+		}
+	}
+`;
+
 export const useBrowseAnime = (
+	search?: string,
 	category?: string,
 	status?: string,
 	season?: string,
 	year?: number
 ) => {
-	const { error, loading, data } = useQuery(GET_BROWSE_FILTERS, {
+	const { error, loading, data } = useQuery(SEARCH_ANIMES, {
 		variables: {
+			search,
 			category,
 			status,
 			season,
