@@ -33,7 +33,7 @@ export default function Search() {
 	const handleChange = (option) => {
 		// Handle the change here
 		const categorySwitched = Object.keys(search).filter(
-			(key) => key == option.parentresult
+			(key) => key == option.parent
 		);
 
 		setSearch({ ...search, [categorySwitched]: option.value });
