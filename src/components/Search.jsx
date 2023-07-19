@@ -16,10 +16,10 @@ export default function Search() {
 
 	const [searchValues, setSearchValues] = useState({
 		search: "",
-		category: "Romance",
-		status: "FINISHED",
-		season: "WINTER",
-		year: 2022,
+		category: null,
+		status: null,
+		season: null,
+		year: null,
 	});
 
 	const { error, loading, data } = useBrowseAnime(
@@ -94,26 +94,6 @@ export default function Search() {
 						</div>
 					)} */}
 				</div>
-				{!!isFilterVisible && (
-					<div className="w-full flex gap-6">
-						{selectData.map((select, i) => (
-							<SelectWrapper
-								key={i}
-								isOpen={openedSelect === i}
-								onToggle={() =>
-									setOpenedSelect((prev) => (prev === i ? null : i))
-								}
-								options={select.options}
-								label={select.label}
-								onChange={handleChange}
-								value={searchValues[select.options[0].parent]}
-							/>
-						))}
-
-						<div>{/* <button type="submit"></button> */}</div>
-					</div>
-				)}
-				{/* <SelectedFilters filters={searchValues} onRemoveFilter={removeFilter} /> */}
 
 				{/* </form> */}
 			</section>
@@ -129,3 +109,23 @@ export default function Search() {
 		</>
 	);
 }
+
+// {!!isFilterVisible && (
+// 	<div className="w-full flex gap-6">
+// 		{selectData.map((select, i) => (
+// 			<SelectWrapper
+// 				key={i}
+// 				isOpen={openedSelect === i}
+// 				onToggle={() =>
+// 					setOpenedSelect((prev) => (prev === i ? null : i))
+// 				}
+// 				options={select.options}
+// 				label={select.label}
+// 				onChange={handleChange}
+// 				value={searchValues[select.options[0].parent]}
+// 			/>
+// 		))}
+
+// 		<div>{/* <button type="submit"></button> */}</div>
+// 	</div>
+// )}
