@@ -3,7 +3,7 @@
 import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
-export default async function Discover() {
+export default async function Discover({}) {
 	// const { cardType } = useCardTypeContext();
 	const cardType = useCardTypeContext();
 

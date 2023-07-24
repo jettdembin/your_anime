@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import { useBrowseAnime } from "../graphql/queries";
 import { selectData } from "../consts";
@@ -11,11 +14,22 @@ import { AnimeCardLayout } from "./Layout/AnimeCardLayou";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 export default function Search() {
+	const navRef = useRef(null);
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!!navRef.current) navRef.current.focus();
+	}, []);
+
+	const searchParams = useSearchParams();
+
+	const search = searchParams.get("search");
+
 	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
 	const [searchValues, setSearchValues] = useState({
-		search: "",
+		search: (!!search && search) || "",
 		category: null,
 		status: null,
 		season: null,
@@ -62,11 +76,15 @@ export default function Search() {
 				</div>
 				<div className="flex gap-8 mb-6">
 					<input
+						ref={navRef}
 						className="w-full px-6 py-4 shadow-custom focus:outline-none"
 						type="text"
 						placeholder="Search"
 						value={searchValues.search}
 						onChange={(e) => {
+							router.push("/discover?search=" + e.target.value, undefined, {
+								shallow: true,
+							});
 							setSearchValues({ ...searchValues, search: e.target.value });
 						}}
 					/>
