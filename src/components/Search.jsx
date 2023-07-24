@@ -17,10 +17,6 @@ export default function Search() {
 	const navRef = useRef(null);
 	const router = useRouter();
 
-	useEffect(() => {
-		if (!!navRef.current) navRef.current.focus();
-	}, []);
-
 	const searchParams = useSearchParams();
 
 	const search = searchParams.get("search");
@@ -35,6 +31,15 @@ export default function Search() {
 		season: null,
 		year: null,
 	});
+
+	useEffect(() => {
+		if (!!navRef.current) navRef.current.focus();
+
+		if (!searchValues?.search)
+			router.push("/", undefined, {
+				shallow: true,
+			});
+	}, [searchValues, router]);
 
 	const { error, loading, data } = useBrowseAnime(
 		...Object.values(searchValues)
