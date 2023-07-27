@@ -167,10 +167,8 @@ export const GET_BROWSE_FILTERS = gql`
 
 export const SEARCH_ANIMES = gql`
 	query SearchAnimes(
-		$search: String # $category: String = null
-	) # $status: MediaStatus = null
-	# $season: MediaSeason = null
-	# $year: Int = null
+		$search: String # $category: String = null # $status: MediaStatus = null # $season: MediaSeason = null
+	) # $year: Int = null
 	{
 		Page(page: 1, perPage: 10) {
 			media(

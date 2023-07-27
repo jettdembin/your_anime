@@ -20,6 +20,7 @@ export default function Search() {
 	const searchParams = useSearchParams();
 
 	const search = searchParams.get("search");
+	const page = searchParams.get("page");
 
 	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
@@ -35,10 +36,12 @@ export default function Search() {
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
 
-		if (!searchValues?.search)
+		if (!searchValues?.search) {
+			if (page) return;
 			router.push("/", undefined, {
 				shallow: true,
 			});
+		}
 	}, [searchValues, router]);
 
 	const { error, loading, data } = useBrowseAnime(

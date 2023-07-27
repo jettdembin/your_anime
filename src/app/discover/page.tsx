@@ -1,13 +1,33 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
-export default async function Discover({}) {
-	// const { cardType } = useCardTypeContext();
+export default async function Discover() {
 	const cardType = useCardTypeContext();
 
-	console.log(cardType);
+	const searchParams = useSearchParams();
+
+	const search = searchParams.get("search");
+	const page = searchParams.get("page");
+
+	const { error, loading, data } = useTrendingAnime();
+
+	if (loading) return <CardSectionLoader />;
+	if (error) {
+		return <p>Error: {error.message}</p>;
+	}
+
+	// return (
+	// 	<AnimeCardLayout>
+	// 		{data.Trending.media.slice(0, 8)?.map((media: Media, i: number) => (
+	// 			<AnimeCard key={i} media={media} />
+	// 		))}
+	// 	</AnimeCardLayout>
+	// );
+
 	return (
 		<section>
 			<header className="flex items-center justify-end">
