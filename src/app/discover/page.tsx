@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 
 import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
+import { useTrendingAnime } from "@/src/graphql/queries";
 
 export default async function Discover() {
 	const cardType = useCardTypeContext();

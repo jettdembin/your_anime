@@ -10,7 +10,7 @@ import { CardSectionLoader } from "../../Elements/LoadingSection";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
-export default function Trending() {
+export default function Trending({ amount }) {
 	const { error, loading, data } = useTrendingAnime();
 
 	if (loading) return <CardSectionLoader />;
