@@ -1,33 +1,59 @@
 "use client";
 
+import { useEffect, useState, useCallback } from "react";
+
 import { useSearchParams } from "next/navigation";
 
-import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
-import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 import { useTrendingAnime } from "@/src/graphql/queries";
 
-export default async function Discover() {
+import { AnimeCardLayout } from "@/src/components/Layout/AnimeCardLayou";
+import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
+
+import AnimeCard from "@/src/components/Pages/Home/ui/AnimeCard";
+import { CardSectionLoader } from "@/src/components/Elements/LoadingSection";
+
+export default function Discover() {
 	const cardType = useCardTypeContext();
-
 	const searchParams = useSearchParams();
+	const isTrending = searchParams?.get("page") === "trending";
 
-	const search = searchParams.get("search");
-	const page = searchParams.get("page");
+	const [page, setPage] = useState(1);
+	const [media, setMedia] = useState([]);
 
-	const { error, loading, data } = useTrendingAnime();
+	const { error, loading, data } = useTrendingAnime(page, 30); // Updated to accept page as a parameter
+
+	useEffect(() => {
+		if (data && data.Trending && data.Trending.media) {
+			setMedia((prevMedia) => [...prevMedia, ...data.Trending.media]);
+		}
+	}, [data]);
+
+	const handleScroll = useCallback(() => {
+		if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+			setPage((prevPage) => prevPage + 1);
+		}
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, [handleScroll]);
 
 	if (loading) return <CardSectionLoader />;
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
 
-	// return (
-	// 	<AnimeCardLayout>
-	// 		{data.Trending.media.slice(0, 8)?.map((media: Media, i: number) => (
-	// 			<AnimeCard key={i} media={media} />
-	// 		))}
-	// 	</AnimeCardLayout>
-	// );
+	if (isTrending)
+		return (
+			<AnimeCardLayout>
+				{media.map((mediaItem, i) => (
+					<AnimeCard key={i} media={mediaItem} />
+				))}
+			</AnimeCardLayout>
+		);
 
 	return (
 		<section>

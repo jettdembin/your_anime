@@ -1,12 +1,10 @@
 import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
-
-// media (type: ${animeBrowseFilter.toUpperCase()}, sort: POPULARITY_DESC) {
+import { useQuery, QueryResult } from "@apollo/client";
 
 export const GET_POPULAR_ANIME = gql`
 	query GetPopularAnime($page: Int) {
 		Page(page: $page, perPage: 100) {
-			media(sort: POPULARITY_DESC) {
+			media(sort: POPULARITY_DESC, isAdult: false) {
 				id
 				title {
 					english
@@ -43,9 +41,6 @@ export const GET_POPULAR_ANIME = gql`
 				season
 				seasonYear
 			}
-			# socialMedia {
-			# 	twitter
-			# }
 		}
 	}
 `;
@@ -61,9 +56,14 @@ export const usePopularAnime = (page: any) => {
 };
 
 export const GET_TRENDING = gql`
-	query {
-		Trending: Page {
-			media(type: ANIME, sort: POPULARITY_DESC, status: RELEASING) {
+	query GetTrending($page: Int, $perPage: Int) {
+		Trending: Page(page: $page, perPage: $perPage) {
+			media(
+				type: ANIME
+				sort: POPULARITY_DESC
+				status: RELEASING
+				isAdult: false
+			) {
 				id
 				title {
 					english
@@ -104,8 +104,10 @@ export const GET_TRENDING = gql`
 	}
 `;
 
-export const useTrendingAnime = () => {
-	const { error, loading, data } = useQuery(GET_TRENDING);
+export const useTrendingAnime = (page: number, perPage: number) => {
+	const { error, loading, data } = useQuery(GET_TRENDING, {
+		variables: { page, perPage },
+	});
 
 	return { error, loading, data };
 };
@@ -124,6 +126,7 @@ export const GET_BROWSE_FILTERS = gql`
 				season: $season
 				seasonYear: $year
 				type: ANIME
+				isAdult: false
 			) {
 				id
 				title {
@@ -166,19 +169,9 @@ export const GET_BROWSE_FILTERS = gql`
 `;
 
 export const SEARCH_ANIMES = gql`
-	query SearchAnimes(
-		$search: String # $category: String = null # $status: MediaStatus = null # $season: MediaSeason = null
-	) # $year: Int = null
-	{
+	query SearchAnimes($search: String) {
 		Page(page: 1, perPage: 10) {
-			media(
-				search: $search
-				# genre: $category
-				# status: $status
-				# season: $season
-				# seasonYear: $year
-				type: ANIME
-			) {
+			media(search: $search, type: ANIME, isAdult: false) {
 				id
 				title {
 					english
@@ -244,8 +237,8 @@ export const GET_TOP_100_ANIME = gql`
 			media(
 				sort: SCORE_DESC
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
+				isAdult: false
 			) {
-				id
 				id
 				title {
 					english
