@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { useTrendingAnime } from "@/src/graphql/queries";
 
-import { AnimeCardLayout } from "@/src/components/Layout/AnimeCardLayou";
+import { AnimeCardLayout } from "@/src/components/Layout/AnimeCardLayout";
 import { useCardTypeContext } from "@/src/components/Pages/Discover/context/CardTypeContext";
 
 import AnimeCard from "@/src/components/Pages/Home/ui/AnimeCard";

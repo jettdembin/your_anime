@@ -31,11 +31,13 @@ export default function RootLayout({
 					/>
 				</head>
 				<body className={inter.className}>
-					<Providers>
-						<Navbar />
-						{children}
-						<Footer />
-					</Providers>
+					<div className="flex flex-col h-screen">
+						<Providers>
+							<Navbar />
+							{children}
+							<Footer />
+						</Providers>
+					</div>
 				</body>
 			</html>
 		</ClerkProvider>

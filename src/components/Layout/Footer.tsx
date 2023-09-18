@@ -13,7 +13,9 @@ const Footer: React.FC = () => {
 
 	return (
 		<footer
-			className={`bg-gray-900 ${isDarkMode ? "text-white" : "text-gray-400"}`}
+			className={`bg-gray-900 ${
+				isDarkMode ? "text-white" : "text-gray-400"
+			} mt-auto`}
 		>
 			<div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between">
 				<div className="mb-4 md:mb-0">
