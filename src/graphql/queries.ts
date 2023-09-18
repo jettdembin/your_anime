@@ -60,7 +60,7 @@ export const GET_TRENDING = gql`
 		Trending: Page(page: $page, perPage: $perPage) {
 			media(
 				type: ANIME
-				sort: POPULARITY_DESC
+				sort: TRENDING_DESC
 				status: RELEASING
 				isAdult: false
 			) {

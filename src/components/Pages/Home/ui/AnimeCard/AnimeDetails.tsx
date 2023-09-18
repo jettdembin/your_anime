@@ -6,7 +6,20 @@ import { getEmoji, convertTimeUntilAiring } from "@/src/util";
 import AnimeDetailsWrapper from "@/src/components/Pages/Home/ui/AnimeCard/AnimeDetailsWrapper";
 
 interface AnimeDetailsProps {
+	episodes: number;
+	startDate: string;
+	description: string;
+	genres: [string];
+	status: string;
+	season: string;
+	seasonYear: string;
+	trailer: string;
+	title: string;
+}
+
+interface AnimeDetailsProps {
 	isVisible: boolean;
+	media: object;
 	animeDetails: Media | null;
 	isLastCard: boolean | undefined;
 	nextEpisodeDays: number | null;
@@ -16,6 +29,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	isVisible,
 	animeDetails,
 	isLastCard,
+	// media,
 }) => {
 	const nextEpisodeDays = animeDetails?.nextAiringEpisode
 		? Math.floor(animeDetails.nextAiringEpisode.timeUntilAiring / 86400)
@@ -31,13 +45,37 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 	const studioName = animeDetails?.studios?.nodes[0]?.name || "Unknown";
 	const likedPercentage = animeDetails?.averageScore;
 
-	// const {
-	// 	episodes: totalEpisodes,
-	// 	genres = [],
-	// 	status,
-	// 	season,
-	// 	seasonYear,
-	// } = animeDetails;
+	const {
+		episodes,
+		startDate,
+		description,
+		genres = [],
+		status,
+		season,
+		seasonYear,
+		trailer,
+		title,
+	} = animeDetails;
+	// debugger;
+
+	const currentlyAiring = (
+		<h6 className="text-lg text-gray-800">
+			Ep {!!currentEpisode ? currentEpisode + 1 : null} airing in
+			{nextEpisodeDays
+				? ` ${nextEpisodeDays} days`
+				: ` ${
+						!!hoursUntilNextEpisode &&
+						convertTimeUntilAiring(hoursUntilNextEpisode)
+				  } hours`}
+		</h6>
+	);
+
+	const airedPreviously = (
+		<h6 className="text-xs">
+			{episodes ? `${episodes} episodes aired in` : "Ongoing, aired in "}
+			{season?.split("")[0] + season?.slice(1).toLowerCase()}
+		</h6>
+	);
 
 	return (
 		<AnimeDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
@@ -62,15 +100,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
 					) : (
 						<>
 							<div className="w-3/4">
-								<h6 className="text-lg text-gray-800">
-									Ep {!!currentEpisode && currentEpisode + 1} airing in
-									{nextEpisodeDays
-										? ` ${nextEpisodeDays} days`
-										: ` ${
-												!!hoursUntilNextEpisode &&
-												convertTimeUntilAiring(hoursUntilNextEpisode)
-										  } hours`}
-								</h6>
+								{!!nextEpisodeDays ? currentlyAiring : airedPreviously}
 							</div>
 							<span>
 								{getEmoji(likedPercentage)} {likedPercentage}%

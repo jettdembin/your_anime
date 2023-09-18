@@ -26,7 +26,7 @@ export const ContentLayout = ({
 							// router.push("/discover?search=" + e.target.value, undefined, {
 							// 	shallow: true,
 							// });
-							router.push(`/discover?page=${"trending"}`, undefined, {
+							router.push(`/discover?page=${page}`, undefined, {
 								shallow: true,
 							});
 						}}

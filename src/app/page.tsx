@@ -26,7 +26,7 @@ export default async function Home() {
 					<PopularAnime />
 				</ContentLayout>
 
-				<ContentLayout title="TOP 100 ANIME" page="trending">
+				<ContentLayout title="TOP 100 ANIME" page="top">
 					<TopAnimeList />
 				</ContentLayout>
 			</main>

@@ -59,16 +59,16 @@ const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
 
 	const likedPercentage = media?.averageScore;
 
-	const currentEpisode =
-		media?.nextAiringEpisode?.episode && media.nextAiringEpisode.episode > 1
-			? media.nextAiringEpisode.episode - 1
-			: null;
-	const hoursUntilNextEpisode = media?.nextAiringEpisode?.timeUntilAiring;
+	// const currentEpisode =
+	// 	media?.nextAiringEpisode?.episode && media.nextAiringEpisode.episode > 1
+	// 		? media.nextAiringEpisode.episode - 1
+	// 		: null;
+	// const hoursUntilNextEpisode = media?.nextAiringEpisode?.timeUntilAiring;
 
-	const nextEpisodeDays = media?.nextAiringEpisode
-		? Math.floor(media.nextAiringEpisode.timeUntilAiring / 86400)
-		: null;
-	const studioName = media?.studios?.nodes[0]?.name || "Unknown";
+	// const nextEpisodeDays = media?.nextAiringEpisode
+	// 	? Math.floor(media.nextAiringEpisode.timeUntilAiring / 86400)
+	// 	: null;
+	// const studioName = media?.studios?.nodes[0]?.name || "Unknown";
 
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [thumbnailBounds, setThumbnailBounds] = useState(null);

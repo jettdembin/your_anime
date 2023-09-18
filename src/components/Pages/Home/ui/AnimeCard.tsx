@@ -82,7 +82,7 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 				>
 					<AnimeDetails
 						isVisible={hoveredAnime === media.id}
-						animeDetails={media || {}}
+						animeDetails={media}
 						isLastCard={isLastCard}
 						nextEpisodeDays={nextEpisodeDays}
 					/>

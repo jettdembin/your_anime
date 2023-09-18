@@ -10,7 +10,7 @@ import { selectData } from "../consts";
 
 import SelectWrapper from "./Elements/Select";
 import { CardSectionLoader } from "./Elements/LoadingSection";
-import { AnimeCardLayout } from "./Layout/AnimeCardLayou";
+import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 export default function Search() {
