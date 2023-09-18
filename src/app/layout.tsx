@@ -34,7 +34,7 @@ export default function RootLayout({
 					<div className="flex flex-col h-screen">
 						<Providers>
 							<Navbar />
-							{children}
+							<div className="pb-4">{children}</div>
 							<Footer />
 						</Providers>
 					</div>

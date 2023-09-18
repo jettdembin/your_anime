@@ -45,10 +45,11 @@ export const GET_POPULAR_ANIME = gql`
 	}
 `;
 
-export const usePopularAnime = (page: any) => {
+export const usePopularAnime = (page: number, perPage: number) => {
 	const { error, loading, data } = useQuery(GET_POPULAR_ANIME, {
 		variables: {
 			page,
+			perPage,
 		},
 	});
 

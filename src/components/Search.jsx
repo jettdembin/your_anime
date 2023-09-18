@@ -12,26 +12,29 @@ import SelectWrapper from "./Elements/Select";
 import { CardSectionLoader } from "./Elements/LoadingSection";
 import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
+import { useSearchContext } from "./Pages/Discover/context/SearchContext";
 
 export default function Search() {
 	const navRef = useRef(null);
 	const router = useRouter();
-
-	const searchParams = useSearchParams();
-
-	const search = searchParams.get("search");
-	const page = searchParams.get("page");
-
-	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-	const [searchValues, setSearchValues] = useState({
-		search: (!!search && search) || "",
-		category: null,
-		status: null,
-		season: null,
-		year: null,
-	});
+	const { searchValues, setSearchValues } = useSearchContext();
+
+	// const searchParams = useSearchParams();
+
+	// const search = searchParams.get("search");
+	// const page = searchParams.get("page");
+
+	// const [openedSelect, setOpenedSelect] = useState(null);
+
+	// const [searchValues, setSearchValues] = useState({
+	// 	search: (!!search && search) || "",
+	// 	category: null,
+	// 	status: null,
+	// 	season: null,
+	// 	year: null,
+	// });
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
@@ -62,7 +65,7 @@ export default function Search() {
 		);
 
 		setSearchValues({ ...searchValues, [categorySwitched]: option.value });
-		debugger;
+		// debugger;
 	};
 
 	// const removeFilter = (parent: string, value: string | number) => {
@@ -123,7 +126,7 @@ export default function Search() {
 
 				{/* </form> */}
 			</section>
-			{loading ? (
+			{/* {loading ? (
 				<CardSectionLoader />
 			) : (
 				<AnimeCardLayout>
@@ -131,7 +134,7 @@ export default function Search() {
 						<AnimeCard key={i} media={media} />
 					))}
 				</AnimeCardLayout>
-			)}
+			)} */}
 		</>
 	);
 }
