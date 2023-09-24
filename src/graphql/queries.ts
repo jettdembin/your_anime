@@ -245,21 +245,38 @@ export const GET_TOP_100_ANIME = gql`
 				id
 				title {
 					english
+					native
 				}
+				description
+				source
 				coverImage {
-					medium
+					large
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
 				}
 				startDate {
 					year
 					month
 					day
 				}
-				format
-				episodes
-				duration
-				genres
 				averageScore
-				popularity
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
 			}
 		}
 	}

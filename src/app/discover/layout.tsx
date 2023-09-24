@@ -18,7 +18,8 @@ export default function DiscoverLayout({
 	const searchParams = useSearchParams();
 	const searchValue = searchParams?.get("search") || "";
 
-	const cardType = useCardType();
+	const { cardType, setCardType, handleCardType } = useCardType();
+
 	const {
 		searchValues,
 		setSearchValues,
@@ -37,7 +38,7 @@ export default function DiscoverLayout({
 				searchData,
 			}}
 		>
-			<CardTypeProvider value={cardType}>
+			<CardTypeProvider value={{ cardType, setCardType, handleCardType }}>
 				<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
 					<Search />
 				</header>

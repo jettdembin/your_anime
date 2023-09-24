@@ -30,7 +30,7 @@ export default function Discover() {
 	const [page, setPage] = useState(1);
 	const [media, setMedia] = useState([]);
 
-	const cardType = useCardTypeContext();
+	const { cardType } = useCardTypeContext();
 
 	const { error, loading, data } = useViewAll(page, 50, type); // Updated to accept page as a parameter
 	const { searchData } = useSearchContext();
@@ -96,13 +96,13 @@ export default function Discover() {
 				{!searchValue ? (
 					<AnimeCardLayout>
 						{media.map((mediaItem, i) => (
-							<AnimeCard key={i} media={mediaItem} />
+							<AnimeCard key={i} media={mediaItem} cardType={cardType} />
 						))}
 					</AnimeCardLayout>
 				) : (
 					<AnimeCardLayout>
 						{searchData?.Page.media.slice(0, 8)?.map((media, i) => (
-							<AnimeCard key={i} media={media} />
+							<AnimeCard key={i} media={media} cardType={cardType} />
 						))}
 					</AnimeCardLayout>
 				)}
