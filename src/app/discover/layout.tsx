@@ -3,9 +3,12 @@
 import { useSearchParams } from "next/navigation";
 
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
+import useSearch from "@/src/components/Pages/Discover/hooks/useSearch";
 
 import { SearchProvider } from "@/src/components/Pages/Discover/context/SearchContext";
 import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
+
+import Search from "@/src/components/Search";
 
 export default function DiscoverLayout({
 	children,
@@ -13,7 +16,7 @@ export default function DiscoverLayout({
 	children: React.ReactNode;
 }) {
 	const searchParams = useSearchParams();
-	const search = searchParams?.get("search") || "";
+	const searchValue = searchParams?.get("search") || "";
 
 	const cardType = useCardType();
 	const {

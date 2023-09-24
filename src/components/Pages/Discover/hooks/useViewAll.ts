@@ -24,7 +24,7 @@ const useViewAll = (page: number, perPage: number) => {
 	if (!viewingPage) {
 		query = GET_TRENDING;
 	}
-	debugger;
+	// debugger;
 
 	const { error, loading, data } = useAnilistAPI(page, perPage, query);
 

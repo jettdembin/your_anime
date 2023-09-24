@@ -6,30 +6,27 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
 import { useBrowseAnime } from "../graphql/queries";
-import { selectData } from "../consts";
+import useSearch from "./Pages/Discover/hooks/useSearch";
 
-import SelectWrapper from "./Elements/Select";
 import { CardSectionLoader } from "./Elements/LoadingSection";
 import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
-<<<<<<< HEAD
-import { useSearchContext } from "./Pages/Discover/context/SearchContext";
-=======
-import useSearch from "./Pages/Discover/hooks/useSearch";
->>>>>>> fixedError
 
 export default function Search() {
 	const navRef = useRef(null);
 	const router = useRouter();
 
+	// Create a new URLSearchParams instance from current query
+	const params = new URLSearchParams(window.location.search);
+
 	const searchParams = useSearchParams();
 
-	const [isFilterVisible, setIsFilterVisible] = useState(true);
-	const page = searchParams?.get("page") || "";
+	const search = searchParams.get("search");
+	const page = searchParams.get("page");
 
-<<<<<<< HEAD
-	const { searchValues, setSearchValues } = useSearchContext();
-=======
+	const [openedSelect, setOpenedSelect] = useState(null);
+	const [isFilterVisible, setIsFilterVisible] = useState(true);
+
 	const { searchValues, setSearchValues } = useSearch(search);
 
 	// const [searchValues, setSearchValues] = useState({
@@ -39,7 +36,6 @@ export default function Search() {
 	// 	season: null,
 	// 	year: null,
 	// });
->>>>>>> fixedError
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
@@ -50,7 +46,7 @@ export default function Search() {
 				shallow: true,
 			});
 		}
-	}, [searchValues, router, page]);
+	}, [searchValues, router]);
 
 	const { error, loading, data } = useBrowseAnime(
 		...Object.values(searchValues)
@@ -70,7 +66,6 @@ export default function Search() {
 		);
 
 		setSearchValues({ ...searchValues, [categorySwitched]: option.value });
-		// debugger;
 	};
 
 	// const removeFilter = (parent: string, value: string | number) => {
@@ -94,14 +89,25 @@ export default function Search() {
 					<input
 						ref={navRef}
 						className="w-full px-6 py-4 shadow-custom focus:outline-none"
+						placeholder="Search for anime..."
 						type="text"
-						placeholder="Search"
-						value={searchValues.search}
+						name="search"
+						value={searchValues["search"] || ""}
 						onChange={(e) => {
-							router.push("/discover?search=" + e.target.value, undefined, {
+							// Construct the new URL
+
+							params.set("search", e.target.value);
+
+							const newURL = `/discover?${params.toString()}`;
+
+							router.push(newURL, undefined, {
 								shallow: true,
 							});
-							setSearchValues({ ...searchValues, search: e.target.value });
+
+							setSearchValues((prev) => ({
+								...prev,
+								search: e.target.value,
+							}));
 						}}
 					/>
 					<button
@@ -128,6 +134,8 @@ export default function Search() {
 						</div>
 					)} */}
 				</div>
+
+				{/* </form> */}
 			</section>
 		</>
 	);

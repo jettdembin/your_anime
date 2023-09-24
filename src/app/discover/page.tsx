@@ -17,12 +17,14 @@ import { useViewAll } from "@/src/components/Pages/Discover/hooks/useViewAll";
 import FilterWidget from "@/src/components/Pages/Discover/ui/FilterWidget";
 import Filter from "@/src/components/Elements/Filter";
 import { useSearchContext } from "@/src/components/Pages/Discover/context/SearchContext";
+import CategoryWidget from "@/src/components/Pages/Discover/ui/CategoryWidget";
 
 export default function Discover() {
 	const searchParams = useSearchParams();
 
 	const type = searchParams?.get("page");
 	const searchValue = searchParams?.get("search");
+	const category = searchParams?.get("page");
 	// const isTrending = searchParams?.get("page") === "trending";
 
 	const [page, setPage] = useState(1);
@@ -68,7 +70,10 @@ export default function Discover() {
 		return (
 			<section>
 				<header className="flex justify-between items-center w-full pb-2">
-					<FilterWidget />
+					<div className="flex w-full items-center justify-between">
+						<FilterWidget />
+						{!!category && <CategoryWidget />}
+					</div>
 					<div className="flex gap-2">
 						<svg
 							clipRule="evenodd"
