@@ -16,7 +16,7 @@ export default function DiscoverLayout({
 	children: React.ReactNode;
 }) {
 	const searchParams = useSearchParams();
-	const search = searchParams?.get("search");
+	const search = searchParams?.get("search") || "";
 
 	const cardType = useCardType();
 	const {

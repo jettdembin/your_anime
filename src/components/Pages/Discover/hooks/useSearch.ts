@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useBrowseAnime } from "@/src/graphql/queries";
 
-const useSearch = (search) => {
+const useSearch = (search: string | null) => {
 	const [searchValues, setSearchValues] = useState({
 		search: (!!search && search) || "",
 		category: null,

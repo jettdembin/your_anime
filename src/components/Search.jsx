@@ -17,24 +17,13 @@ import { useSearchContext } from "./Pages/Discover/context/SearchContext";
 export default function Search() {
 	const navRef = useRef(null);
 	const router = useRouter();
+
+	const searchParams = useSearchParams();
+
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
+	const page = searchParams?.get("page") || "";
 
 	const { searchValues, setSearchValues } = useSearchContext();
-
-	// const searchParams = useSearchParams();
-
-	// const search = searchParams.get("search");
-	// const page = searchParams.get("page");
-
-	// const [openedSelect, setOpenedSelect] = useState(null);
-
-	// const [searchValues, setSearchValues] = useState({
-	// 	search: (!!search && search) || "",
-	// 	category: null,
-	// 	status: null,
-	// 	season: null,
-	// 	year: null,
-	// });
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
@@ -45,7 +34,7 @@ export default function Search() {
 				shallow: true,
 			});
 		}
-	}, [searchValues, router]);
+	}, [searchValues, router, page]);
 
 	const { error, loading, data } = useBrowseAnime(
 		...Object.values(searchValues)
@@ -123,18 +112,7 @@ export default function Search() {
 						</div>
 					)} */}
 				</div>
-
-				{/* </form> */}
 			</section>
-			{/* {loading ? (
-				<CardSectionLoader />
-			) : (
-				<AnimeCardLayout>
-					{data.Page.media.slice(0, 8)?.map((media, i) => (
-						<AnimeCard key={i} media={media} />
-					))}
-				</AnimeCardLayout>
-			)} */}
 		</>
 	);
 }

@@ -67,7 +67,7 @@ export default function Discover() {
 		// if (loading && page > 1)
 		return (
 			<section>
-				<header className="flex justify-between items-center w-full">
+				<header className="flex justify-between items-center w-full pb-2">
 					<FilterWidget />
 					<div className="flex gap-2">
 						<svg
@@ -96,7 +96,7 @@ export default function Discover() {
 					</AnimeCardLayout>
 				) : (
 					<AnimeCardLayout>
-						{searchData.Page.media.slice(0, 8)?.map((media, i) => (
+						{searchData?.Page.media.slice(0, 8)?.map((media, i) => (
 							<AnimeCard key={i} media={media} />
 						))}
 					</AnimeCardLayout>
