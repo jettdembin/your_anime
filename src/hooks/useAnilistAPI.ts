@@ -1,18 +1,8 @@
 import { useQuery } from "@apollo/client";
 
-import { GET_POPULAR_ANIME, GET_TRENDING } from "@/src/graphql/queries";
-
-export const useAnilistAPI = (
-	page: number,
-	perPage: number,
-	// query: any,
-	gql: any
-) => {
-	const { error, loading, data } = useQuery(GET_TRENDING, {
-		variables: {
-			page,
-			perPage,
-		},
+export const useAnilistAPI = (query?: any, variables?: any) => {
+	const { error, loading, data } = useQuery(query, {
+		variables: variables,
 	});
 	return { error, loading, data };
 };
