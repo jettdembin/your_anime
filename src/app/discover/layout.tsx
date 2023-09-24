@@ -4,11 +4,8 @@ import { useSearchParams } from "next/navigation";
 
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
 
-import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import { SearchProvider } from "@/src/components/Pages/Discover/context/SearchContext";
-
-import Search from "@/src/components/Search";
-import useSearch from "@/src/components/Pages/Discover/hooks/useSearch";
+import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
 
 export default function DiscoverLayout({
 	children,
@@ -22,22 +19,22 @@ export default function DiscoverLayout({
 	const {
 		searchValues,
 		setSearchValues,
-		error: searchError,
-		loading: searchLoading,
+		error: searchDataError,
+		loading: isSearchDataLoading,
 		data: searchData,
-	} = useSearch(search);
+	} = useSearch(searchValue);
 
 	return (
-		<CardTypeProvider value={cardType}>
-			<SearchProvider
-				value={{
-					searchValues,
-					setSearchValues,
-					searchError,
-					searchLoading,
-					searchData,
-				}}
-			>
+		<SearchProvider
+			value={{
+				searchValues,
+				setSearchValues,
+				searchDataError,
+				isSearchDataLoading,
+				searchData,
+			}}
+		>
+			<CardTypeProvider value={cardType}>
 				<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
 					<Search />
 				</header>
@@ -45,7 +42,7 @@ export default function DiscoverLayout({
 				<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
 					{children}
 				</main>
-			</SearchProvider>
-		</CardTypeProvider>
+			</CardTypeProvider>
+		</SearchProvider>
 	);
 }

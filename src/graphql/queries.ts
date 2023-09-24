@@ -1,3 +1,5 @@
+"use client";
+
 import { gql } from "@apollo/client";
 import { useQuery, QueryResult } from "@apollo/client";
 

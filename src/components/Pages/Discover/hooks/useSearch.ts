@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 import { useBrowseAnime } from "@/src/graphql/queries";
