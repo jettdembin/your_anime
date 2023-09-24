@@ -2,8 +2,10 @@
 
 import Search from "@/src/components/Search";
 
-import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
 import useCardType from "@/src/components/Pages/Discover/hooks/useCardType";
+
+import { SearchProvider } from "@/src/components/Pages/Discover/context/SearchContext";
+import { CardTypeProvider } from "@/src/components/Pages/Discover/context/CardTypeContext";
 
 export default function DiscoverLayout({
 	children,
@@ -11,13 +13,33 @@ export default function DiscoverLayout({
 	children: React.ReactNode;
 }) {
 	const cardType = useCardType();
-	return (
-		<CardTypeProvider value={cardType}>
-			<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
-				<Search />
-			</header>
+	const {
+		searchValues,
+		setSearchValues,
+		error: searchDataError,
+		loading: isSearchDataLoading,
+		data: searchData,
+	} = useSearch(searchValue);
 
-			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">{children}</main>
-		</CardTypeProvider>
+	return (
+		<SearchProvider
+			value={{
+				searchValues,
+				setSearchValues,
+				searchDataError,
+				isSearchDataLoading,
+				searchData,
+			}}
+		>
+			<CardTypeProvider value={cardType}>
+				<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
+					<Search />
+				</header>
+
+				<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
+					{children}
+				</main>
+			</CardTypeProvider>
+		</SearchProvider>
 	);
 }

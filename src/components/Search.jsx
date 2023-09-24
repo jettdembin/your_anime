@@ -12,6 +12,7 @@ import SelectWrapper from "./Elements/Select";
 import { CardSectionLoader } from "./Elements/LoadingSection";
 import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
+import useSearch from "./Pages/Discover/hooks/useSearch";
 
 export default function Search() {
 	const navRef = useRef(null);
@@ -25,13 +26,15 @@ export default function Search() {
 	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-	const [searchValues, setSearchValues] = useState({
-		search: (!!search && search) || "",
-		category: null,
-		status: null,
-		season: null,
-		year: null,
-	});
+	const { searchValues, setSearchValues } = useSearch(search);
+
+	// const [searchValues, setSearchValues] = useState({
+	// 	search: (!!search && search) || "",
+	// 	category: null,
+	// 	status: null,
+	// 	season: null,
+	// 	year: null,
+	// });
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
