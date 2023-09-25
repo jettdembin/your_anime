@@ -1,13 +1,17 @@
 "use client";
+
 import { useTrendingAnime } from "@/src/graphql/queries";
 
 import { Media } from "../types/anime";
+
+import { GET_TRENDING, useAnilistAPI } from "../graphql/queries";
 import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
 
 export default function Trending() {
-	const { error, loading, data } = useTrendingAnime();
+	// const { error, loading, data } = useTrendingAnime();
+	const { error, loading, data } = useAnilistAPI(GET_TRENDING);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) {

@@ -47,7 +47,7 @@ export const GET_POPULAR_ANIME = gql`
 	}
 `;
 
-export const usePopularAnime = (page: number, perPage: number) => {
+export const usePopularAnime = (page: number = 1, perPage: number = 25) => {
 	const { error, loading, data } = useQuery(GET_POPULAR_ANIME, {
 		variables: {
 			page,
@@ -236,7 +236,7 @@ export const useBrowseAnime = (
 
 export const GET_TOP_100_ANIME = gql`
 	query GetTop100Anime {
-		Page(page: 1, perPage: 100) {
+		Page(page: 1, perPage: 25) {
 			media(
 				sort: SCORE_DESC
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
