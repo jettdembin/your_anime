@@ -12,24 +12,21 @@ const categories = ["Trending", "Popular", "Top Rated", "Upcoming"];
 
 const CategoryWidget = () => {
 	const searchParams = useSearchParams();
-	const router = useRouter();
-	// Create a new URLSearchParams instance from current query
-	const params = new URLSearchParams(window.location.search);
 
-	const search = searchParams?.get("search") || "";
-	const page = searchParams?.get("page") || "";
+	const category = searchParams?.get("category") || "";
 
-	const { setSearchValues } = useSearchContext();
-	const [category, setCategory] = useState(!!page ? page : categories[0]); // [0] is the default value
+	const { setSearchValues, handleCategory } = useSearchContext();
 
-	const handleCategory = (category: string) => {
-		setCategory(category);
+	// const [category, setCategory] = useState(!!page ? page : categories[0]); // [0] is the default value
 
-		//set the page to the category
-		params.set("page", category);
-		const newURL = `/discover?${params.toString()}`;
-		router.push(newURL);
-	};
+	// const handleCategory = (category: string) => {
+	// 	setCategory(category);
+
+	// 	//set the page to the category
+	// 	params.set("category", category);
+	// 	const newURL = `/discover?${params.toString()}`;
+	// 	router.push(newURL);
+	// };
 
 	return (
 		<div className="dropdown">
@@ -43,10 +40,9 @@ const CategoryWidget = () => {
 				{categories.map((category) => (
 					<li
 						key={category}
-						onClick={() => {
-							handleCategory(`${category}`);
-
-							setSearchValues();
+						onClick={(e) => {
+							const selectedCategory = e.target.text || "";
+							handleCategory(selectedCategory);
 						}}
 					>
 						<a>{category}</a>

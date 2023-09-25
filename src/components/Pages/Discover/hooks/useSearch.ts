@@ -10,9 +10,10 @@ import {
 	SEARCH_ANIMES,
 } from "@/src/graphql/queries";
 import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
-import { router } from "next/router";
+import { useRouter } from "next/navigation";
 
 const useSearch = () => {
+	const router = useRouter();
 	const searchParams = useSearchParams();
 	// Create a new URLSearchParams instance from current query
 	const params = new URLSearchParams(window.location.search);
@@ -21,8 +22,8 @@ const useSearch = () => {
 	const category = searchParams?.get("category") || "";
 
 	const [searchValues, setSearchValues] = useState({
-		search: (!!searchValue && searchValue) || "",
-		category: category,
+		search: searchValue,
+		sort: category,
 		status: null,
 		season: null,
 		year: null,
@@ -32,25 +33,35 @@ const useSearch = () => {
 
 	if (category?.toLowerCase() === "trending" && !searchValue) {
 		query = GET_TRENDING;
-	}
-	if (category?.toLowerCase() === "popular" && !searchValue) {
+	} else if (category?.toLowerCase() === "popular" && !searchValue) {
 		query = GET_POPULAR_ANIME;
-	}
-	if (!!searchValue) {
+	} else if (!!searchValue) {
 		query = SEARCH_ANIMES;
-		debugger;
-	}
-	if (!category?.toLowerCase()) {
+		// debugger;
+	} else if (!searchValue && !!category) {
 		query = GET_TRENDING;
-	}
+	} else query = GET_TRENDING;
 
 	const handleCategory = (category: string) => {
 		// setCategory(category);
 
-		//set the category to the category
 		params.set("category", category);
 		const newURL = `/discover?${params.toString()}`;
 		router.push(newURL);
+	};
+	const handleSearch = (e: any) => {
+		const params = new URLSearchParams(window.location.search);
+
+		params.set("search", e.target.value);
+		const newURL = `/discover?${params.toString()}`;
+		router.push(newURL, undefined, {
+			shallow: true,
+		});
+
+		setSearchValues((prev) => ({
+			...prev,
+			search: e.target.value,
+		}));
 	};
 
 	useEffect(() => {
@@ -66,8 +77,9 @@ const useSearch = () => {
 
 	return {
 		handleCategory,
-		searchValues,
+		handleSearch,
 		setSearchValues,
+		searchValues,
 		error,
 		loading,
 		data,

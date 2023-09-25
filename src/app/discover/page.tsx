@@ -76,7 +76,7 @@ export default function Discover() {
 			<header className="flex justify-between items-center w-full pb-2">
 				<div className="flex w-full items-center justify-between">
 					{!!searchValue && <FilterWidget />}
-					{!!category && <CategoryWidget />}
+					<CategoryWidget />
 				</div>
 				<div className="flex gap-2">
 					<svg

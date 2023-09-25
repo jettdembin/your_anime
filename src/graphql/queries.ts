@@ -172,9 +172,15 @@ export const GET_BROWSE_FILTERS = gql`
 `;
 
 export const SEARCH_ANIMES = gql`
-	query SearchAnimes($search: String) {
+	query SearchAnimes(
+		$search: String
+		$sort: String
+		$status: MediaStatus
+		$season: MediaSeason
+		$year: Int
+	) {
 		Page(page: 1, perPage: 10) {
-			media(search: $search, type: ANIME, isAdult: false) {
+			media(search: $search, type: ANIME, isAdult: false, sort: $sort) {
 				id
 				title {
 					english

@@ -5,78 +5,31 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-import { useBrowseAnime } from "../graphql/queries";
 import useSearch from "./Pages/Discover/hooks/useSearch";
-
-import { CardSectionLoader } from "./Elements/LoadingSection";
-import { AnimeCardLayout } from "./Layout/AnimeCardLayout";
-import AnimeCard from "./Pages/Home/ui/AnimeCard";
 
 export default function Search() {
 	const navRef = useRef(null);
 	const router = useRouter();
 
-	// Create a new URLSearchParams instance from current query
-	const params = new URLSearchParams(window.location.search);
-
 	const searchParams = useSearchParams();
 
 	const search = searchParams.get("search");
-	const page = searchParams.get("page");
+	const category = searchParams.get("category");
 
-	const [openedSelect, setOpenedSelect] = useState(null);
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-	const { searchValues, setSearchValues } = useSearch(search);
-
-	// const [searchValues, setSearchValues] = useState({
-	// 	search: (!!search && search) || "",
-	// 	category: null,
-	// 	status: null,
-	// 	season: null,
-	// 	year: null,
-	// });
+	const { searchValues, handleSearch } = useSearch(search);
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
 
 		if (!searchValues?.search) {
-			if (page) return;
+			if (!!category) return;
 			router.push("/", undefined, {
 				shallow: true,
 			});
 		}
 	}, [searchValues, router]);
-
-	const { error, loading, data } = useBrowseAnime(
-		...Object.values(searchValues)
-	);
-	// const { error, loading, data } = useBrowseAnime(searchValues);
-
-	if (error) {
-		return <p>Error: {error.message}</p>;
-	}
-
-	// const filterRef = useRef();
-
-	const handleChange = (option) => {
-		// Handle the change here
-		const categorySwitched = Object.keys(searchValues).filter(
-			(key) => key == option.parent
-		);
-
-		setSearchValues({ ...searchValues, [categorySwitched]: option.value });
-	};
-
-	// const removeFilter = (parent: string, value: string | number) => {
-	// 	setSearchValues((prevState) => {
-	// 		let newSelections = { ...prevState };
-	// 		newSelections[parent] = newSelections[parent].filter(
-	// 			(val) => val !== value
-	// 		);
-	// 		return newSelections;
-	// 	});
-	// };
 
 	return (
 		<>
@@ -93,22 +46,7 @@ export default function Search() {
 						type="text"
 						name="search"
 						value={searchValues["search"] || ""}
-						onChange={(e) => {
-							// Construct the new URL
-
-							params.set("search", e.target.value);
-
-							const newURL = `/discover?${params.toString()}`;
-
-							router.push(newURL, undefined, {
-								shallow: true,
-							});
-
-							setSearchValues((prev) => ({
-								...prev,
-								search: e.target.value,
-							}));
-						}}
+						onChange={handleSearch}
 					/>
 					<button
 						className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 bg-white border-none shadow-custom"

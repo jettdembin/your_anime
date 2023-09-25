@@ -19,8 +19,9 @@ export default function DiscoverLayout({
 
 	const {
 		handleCategory,
-		searchValues,
+		handleSearch,
 		setSearchValues,
+		searchValues,
 		error,
 		loading,
 		data,
@@ -30,8 +31,9 @@ export default function DiscoverLayout({
 		<SearchProvider
 			value={{
 				handleCategory,
-				searchValues,
+				handleSearch,
 				setSearchValues,
+				searchValues,
 				error,
 				loading,
 				data,
