@@ -19,11 +19,18 @@ const useSearch = () => {
 	const params = new URLSearchParams(window.location.search);
 
 	const searchValue = searchParams?.get("search") || "";
-	const category = searchParams?.get("category") || "";
+	const categoryValue = searchParams?.get("category") || "";
 
+	const categories = [
+		{ label: "Trending", value: "TRENDING_DESC" },
+		{ label: "Popular", value: "POPULAR_DESC" },
+		{ label: "Upcoming", value: "UPCOMING_DESC" },
+	];
+
+	const [category, setCategory] = useState(categories[0]);
 	const [searchValues, setSearchValues] = useState({
 		search: searchValue,
-		sort: category,
+		sort: categoryValue ?? category,
 		status: null,
 		season: null,
 		year: null,
@@ -31,19 +38,19 @@ const useSearch = () => {
 
 	let query;
 
-	if (category?.toLowerCase() === "trending" && !searchValue) {
+	if (categoryValue?.toLowerCase() === "trending" && !searchValue) {
 		query = GET_TRENDING;
-	} else if (category?.toLowerCase() === "popular" && !searchValue) {
+	} else if (categoryValue?.toLowerCase() === "popular" && !searchValue) {
 		query = GET_POPULAR_ANIME;
 	} else if (!!searchValue) {
 		query = SEARCH_ANIMES;
 		// debugger;
-	} else if (!searchValue && !!category) {
+	} else if (!searchValue && !!categoryValue) {
 		query = GET_TRENDING;
 	} else query = GET_TRENDING;
 
 	const handleCategory = (category: string) => {
-		// setCategory(category);
+		setCategory(category);
 
 		params.set("category", category);
 		const newURL = `/discover?${params.toString()}`;
@@ -66,9 +73,12 @@ const useSearch = () => {
 
 	useEffect(() => {
 		if (!!searchValue) {
-			setSearchValues({ ...searchValues, search: searchValue });
+			setSearchValues((prev) => ({ ...prev, search: searchValue }));
 		}
-	}, [searchValue]);
+		if (!!categoryValue) {
+			setSearchValues((prev) => ({ ...prev, sort: categoryValue }));
+		}
+	}, [searchValue, categoryValue]);
 
 	const { error, loading, data } = useAnilistAPI(query, searchValues);
 	// const { error, loading, data } = useBrowseAnime(
@@ -76,6 +86,7 @@ const useSearch = () => {
 	// );
 
 	return {
+		category,
 		handleCategory,
 		handleSearch,
 		setSearchValues,

@@ -8,14 +8,18 @@ import { useSearchParams } from "next/navigation";
 import { useCardTypeContext } from "../context/CardTypeContext";
 import { useSearchContext } from "../context/SearchContext";
 
-const categories = ["Trending", "Popular", "Top Rated", "Upcoming"];
+const categories = [
+	{ label: "Trending", value: "TRENDING_DESC" },
+	{ label: "Popular", value: "POPULAR_DESC" },
+	{ label: "Upcoming", value: "UPCOMING_DESC" },
+];
 
 const CategoryWidget = () => {
 	const searchParams = useSearchParams();
 
-	const category = searchParams?.get("category") || "";
+	const categoryValue = searchParams?.get("category") || "";
 
-	const { setSearchValues, handleCategory } = useSearchContext();
+	const { category, handleCategory } = useSearchContext();
 
 	// const [category, setCategory] = useState(!!page ? page : categories[0]); // [0] is the default value
 
@@ -31,7 +35,7 @@ const CategoryWidget = () => {
 	return (
 		<div className="dropdown">
 			<label tabIndex={0} className="btn m-1">
-				{category}
+				{category.label}
 			</label>
 			<ul
 				tabIndex={0}
@@ -39,13 +43,15 @@ const CategoryWidget = () => {
 			>
 				{categories.map((category) => (
 					<li
-						key={category}
+						key={category.value}
+						data-value={category.value}
 						onClick={(e) => {
-							const selectedCategory = e.target.text || "";
+							const selectedCategory =
+								e.currentTarget.getAttribute("data-value") || "";
 							handleCategory(selectedCategory);
 						}}
 					>
-						<a>{category}</a>
+						<a>{category.label} </a>
 					</li>
 				))}
 			</ul>

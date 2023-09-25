@@ -18,6 +18,7 @@ export default function DiscoverLayout({
 	const { cardType, setCardType, handleCardType } = useCardType();
 
 	const {
+		category,
 		handleCategory,
 		handleSearch,
 		setSearchValues,
@@ -30,6 +31,7 @@ export default function DiscoverLayout({
 	return (
 		<SearchProvider
 			value={{
+				category,
 				handleCategory,
 				handleSearch,
 				setSearchValues,
