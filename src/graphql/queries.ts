@@ -240,43 +240,26 @@ export const GET_TOP_100_ANIME = gql`
 			media(
 				sort: SCORE_DESC
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
-				isAdult: false
 			) {
+				id
 				id
 				title {
 					english
-					native
 				}
-				description
-				source
 				coverImage {
-					large
-				}
-				trailer {
-					id
-					site
-					thumbnail
-				}
-				nextAiringEpisode {
-					timeUntilAiring
-					episode
+					medium
 				}
 				startDate {
 					year
 					month
 					day
 				}
-				averageScore
-				studios(isMain: true) {
-					nodes {
-						name
-					}
-				}
+				format
 				episodes
+				duration
 				genres
-				status
-				season
-				seasonYear
+				averageScore
+				popularity
 			}
 		}
 	}
