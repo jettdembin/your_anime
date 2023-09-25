@@ -15,27 +15,26 @@ export default function DiscoverLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const searchParams = useSearchParams();
-	const searchValue = searchParams?.get("search") || "";
-
 	const { cardType, setCardType, handleCardType } = useCardType();
 
 	const {
+		handleCategory,
 		searchValues,
 		setSearchValues,
-		error: searchDataError,
-		loading: isSearchDataLoading,
-		data: searchData,
-	} = useSearch(searchValue);
+		error,
+		loading,
+		data,
+	} = useSearch();
 
 	return (
 		<SearchProvider
 			value={{
+				handleCategory,
 				searchValues,
 				setSearchValues,
-				searchDataError,
-				isSearchDataLoading,
-				searchData,
+				error,
+				loading,
+				data,
 			}}
 		>
 			<CardTypeProvider value={{ cardType, setCardType, handleCardType }}>

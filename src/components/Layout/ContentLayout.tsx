@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 type ContentLayoutProps = {
 	children: React.ReactNode;
 	title: string;
-	page: string;
+	category: string;
 };
 
 export const ContentLayout = ({
 	children,
 	title,
-	page,
+	category,
 }: ContentLayoutProps) => {
 	const router = useRouter();
 
@@ -26,7 +26,7 @@ export const ContentLayout = ({
 							// router.push("/discover?search=" + e.target.value, undefined, {
 							// 	shallow: true,
 							// });
-							router.push(`/discover?page=${page}`, undefined, {
+							router.push(`/discover?category=${category}`, undefined, {
 								shallow: true,
 							});
 						}}

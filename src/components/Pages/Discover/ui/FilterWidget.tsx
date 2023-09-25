@@ -7,7 +7,8 @@ import { useSearchParams } from "next/navigation";
 const FilterWidget = () => {
 	const searchParams = useSearchParams();
 
-	const search = searchParams?.get("search");
+	const search = searchParams?.get("search") || "";
+	const page = searchParams?.get("page") || "";
 
 	// const [searchValue, setSearchValue] = useState(search);
 	return (

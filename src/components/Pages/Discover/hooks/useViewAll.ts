@@ -9,24 +9,24 @@ import { GET_POPULAR_ANIME, GET_TRENDING } from "@/src/graphql/queries";
 const useViewAll = (page: number, perPage: number) => {
 	const searchParams = useSearchParams();
 
-	const viewingPage = searchParams?.get("page") || "";
+	const category = searchParams?.get("category") || "";
 
 	// const [viewing, setViewing] = useState<string | null>(viewingPage);
 
 	let query;
 
-	if (viewingPage == "trending") {
+	if (category == "trending") {
 		query = GET_TRENDING;
 	}
-	if (viewingPage == "popular") {
+	if (category == "popular") {
 		query = GET_POPULAR_ANIME;
 	}
-	if (!viewingPage) {
+	if (!category) {
 		query = GET_TRENDING;
 	}
 	// debugger;
 
-	const { error, loading, data } = useAnilistAPI(page, perPage, query);
+	const { error, loading, data } = useAnilistAPI(query);
 
 	return { error, loading, data };
 };

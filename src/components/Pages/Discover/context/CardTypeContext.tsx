@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, ReactNode } from "react";
 
-type CardType = {};
+type CardType = { handleCardType: () => void };
 interface CardTypeProviderProps {
 	children: ReactNode;
 	value: CardType;

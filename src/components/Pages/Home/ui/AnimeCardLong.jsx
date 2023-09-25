@@ -3,11 +3,11 @@ import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
 const AnimeCardLong = ({ anime, index }) => {
 	return (
 		<li key={anime.id} className="flex items-center mb-4">
-			<span className="w-8 mr-4 font-bold text-xl text-8ba0b2">
+			<span className="w-8 mr-4 font-bold text-xl" style={{ color: "#8ba0b2" }}>
 				#{index + 1}
 			</span>
 			<table className="w-full bg-white rounded-md shadow-box  shadow-custom">
-				<tbody>
+				<tbody className="text-slate-800">
 					<tr>
 						<td className="w-1/6 lg:w-[10%] p-4">
 							<img
