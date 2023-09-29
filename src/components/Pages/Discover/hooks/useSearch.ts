@@ -4,50 +4,43 @@ import { useState, useEffect } from "react";
 
 import { useParams, useSearchParams } from "next/navigation";
 
-import {
-	GET_POPULAR_ANIME,
-	GET_TRENDING,
-	SEARCH_ANIMES,
-} from "@/src/graphql/queries";
 import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 import { useRouter } from "next/navigation";
+import { GET_TRENDING } from "@/src/graphql/queries";
 
-const useSearch = () => {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-	// Create a new URLSearchParams instance from current query
-	const params = new URLSearchParams(window.location.search);
-
-	const searchValue = searchParams?.get("search") || "";
-	const categoryValue = searchParams?.get("category") || "";
-
+const useSearch = (userSearch) => {
 	const categories = [
 		{ label: "Trending", value: "TRENDING_DESC" },
-		{ label: "Popular", value: "POPULAR_DESC" },
-		{ label: "Upcoming", value: "UPCOMING_DESC" },
+		{ label: "Popular", value: "POPULARITY_DESC" },
+		{ label: "Rating", value: "SCORE_DESC" },
 	];
+	const router = useRouter();
+
+	// Create a new URLSearchParams instance from current query
+	const params = new URLSearchParams(window?.location?.search);
+
+	const { searchValue, categoryValue, query } = userSearch || {};
 
 	const [category, setCategory] = useState(categories[0]);
 	const [searchValues, setSearchValues] = useState({
 		search: searchValue,
-		sort: categoryValue ?? category,
+		// sort: categoryValue ?? category,
 		status: null,
 		season: null,
 		year: null,
 	});
+	const [gqlQuery, setGqlQuery] = useState(query ?? GET_TRENDING);
 
-	let query;
+	useEffect(() => {
+		if (!!query && gqlQuery !== query) {
+			setGqlQuery(query);
+		}
+	}, [query]);
 
-	if (categoryValue?.toLowerCase() === "trending" && !searchValue) {
-		query = GET_TRENDING;
-	} else if (categoryValue?.toLowerCase() === "popular" && !searchValue) {
-		query = GET_POPULAR_ANIME;
-	} else if (!!searchValue) {
-		query = SEARCH_ANIMES;
-		// debugger;
-	} else if (!searchValue && !!categoryValue) {
-		query = GET_TRENDING;
-	} else query = GET_TRENDING;
+	// const [query, setQuery] = useState(GET_TRENDING);
+
+	console.log(query, "query");
+	const { error, loading, data } = useAnilistAPI(gqlQuery ?? "", searchValues);
 
 	const handleCategory = (category: string) => {
 		setCategory(category);
@@ -56,8 +49,9 @@ const useSearch = () => {
 		const newURL = `/discover?${params.toString()}`;
 		router.push(newURL);
 	};
+
 	const handleSearch = (e: any) => {
-		const params = new URLSearchParams(window.location.search);
+		const params = new URLSearchParams(window?.location?.search);
 
 		params.set("search", e.target.value);
 		const newURL = `/discover?${params.toString()}`;
@@ -75,21 +69,16 @@ const useSearch = () => {
 		if (!!searchValue) {
 			setSearchValues((prev) => ({ ...prev, search: searchValue }));
 		}
-		if (!!categoryValue) {
-			setSearchValues((prev) => ({ ...prev, sort: categoryValue }));
-		}
 	}, [searchValue, categoryValue]);
-
-	const { error, loading, data } = useAnilistAPI(query, searchValues);
-	// const { error, loading, data } = useBrowseAnime(
-	// 	...Object.values(searchValues)
-	// );
 
 	return {
 		category,
+		categories,
+
 		handleCategory,
 		handleSearch,
 		setSearchValues,
+
 		searchValues,
 		error,
 		loading,

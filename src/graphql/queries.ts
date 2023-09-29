@@ -50,8 +50,8 @@ export const GET_POPULAR_ANIME = gql`
 export const usePopularAnime = (page: number = 1, perPage: number = 25) => {
 	const { error, loading, data } = useQuery(GET_POPULAR_ANIME, {
 		variables: {
-			page,
-			perPage,
+			page: 1,
+			perPage: 25,
 		},
 	});
 
@@ -106,7 +106,6 @@ export const GET_TRENDING = gql`
 		}
 	}
 `;
-
 export const useTrendingAnime = (page: number, perPage: number) => {
 	const { error, loading, data } = useQuery(GET_TRENDING, {
 		variables: { page, perPage },
@@ -171,13 +170,107 @@ export const GET_BROWSE_FILTERS = gql`
 	}
 `;
 
-export const SEARCH_ANIMES = gql`
+export const SEARCH_ANIMES_UPCOMING = gql`
 	query SearchAnimes(
-		$search: String
-		$sort: [MediaSort] = TRENDING_DESC # $status: String # $season: String # $year: Int
+		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
 	) {
 		Page(page: 1, perPage: 10) {
-			media(search: $search, type: ANIME, isAdult: false, sort: $sort) {
+			media(search: $search, type: ANIME, isAdult: false, sort: SCORE_DESC) {
+				id
+				title {
+					english
+					native
+				}
+				description
+				source
+				coverImage {
+					large
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
+				}
+				startDate {
+					year
+					month
+					day
+				}
+				averageScore
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
+			}
+		}
+	}
+`;
+export const SEARCH_ANIMES_POPULAR = gql`
+	query SearchAnimes(
+		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
+	) {
+		Page(page: 1, perPage: 10) {
+			media(
+				search: $search
+				type: ANIME
+				isAdult: false
+				sort: POPULARITY_DESC
+			) {
+				id
+				title {
+					english
+					native
+				}
+				description
+				source
+				coverImage {
+					large
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
+				}
+				startDate {
+					year
+					month
+					day
+				}
+				averageScore
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
+			}
+		}
+	}
+`;
+export const SEARCH_ANIMES_TRENDING = gql`
+	query SearchAnimes(
+		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
+	) {
+		Page(page: 1, perPage: 10) {
+			media(search: $search, type: ANIME, isAdult: false, sort: TRENDING_DESC) {
 				id
 				title {
 					english
@@ -225,7 +318,7 @@ export const useBrowseAnime = (
 	season?: string,
 	year?: number
 ) => {
-	const { error, loading, data } = useQuery(SEARCH_ANIMES, {
+	const { error, loading, data } = useQuery(SEARCH_ANIMES_TRENDING, {
 		variables: {
 			search,
 			category,

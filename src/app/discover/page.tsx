@@ -24,7 +24,7 @@ export default function Discover() {
 
 	// const type = searchParams?.get("page");
 	const searchValue = searchParams?.get("search");
-	const category = searchParams?.get("category");
+	const categoryValue = searchParams?.get("category");
 	// const isTrending = searchParams?.get("page") === "trending";
 
 	const [page, setPage] = useState(1);
@@ -32,7 +32,7 @@ export default function Discover() {
 
 	const { cardType } = useCardTypeContext();
 
-	const { error, loading, data } = useViewAll(category, 50); // Updated to accept page as a parameter
+	const { error, loading, data } = useViewAll(1, 50); // Updated to accept page as a parameter
 	const { data: searchData } = useSearchContext();
 
 	useEffect(() => {
@@ -60,17 +60,11 @@ export default function Discover() {
 		};
 	}, [data, handleScroll]);
 
-	useEffect(() => {
-		console.log(searchData, "searchData");
-	}, [searchData]);
-
 	if (loading) return <CardSectionLoader />;
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
 
-	// if (data)
-	// if (loading && page > 1)
 	return (
 		<section>
 			<header className="flex justify-between items-center w-full pb-2">

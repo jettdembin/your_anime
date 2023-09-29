@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
 import useSearch from "./Pages/Discover/hooks/useSearch";
+import { useSearchContext } from "./Pages/Discover/context/SearchContext";
 
 export default function Search() {
 	const navRef = useRef(null);
@@ -13,21 +14,26 @@ export default function Search() {
 
 	const searchParams = useSearchParams();
 
-	const search = searchParams.get("search");
-	const category = searchParams.get("category");
+	const searchValue = searchParams.get("search");
+	const categoryValue = searchParams.get("category");
 
 	const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-	const { searchValues, handleSearch } = useSearch(search);
+	const { searchValues, handleSearch } = useSearchContext();
+	// const { searchValues, handleSearch } = useSearch({
+	// 	searchValue,
+	// 	categoryValue,
+	// });
 
 	useEffect(() => {
 		if (!!navRef.current) navRef.current.focus();
 
 		if (!searchValues?.search) {
-			if (!!category) return;
-			router.push("/", undefined, {
-				shallow: true,
-			});
+			if (!categoryValue) {
+				router.push("/", undefined, {
+					shallow: true,
+				});
+			}
 		}
 	}, [searchValues, router]);
 
