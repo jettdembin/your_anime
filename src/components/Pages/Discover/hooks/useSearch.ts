@@ -15,7 +15,6 @@ const useSearch = (userSearch) => {
 		{ label: "Rating", value: "SCORE_DESC" },
 	];
 	const router = useRouter();
-
 	// Create a new URLSearchParams instance from current query
 	const params = new URLSearchParams(window?.location?.search);
 
@@ -42,10 +41,12 @@ const useSearch = (userSearch) => {
 	console.log(query, "query");
 	const { error, loading, data } = useAnilistAPI(gqlQuery ?? "", searchValues);
 
-	const handleCategory = (category: string) => {
+	const handleCategory = (category: any) => {
 		setCategory(category);
 
-		params.set("category", category);
+		const { value } = category || {};
+
+		params.set("category", value);
 		const newURL = `/discover?${params.toString()}`;
 		router.push(newURL);
 	};

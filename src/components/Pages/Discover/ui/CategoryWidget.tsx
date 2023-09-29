@@ -21,10 +21,10 @@ const CategoryWidget = () => {
 						onClick={(e) => {
 							const selectedCategory =
 								e.currentTarget.getAttribute("data-value") || "";
-							handleCategory(selectedCategory);
+							handleCategory(category);
 						}}
 					>
-						<a>{category?.label} </a>
+						<a>{category?.label}</a>
 					</li>
 				))}
 			</ul>
