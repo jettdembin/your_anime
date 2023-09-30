@@ -5,7 +5,7 @@ import { useQuery, QueryResult } from "@apollo/client";
 
 export const GET_POPULAR_ANIME = gql`
 	query GetPopularAnime($page: Int) {
-		Page(page: $page, perPage: 100) {
+		Page(page: $page, perPage: 500) {
 			media(sort: POPULARITY_DESC, isAdult: false) {
 				id
 				title {
@@ -47,11 +47,11 @@ export const GET_POPULAR_ANIME = gql`
 	}
 `;
 
-export const usePopularAnime = (page: number = 1, perPage: number = 25) => {
+export const usePopularAnime = (page: number = 1, perPage: number = 50) => {
 	const { error, loading, data } = useQuery(GET_POPULAR_ANIME, {
 		variables: {
 			page: 1,
-			perPage: 25,
+			perPage: 50,
 		},
 	});
 
@@ -121,7 +121,7 @@ export const GET_BROWSE_FILTERS = gql`
 		$season: MediaSeason
 		$year: Int
 	) {
-		Page(page: 1, perPage: 10) {
+		Page(page: 1, perPage: 50) {
 			media(
 				genre: $category
 				status: $status
@@ -171,10 +171,8 @@ export const GET_BROWSE_FILTERS = gql`
 `;
 
 export const SEARCH_ANIMES_UPCOMING = gql`
-	query SearchAnimes(
-		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
-	) {
-		Page(page: 1, perPage: 10) {
+	query SearchAnimes($search: String) {
+		Page(page: 1, perPage: 50) {
 			media(search: $search, type: ANIME, isAdult: false, sort: SCORE_DESC) {
 				id
 				title {
@@ -219,7 +217,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
 	query SearchAnimes(
 		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
 	) {
-		Page(page: 1, perPage: 10) {
+		Page(page: 1, perPage: 50) {
 			media(
 				search: $search
 				type: ANIME
@@ -269,7 +267,7 @@ export const SEARCH_ANIMES_TRENDING = gql`
 	query SearchAnimes(
 		$search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
 	) {
-		Page(page: 1, perPage: 10) {
+		Page(page: 1, perPage: 50) {
 			media(search: $search, type: ANIME, isAdult: false, sort: TRENDING_DESC) {
 				id
 				title {
@@ -332,7 +330,7 @@ export const useBrowseAnime = (
 
 export const GET_TOP_100_ANIME = gql`
 	query GetTop100Anime {
-		Page(page: 1, perPage: 25) {
+		Page(page: 1, perPage: 50) {
 			media(
 				sort: SCORE_DESC
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]

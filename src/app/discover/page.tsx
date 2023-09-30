@@ -72,23 +72,11 @@ export default function Discover() {
 					{!!searchValue && <FilterWidget />}
 					<CategoryWidget />
 				</div>
-				<div className="flex gap-2">
-					<svg
-						clipRule="evenodd"
-						fillRule="evenodd"
-						strokeLinejoin="round"
-						strokeMiterlimit="2"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="m8 16h-5v4c0 .621.52 1 1 1h4zm6.6 5v-5h-5.2v5zm6.4-5h-5v5h4c.478 0 1-.379 1-1zm0-1.4v-5.2h-5v5.2zm-18-5.2v5.2h5v-5.2zm11.6 0h-5.2v5.2h5.2zm1.4-6.4v5h5v-4c0-.478-.379-1-1-1zm-8 5v-5h-4c-.62 0-1 .519-1 1v4zm6.6-5h-5.2v5h5.2z"
-							fillRule="nonzero"
-						/>
-					</svg>
-					<i>icon</i>
-					<i>icon</i>
-					<i>icon</i>
+				<hr className="h-10 mx-2 border-x border-y border-gray-800" />
+				<div className="flex gap-1">
+					<span className="material-icons text-gray-800">grid_view</span>
+					<span className="material-icons text-gray-800">grid_view</span>
+					<span className="material-icons text-gray-800">grid_view</span>
 				</div>
 			</header>
 			{!searchValue ? (
@@ -99,7 +87,7 @@ export default function Discover() {
 				</AnimeCardLayout>
 			) : (
 				<AnimeCardLayout>
-					{searchData?.Page?.media?.slice(0, 8)?.map((media, i) => (
+					{searchData?.Page?.media?.map((media, i) => (
 						<AnimeCard key={i} media={media} cardType={cardType} />
 					))}
 				</AnimeCardLayout>

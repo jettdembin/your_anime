@@ -9,18 +9,26 @@ import { useRouter } from "next/navigation";
 import { GET_TRENDING } from "@/src/graphql/queries";
 
 const useSearch = (userSearch) => {
-	const categories = [
-		{ label: "Trending", value: "TRENDING_DESC" },
-		{ label: "Popular", value: "POPULARITY_DESC" },
-		{ label: "Rating", value: "SCORE_DESC" },
-	];
 	const router = useRouter();
 	// Create a new URLSearchParams instance from current query
 	const params = new URLSearchParams(window?.location?.search);
 
 	const { searchValue, categoryValue, query } = userSearch || {};
 
-	const [category, setCategory] = useState(categories[0]);
+	const categories = [
+		{ label: "Trending", value: "TRENDING_DESC" },
+		{ label: "Popular", value: "POPULARITY_DESC" },
+		{ label: "Rating", value: "SCORE_DESC" },
+	];
+	const categoryMap = {
+		TRENDING_DESC: categories[0],
+		POPULAR_DESC: categories[1],
+		SCORE_DESC: categories[2],
+	};
+	const initialCategory = categoryMap[categoryValue] || categories[0];
+
+	const [category, setCategory] = useState(initialCategory);
+
 	const [searchValues, setSearchValues] = useState({
 		search: searchValue,
 		// sort: categoryValue ?? category,
@@ -28,6 +36,7 @@ const useSearch = (userSearch) => {
 		season: null,
 		year: null,
 	});
+
 	const [gqlQuery, setGqlQuery] = useState(query ?? GET_TRENDING);
 
 	useEffect(() => {
@@ -36,9 +45,6 @@ const useSearch = (userSearch) => {
 		}
 	}, [query]);
 
-	// const [query, setQuery] = useState(GET_TRENDING);
-
-	console.log(query, "query");
 	const { error, loading, data } = useAnilistAPI(gqlQuery ?? "", searchValues);
 
 	const handleCategory = (category: any) => {

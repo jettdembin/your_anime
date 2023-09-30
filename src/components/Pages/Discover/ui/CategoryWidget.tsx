@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { useSearchContext } from "../context/SearchContext";
 
 const CategoryWidget = () => {
