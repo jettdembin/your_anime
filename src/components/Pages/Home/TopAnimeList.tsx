@@ -5,7 +5,7 @@ import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 import { GET_TOP_100_ANIME } from "@/src/graphql/queries";
 
 import { CardSectionLoader } from "../../Elements/LoadingSection";
-import AnimeCardLong from "./ui/AnimeCardLong";
+import AnimeCardLong from "./ui/ListType";
 
 export default function TopAnimeList() {
 	const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);

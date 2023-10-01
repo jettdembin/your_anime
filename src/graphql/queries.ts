@@ -336,24 +336,41 @@ export const GET_TOP_100_ANIME = gql`
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
 			) {
 				id
-				id
 				title {
 					english
+					native
 				}
+				description
+				source
 				coverImage {
+					large
 					medium
+				}
+				trailer {
+					id
+					site
+					thumbnail
+				}
+				nextAiringEpisode {
+					timeUntilAiring
+					episode
 				}
 				startDate {
 					year
 					month
 					day
 				}
-				format
-				episodes
-				duration
-				genres
 				averageScore
-				popularity
+				studios(isMain: true) {
+					nodes {
+						name
+					}
+				}
+				episodes
+				genres
+				status
+				season
+				seasonYear
 			}
 		}
 	}

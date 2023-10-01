@@ -18,15 +18,15 @@ export default async function Home() {
 			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
 				<Search />
 
-				<ContentLayout title="TRENDING NOW" category="trending">
+				<ContentLayout title="TRENDING NOW" category="TRENDING">
 					<Trending />
 				</ContentLayout>
 
-				<ContentLayout title="ALL TIME POPULAR" category="alltime">
+				<ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
 					<PopularAnime />
 				</ContentLayout>
 
-				<ContentLayout title="TOP 100 ANIME" category="top">
+				<ContentLayout title="TOP 100 ANIME" category="TOP_100">
 					<TopAnimeList />
 				</ContentLayout>
 			</main>

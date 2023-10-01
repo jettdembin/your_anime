@@ -18,7 +18,7 @@ import FilterWidget from "@/src/components/Pages/Discover/ui/FilterWidget";
 import Filter from "@/src/components/Elements/Filter";
 import { useSearchContext } from "@/src/components/Pages/Discover/context/SearchContext";
 import CategoryWidget from "@/src/components/Pages/Discover/ui/CategoryWidget";
-import Widget from "@/src/components/Pages/Discover/ui/CategoryWidget/Widget";
+import CardWidget from "@/src/components/Pages/Discover/ui/CardTypeWidget/Widget";
 
 export default function Discover() {
 	const searchParams = useSearchParams();
@@ -37,8 +37,10 @@ export default function Discover() {
 	const { data: searchData } = useSearchContext();
 
 	useEffect(() => {
-		if (data && data.Trending && data.Trending.media) {
-			setMedia((prevMedia) => [...prevMedia, ...data.Trending.media]);
+		if (data && data.Page && data.Page.media) {
+			// if (data && data.Trending && data.Trending.media) {
+			setMedia((prevMedia) => [...prevMedia, ...data.Page.media]);
+			// setMedia((prevMedia) => [...prevMedia, ...data.Trending.media]);
 		}
 	}, [data]);
 
@@ -66,6 +68,7 @@ export default function Discover() {
 		return <p>Error: {error.message}</p>;
 	}
 
+	if (!data) return;
 	return (
 		<section>
 			<header className="flex justify-between items-center w-full pb-2">
@@ -75,9 +78,9 @@ export default function Discover() {
 				</div>
 				<hr className="h-10 mx-2 border-x border-y border-gray-800" />
 				<div className="flex gap-1">
-					<Widget cardType="card" />
-					<Widget cardType="descriptive" />
-					<Widget cardType="list" />
+					<CardWidget cardType="card" />
+					<CardWidget cardType="descriptive" />
+					<CardWidget cardType="list" />
 				</div>
 			</header>
 			{!searchValue ? (

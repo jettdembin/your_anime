@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import {
 	GET_POPULAR_ANIME,
+	GET_TOP_100_ANIME,
 	GET_TRENDING,
 	SEARCH_ANIMES_POPULAR,
 	SEARCH_ANIMES_TRENDING,
@@ -38,8 +39,10 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
 		query = SEARCH_ANIMES_TRENDING;
 	} else if (categoryValue?.toUpperCase() === "POPULARITY_DESC") {
 		query = GET_POPULAR_ANIME;
-	} else {
-		query = GET_TRENDING;
+	} else if (categoryValue?.toUpperCase() === "TOP_100") {
+		query = GET_TOP_100_ANIME;
+	} else if (categoryValue?.toUpperCase() === "POPULAR_ANIME") {
+		query = GET_POPULAR_ANIME;
 	}
 
 	const {

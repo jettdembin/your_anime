@@ -1,4 +1,6 @@
 import React from "react";
+import useCardType from "../Pages/Discover/hooks/useCardType";
+import { useCardTypeContext } from "../Pages/Discover/context/CardTypeContext";
 
 // type AnimeCardLayoutProps = {
 // 	children: React.ReactNode;
@@ -7,9 +9,16 @@ import React from "react";
 export const AnimeCardLayout = ({ children }) => {
 	const childrenArray = React.Children.toArray(children);
 
+	const { cardType } = useCardTypeContext();
 	return (
 		<>
-			<section className="grid sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-2 gap-4">
+			<section
+				className={
+					cardType === "list"
+						? "grid grid-cols-2 gap-4"
+						: "grid grid-cols-4 gap-4"
+				}
+			>
 				{childrenArray.map((child, index) => {
 					const sm = window.innerWidth >= 640 && index % 2 === 1; // For sm screens
 					const md =

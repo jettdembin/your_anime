@@ -9,7 +9,7 @@ import { useShowAnimeInfo } from "@/src/hooks/useShowAnimeInfo";
 import ListType from "./AnimeCard/ListType";
 import CardType from "./AnimeCard/CardType";
 import AnimeDetails from "./AnimeCard/AnimeDetails";
-import ListCard from "./ListType";
+import AnimeCardLong from "./ListType";
 import { useCardTypeContext } from "../../Discover/context/CardTypeContext";
 
 interface AnimeCardProps {
