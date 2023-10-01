@@ -20,6 +20,10 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
 		useShowAnimeInfo();
 
+	const nextEpisodeDays = media?.nextAiringEpisode
+		? Math.floor(media.nextAiringEpisode.timeUntilAiring / 86400)
+		: null;
+
 	return (
 		<div
 			className="relative flex"
