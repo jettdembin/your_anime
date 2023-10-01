@@ -10,7 +10,7 @@ import { Media } from "@/src/types/anime";
 
 import { getEmoji, getMonthName } from "@/src/util";
 
-import AnimeHoverOptions from "./AnimeDetailsLarge/AnimeHoverOptions";
+import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
 
 // interface AnimeCardProps {
 // 	media: Media;
@@ -19,7 +19,7 @@ import AnimeHoverOptions from "./AnimeDetailsLarge/AnimeHoverOptions";
 // 	setIsCardHovered: (isCardHovered: boolean) => void;
 // }
 
-const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
+const ListCard = ({ media, isCardHovered, setIsCardHovered }) => {
 	// const convertTimeUntilAiring = (hours: number): string => {
 	// 	// Convert hours to days
 	// 	const days = Math.floor(hours / 24);
@@ -292,4 +292,4 @@ const AnimeDetailsLarge = ({ media, isCardHovered, setIsCardHovered }) => {
 	);
 };
 
-export default AnimeDetailsLarge;
+export default ListCard;

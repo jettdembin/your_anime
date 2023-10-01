@@ -18,6 +18,7 @@ import FilterWidget from "@/src/components/Pages/Discover/ui/FilterWidget";
 import Filter from "@/src/components/Elements/Filter";
 import { useSearchContext } from "@/src/components/Pages/Discover/context/SearchContext";
 import CategoryWidget from "@/src/components/Pages/Discover/ui/CategoryWidget";
+import Widget from "@/src/components/Pages/Discover/ui/CategoryWidget/Widget";
 
 export default function Discover() {
 	const searchParams = useSearchParams();
@@ -74,9 +75,9 @@ export default function Discover() {
 				</div>
 				<hr className="h-10 mx-2 border-x border-y border-gray-800" />
 				<div className="flex gap-1">
-					<span className="material-icons text-gray-800">grid_view</span>
-					<span className="material-icons text-gray-800">grid_view</span>
-					<span className="material-icons text-gray-800">grid_view</span>
+					<Widget cardType="card" />
+					<Widget cardType="descriptive" />
+					<Widget cardType="list" />
 				</div>
 			</header>
 			{!searchValue ? (

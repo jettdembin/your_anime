@@ -12,6 +12,7 @@ const useCardType = (): {
 
 	const handleCardType = (type: CardType): void => {
 		setCardType(type);
+		console.log(type, "type");
 	};
 
 	return { cardType, setCardType, handleCardType };
