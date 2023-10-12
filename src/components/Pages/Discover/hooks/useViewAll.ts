@@ -39,6 +39,8 @@ const useViewAll = (page: number, perPage: number) => {
 		query = GET_TOP_100_ANIME;
 	} else if (categoryValue?.toUpperCase() === "POPULAR_ANIME") {
 		query = GET_POPULAR_ANIME;
+	} else {
+		query = GET_TRENDING;
 	}
 	// debugger;
 

@@ -15,7 +15,7 @@ export const AnimeCardLayout = ({ children }) => {
 			<section
 				className={
 					cardType === "list"
-						? "grid grid-cols-2 gap-4"
+						? "grid grid-cols-1 gap-4"
 						: "grid grid-cols-4 gap-4"
 				}
 			>

@@ -2,7 +2,7 @@ import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
 
 const AnimeCardLong = ({ anime, index }) => {
 	return (
-		<li key={anime.id} className="flex items-center mb-4">
+		<li key={anime.id} className="flex items-center mb-4 w-full">
 			<span className="w-8 mr-4 font-bold text-xl" style={{ color: "#8ba0b2" }}>
 				#{index + 1}
 			</span>

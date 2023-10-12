@@ -17,7 +17,11 @@ interface AnimeCardProps {
 	isLastCard?: boolean;
 }
 
-export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
+export default function AnimeCard({
+	media,
+	isLastCard,
+	index,
+}: AnimeCardProps) {
 	const { cardType } = useCardTypeContext();
 	const [isCardHovered, setIsCardHovered] = useState(false);
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
@@ -64,7 +68,7 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 			onMouseEnter={() => setIsCardHovered(true)}
 			onMouseLeave={() => setIsCardHovered(false)}
 		>
-			{cardType === "list" ? <ListCard anime={media} /> : card}
+			{cardType === "list" ? <ListCard anime={media} index={index} /> : card}
 		</div>
 	);
 }

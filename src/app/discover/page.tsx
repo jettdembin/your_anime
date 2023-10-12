@@ -86,13 +86,18 @@ export default function Discover() {
 			{!searchValue ? (
 				<AnimeCardLayout>
 					{media.map((mediaItem, i) => (
-						<AnimeCard key={i} media={mediaItem} cardType={cardType} />
+						<AnimeCard
+							key={i}
+							media={mediaItem}
+							index={i}
+							cardType={cardType}
+						/>
 					))}
 				</AnimeCardLayout>
 			) : (
 				<AnimeCardLayout>
 					{searchData?.Page?.media?.map((media, i) => (
-						<AnimeCard key={i} media={media} cardType={cardType} />
+						<AnimeCard key={i} media={media} cardType={cardType} index={i} />
 					))}
 				</AnimeCardLayout>
 			)}

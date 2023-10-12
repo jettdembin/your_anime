@@ -330,7 +330,7 @@ export const useBrowseAnime = (
 
 export const GET_TOP_100_ANIME = gql`
 	query GetTop100Anime {
-		Page(page: 1, perPage: 50) {
+		Page(page: 1, perPage: 100) {
 			media(
 				sort: SCORE_DESC
 				format_in: [TV, TV_SHORT, MOVIE, OVA, ONA, SPECIAL]
