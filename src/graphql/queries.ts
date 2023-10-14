@@ -379,3 +379,94 @@ export const GET_TOP_100_ANIME = gql`
 		}
 	}
 `;
+
+const MEDIA_FIELDS = gql`
+	fragment MediaFields on Media {
+		id
+		title {
+			english
+			native
+		}
+		description
+		source
+		coverImage {
+			large
+			medium
+		}
+		trailer {
+			id
+			site
+			thumbnail
+		}
+		nextAiringEpisode {
+			timeUntilAiring
+			episode
+		}
+		startDate {
+			year
+			month
+			day
+		}
+		averageScore
+		studios(isMain: true) {
+			nodes {
+				name
+			}
+		}
+		episodes
+		genres
+		status
+		season
+		seasonYear
+	}
+`;
+export const useAnimeDetails = (mediaId) => {
+	const { error, loading, data } = useQuery(GET_ANIME_DETAILS, {
+		variables: {
+			id: mediaId,
+		},
+	});
+	return { error, loading, data };
+};
+
+export const GET_ANIME_DETAILS = gql`
+	query GetAnimeDetails($id: Int) {
+		Media(id: $id) {
+			id
+			title {
+				english
+				native
+			}
+			description
+			startDate {
+				year
+				month
+				day
+			}
+			episodes
+			genres
+			coverImage {
+				large
+			}
+			bannerImage
+			averageScore
+			studios(isMain: true) {
+				nodes {
+					name
+				}
+			}
+			trailer {
+				id
+				site
+				thumbnail
+			}
+			nextAiringEpisode {
+				timeUntilAiring
+				episode
+			}
+			status
+			season
+			seasonYear
+		}
+	}
+`;

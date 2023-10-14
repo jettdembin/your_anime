@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Media } from "@/src/types/anime";
 
@@ -18,6 +19,7 @@ interface AnimeCardProps {
 }
 
 export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
+	const router = useRouter();
 	const { cardType } = useCardTypeContext();
 	const [isCardHovered, setIsCardHovered] = useState(false);
 	const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
@@ -63,6 +65,10 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
 			className="relative flex"
 			onMouseEnter={() => setIsCardHovered(true)}
 			onMouseLeave={() => setIsCardHovered(false)}
+			onClick={() => {
+				router.push(`/anime-details/${media.title.english}`);
+				debugger;
+			}}
 		>
 			{cardType === "list" ? <ListCard anime={media} /> : card}
 		</div>

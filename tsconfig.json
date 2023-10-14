@@ -34,7 +34,8 @@
 		"src/pages/api/auth/[...nextauth].js",
 		"src/components/Layout/AnimeCardLayout.jsx",
 		"src/components/Elements/LoadingSection.jsx",
-		"src/components/Pages/Home/ui/ListType.jsx"
+		"src/components/Pages/Home/ui/ListType.jsx",
+		"src/app/anime-details/[id]"
 	],
 	"exclude": ["node_modules"]
 }
