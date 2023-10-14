@@ -16,7 +16,7 @@ const AnimeCardLong = ({ anime, index }) => {
 								alt={anime.title.english || "Anime Cover"}
 							/>
 						</td>
-						<td className="w-1/3 lg:w-1/2">
+						<td className="w-1/3 lg:w-1/2 pr-2 lg:pr-0">
 							<h3 className="font-semibold text-lg">{anime.title.english}</h3>
 							<p className="text-sm">{formatGenres(anime.genres)}</p>
 						</td>

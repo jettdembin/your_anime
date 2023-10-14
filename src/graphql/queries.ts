@@ -5,7 +5,7 @@ import { useQuery, QueryResult } from "@apollo/client";
 
 export const GET_POPULAR_ANIME = gql`
 	query GetPopularAnime($page: Int) {
-		Page(page: $page, perPage: 500) {
+		Page(page: $page, perPage: 100) {
 			media(sort: POPULARITY_DESC, isAdult: false) {
 				id
 				title {
@@ -16,6 +16,7 @@ export const GET_POPULAR_ANIME = gql`
 				source
 				coverImage {
 					large
+					medium
 				}
 				trailer {
 					id
@@ -60,7 +61,7 @@ export const usePopularAnime = (page: number = 1, perPage: number = 50) => {
 
 export const GET_TRENDING = gql`
 	query GetTrending($page: Int, $perPage: Int) {
-		Trending: Page(page: $page, perPage: $perPage) {
+		Page(page: $page, perPage: $perPage) {
 			media(
 				type: ANIME
 				sort: TRENDING_DESC
@@ -76,6 +77,7 @@ export const GET_TRENDING = gql`
 				source
 				coverImage {
 					large
+					medium
 				}
 				trailer {
 					id
@@ -183,6 +185,7 @@ export const SEARCH_ANIMES_UPCOMING = gql`
 				source
 				coverImage {
 					large
+					medium
 				}
 				trailer {
 					id
@@ -233,6 +236,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
 				source
 				coverImage {
 					large
+					medium
 				}
 				trailer {
 					id
