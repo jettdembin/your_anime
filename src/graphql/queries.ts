@@ -446,7 +446,9 @@ export const GET_ANIME_DETAILS = gql`
 			episodes
 			genres
 			coverImage {
+				medium
 				large
+				extraLarge
 			}
 			bannerImage
 			averageScore
