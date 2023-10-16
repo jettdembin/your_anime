@@ -1,25 +1,43 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+
 import { GET_ANIME_DETAILS, useAnimeDetails } from "@/src/graphql/queries";
 
 const AnimeDetails = ({ params }: { params: { id: string } }) => {
+	const animeDescriptionRef = useRef(null);
+
 	const { error, loading, data } = useAnimeDetails(params.id);
+	const anime = data?.Media;
+
+	useEffect(() => {
+		if (data && !!animeDescriptionRef?.current) {
+			animeDescriptionRef.current.innerHTML = anime.description;
+		}
+	}, [data?.Media, anime?.description, data]);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;
 
-	const anime = data.Media;
-
 	// Define the Hero component
 	const hero = (
 		<div className="header-wrap relative bg-slate-50">
-			<div className="banner bg-cover h-[400px] -mt-12">
-				<div className="absolute inset-0 shadow-inner" aria-hidden="true"></div>
-				<img
-					className="w-full h-full object-cover shadow-inner"
-					src={anime.bannerImage}
-					alt={anime.title.english}
-				/>
+			<div
+				className="banner w-full h-[400px] -mt-12 relative"
+				style={{
+					background: `url(${anime.bannerImage})`,
+					backgroundSize: "cover",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "50% 35%",
+				}}
+			>
+				<div
+					className="absolute inset-0 bg-opacity-50 bg-black shadow-inner"
+					style={{
+						background:
+							"linear-gradient(180deg,rgba(10, 10, 10, 0) 40%,rgba(10, 10, 10, 0.6))",
+					}}
+				></div>
 			</div>
 			<div className="header">
 				<div
@@ -27,9 +45,9 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 					style={{ gridTemplateColumns: "215px auto" }}
 				>
 					<div className="relative -mt-32">
-						<div className="static">
+						<div className="static shadow-lg">
 							<img
-								className="w-full object-cover rounded-sm shadow-xl"
+								className="w-full object-cover rounded-sm"
 								src={anime.coverImage.extraLarge}
 								alt={anime.title.english}
 							/>
@@ -47,9 +65,9 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 						</div>
 					</div>
 
-					<div className="pl-4 pt-6">
+					<div className="pl-4 pt-6 pb-4">
 						<h2 className="text-3xl mb-2">{anime.title.english}</h2>
-						<p className="text-gray-700">{anime.description}</p>
+						<p className="text-gray-700" ref={animeDescriptionRef}></p>
 					</div>
 				</div>
 			</div>
