@@ -70,9 +70,6 @@ export default function AnimeCard({
 			className="relative flex"
 			onMouseEnter={() => setIsCardHovered(true)}
 			onMouseLeave={() => setIsCardHovered(false)}
-			onClick={() => {
-				router.push(`/anime-details/${media.id}`);
-			}}
 		>
 			{cardType === "list" ? <ListCard anime={media} index={index} /> : card}
 		</div>

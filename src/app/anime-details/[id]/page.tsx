@@ -12,47 +12,163 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 
 	// Define the Hero component
 	const hero = (
-		<div className="flex flex-col bg-gray-100">
-			<img
-				className="w-full max-h-[1000px] h-96 object-cover rounded-md"
-				src={anime.bannerImage}
-				// src={anime.coverImage.extraLarge}
-				alt={anime.title.english}
-			/>
-			<div
-				className="grid relative p-8"
-				style={{ gridTemplateColumns: "2fr 3fr" }}
-			>
-				<div className="relative -top-2/4 translate-y-1/4 w-full max-w-fit">
-					<div className="flex flex-col space-y-4">
-						{/* <div className="relative -top-2/4 translate-y-1/4 max-h-[25rem] w-full overflow-hidden max-w-fit"> */}
-						<img
-							className="w-72 object-cover rounded-md"
-							src={anime.coverImage.extraLarge}
-							alt={anime.title.english}
-						/>
-
-						<div className="flex gap-2 relative top-0">
-							<button className="w-40 py-1 bg-blue-200">Add to List</button>
-							<button className="w-12 py-1 bg-red-400">♥</button>
+		<div className="header-wrap relative bg-slate-50">
+			<div className="banner bg-cover h-[400px] -mt-12">
+				<div className="absolute inset-0 shadow-inner" aria-hidden="true"></div>
+				<img
+					className="w-full h-full object-cover shadow-inner"
+					src={anime.bannerImage}
+					alt={anime.title.english}
+				/>
+			</div>
+			<div className="header">
+				<div
+					className="container grid gap-7 max-w-6xl px-7"
+					style={{ gridTemplateColumns: "215px auto" }}
+				>
+					<div className="relative -mt-32">
+						<div className="static">
+							<img
+								className="w-full object-cover rounded-sm shadow-xl"
+								src={anime.coverImage.extraLarge}
+								alt={anime.title.english}
+							/>
+						</div>
+						<div
+							className="grid my-5 gap-4"
+							style={{ gridTemplateColumns: "auto 35px" }}
+						>
+							<button className="py-2 bg-blue-200 rounded-sm">
+								Add to List
+							</button>
+							<button className="py-2 bg-red-400 rounded-sm text-white">
+								♥
+							</button>
 						</div>
 					</div>
-				</div>
 
-				<div>
-					<h2 className="text-3xl mb-2">{anime.title.english}</h2>
-					<p className="text-gray-700">{anime.description}</p>
+					<div className="pl-4 pt-6">
+						<h2 className="text-3xl mb-2">{anime.title.english}</h2>
+						<p className="text-gray-700">{anime.description}</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 
+	const animeRating = (
+		<div className="px-8 mb-4">
+			<div className="w-[225px] bg-white shadow-sm p-4">
+				<h6>⭐ Highest Rated All Time</h6>
+			</div>
+		</div>
+	);
+
+	const animePopularity = (
+		<div className="px-8 mb-4">
+			<div className="w-[225px] bg-white shadow-sm p-4">
+				<h6>💖 Most Popular All Time</h6>
+			</div>
+		</div>
+	);
+
+	const animeInfo = (
+		<div className="px-8">
+			<ul className="w-[225px] flex flex-col space-y-4 rounded-md bg-white shadow-sm p-4">
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+				<li>
+					<h6>Format</h6>
+					<p className="text-sm text-slate-700">Tv</p>
+				</li>
+			</ul>
+		</div>
+	);
+
 	return (
 		<div>
-			<header className="bg-gray-800 p-4 text-white">
-				<h1 className="text-2xl">{anime.title.english}</h1>
-			</header>
-			<main>{hero}</main>
+			<main>
+				<section>{hero}</section>
+				<section className="py-4">
+					{animeRating}
+					{animePopularity}
+					{animeInfo}
+				</section>
+			</main>
 		</div>
 	);
 };
