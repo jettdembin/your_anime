@@ -41,8 +41,8 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 			</div>
 			<div className="header">
 				<div
-					className="container grid gap-7 max-w-6xl px-7"
-					style={{ gridTemplateColumns: "215px auto" }}
+					className="container grid gap-7 max-w-6xl px-12"
+					style={{ gridTemplateColumns: "270px auto" }}
 				>
 					<div className="relative -mt-32">
 						<div className="static shadow-lg">
@@ -65,7 +65,7 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 						</div>
 					</div>
 
-					<div className="pl-4 pt-6 pb-4">
+					<div className="pt-6 pb-4">
 						<h2 className="text-3xl mb-2">{anime.title.english}</h2>
 						<p className="text-gray-700" ref={animeDescriptionRef}></p>
 					</div>
@@ -75,105 +75,112 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 	);
 
 	const animeRating = (
-		<div className="px-8 mb-4">
-			<div className="w-[225px] bg-white shadow-sm p-4">
-				<h6>⭐ Highest Rated All Time</h6>
+		<div className="mb-4">
+			<div className="bg-white shadow-sm p-4">
+				<h6>⭐#{anime.averageScore} Highest Rated All Time</h6>
 			</div>
 		</div>
 	);
 
 	const animePopularity = (
-		<div className="px-8 mb-4">
-			<div className="w-[225px] bg-white shadow-sm p-4">
-				<h6>💖 Most Popular All Time</h6>
+		<div className="mb-4">
+			<div className="flex items-center bg-white shadow-sm p-4">
+				<h6 className="">
+					💖 #{anime.popularity} <span>Most Popular All Time</span>
+				</h6>
 			</div>
 		</div>
 	);
 
 	const animeInfo = (
-		<div className="px-8">
-			<ul className="w-[225px] flex flex-col space-y-4 rounded-md bg-white shadow-sm p-4">
+		<div className="">
+			<ul className="flex flex-col space-y-4 rounded-md bg-white shadow-sm p-4">
 				<li>
 					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<p className="text-sm text-slate-700">{anime.format}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Episode Duration</h6>
+					<p className="text-sm text-slate-700">{anime.duration}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Status</h6>
+					<p className="text-sm text-slate-700">{anime.status}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Start Date</h6>
+					<p className="text-sm text-slate-700">{anime.startDate.year}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Season</h6>
+					<p className="text-sm text-slate-700">{anime.season}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Average Score</h6>
+					<p className="text-sm text-slate-700">{anime.averageScore}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Mean Score</h6>
+					<p className="text-sm text-slate-700">{anime.meanScore}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Popularity</h6>
+					<p className="text-sm text-slate-700">{anime.popularity}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Favorites</h6>
+					<p className="text-sm text-slate-700">{anime.favourites}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Studios</h6>
+					<p className="text-sm text-slate-700">{anime.studios?.nodes?.name}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Producers</h6>
+					<p className="text-sm text-slate-700">{anime.format}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Source</h6>
+					<p className="text-sm text-slate-700">{anime.source}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Hashtag</h6>
+					<p className="text-sm text-slate-700">{anime.hashtag}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Genres</h6>
+					<p className="text-sm text-slate-700">{anime.genres.join(", ")}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Romaji</h6>
+					<p className="text-sm text-slate-700">{anime.title.romaji}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>English</h6>
+					<p className="text-sm text-slate-700">{anime.title.english}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Native</h6>
+					<p className="text-sm text-slate-700">{anime.title.native}</p>
 				</li>
 				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
-				</li>
-				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
-				</li>
-				<li>
-					<h6>Format</h6>
-					<p className="text-sm text-slate-700">Tv</p>
+					<h6>Synonyms</h6>
+					<p className="text-sm text-slate-700">{anime.synonyms}</p>
 				</li>
 			</ul>
+		</div>
+	);
+
+	const tags = (
+		<div className="py-6">
+			<h6>Tags</h6>
+			<div className="relative space-y-4 pt-4">
+				{anime.tags.map((tag) => (
+					<div key={tag.name} className="px-3 py-2 bg-white rounded-sm">
+						{tag.name}
+					</div>
+				))}
+			</div>
 		</div>
 	);
 
@@ -181,10 +188,19 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 		<div>
 			<main>
 				<section>{hero}</section>
-				<section className="py-4">
-					{animeRating}
-					{animePopularity}
-					{animeInfo}
+				<section
+					className="px-12 grid gap-10"
+					style={{ gridTemplateColumns: "270px auto" }}
+				>
+					<section>
+						{animeRating}
+						{animePopularity}
+						{animeInfo}
+						{tags}
+					</section>
+					<section>
+						<div>stuff</div>
+					</section>
 				</section>
 			</main>
 		</div>

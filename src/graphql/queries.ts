@@ -433,30 +433,43 @@ export const GET_ANIME_DETAILS = gql`
 	query GetAnimeDetails($id: Int) {
 		Media(id: $id) {
 			id
+			format
 			title {
+				romaji
 				english
 				native
+				userPreferred
 			}
+			synonyms
 			description
 			startDate {
 				year
 				month
 				day
 			}
+			season
+			seasonYear
 			episodes
+			duration
+			status
+			averageScore
+			meanScore
+			popularity
+			favourites
 			genres
+			source
+			hashtag
+			studios(isMain: true) {
+				nodes {
+					name
+				}
+			}
 			coverImage {
 				medium
 				large
 				extraLarge
 			}
 			bannerImage
-			averageScore
-			studios(isMain: true) {
-				nodes {
-					name
-				}
-			}
 			trailer {
 				id
 				site
@@ -466,9 +479,46 @@ export const GET_ANIME_DETAILS = gql`
 				timeUntilAiring
 				episode
 			}
-			status
-			season
-			seasonYear
+			externalLinks {
+				url
+				site
+			}
+			tags {
+				name
+				rank
+			}
+			# staff {
+			# 	nodes {
+			# 		name
+			# 		role
+			# 	}
+			# }
+			# characters {
+			# 	nodes {
+			# 		name {
+			# 			full
+			# 		}
+			# 		voiceActor(language: JAPANESE) {
+			# 			name {
+			# 				full
+			# 			}
+			# 		}
+			# 	}
+			# }
+			relations {
+				nodes {
+					title {
+						userPreferred
+					}
+					type
+				}
+			}
+			# siteStatistics {
+			# 	statusDistribution {
+			# 		status
+			# 		amount
+			# 	}
+			# }
 		}
 	}
 `;
