@@ -9,7 +9,8 @@ export default async function handler(
 	if (req.method === "GET") {
 		try {
 			const data = await prisma.user.findMany();
-			res.status(200).json(data);
+			const likes = await prisma.like.findMany();
+			res.status(200).json({...likes, ...data});
 		} catch (err) {
 			res.status(500).json(err);
 		}
