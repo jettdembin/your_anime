@@ -7,33 +7,43 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      // Assuming you receive the GraphQL ID of the anime in the request body.
       const { animeId, animeTitle } = req.body;
-
-      // Check if the user is authenticated and get the user's ID.
       const userId = "1"; // Replace with actual user authentication.
 
-      // Create a new like using Prisma.
-      const newLike = await prisma.like.create({
-        data: {
-          title: animeTitle, // Set the appropriate title.
-          postId: animeId, // Assuming postId represents the anime ID.
-          likeId: userId, // Assuming likeId represents the user who liked.
+      // Check if a like already exists for the given animeId and userId
+      const existingLike = await prisma.like.findFirst({
+        where: {
+          AND: [
+            { postId: animeId },
+            { likeId: userId },
+          ],
         },
       });
 
-      // Update the User record to include the new like.
-      await prisma.user.update({
-        where: { id: userId },
-        data: {
-          likes: {
-            connect: { id: newLike.id }, // Connect the new like to the user's likes array.
+      // If a like doesn't exist, create one
+      if (!existingLike) {
+        const newLike = await prisma.like.create({
+          data: {
+            title: animeTitle,
+            postId: animeId,
+            likeId: userId,
           },
-        },
-      });
+        });
 
-      /// Respond with the newly created like.
-      res.status(201).json(newLike);
+        await prisma.user.update({
+          where: { id: userId },
+          data: {
+            likes: {
+              connect: { id: newLike.id },
+            },
+          },
+        });
+
+        res.status(201).json(newLike);
+      } else {
+        res.status(409).json({ message: "Like already exists" });
+      }
+
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
