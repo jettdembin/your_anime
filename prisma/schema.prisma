@@ -17,9 +17,10 @@ model User {
   likes         Like[]
   posts         Post[]
 }
+
 model Test {
-  id            String    @id @default(cuid())
-  name          String?
+  id   String  @id @default(cuid())
+  name String?
 }
 
 model Post {

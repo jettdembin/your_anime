@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import axios from "axios";
 
 import { GET_ANIME_DETAILS, useAnimeDetails } from "@/src/graphql/queries";
 
@@ -10,13 +11,29 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
   const { error, loading, data } = useAnimeDetails(params.id);
   const anime = data?.Media;
 
-  const handleAddToLikes = () => {
-    const res = await fetch(`${process.env.BASE_URL}/api/getPosts`);
+  const handleAddToLikes = async () => {
+    try {
+      // Assuming you have the anime's GraphQL ID available as animeId.
+      const likeData = {
+        animeId: params.id, // Pass the GraphQL ID of the anime.
+        animeTitle: anime.title.english,
+      };
 
-    if (!res.ok) {
-      console.log(res);
+      const res = await axios.post(
+        `/api/postLike`,
+        likeData
+      );
+
+      if (!res.ok) {
+        console.log(res);
+      } else {
+        // Handle successful like addition, e.g., update UI or show a message.
+        // You can also consider updating the UI optimistically here.
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that may occur during the request.
     }
-    return res.json();
   };
 
   useEffect(() => {
@@ -65,13 +82,13 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
               className="grid my-5 gap-4"
               style={{ gridTemplateColumns: "auto 35px" }}
             >
-              <button
-                className="py-2 bg-blue-200 rounded-sm"
-                onClick={handleAddToLikes}
-              >
+              <button className="py-2 bg-blue-200 rounded-sm">
                 Add to List
               </button>
-              <button className="py-2 bg-red-400 rounded-sm text-white">
+              <button
+                className="py-2 bg-red-400 rounded-sm text-white"
+                onClick={handleAddToLikes}
+              >
                 ♥
               </button>
             </div>
