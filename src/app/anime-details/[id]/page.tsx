@@ -16,25 +16,39 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
  
 
   const handleAddToLikes = async () => {
-    try {
-      // Assuming you have the anime's GraphQL ID available as animeId.
-      const likeData = {
-        animeId: params.id, // Pass the GraphQL ID of the anime.
-        animeTitle: anime.title.english,
-      };
-
-      toast.promise(
-        axios.post(`/api/postLike`, likeData), // Note: Removed "await" here
-        {
-          pending: 'Adding your like...',
-          success: 'Like added successfully!',
-          error: 'Failed to add like'
+    // Assuming you have the anime's GraphQL ID available as animeId.
+    const likeData = {
+      animeId: params.id, // Pass the GraphQL ID of the anime.
+      animeTitle: anime.title.english,
+    };
+    // Show a pending toast first.
+    const toastId = toast("Adding your like...", {
+      autoClose: false,
+    });
+  
+    axios
+      .post("/api/postLike", likeData)
+      .then((response) => {
+        // Close the pending toast.
+        toast.dismiss(toastId);
+        
+        // Show success toast.
+        toast.success("Like added successfully!");
+      })
+      .catch((error) => {
+        // Close the pending toast.
+        toast.dismiss(toastId);
+        
+        let errorMessage = "Failed to add like";
+        
+        // If the API returned a custom error message, use it.
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
         }
-      );
-    } catch (error) {
-      console.error(error);
-      // Handle any errors that may occur during the request.
-    }
+        
+        // Show error toast with either default or custom message.
+        toast.error(errorMessage);
+      });
   };
 
   useEffect(() => {
