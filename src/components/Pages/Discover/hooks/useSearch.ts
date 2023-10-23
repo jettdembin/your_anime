@@ -10,8 +10,12 @@ import { GET_TRENDING } from "@/src/graphql/queries";
 
 const useSearch = (userSearch) => {
 	const router = useRouter();
-	// Create a new URLSearchParams instance from current query
-	const params = new URLSearchParams(window?.location?.search) || {};
+	const [params, setParams] = useState(null);
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setParams(new URLSearchParams(window.location.search));
+		}
+	}, []);
 
 	const { searchValue, categoryValue, query } = userSearch || {};
 

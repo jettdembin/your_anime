@@ -15,7 +15,6 @@ export default function TopAnimeList() {
 	if (error) {
 		return <p>Error: {error.message}</p>;
 	}
-
 	return (
 		<div className="max-w-7xl mx-auto">
 			<ul>
