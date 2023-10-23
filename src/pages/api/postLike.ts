@@ -39,7 +39,7 @@ export default async function handler(
           },
         });
 
-        res.status(201).json(newLike);
+        res.status(200).json(newLike);
       } else {
         res.status(409).json({ message: "Like already exists" });
       }

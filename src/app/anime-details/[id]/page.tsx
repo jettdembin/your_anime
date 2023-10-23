@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 import { GET_ANIME_DETAILS, useAnimeDetails } from "@/src/graphql/queries";
 
@@ -11,6 +13,8 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
   const { error, loading, data } = useAnimeDetails(params.id);
   const anime = data?.Media;
 
+ 
+
   const handleAddToLikes = async () => {
     try {
       // Assuming you have the anime's GraphQL ID available as animeId.
@@ -19,17 +23,14 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
         animeTitle: anime.title.english,
       };
 
-      const res = await axios.post(
-        `/api/postLike`,
-        likeData
+      toast.promise(
+        axios.post(`/api/postLike`, likeData), // Note: Removed "await" here
+        {
+          pending: 'Adding your like...',
+          success: 'Like added successfully!',
+          error: 'Failed to add like'
+        }
       );
-
-      if (!res.ok) {
-        console.log(res);
-      } else {
-        // Handle successful like addition, e.g., update UI or show a message.
-        // You can also consider updating the UI optimistically here.
-      }
     } catch (error) {
       console.error(error);
       // Handle any errors that may occur during the request.
@@ -231,6 +232,19 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
             <div>stuff</div>
           </section>
         </section>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+       
       </main>
     </div>
   );

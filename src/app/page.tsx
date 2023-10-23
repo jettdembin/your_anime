@@ -29,6 +29,7 @@ export default async function Home() {
 				<ContentLayout title="TOP 100 ANIME" category="TOP_100">
 					<TopAnimeList />
 				</ContentLayout>
+				
 			</main>
 		</div>
 	);
