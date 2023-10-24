@@ -31,7 +31,7 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 				toast.dismiss(toastId);
 
 				// Show success toast.
-				toast.success("Like added successfully!");
+				toast.success("Added to your likes 💘");
 			})
 			.catch((error) => {
 				// Close the pending toast.
@@ -268,7 +268,7 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 		</div>
 	);
 
-	const card = (relation) => (
+	const relationCard = (relation) => (
 		<div className="grid bg-white" style={{ gridTemplateColumns: "20% auto" }}>
 			<div>
 				<img
@@ -293,7 +293,49 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 			<div className="flex flex-col space-y-4">
 				{anime?.relations?.nodes.map((relation, index) => {
 					console.log(relation);
-					return <div key={index}>{card(relation)}</div>;
+					return <div key={index}>{relationCard(relation)}</div>;
+				})}
+			</div>
+		</section>
+	);
+
+	const characterCard = (character) => (
+		<div
+			className="grid bg-white"
+			style={{ gridTemplateColumns: "20% auto 20%" }}
+		>
+			<div>
+				<img
+					className="w-full object-cover rounded-sm"
+					src={character.image.large}
+					alt={character.image.large}
+				/>
+			</div>
+
+			<div className="p-4 flex flex-col">
+				<h6>Source</h6>
+				<p className="mt-1">{character.name.full}</p>
+				<p className="mt-auto">
+					{character.name.full} - {character.name.full}
+				</p>
+			</div>
+			<div>
+				<img
+					className="w-full object-cover rounded-sm"
+					src={anime.coverImage.extraLarge}
+					alt={anime.title.english}
+				/>
+			</div>
+		</div>
+	);
+
+	const characters = (
+		<section>
+			<h3 className="text-base mb-2">Characters</h3>
+			<div className="flex flex-col space-y-4">
+				{anime?.characters?.nodes.map((character, index) => {
+					console.log(character);
+					return <div key={index}>{characterCard(character)}</div>;
 				})}
 			</div>
 		</section>
@@ -314,7 +356,10 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 							{animeInfo}
 							{tags}
 						</section>
-						<section>{relations}</section>
+						<section>
+							{relations}
+							{characters}
+						</section>
 					</section>
 				</div>
 				<ToastContainer

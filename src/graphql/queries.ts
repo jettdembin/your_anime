@@ -515,6 +515,21 @@ export const GET_ANIME_DETAILS = gql`
 					status
 				}
 			}
+			characters {
+				nodes {
+					name {
+						full
+					}
+					# voiceActor(language: JAPANESE) {
+					# 	name {
+					# 		full
+					# 	}
+					# }
+					image {
+						large
+					}
+				}
+			}
 			# siteStatistics {
 			# 	statusDistribution {
 			# 		status
