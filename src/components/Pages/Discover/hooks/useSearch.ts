@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-import { useParams, useSearchParams } from "next/navigation";
-
 import { useAnilistAPI } from "@/src/hooks/useAnilistAPI";
 import { useRouter } from "next/navigation";
 import { GET_TRENDING } from "@/src/graphql/queries";

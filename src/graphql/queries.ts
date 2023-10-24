@@ -508,9 +508,11 @@ export const GET_ANIME_DETAILS = gql`
 			relations {
 				nodes {
 					title {
+						english
 						userPreferred
 					}
 					type
+					status
 				}
 			}
 			# siteStatistics {
