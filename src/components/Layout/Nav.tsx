@@ -12,6 +12,7 @@ import {
 	auth,
 	currentUser,
 } from "@clerk/nextjs";
+
 import { useRouter } from "next/navigation";
 
 import { SignUp } from "@clerk/clerk-react";
@@ -19,6 +20,7 @@ import { SignUp } from "@clerk/clerk-react";
 // import Login from "../Elements/Login";
 
 import useClickOutside from "@/src/hooks/useClickOutside";
+import Link from "next/link";
 
 export default async function Nav() {
 	const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -66,6 +68,8 @@ export default async function Nav() {
 
 	const router = useRouter();
 
+	const { isLoaded, userId, sessionId, getToken } = useAuth();
+
 	return (
 		<>
 			<nav
@@ -93,36 +97,25 @@ export default async function Nav() {
 							<SignedOut>
 								<li
 									className="my-auto font-medium cursor-pointer"
-									onClick={() => {
-										router.push(`/sign-in`, undefined, {
-											shallow: true,
-										});
-									}}
+
 									// onClick={() => {
 									// 	setIsLoggingIn(true);
 									// }}
 								>
-									Log In
+									<Link href="/sign-in">Log In</Link>
 								</li>
 								<li
 									className="my-auto font-medium cursor-pointer"
-									onClick={() => {
-										setIsSigningUp(true);
-									}}
+									// onClick={() => {
+									// 	setIsSigningUp(true);
+									// }}
 								>
-									Sign up
+									<Link href={`/dashboard/${userId}`}> Sign up</Link>
 								</li>
 							</SignedOut>
 							<SignedIn>
-								<li
-									className="my-auto font-medium cursor-pointer"
-									onClick={() => {
-										router.push(`/dashboard/${userId}`, undefined, {
-											shallow: true,
-										});
-									}}
-								>
-									Dashboard
+								<li className="my-auto font-medium cursor-pointer">
+									<Link href={`/dashboard/${userId}`}>Dashboard</Link>
 								</li>
 								<li>
 									<UserButton />
@@ -132,9 +125,8 @@ export default async function Nav() {
 					</ul>
 				</div>
 			</nav>
-			{isLoggingIn ? (
+			{/* {isLoggingIn ? (
 				<div className="overflow-hidden">
-					{console.log("Rendering SignIn component")}
 					<div className="fixed w-screen h-screen top-0 left-0 bg-gray-600 z-10 opacity-75"></div>
 					<div className="fixed w-screen h-screen z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
 						<div ref={logInFormRef}>
@@ -152,7 +144,7 @@ export default async function Nav() {
 						</div>
 					</div>
 				</div>
-			) : null}
+			) : null} */}
 		</>
 	);
 }

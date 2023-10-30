@@ -5,9 +5,15 @@ import { useRef, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-import { GET_ANIME_DETAILS, useAnimeDetails } from "@/src/graphql/queries";
+import { useAnimeDetails } from "@/src/graphql/queries";
+import { useAuthContext } from "@/src/context/AuthContext";
 
-const AnimeDetails = ({ params }: { params: { id: string } }) => {
+const AnimeDetails = ({
+	params,
+}: {
+	params: { id: string; userId: string };
+}) => {
+	const { auth } = useAuthContext();
 	const animeDescriptionRef = useRef(null);
 
 	const { error, loading, data } = useAnimeDetails(params.id);
@@ -18,6 +24,7 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 		const likeData = {
 			animeId: params.id, // Pass the GraphQL ID of the anime.
 			animeTitle: anime.title.english,
+			userId: auth?.userId,
 		};
 		// Show a pending toast first.
 		const toastId = toast("Adding your like...", {
@@ -311,7 +318,6 @@ const AnimeDetails = ({ params }: { params: { id: string } }) => {
 					alt={character.image.large}
 				/>
 			</div>
-
 			<div className="p-4 flex flex-col">
 				<h6>Source</h6>
 				<p className="mt-1">{character.name.full}</p>

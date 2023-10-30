@@ -7,13 +7,12 @@ export default async function handler(
 ) {
 	if (req.method === "POST") {
 		try {
-			const { animeId, animeTitle, userId = "1" } = req.body;
-			// const userId = "1"; // Replace with actual user authentication.
+			const { animeId, animeTitle, userId } = req.body;
 
 			// Check if a like already exists for the given animeId and userId
 			const existingLike = await prisma.like.findFirst({
 				where: {
-					AND: [{ postId: animeId }, { likeId: userId }],
+					AND: [{ animeId: animeId }, { likeId: userId }],
 				},
 			});
 
@@ -22,7 +21,7 @@ export default async function handler(
 				const newLike = await prisma.like.create({
 					data: {
 						title: animeTitle,
-						postId: animeId,
+						animeId: animeId,
 						likeId: userId,
 					},
 				});
@@ -31,7 +30,7 @@ export default async function handler(
 					where: { id: userId },
 					data: {
 						likes: {
-							connect: { id: newLike.id },
+							connect: { animeId: newLike.animeId },
 						},
 					},
 				});

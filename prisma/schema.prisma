@@ -13,41 +13,13 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  comments      Comment[]
   likes         Like[]
-  posts         Post[]
-}
-
-model Test {
-  id   String  @id @default(cuid())
-  name String?
-}
-
-model Post {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @default(now())
-  title     String
-  published Boolean   @default(false)
-  userId    String
-  comments  Comment[]
-  user      User      @relation(fields: [userId], references: [id])
-}
-
-model Comment {
-  id        String   @id @default(cuid())
-  title     String
-  postId    String
-  createdAt DateTime @default(now())
-  commentId String
-  user      User     @relation(fields: [commentId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model Like {
   id        String   @id @default(cuid())
   title     String
-  postId    String
+  animeId   String
   likeId    String
   createdAt DateTime @default(now())
   user      User     @relation(fields: [likeId], references: [id])

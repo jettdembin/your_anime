@@ -1,6 +1,8 @@
 import axios from "axios";
 import { auth, currentUser } from "@clerk/nextjs";
 
+import UserData from "@/src/components/Pages/Dashboard/UserData";
+
 async function getAccountData(params: {}) {
 	try {
 		const res = await axios.get(`${process.env.BASE_URL}/api/getAccountData`, {
@@ -21,6 +23,7 @@ export default async function Dashboard() {
 	if (userId) {
 		// Get the User object when you need access to the user's information
 		const user = await currentUser();
+		console.log(user);
 
 		// Query DB for user specific information or display assets only to logged in users
 
@@ -29,18 +32,20 @@ export default async function Dashboard() {
 		const { likes } = userData;
 		return (
 			<div>
-				<div key={userData.id}>
-					<h1>{userData.name}</h1>
-					{/* Render other user details */}
-				</div>
-
-				{likes?.map((like) => (
-					<div key={like.id}>
-						<p>Like Title: {like.title}</p>
-						{/* Render other like details */}
-					</div>
-				))}
+				<UserData data={userData} />
 			</div>
 		);
 	}
 }
+
+// <div key={userData.id}>
+// 	<h1>{userData.name}</h1>
+// 	{/* Render other user details */}
+// </div>
+
+// {likes?.map((like) => (
+// 	<div key={like.id}>
+// 		<p>Like Title: {like.title}</p>
+// 		{/* Render other like details */}
+// 	</div>
+// ))}
