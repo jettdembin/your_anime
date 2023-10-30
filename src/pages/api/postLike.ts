@@ -30,7 +30,7 @@ export default async function handler(
 					where: { id: userId },
 					data: {
 						likes: {
-							connect: { animeId: newLike.animeId },
+							connect: [{ animeId: newLike.animeId }],
 						},
 					},
 				});

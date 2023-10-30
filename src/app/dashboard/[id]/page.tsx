@@ -23,7 +23,7 @@ export default async function Dashboard() {
 	if (userId) {
 		// Get the User object when you need access to the user's information
 		const user = await currentUser();
-		console.log(user);
+		console.log(user, "THIS IS THE USER DATA");
 
 		// Query DB for user specific information or display assets only to logged in users
 

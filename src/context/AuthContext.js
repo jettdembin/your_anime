@@ -7,12 +7,16 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
 	const [auth, setAuth] = useState(null);
 
-	const value = {
-		auth,
-		setAuth,
-	};
-
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider
+			value={{
+				auth,
+				setAuth,
+			}}
+		>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 // Create a hook to use the auth context

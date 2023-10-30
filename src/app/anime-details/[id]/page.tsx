@@ -14,6 +14,8 @@ const AnimeDetails = ({
 	params: { id: string; userId: string };
 }) => {
 	const { auth } = useAuthContext();
+
+	console.log(auth, "AUTHH");
 	const animeDescriptionRef = useRef(null);
 
 	const { error, loading, data } = useAnimeDetails(params.id);
@@ -24,8 +26,9 @@ const AnimeDetails = ({
 		const likeData = {
 			animeId: params.id, // Pass the GraphQL ID of the anime.
 			animeTitle: anime.title.english,
-			userId: auth?.userId,
+			userId: auth?.id,
 		};
+
 		// Show a pending toast first.
 		const toastId = toast("Adding your like...", {
 			autoClose: false,
