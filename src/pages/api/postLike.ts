@@ -12,38 +12,34 @@ export default async function handler(
 			// Check if a like already exists for the given animeId and userId
 			const existingLike = await prisma.like.findFirst({
 				where: {
-					AND: [{ animeId: animeId }, { likeId: userId }],
+					AND: [{ animeId: animeId }, { user: { id: userId } }],
 				},
 			});
 
-			// If a like doesn't exist, create one
+			// If a like doesn't exist, create one and connect it to the user
 			if (!existingLike) {
 				const newLike = await prisma.like.create({
 					data: {
 						title: animeTitle,
 						animeId: animeId,
-						likeId: userId,
+						userId: userId,
 					},
 				});
 
-				await prisma.user.update({
-					where: { id: userId },
-					data: {
-						likes: {
-							connect: [{ animeId: newLike.animeId }],
-						},
-					},
-				});
-
+				// The relationship between the new Like and the User is established
+				// in the `create` operation above, so no need for a separate `update` operation.
 				res.status(200).json(newLike);
 			} else {
+				// If the like already exists, send a conflict response
 				res.status(409).json({ message: "Already in your likes 😁" });
 			}
 		} catch (err) {
+			// If there's an error, log it and send a server error response
 			console.error(err);
 			res.status(500).json({ message: "Internal Server Error" });
 		}
 	} else {
+		// If the HTTP method is not POST, send a method not allowed response
 		res.status(405).json({ message: "Method not allowed" });
 	}
 }

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -19,8 +19,8 @@ model User {
 model Like {
   id        String   @id @default(cuid())
   title     String
-  animeId   String
-  likeId    String
+  animeId   String   @unique
+  userId    String   @unique
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [likeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
