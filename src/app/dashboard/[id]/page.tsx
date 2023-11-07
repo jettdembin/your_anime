@@ -1,76 +1,66 @@
 import axios from "axios";
 import { auth, currentUser } from "@clerk/nextjs";
-
 import UserData from "@/src/components/Pages/Dashboard/UserData";
 
-async function getAccountData(params: {}) {
+// Function to either fetch user data or create a new user if they don't exist
+async function getUserDataOrCreateUser(userId) {
+	console.log(userId, "USERID");
 	try {
-		const res = await axios.get(`${process.env.BASE_URL}/api/getAccountData`, {
-			params: params,
-			headers: { "Cache-Control": "no-store" },
-		});
-		return res.data;
+		// Attempt to get the user's account data
+		const accountDataResponse = await axios.get(
+			`${process.env.BASE_URL}/api/getAccountData`,
+			{
+				params: { userId },
+			}
+		);
+
+		// If successful, return the account data
+		return accountDataResponse.data;
 	} catch (error) {
-		console.error("Error fetching account data: ", error);
-		throw error;
+		// If user does not exist, create the user
+		if (error.response && error.response.status === 404) {
+			// Here you would get the actual name and email from your authentication context or user input
+			const user = await currentUser(); // Assumes currentUser() is synchronous or that you've handled the promise correctly elsewhere
+
+			const userData = {
+				userId,
+				name: `${user.firstName} ${user.lastName}`, // Use actual names from your user context
+				email: user.primaryEmailAddress?.emailAddress, // Use actual email from your user context
+			};
+
+			// Create the user
+			const createUserResponse = await axios.post(
+				`${process.env.BASE_URL}/api/createUser`,
+				userData
+			);
+			return createUserResponse.data;
+		} else {
+			// Handle other errors
+			throw error;
+		}
 	}
 }
 
 export default async function Dashboard() {
-	// Get the userId from auth() -- if null, the user is not logged in
 	const { userId } = auth();
 
 	if (userId) {
-		// Get the User object when you need access to the user's information
-		const user = await currentUser();
-		const { firstName, lastName, id, primaryEmailAddressId } = user;
-		console.log(user, "USER");
-
-		const createUser = async () => {
-			try {
-				const response = await axios.post(
-					`${process.env.BASE_URL}/api/createUser`,
-					{
-						userId: id,
-						name: firstName + " " + lastName,
-						email: primaryEmailAddressId,
-					}
-				);
-				return response.data;
-				// Perform any actions on successful user creation, like updating context or state
-			} catch (error) {
-				console.error("Error creating user:", error);
-			}
-		};
-
-		const userData = await createUser();
-
-		return (
-			<div>
-				<UserData data={userData} />
-			</div>
-		);
-		// Query DB for user specific information or display assets only to logged in users
-		// const data = await getAccountData({ userId });
-		// const { userData } = data;
-		// const { likes } = userData;
-		// return (
-		// 	<div>
-		// 		<UserData data={userData} />
-
-		// 	</div>
-		// );
+		try {
+			// Try to get or create user data
+			const userData = await getUserDataOrCreateUser(userId);
+			return (
+				<div>
+					<UserData data={userData} />
+				</div>
+			);
+		} catch (error) {
+			console.error("Error handling user data:", error);
+			// Handle the error or display an error message
+		}
+	} else {
+		// If there is no userId, handle accordingly, maybe redirect to login page
 	}
+
+	// Render nothing or a loading indicator until the user data is fetched/created
+	return <div>Loading...</div>;
 }
-
-// <div key={userData.id}>
-// 	<h1>{userData.name}</h1>
-// 	{/* Render other user details */}
-// </div>
-
-// {likes?.map((like) => (
-// 	<div key={like.id}>
-// 		<p>Like Title: {like.title}</p>
-// 		{/* Render other like details */}
-// 	</div>
-// ))}

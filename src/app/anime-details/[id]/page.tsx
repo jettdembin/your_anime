@@ -28,6 +28,7 @@ const AnimeDetails = ({
 			animeTitle: anime.title.english,
 			userId: auth?.id,
 		};
+		debugger;
 
 		// Show a pending toast first.
 		const toastId = toast("Adding your like...", {

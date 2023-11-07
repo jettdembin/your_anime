@@ -9,7 +9,7 @@ const UserData = ({ data }) => {
 	const { auth, setAuth } = useAuthContext();
 
 	useEffect(() => {
-		setAuth(data);
+		setAuth(data.userData);
 		debugger;
 	}, [data, setAuth]);
 
