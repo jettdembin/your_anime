@@ -11,6 +11,7 @@ async function getUserDataOrCreateUser(userId) {
 			`${process.env.BASE_URL}/api/getAccountData`,
 			{
 				params: { userId },
+				headers: { "Cache-Control": "no-store" },
 			}
 		);
 

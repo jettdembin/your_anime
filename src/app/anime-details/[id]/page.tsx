@@ -15,7 +15,6 @@ const AnimeDetails = ({
 }) => {
 	const { auth } = useAuthContext();
 
-	console.log(auth, "AUTHH");
 	const animeDescriptionRef = useRef(null);
 
 	const { error, loading, data } = useAnimeDetails(params.id);

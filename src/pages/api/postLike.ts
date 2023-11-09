@@ -8,6 +8,7 @@ export default async function handler(
 	if (req.method === "POST") {
 		try {
 			const { animeId, animeTitle, userId } = req.body;
+			console.log(userId, "user IDD");
 
 			// Check if a like already exists for the given animeId and userId
 			const existingLike = await prisma.like.findFirst({
