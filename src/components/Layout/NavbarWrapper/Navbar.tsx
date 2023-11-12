@@ -2,28 +2,15 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
-import {
-	SignedOut,
-	SignedIn,
-	useAuth,
-	SignIn,
-	UserButton,
-	SignInButton,
-	auth,
-	currentUser,
-} from "@clerk/nextjs";
+import { SignedOut, SignedIn, useAuth, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 
-import { SignUp } from "@clerk/clerk-react";
-
-// import Login from "../Elements/Login";
-
+import { useAuthContext } from "@/src/context/AuthContext";
 import useClickOutside from "@/src/hooks/useClickOutside";
-import Link from "next/link";
 
-export default async function Nav() {
-	const [lastScrollTop, setLastScrollTop] = useState(0);
+export default async function Navbar({ userData }) {
 	const [navClass, setNavClass] = useState(
 		"transform translate-y-0 transition-transform duration-300"
 	);
@@ -42,33 +29,32 @@ export default async function Nav() {
 	useClickOutside(signUpFormRef, toggleSignUpForm);
 	useClickOutside(logInFormRef, toggleLogInForm);
 
-	//scroll animation
+	const lastScrollTopRef = useRef(0);
+
 	useEffect(() => {
 		function handleScroll() {
 			let st = window.pageYOffset || document.documentElement.scrollTop;
-			if (st > lastScrollTop) {
-				// downscroll code
+			if (st > lastScrollTopRef.current) {
 				setNavClass(
 					"transform -translate-y-full transition-transform duration-300"
 				);
 			} else {
-				// upscroll code
 				setNavClass(
 					"transform translate-y-0 transition-transform duration-300"
 				);
 			}
-			setLastScrollTop(st <= 0 ? 0 : st);
+			lastScrollTopRef.current = st <= 0 ? 0 : st;
 		}
 
 		window.addEventListener("scroll", handleScroll);
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
-	}, [lastScrollTop]);
+	}, []); // Removed lastScrollTop from dependencies
 
 	const router = useRouter();
 
-	const { isLoaded, userId, sessionId, getToken } = useAuth();
+	const { userId } = useAuth();
 
 	return (
 		<>
@@ -110,7 +96,7 @@ export default async function Nav() {
 									// 	setIsSigningUp(true);
 									// }}
 								>
-									<Link href={`/dashboard/${userId}`}> Sign up</Link>
+									<Link href={`/dashboard/${userId}`}>Sign up</Link>
 								</li>
 							</SignedOut>
 							<SignedIn>

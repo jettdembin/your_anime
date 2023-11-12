@@ -2,6 +2,10 @@
 
 import { useRef, useEffect } from "react";
 
+import { SignedOut, SignedIn, useAuth, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -14,6 +18,9 @@ const AnimeDetails = ({
 	params: { id: string; userId: string };
 }) => {
 	const { auth } = useAuthContext();
+	const router = useRouter();
+
+	const { userId } = useAuth();
 
 	const animeDescriptionRef = useRef(null);
 
