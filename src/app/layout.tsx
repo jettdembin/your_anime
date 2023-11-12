@@ -4,7 +4,7 @@ import Providers from "../util/providers";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../components/Layout/Footer";
-import Navbar from "../components/Layout/NavbarWrapper/Navbar";
+import NavWrapper from "../components/Layout/NavbarWrapper/Navbar";
 import { ToastContainer } from "react-toastify";
 // In your main file, likely App.js or index.js
 import "react-toastify/dist/ReactToastify.css";
@@ -37,7 +37,7 @@ export default function RootLayout({
 				<body className={inter.className}>
 					<div className="flex flex-col h-screen">
 						<Providers>
-							<Navbar />
+							<NavWrapper />
 							<div className="pb-4 mt-20">{children}</div>
 							<Footer />
 						</Providers>

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/src/context/AuthContext";
 import useClickOutside from "@/src/hooks/useClickOutside";
 
-export default async function Navbar({ userData }) {
+export default function Navbar() {
 	const [navClass, setNavClass] = useState(
 		"transform translate-y-0 transition-transform duration-300"
 	);
