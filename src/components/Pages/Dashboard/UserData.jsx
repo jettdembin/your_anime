@@ -5,12 +5,10 @@ import axios from "axios"; // Make sure to install axios with `npm install axios
 import { useAuthContext } from "@/src/context/AuthContext";
 
 const UserData = ({ data }) => {
-	console.log(data, "data");
 	const { auth, setAuth } = useAuthContext();
 
 	useEffect(() => {
-		setAuth(data.userData);
-		debugger;
+		setAuth(data);
 	}, [data, setAuth]);
 
 	const { likes } = auth || {};

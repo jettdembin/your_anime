@@ -19,12 +19,14 @@ const AnimeDetails = ({
 
 	const { error, loading, data } = useAnimeDetails(params.id);
 	const anime = data?.Media;
+	const { title } = anime || {};
+	const { english } = title || {};
 
 	const handleAddToLikes = async () => {
 		// Assuming you have the anime's GraphQL ID available as animeId.
 		const likeData = {
 			animeId: params.id, // Pass the GraphQL ID of the anime.
-			animeTitle: anime.title.english,
+			animeTitle: english,
 			userId: auth?.id,
 		};
 		debugger;

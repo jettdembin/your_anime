@@ -7,14 +7,14 @@ export default async function handler(
 ) {
 	if (req.method === "GET") {
 		try {
-			const userId = req.query.userId as string;
+			const id = req.query.id as string;
 
-			if (!userId) {
+			if (!id) {
 				return res.status(400).json({ error: "UserId is required" });
 			}
 
 			const userData = await prisma.user.findUnique({
-				where: { id: userId },
+				where: { id },
 				include: {
 					likes: true, // Assumes you have a relation 'likes' in your user model
 				},
@@ -27,7 +27,7 @@ export default async function handler(
 					.json({ error: "User not found", createUser: true });
 			}
 
-			return res.status(200).json({ userData });
+			return res.status(200).json(userData);
 		} catch (err) {
 			console.error(err);
 			return res.status(500).json({ error: err.message });

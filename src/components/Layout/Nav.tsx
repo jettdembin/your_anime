@@ -89,7 +89,7 @@ export default async function Nav() {
 						</li>
 						<div className="flex gap-10">
 							<li className="my-auto font-medium cursor-pointer">Search</li>
-							<li className="my-auto font-medium cursor-pointer">Social</li>
+							<li className="my-auto font-medium8i6 cursor-pointer">Social</li>
 							<li className="my-auto font-medium cursor-pointer">Forum</li>
 						</div>
 
