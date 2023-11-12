@@ -19,7 +19,8 @@ export default async function handler(
 					likes: true, // Assumes you have a relation 'likes' in your user model
 				},
 			});
-
+			console.log(id, "IDDDIDI");
+			debugger;
 			if (!userData) {
 				// Indicate that user data was not found and user needs to be created
 				return res

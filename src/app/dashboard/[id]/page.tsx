@@ -112,9 +112,9 @@ export default async function Dashboard() {
 					<div className="bg-white p-4 rounded-lg shadow-md">Item 3</div>
 				</div>
 			</div>
-			<div className="container m-auto">
+			<main className="container m-auto">
 				<UserData data={userData} />
-			</div>
+			</main>
 		</div>
 	);
 }

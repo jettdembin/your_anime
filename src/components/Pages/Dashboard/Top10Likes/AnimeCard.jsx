@@ -1,9 +1,11 @@
 "use client";
 
+import { useAnimeDetails } from "@/src/graphql/queries";
 import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
 
-export default function AnimeCard({ likeId: id, index }) {
-	const { error, loading, data } = useAnimeDetails(id);
+export default function AnimeCard({ like, index }) {
+	const { error, loading, data } = useAnimeDetails(Number(like?.animeId));
+
 	const anime = data?.Media;
 	const { title } = anime || {};
 	const { english } = title || {};

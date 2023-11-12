@@ -1,11 +1,12 @@
 import AnimeCardLong from "../Home/ui/ListType";
 
-export default async function Top10Likes({ likes }) {
+export default function Top10Likes({ likes }) {
 	return (
 		<ul>
-			{/* {likes?.map((likeId, index) => (
-				<AnimeCardLong key={likeId} index={index} likeId={likeId} />
-			))} */}
+			testeet
+			{likes?.map((like, index) => (
+				<AnimeCardLong key={like.id} index={index} like={like} />
+			))}
 		</ul>
 	);
 }
