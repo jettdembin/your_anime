@@ -94,7 +94,7 @@ export default async function Dashboard() {
 						}}
 					></div>
 				</div> */}
-				<div className="container m-auto text-slate-800 font-bold">
+				<div className="container m-auto bg-white text-slate-800 font-bold">
 					<ul className="flex justify-between py-2">
 						<li className="hover:text-[#4ad3fc] cursor-pointer">Overview</li>
 						<li className="hover:text-[#4ad3fc] cursor-pointer">Favorites</li>

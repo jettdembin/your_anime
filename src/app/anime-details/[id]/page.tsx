@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { SignedOut, SignedIn, useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
@@ -29,8 +29,11 @@ const AnimeDetails = ({
 	const { title } = anime || {};
 	const { english } = title || {};
 
+	const [ratingModalOpen, setRatingModalOpen] = useState(false);
+
 	const handleAddToLikes = async () => {
-		// Assuming you have the anime's GraphQL ID available as animeId.
+		// setRatingModalOpen(true);
+
 		const likeData = {
 			animeId: params.id, // Pass the GraphQL ID of the anime.
 			animeTitle: english,
@@ -123,7 +126,9 @@ const AnimeDetails = ({
 							</button>
 							<button
 								className="py-2 bg-red-400 rounded-sm text-white"
-								onClick={handleAddToLikes}
+								onClick={() => {
+									document.getElementById("my_modal_2").showModal();
+								}}
 							>
 								♥
 							</button>
@@ -362,8 +367,77 @@ const AnimeDetails = ({
 	return (
 		<div>
 			<main>
+				{/* Open the modal using document.getElementById('ID').showModal() method */}
+
 				<section>{hero}</section>
 				<div className="container mx-auto py-6">
+					<dialog id="my_modal_2" className="modal">
+						<div className="modal-box">
+							<h3 className="font-bold text-lg text-white">
+								Add to Favorites with a Rating! 😋
+							</h3>
+							<form
+								method="post"
+								className="modal-backdrop"
+								onSubmit={(e) => {
+									e.preventDefault();
+									handleAddToLikes();
+								}}
+							>
+								<div className="rating ">
+									<input
+										type="radio"
+										name="rating-2"
+										value={1}
+										className="mask mask-star-2 bg-orange-400"
+									/>
+									<input
+										type="radio"
+										name="rating-2"
+										value={2}
+										className="mask mask-star-2 bg-orange-400"
+									/>
+									<input
+										type="radio"
+										name="rating-2"
+										value={3}
+										className="mask mask-star-2 bg-orange-400"
+									/>
+									<input
+										type="radio"
+										name="rating-2"
+										value={4}
+										className="mask mask-star-2 bg-orange-400"
+									/>
+									<input
+										type="radio"
+										name="rating-2"
+										value={5}
+										className="mask mask-star-2 bg-orange-400"
+									/>
+								</div>
+
+								<div className="modal-action">
+									{/* if there is a button in form, it will close the modal */}
+									<button
+										className="btn"
+										type="submit"
+										onClick={() => {
+											document.getElementById("my_modal_2").close();
+										}}
+									>
+										Add
+									</button>
+								</div>
+							</form>
+							<form method="dialog" className="modal-backdrop">
+								{/* if there is a button in form, it will close the modal */}
+								<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white">
+									✕
+								</button>
+							</form>
+						</div>
+					</dialog>
 					<section
 						className="grid gap-10"
 						style={{ gridTemplateColumns: "270px auto" }}
