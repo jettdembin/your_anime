@@ -1,5 +1,5 @@
 import { formatDate, formatGenres, formatMediaType } from "@/src/util/format";
-import AnimeCard from "@/src/components/Pages/Dashboard/Top10Likes/AnimeCard";
+import AnimeCard from "@/src/components/Pages/Dashboard/Top10Likes/DraggableList/AnimeCard";
 
 const AnimeCardLong = ({ anime, index, like }) => {
 	if (!!like?.id) {
