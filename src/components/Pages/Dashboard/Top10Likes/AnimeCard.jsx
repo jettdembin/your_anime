@@ -9,7 +9,6 @@ export default function AnimeCard({ like, index }) {
 	const anime = data?.Media;
 	const { title } = anime || {};
 	const { english } = title || {};
-	console.log("anime carddd");
 
 	return (
 		<li key={anime?.id} className="flex items-center mb-4 w-full">

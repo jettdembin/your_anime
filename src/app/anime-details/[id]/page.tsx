@@ -11,12 +11,19 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { useAnimeDetails } from "@/src/graphql/queries";
 import { useAuthContext } from "@/src/context/AuthContext";
+import useClickOutside from "@/src/hooks/useClickOutside";
 
 const AnimeDetails = ({
 	params,
 }: {
 	params: { id: string; userId: string };
 }) => {
+	//listens to user click to close div if button click not contained in div
+	const ratingModalRef = useRef(null);
+	useClickOutside(ratingModalRef, () => {
+		document.getElementById("my_modal_2").close();
+	});
+
 	const { auth } = useAuthContext();
 	const router = useRouter();
 
@@ -29,16 +36,21 @@ const AnimeDetails = ({
 	const { title } = anime || {};
 	const { english } = title || {};
 
-	const [ratingModalOpen, setRatingModalOpen] = useState(false);
+	const handleAddToLikes = async (e) => {
+		e.preventDefault();
+		// Create a FormData object from the event
+		const formData = new FormData(e.currentTarget);
 
-	const handleAddToLikes = async () => {
-		// setRatingModalOpen(true);
+		// Get the value of the selected radio button
+		const rating = formData.get("rating-10");
 
 		const likeData = {
 			animeId: params.id, // Pass the GraphQL ID of the anime.
 			animeTitle: english,
 			userId: auth?.id,
+			rating: Number(rating) ?? 5,
 		};
+
 		debugger;
 
 		// Show a pending toast first.
@@ -372,18 +384,15 @@ const AnimeDetails = ({
 				<section>{hero}</section>
 				<div className="container mx-auto py-6">
 					<dialog id="my_modal_2" className="modal">
-						<div className="modal-box">
+						<div className="modal-box" ref={ratingModalRef}>
 							<h3 className="font-bold text-lg text-white">
-								Add to Favorites with a Rating! 😋
+								Add to Favorites with a Rating !! 🐱‍🏍
 							</h3>
 							<section className="mt-4">
 								<form
 									method="post"
 									className="modal-backdrop"
-									onSubmit={(e) => {
-										e.preventDefault();
-										handleAddToLikes();
-									}}
+									onSubmit={handleAddToLikes}
 								>
 									<div className="rating rating-lg rating-half">
 										<input

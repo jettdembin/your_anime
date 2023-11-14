@@ -3,7 +3,6 @@ import AnimeCard from "@/src/components/Pages/Dashboard/Top10Likes/AnimeCard";
 
 const AnimeCardLong = ({ anime, index, like }) => {
 	if (!!like?.id) {
-		debugger;
 		return <AnimeCard like={like} index={index} />;
 		// return <div>test</div>;
 	}

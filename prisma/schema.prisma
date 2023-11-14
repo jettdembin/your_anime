@@ -19,6 +19,7 @@ model User {
 model Like {
   id        String   @id @default(cuid())
   title     String
+  rating    Float    @default(0)    
   animeId   String   
   userId    String  
   createdAt DateTime @default(now())

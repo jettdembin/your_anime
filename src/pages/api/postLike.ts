@@ -6,36 +6,38 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	if (req.method === "POST") {
-		try {
-			const { animeId, animeTitle, userId } = req.body;
-			console.log(userId, "user IDD");
+		const { animeId, animeTitle, userId, rating } = req.body;
 
+		// Check if userId is provided
+		if (!userId) {
+			return res.status(400).json({ message: "User ID is required" });
+		}
+
+		try {
 			// Check if a like already exists for the given animeId and userId
 			const existingLike = await prisma.like.findFirst({
 				where: {
-					AND: [{ animeId: animeId }, { user: { id: userId } }],
+					AND: [{ animeId: animeId }, { userId: userId }],
 				},
 			});
 
-			// If a like doesn't exist, create one and connect it to the user
 			if (!existingLike) {
+				// If a like doesn't exist, create one
 				const newLike = await prisma.like.create({
 					data: {
 						title: animeTitle,
 						animeId: animeId,
 						userId: userId,
+						rating,
 					},
 				});
 
-				// The relationship between the new Like and the User is established
-				// in the `create` operation above, so no need for a separate `update` operation.
 				res.status(200).json(newLike);
 			} else {
 				// If the like already exists, send a conflict response
-				res.status(409).json({ message: "Already in your likes 😁" });
+				res.status(409).json({ message: "Already in your likes" });
 			}
 		} catch (err) {
-			// If there's an error, log it and send a server error response
 			console.error(err);
 			res.status(500).json({ message: "Internal Server Error" });
 		}

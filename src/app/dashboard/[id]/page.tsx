@@ -94,12 +94,20 @@ export default async function Dashboard() {
 						}}
 					></div>
 				</div> */}
-				<div className="container m-auto bg-white text-slate-800 font-bold">
-					<ul className="flex justify-between py-2">
-						<li className="hover:text-[#4ad3fc] cursor-pointer">Overview</li>
-						<li className="hover:text-[#4ad3fc] cursor-pointer">Favorites</li>
-						<li className="hover:text-[#4ad3fc] cursor-pointer">Reviews</li>
-					</ul>
+				<div className="bg-white text-slate-800 font-bold">
+					<div className="container m-auto ">
+						<ul className="flex justify-between py-2">
+							<li className="hover:text-[#4ad3fc] cursor-pointer">
+								<p className="px-12">Overview</p>
+							</li>
+							<li className="hover:text-[#4ad3fc] cursor-pointer">
+								<p className="px-12">Favorites</p>
+							</li>
+							<li className="hover:text-[#4ad3fc] cursor-pointer">
+								<p className="px-12">Reviews</p>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</header>
 
@@ -112,8 +120,10 @@ export default async function Dashboard() {
 					<div className="bg-white p-4 rounded-lg shadow-md">Item 3</div>
 				</div>
 			</div>
-			<main className="container m-auto">
-				<UserData data={userData} />
+			<main>
+				<div className="container m-auto">
+					<UserData data={userData} />
+				</div>
 			</main>
 		</div>
 	);
