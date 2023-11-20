@@ -5,7 +5,7 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
-	reactStrictMode: true,
+	reactStrictMode: false,
 	swcMinify: true,
 	images: {
 		domains: ["media.kitsu.io", "anilist.co", "s4.anilist.co", "i.ytimg.com"],
