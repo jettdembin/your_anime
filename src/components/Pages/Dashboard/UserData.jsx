@@ -6,13 +6,14 @@ import { useAuthContext } from "@/src/context/AuthContext";
 import Top10Likes from "@/src/components/Pages/Dashboard/Top10Likes";
 
 const UserData = ({ data }) => {
-	const { auth, setAuth } = useAuthContext();
+	const { setAuth } = useAuthContext();
 
 	useEffect(() => {
 		setAuth(data);
 	}, [data, setAuth]);
 
-	const { likes } = auth || {};
+	const { likes, topAnimes } = data || {};
+	debugger;
 
 	return (
 		<div>
@@ -28,7 +29,7 @@ const UserData = ({ data }) => {
 			</section>
 
 			<section>
-				<Top10Likes likes={likes} />
+				<Top10Likes likes={likes} topAnimes={topAnimes} />
 			</section>
 		</div>
 	);

@@ -10,6 +10,7 @@ import TopAnimeList from "../components/Pages/Home/TopAnimeList";
 import Trending from "../components/Pages/Home/Trending";
 import PopularAnime from "../components/Pages/Home/PopularAnime";
 import LandingPageContent from "../components/Pages/Home/LandingPageContent";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
 	return (

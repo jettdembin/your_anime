@@ -51,8 +51,6 @@ const AnimeDetails = ({
 			rating: Number(rating) ?? 5,
 		};
 
-		debugger;
-
 		// Show a pending toast first.
 		const toastId = toast("Adding your like...", {
 			autoClose: false,

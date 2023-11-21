@@ -16,11 +16,11 @@ export default async function handler(
 			const userData = await prisma.user.findUnique({
 				where: { id },
 				include: {
-					likes: true, // Assumes you have a relation 'likes' in your user model
+					likes: true,
+					topAnimes: true, // Assumes you have a relation 'likes' in your user model
 				},
 			});
-			console.log(id, "IDDDIDI");
-			debugger;
+
 			if (!userData) {
 				// Indicate that user data was not found and user needs to be created
 				return res
@@ -28,7 +28,13 @@ export default async function handler(
 					.json({ error: "User not found", createUser: true });
 			}
 
-			return res.status(200).json(userData);
+			return res.status(200).json({
+				...userData,
+				likes: userData.likes.sort((a, b) => b.rating - a.rating),
+				topAnimes: userData.topAnimes
+					.sort((a, b) => a.rank - b.rank)
+					.slice(0, 20),
+			});
 		} catch (err) {
 			console.error(err);
 			return res.status(500).json({ error: err.message });

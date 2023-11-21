@@ -14,6 +14,7 @@ model User {
   emailVerified DateTime?
   image         String?
   likes         Like[]
+  topAnimes     TopAnime[]
 }
 
 model Like {
@@ -22,6 +23,17 @@ model Like {
   rating    Float    @default(0)    
   animeId   String   
   userId    String  
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id],  onDelete: Cascade)
+}
+
+model TopAnime {
+  id        String   @id @default(cuid())
+  title     String
+  rating    Float    @default(0)    
+  animeId   String   
+  userId    String 
+  rank      Int 
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id],  onDelete: Cascade)
 }

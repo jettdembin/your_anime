@@ -1,24 +1,16 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { toast } from "react-toastify";
 
 import AnimeCardLong from "@/src/components/Pages/Home/ui/ListType";
 
-// A function to reorder the list items
-const reorder = (list, startIndex, endIndex) => {
-	const result = Array.from(list);
-	const [removed] = result.splice(startIndex, 1);
-	result.splice(endIndex, 0, removed);
-	return result;
-};
-
-const DraggableList = ({ likes }) => {
-	const [sortedLikes, setSortedLikes] = useState(likes);
+const DraggableList = ({ topAnimes }) => {
+	const [sortedLikes, setSortedLikes] = useState(topAnimes);
+	const isPastInitialRenderRef = useRef(false);
 
 	const handleDragAndDrop = (results) => {
-		const { source, destination, type } = results;
+		const { source, destination } = results;
 
 		if (!destination) return;
 
@@ -28,73 +20,70 @@ const DraggableList = ({ likes }) => {
 		)
 			return;
 
-		if (type === "group") {
-			const reorderedStores = [...sortedLikes];
+		const reorderedLikes = [...sortedLikes];
+		const [reorderedItem] = reorderedLikes.splice(source.index, 1);
+		reorderedLikes.splice(destination.index, 0, reorderedItem);
 
-			const storeSourceIndex = source.index;
-			const storeDestinatonIndex = destination.index;
-
-			const [removedStore] = reorderedStores.splice(storeSourceIndex, 1);
-			reorderedStores.splice(storeDestinatonIndex, 0, removedStore);
-
-			return setSortedLikes(reorderedStores);
-		}
-		const itemSourceIndex = source.index;
-		const itemDestinationIndex = destination.index;
-
-		const storeSourceIndex = sortedLikes.findIndex(
-			(store) => store.id === source.droppableId
-		);
-		const storeDestinationIndex = sortedLikes.findIndex(
-			(store) => store.id === destination.droppableId
-		);
-
-		const newSourceItems = [...sortedLikes[storeSourceIndex].items];
-		const newDestinationItems =
-			source.droppableId !== destination.droppableId
-				? [...sortedLikes[storeDestinationIndex].items]
-				: newSourceItems;
-
-		const [deletedItem] = newSourceItems.splice(itemSourceIndex, 1);
-		newDestinationItems.splice(itemDestinationIndex, 0, deletedItem);
-
-		const newStores = [...sortedLikes];
-
-		newStores[storeSourceIndex] = {
-			...sortedLikes[storeSourceIndex],
-			items: newSourceItems,
-		};
-		newStores[storeDestinationIndex] = {
-			...sortedLikes[storeDestinationIndex],
-			items: newDestinationItems,
-		};
-
-		setSortedLikes(newStores);
+		setSortedLikes(reorderedLikes);
 	};
 
-	const onDragEnd = (result) => {
-		if (!result.destination) {
-			return;
-		}
-		if (result.destination.index === result.source.index) {
-			return;
+	useEffect(() => {
+		let ignore = false;
+
+		const updateLikesOrderOnServer = async (updatedLikes) => {
+			const toastId = toast.loading("Updating ranking...");
+
+			try {
+				const response = await fetch(`/api/postRanking`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						likes: updatedLikes,
+						userId: updatedLikes[0].userId,
+					}),
+				});
+
+				if (response.ok) {
+					const data = await response.json();
+					toast.update(toastId, {
+						render: `${data.message}`,
+						type: "success",
+						isLoading: false,
+						autoClose: 5000,
+					});
+					return data;
+				} else {
+					throw new Error("Server responded with an error!");
+				}
+			} catch (error) {
+				console.error("Error updating likes order:", error);
+				toast.update(toastId, {
+					render: `Error: ${error.message || "Failed to update ranking"}`,
+					type: "error",
+					isLoading: false,
+					autoClose: 5000,
+				});
+			}
+		};
+
+		if (!ignore && isPastInitialRenderRef.current) {
+			updateLikesOrderOnServer(sortedLikes);
 		}
 
-		const newLikes = reorder(
-			sortedLikes,
-			result.source.index,
-			result.destination.index
-		);
-
-		setSortedLikes(newLikes);
-	};
+		return () => {
+			ignore = true;
+			isPastInitialRenderRef.current = true;
+		};
+	}, [sortedLikes]);
 
 	return (
 		<DragDropContext onDragEnd={handleDragAndDrop}>
 			<Droppable droppableId="likes" type="group">
 				{(provided) => (
 					<ul {...provided.droppableProps} ref={provided.innerRef}>
-						{likes?.slice(0, 10)?.map((like, index) => (
+						{sortedLikes?.map((like, index) => (
 							<Draggable key={like.id} draggableId={like.id} index={index}>
 								{(provided) => (
 									<li

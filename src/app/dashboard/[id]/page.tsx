@@ -1,6 +1,9 @@
 import axios from "axios";
+
+import { useRouter } from "next/router";
 import { currentUser } from "@clerk/nextjs";
 import UserData from "@/src/components/Pages/Dashboard/UserData";
+import { ToastContainer } from "react-toastify";
 
 // Function to either fetch user data or create a new user if they don't exist
 async function getUserDataOrCreateUser(user) {
@@ -14,7 +17,7 @@ async function getUserDataOrCreateUser(user) {
 				headers: { "Cache-Control": "no-store" },
 			}
 		);
-		console.log("in try of catch");
+		console.log(accountDataResponse.data, "user data");
 
 		// If successful, return the account data
 		return accountDataResponse.data;
@@ -125,6 +128,18 @@ export default async function Dashboard() {
 					<UserData data={userData} />
 				</div>
 			</main>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</div>
 	);
 }
