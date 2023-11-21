@@ -31,9 +31,7 @@ export default async function handler(
 			return res.status(200).json({
 				...userData,
 				likes: userData.likes.sort((a, b) => b.rating - a.rating),
-				topAnimes: userData.topAnimes
-					.sort((a, b) => a.rank - b.rank)
-					.slice(0, 20),
+				topAnimes: userData.topAnimes.sort((a, b) => a.rank - b.rank),
 			});
 		} catch (err) {
 			console.error(err);

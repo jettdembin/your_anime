@@ -116,7 +116,7 @@ export default function HomeHeader() {
 					</div>
 				</div>
 			</div>
-			<LoginWrapper>
+			<LoginWrapper signUp>
 				<div className="absolute -bottom-8 left-1/2 -translate-x-1/2 cursor-pointer">
 					<div
 						// href="/signup"

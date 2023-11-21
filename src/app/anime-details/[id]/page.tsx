@@ -18,6 +18,8 @@ const AnimeDetails = ({
 }: {
 	params: { id: string; userId: string };
 }) => {
+	const [showModal, setShowModal] = useState(false);
+
 	//listens to user click to close div if button click not contained in div
 	const ratingModalRef = useRef(null);
 	useClickOutside(ratingModalRef, () => {
@@ -35,6 +37,50 @@ const AnimeDetails = ({
 	const anime = data?.Media;
 	const { title } = anime || {};
 	const { english } = title || {};
+
+	const handleAddToList = async (listType, rating = 0) => {
+		const listData = {
+			animeId: params.id, // Pass the GraphQL ID of the anime.
+			animeTitle: english,
+			userId: auth?.id,
+			rating: rating,
+			listType: listType, // 'WATCHED', 'WATCHING', or 'TO_WATCH'
+		};
+		console.log(listData);
+
+		// Show a pending toast first.
+		const toastId = toast("Adding to your list...", {
+			autoClose: false,
+		});
+
+		axios
+			.post("/api/postToList", listData)
+			.then((response) => {
+				// Close the pending toast.
+				toast.dismiss(toastId);
+
+				// Show success toast.
+				toast.success(`Added to your ${listType} list 💫`);
+			})
+			.catch((error) => {
+				// Close the pending toast.
+				toast.dismiss(toastId);
+
+				let errorMessage = `Failed to add to ${listType} list`;
+
+				// If the API returned a custom error message, use it.
+				if (
+					error.response &&
+					error.response.data &&
+					error.response.data.message
+				) {
+					errorMessage = error.response.data.message;
+				}
+
+				// Show error toast with either default or custom message.
+				toast.error(errorMessage);
+			});
+	};
 
 	const handleAddToLikes = async (e) => {
 		e.preventDefault();
@@ -131,7 +177,14 @@ const AnimeDetails = ({
 							className="grid my-5 gap-4"
 							style={{ gridTemplateColumns: "auto 35px" }}
 						>
-							<button className="py-2 bg-blue-200 rounded-sm">
+							<button
+								className="py-2 bg-blue-200 rounded-sm"
+								tabIndex={0}
+								onClick={() => {
+									handleAddToList("WATCHED");
+									// document.getElementById("my_modal_2").showModal();
+								}}
+							>
 								Add to List
 							</button>
 							<button
@@ -372,6 +425,206 @@ const AnimeDetails = ({
 				})}
 			</div>
 		</section>
+	);
+
+	const addLikeModal = (
+		<dialog id="my_modal_2" className="modal">
+			<div className="modal-box" ref={ratingModalRef}>
+				<h3 className="font-bold text-lg text-white">
+					Add to Favorites with a Rating !! 🐱‍🏍
+				</h3>
+				<section className="mt-4">
+					<form
+						method="post"
+						className="modal-backdrop"
+						onSubmit={handleAddToLikes}
+					>
+						<div className="rating rating-lg rating-half">
+							<input type="radio" name="rating-10" className="rating-hidden" />
+							<input
+								type="radio"
+								name="rating-10"
+								value={0.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={1}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={1.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={2}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={2.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={3}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={3.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={4}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={4.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={5}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+						</div>
+
+						<div className="modal-action">
+							{/* if there is a button in form, it will close the modal */}
+							<button
+								className="btn"
+								type="submit"
+								onClick={() => {
+									document.getElementById("my_modal_2").close();
+								}}
+							>
+								Add
+							</button>
+						</div>
+					</form>
+				</section>
+				<form method="dialog" className="modal-backdrop">
+					{/* if there is a button in form, it will close the modal */}
+					<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white">
+						✕
+					</button>
+				</form>
+			</div>
+		</dialog>
+	);
+
+	const addToListModal = (
+		<dialog id="my_modal_2" className="modal">
+			<div className="modal-box" ref={ratingModalRef}>
+				<h3 className="font-bold text-lg text-white">
+					Add to Favorites with a Rating !! 🐱‍🏍
+				</h3>
+				<section className="mt-4">
+					<form
+						method="post"
+						className="modal-backdrop"
+						onSubmit={handleAddToLikes}
+					>
+						<div className="rating rating-lg rating-half">
+							<input type="radio" name="rating-10" className="rating-hidden" />
+							<input
+								type="radio"
+								name="rating-10"
+								value={0.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={1}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={1.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={2}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={2.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={3}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={3.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={4}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={4.5}
+								className="bg-green-500 mask mask-star-2 mask-half-1"
+							/>
+							<input
+								type="radio"
+								name="rating-10"
+								value={5}
+								className="bg-green-500 mask mask-star-2 mask-half-2"
+							/>
+						</div>
+
+						<div className="modal-action">
+							{/* if there is a button in form, it will close the modal */}
+							<button
+								className="btn"
+								type="submit"
+								onClick={() => {
+									document.getElementById("my_modal_2").close();
+								}}
+							>
+								Add
+							</button>
+						</div>
+					</form>
+				</section>
+				<form method="dialog" className="modal-backdrop">
+					{/* if there is a button in form, it will close the modal */}
+					<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white">
+						✕
+					</button>
+				</form>
+			</div>
+		</dialog>
 	);
 
 	return (

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 import { useAuthContext } from "@/src/context/AuthContext";
 import useClickOutside from "@/src/hooks/useClickOutside";
+import LoginWrapper from "../../Elements/LoginWrapper";
 
 export default function Navbar() {
 	const [navClass, setNavClass] = useState(
@@ -80,25 +81,15 @@ export default function Navbar() {
 						</div>
 
 						<div className="flex gap-4">
-							<SignedOut>
-								<li
-									className="my-auto font-medium cursor-pointer"
+							{/* <SignedOut> */}
+							<LoginWrapper signIn>
+								<li className="my-auto font-medium cursor-pointer">Sign In</li>
+							</LoginWrapper>
 
-									// onClick={() => {
-									// 	setIsLoggingIn(true);
-									// }}
-								>
-									<Link href="/sign-in">Log In</Link>
-								</li>
-								<li
-									className="my-auto font-medium cursor-pointer"
-									// onClick={() => {
-									// 	setIsSigningUp(true);
-									// }}
-								>
-									<Link href={`/dashboard/${userId}`}>Sign up</Link>
-								</li>
-							</SignedOut>
+							<LoginWrapper signUp>
+								<li className="my-auto font-medium cursor-pointer">Sign Up</li>
+							</LoginWrapper>
+
 							<SignedIn>
 								<li className="my-auto font-medium cursor-pointer">
 									<Link href={`/dashboard/${userId}`}>Dashboard</Link>
