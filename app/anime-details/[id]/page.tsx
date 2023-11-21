@@ -8,6 +8,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/Elements/HoverCard";
 
 import { useAnimeDetails } from "@/graphql/queries";
 import { useAuthContext } from "@/context/AuthContext";
@@ -40,95 +45,68 @@ const AnimeDetails = ({
 
 	const handleAddToList = async (listType, rating = 0) => {
 		const listData = {
-			animeId: params.id, // Pass the GraphQL ID of the anime.
+			animeId: params.id,
 			animeTitle: english,
 			userId: auth?.id,
 			rating: rating,
-			listType: listType, // 'WATCHED', 'WATCHING', or 'TO_WATCH'
+			listType: listType,
 		};
-		console.log(listData);
 
-		// Show a pending toast first.
-		const toastId = toast("Adding to your list...", {
-			autoClose: false,
-		});
+		// Show a loading toast first
+		const toastId = toast.loading("Adding to your list...");
 
-		axios
-			.post("/api/postToList", listData)
-			.then((response) => {
-				// Close the pending toast.
-				toast.dismiss(toastId);
-
-				// Show success toast.
-				toast.success(`Added to your ${listType} list 💫`);
-			})
-			.catch((error) => {
-				// Close the pending toast.
-				toast.dismiss(toastId);
-
-				let errorMessage = `Failed to add to ${listType} list`;
-
-				// If the API returned a custom error message, use it.
-				if (
-					error.response &&
-					error.response.data &&
-					error.response.data.message
-				) {
-					errorMessage = error.response.data.message;
-				}
-
-				// Show error toast with either default or custom message.
-				toast.error(errorMessage);
+		try {
+			const response = await axios.post("/api/postToList", listData);
+			toast.update(toastId, {
+				render: `Added to your ${listType} list 💫`,
+				type: "success",
+				isLoading: false,
+				autoClose: 5000,
 			});
+		} catch (error) {
+			let errorMessage =
+				error.response?.data?.message || `Failed to add to ${listType} list`;
+			toast.update(toastId, {
+				render: errorMessage,
+				type: "error",
+				isLoading: false,
+				autoClose: 5000,
+			});
+		}
 	};
 
 	const handleAddToLikes = async (e) => {
 		e.preventDefault();
-		// Create a FormData object from the event
 		const formData = new FormData(e.currentTarget);
-
-		// Get the value of the selected radio button
 		const rating = formData.get("rating-10");
 
 		const likeData = {
-			animeId: params.id, // Pass the GraphQL ID of the anime.
+			animeId: params.id,
 			animeTitle: english,
 			userId: auth?.id,
 			rating: Number(rating) ?? 5,
 		};
 
-		// Show a pending toast first.
-		const toastId = toast("Adding your like...", {
-			autoClose: false,
-		});
+		// Show a loading toast first
+		const toastId = toast.loading("Adding your like...");
 
-		axios
-			.post("/api/postLike", likeData)
-			.then((response) => {
-				// Close the pending toast.
-				toast.dismiss(toastId);
-
-				// Show success toast.
-				toast.success("Added to your likes 💘");
-			})
-			.catch((error) => {
-				// Close the pending toast.
-				toast.dismiss(toastId);
-
-				let errorMessage = "Failed to add like";
-
-				// If the API returned a custom error message, use it.
-				if (
-					error.response &&
-					error.response.data &&
-					error.response.data.message
-				) {
-					errorMessage = error.response.data.message;
-				}
-
-				// Show error toast with either default or custom message.
-				toast.error(errorMessage);
+		try {
+			const response = await axios.post("/api/postLike", likeData);
+			toast.update(toastId, {
+				render: "Added to your likes 💘",
+				type: "success",
+				isLoading: false,
+				autoClose: 5000,
 			});
+		} catch (error) {
+			let errorMessage = error.response?.data?.message || "Failed to add like";
+			toast.update(toastId, {
+				render: errorMessage,
+				type: "error",
+				isLoading: false,
+				autoClose: 5000,
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -177,16 +155,102 @@ const AnimeDetails = ({
 							className="grid my-5 gap-4"
 							style={{ gridTemplateColumns: "auto 35px" }}
 						>
-							<button
-								className="py-2 bg-blue-200 rounded-sm"
-								tabIndex={0}
-								onClick={() => {
-									handleAddToList("WATCHED");
-									// document.getElementById("my_modal_2").showModal();
-								}}
-							>
-								Add to List
-							</button>
+							<div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
+								<button
+									tabIndex={0}
+									className="w-full py-2 text-center bg-blue-200 rounded-sm cursor-pointer"
+								>
+									Add to List
+								</button>
+								<ul
+									tabIndex={0}
+									className="dropdown-content z-[1] menu p-2 shadow rounded-box"
+								>
+									<li>
+										<a
+											onClick={() => {
+												handleAddToList("WATCHING");
+											}}
+										>
+											Watching
+										</a>
+									</li>
+									<li>
+										<a
+											onClick={() => {
+												handleAddToList("WATCHED");
+											}}
+										>
+											Completed
+										</a>
+									</li>
+									<li>
+										<a
+											onClick={() => {
+												handleAddToList("TO_WATCH");
+											}}
+										>
+											Plan to Watch
+										</a>
+									</li>
+									<li>
+										<a
+											onClick={() => {
+												handleAddToList("DROPPED");
+											}}
+										>
+											Dropped
+										</a>
+									</li>
+								</ul>
+							</div>
+							{/* <HoverCard>
+								<HoverCardTrigger>
+									<div
+										className="py-2 text-center bg-blue-200 rounded-sm w-full cursor-pointer"
+										tabIndex={0}
+									>
+										Add to List
+									</div>
+								</HoverCardTrigger>
+								<HoverCardContent>
+									<div>
+										<button
+											className="py-2  rounded-sm w-full"
+											onClick={() => {
+												handleAddToList("WATCHED");
+											}}
+										>
+											Completed
+										</button>
+										<button
+											className="py-2  rounded-sm w-full"
+											onClick={() => {
+												handleAddToList("WATCHING");
+											}}
+										>
+											Watching
+										</button>
+										<button
+											className="py-2  rounded-sm w-full"
+											onClick={() => {
+												handleAddToList("TO_WATCH");
+											}}
+										>
+											Plan to Watch
+										</button>
+										<button
+											className="py-2  rounded-sm w-full"
+											onClick={() => {
+												handleAddToList("DROPPED");
+											}}
+										>
+											Dropped
+										</button>
+									</div>
+								</HoverCardContent>
+							</HoverCard> */}
+
 							<button
 								className="py-2 bg-red-400 rounded-sm text-white"
 								onClick={() => {

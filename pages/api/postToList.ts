@@ -94,6 +94,36 @@ export default async function handler(
 			if (isInList(listCheck?.toWatchList || []))
 				await removeFromList("TO_WATCH", animeId);
 
+			// Function to check if anime is in the specific list
+			const isInSpecificList = async (
+				listType: "WATCHED" | "WATCHING" | "TO_WATCH",
+				animeId: string
+			) => {
+				const listCheck = await prisma.list.findUnique({
+					where: { userId: userId },
+					include: {
+						watchedList: listType === "WATCHED",
+						watchingList: listType === "WATCHING",
+						toWatchList: listType === "TO_WATCH",
+					},
+				});
+
+				const list =
+					listType === "WATCHED"
+						? listCheck?.watchedList
+						: listType === "WATCHING"
+						? listCheck?.watchingList
+						: listCheck?.toWatchList;
+
+				return list?.some((item) => item.animeId === animeId);
+			};
+
+			if (await isInSpecificList(listType, animeId)) {
+				return res
+					.status(409)
+					.json({ message: "Anime already in the specified list" });
+			}
+
 			// Add anime to the specified list and link it to the user's list
 			let newListEntry;
 			switch (listType) {
