@@ -7,7 +7,7 @@ import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import * as HoverCard from "@radix-ui/react-hover-card";
 
-const AnimeHoverOptions = () => {
+const AddToListModal = () => {
   const [status, setStatus] = useState(null);
 
   return (
@@ -145,4 +145,4 @@ const AnimeHoverOptions = () => {
   );
 };
 
-export default AnimeHoverOptions;
+export default AddToListModal;
