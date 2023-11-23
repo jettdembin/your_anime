@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Flex, Text, Button } from "@radix-ui/themes";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import * as HoverCard from "@radix-ui/react-hover-card";
 
@@ -12,22 +13,9 @@ const AnimeHoverOptions = () => {
   return (
     <HoverCard.Root>
       <HoverCard.Trigger asChild>
-        <span className="material-icons cursor-pointer text-black relative">
-          loupe
-          {/* <AnimatePresence>
-						{isAnimeHoverOptionsHovered && (
-							<motion.div
-								initial={{ opacity: 0, y: "-100%" }}
-								animate={{ opacity: 1, y: "-120%" }}
-								exit={{ opacity: 0, y: "-100%" }}
-								transition={{ duration: 0.2 }}
-								className="absolute top-0 rounded-lg shadow-md bg-white z-40"
-							>
-								
-							</motion.div>
-						)}
-					</AnimatePresence> */}
-        </span>
+        <div className="bg-white p-4 rounded-full">
+          <BookmarkIcon />
+        </div>
       </HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
