@@ -206,10 +206,10 @@ const ListCard = ({ media, isCardHovered, setIsCardHovered }) => {
 					</div>
 				</div>
 				<div className="px-4 py-2 flex justify-between mt-auto bg-genre">
-					<div className="flex flex-wrap justify-between gap-2">
+					<div className="flex flex-wrap items-center justify-between gap-2">
 						{genres.slice(0, 4).map((genre, i) => (
 							<span
-								className="text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+								className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
 								key={i}
 							>
 								{genre?.toLowerCase()}

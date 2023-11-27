@@ -130,9 +130,11 @@ const AnimeDetails = ({
 						ref={animeDescriptionRef}
 					/>
 				</header>
-				<main className="container mx-auto py-6">
-					<Main handleAddToLikes={handleAddToLikes} anime={anime} />
-				</main>
+				<div className="bg-slate-200">
+					<main className="container mx-auto py-6">
+						<Main handleAddToLikes={handleAddToLikes} anime={anime} />
+					</main>
+				</div>
 				<ToastContainer
 					position="top-right"
 					autoClose={5000}
