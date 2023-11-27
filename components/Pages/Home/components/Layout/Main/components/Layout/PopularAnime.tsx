@@ -1,13 +1,12 @@
 "use client";
 
-import { Media } from "../../../../../types/anime";
-
 import { GET_POPULAR_ANIME, usePopularAnime } from "@/graphql/queries";
 
-import { AnimeCardLayout } from "../../../../Layout/AnimeCardLayout";
-import { CardSectionLoader } from "../../../../ui/LoadingSection";
-import AnimeCard from "../../ui/AnimeCard";
+import AnimeCard from "../../../../ui/AnimeCard";
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
+import { CardSectionLoader } from "@/components/ui/LoadingSection";
+import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import { Media } from "@/types/anime";
 
 export default function PopularAnime() {
 	// const { error, loading, data } = usePopularAnime(1);

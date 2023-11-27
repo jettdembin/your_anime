@@ -1,15 +1,13 @@
 "use client";
 
-import { Media } from "../../../../../types/anime";
+import { GET_TRENDING } from "@/graphql/queries";
+import { GET_POPULAR_ANIME, usePopularAnime } from "@/graphql/queries";
+import { Media } from "@/types/anime";
 
-import { GET_TRENDING, useTrendingAnime } from "@/graphql/queries";
-
-import { AnimeCardLayout } from "../../../../Layout/AnimeCardLayout";
-import AnimeCard from "../../ui/AnimeCard";
-import { CardSectionLoader } from "../../../../ui/LoadingSection";
+import AnimeCard from "../../../../ui/AnimeCard";
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
-
-// const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";
+import { CardSectionLoader } from "@/components/ui/LoadingSection";
+import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 
 export default function Trending({}) {
 	const { error, loading, data } = useAnilistAPI(GET_TRENDING);

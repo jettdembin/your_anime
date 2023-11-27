@@ -2,9 +2,9 @@ export const metadata = {
 	title: "Your Anime",
 };
 
-import Header from "@/components/Pages/Home/Layout/Header";
-import Main from "@/components/Pages/Home/Layout/Main";
-import LandingPageContent from "@/components/Pages/Home/Layout/Main/LandingPageContent";
+import LandingPageContent from "@/components/Pages/Home/components/Layout/Main/components/Layout/LandingPageContent";
+import Header from "@/components/Pages/Home/components/Layout/Header";
+import Main from "@/components/Pages/Home/components/Layout/Main";
 
 export default function Home() {
 	return (

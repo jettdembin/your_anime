@@ -12,7 +12,7 @@ import ListType from "./AnimeCard/ListType";
 import CardType from "./AnimeCard/CardType";
 import AnimeDetails from "./AnimeCard/AnimeDetails";
 import ListCard from "./ListType";
-import { useCardTypeContext } from "../../Discover/context/CardTypeContext";
+import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 
 interface AnimeCardProps {
 	media: Media;

@@ -1,5 +1,6 @@
-import { useCardTypeContext } from "../../../Discover/context/CardTypeContext";
 import { useRouter } from "next/navigation";
+
+import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 
 //THIS IS THE IMAGE OF THE CARD
 

@@ -1,9 +1,9 @@
 import { ContentLayout } from "@/components/Layout/ContentLayout";
 
 import Search from "@/components/Search";
-import TopAnimeList from "@/components/Pages/Home/Layout/Main/TopAnimeList";
-import Trending from "@/components/Pages/Home/Layout/Main/Trending";
-import PopularAnime from "@/components/Pages/Home/Layout/Main/PopularAnime";
+import Trending from "./Main/components/Layout/Trending";
+import PopularAnime from "./Main/components/Layout/PopularAnime";
+import TopAnimeList from "./Main/components/Layout/TopAnimeList";
 
 type Props = {};
 
