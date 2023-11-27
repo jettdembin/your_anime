@@ -6,7 +6,7 @@ import { GET_TRENDING, useTrendingAnime } from "@/graphql/queries";
 
 import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
 import AnimeCard from "./ui/AnimeCard";
-import { CardSectionLoader } from "../../Elements/LoadingSection";
+import { CardSectionLoader } from "../../ui/LoadingSection";
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 // const ANILIST_API_ENDPOINT = "https://graphql.anilist.co";

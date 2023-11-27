@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import LoginWrapper from "../../Elements/LoginWrapper";
+import LoginWrapper from "../../ui/LoginWrapper";
 
 // import LoginWrapper from "@/app/components/Elements/LoginWrapper";
 

@@ -4,7 +4,7 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 import { GET_TOP_100_ANIME } from "@/graphql/queries";
 
-import { CardSectionLoader } from "../../Elements/LoadingSection";
+import { CardSectionLoader } from "../../ui/LoadingSection";
 import AnimeCardLong from "./ui/ListType";
 
 export default function TopAnimeList() {

@@ -27,18 +27,28 @@ export default async function handler(
 		}
 
 		try {
-			// Retrieve the user's list or create it if it doesn't exist
+			// Retrieve the user's list or create it if not present
 			let userList = await prisma.list.findFirst({ where: { userId: userId } });
 			if (!userList) {
 				userList = await prisma.list.create({ data: { userId: userId } });
 			}
 
-			// Check if the anime is already in the requested list related to the User
-			const existingEntry = await prisma[listType.toLowerCase()].findFirst({
-				where: { animeId: animeId, userId: userId },
+			// Check if the anime is already in the requested list
+			const listCheck = await prisma.list.findUnique({
+				where: { userId: userId },
+				include: {
+					watchedList: listType === "WATCHED",
+					watchingList: listType === "WATCHING",
+					toWatchList: listType === "TO_WATCH",
+				},
 			});
 
-			if (existingEntry) {
+			const listName = listType.toLowerCase() + "List";
+			const isInRequestedList = listCheck[listName].some(
+				(item) => item.animeId === animeId
+			);
+
+			if (isInRequestedList) {
 				return res
 					.status(409)
 					.json({
@@ -46,16 +56,25 @@ export default async function handler(
 					});
 			}
 
-			// Remove the anime from any other list related to the User
-			const listTypes = ["watchedList", "watchingList", "toWatchList"];
-			for (const type of listTypes) {
-				if (type !== listType.toLowerCase()) {
-					await prisma[type].deleteMany({ where: { animeId, userId } });
-				}
-			}
+			// Remove the anime from any other list
+			await prisma.watchedList.deleteMany({
+				where: { animeId, userId, NOT: { listId: userList.id } },
+			});
+			await prisma.watchingList.deleteMany({
+				where: { animeId, userId, NOT: { listId: userList.id } },
+			});
+			await prisma.toWatchList.deleteMany({
+				where: { animeId, userId, NOT: { listId: userList.id } },
+			});
 
 			// Add anime to the requested list
-			const newListEntry = await prisma[listType.toLowerCase()].create({
+			const listModel = {
+				WATCHED: prisma.watchedList,
+				WATCHING: prisma.watchingList,
+				TO_WATCH: prisma.toWatchList,
+			}[listType];
+
+			const newListEntry = await listModel.create({
 				data: {
 					title: animeTitle,
 					animeId: animeId,

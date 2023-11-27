@@ -5,7 +5,7 @@ import { Media } from "../../../types/anime";
 import { GET_POPULAR_ANIME, usePopularAnime } from "@/graphql/queries";
 
 import { AnimeCardLayout } from "../../Layout/AnimeCardLayout";
-import { CardSectionLoader } from "../../Elements/LoadingSection";
+import { CardSectionLoader } from "../../ui/LoadingSection";
 import AnimeCard from "./ui/AnimeCard";
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 import { useAuthContext } from "@/context/AuthContext";
 import useClickOutside from "@/hooks/useClickOutside";
-import LoginWrapper from "../../Elements/LoginWrapper";
+import LoginWrapper from "../../ui/LoginWrapper";
 
 export default function Navbar() {
 	const [navClass, setNavClass] = useState(

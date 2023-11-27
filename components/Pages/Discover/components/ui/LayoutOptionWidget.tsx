@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
-import useCardType from "../hooks/useCardType";
+import useCardType from "../../hooks/useCardType";
 
 const LayoutOptionWidget = () => {
 	const { cardType, setCardType, handleCardType } = useCardType();
