@@ -5,7 +5,7 @@ import axios from "axios"; // Make sure to install axios with `npm install axios
 import { useAuthContext } from "@/context/AuthContext";
 import Top10Likes from "@/components/Pages/Dashboard/Top10Likes";
 
-const UserData = ({ data }) => {
+const UserProfile = ({ data }) => {
 	const { setAuth } = useAuthContext();
 
 	useEffect(() => {
@@ -35,4 +35,4 @@ const UserData = ({ data }) => {
 	);
 };
 
-export default UserData;
+export default UserProfile;
