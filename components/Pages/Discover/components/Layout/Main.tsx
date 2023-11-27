@@ -1,6 +1,6 @@
-import Characters from "./Main/Aside/Characters";
-import Relations from "./Main/Aside/Relations";
-import Aside from "./Main/Aside";
+import Characters from "./Main/Layout/Aside/Layout/Characters";
+import Relations from "./Main/Layout/Aside/Layout/Relations";
+import Aside from "./Main/Layout/Aside";
 
 type Props = {};
 

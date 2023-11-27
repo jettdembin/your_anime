@@ -1,5 +1,5 @@
 import React from "react";
-import Tags from "./Aside/Tags";
+import Tags from "./Aside/Layout/Tags";
 
 type Props = {};
 
