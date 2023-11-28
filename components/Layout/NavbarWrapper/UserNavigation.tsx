@@ -46,16 +46,16 @@ export default function UserNavigation({}: Props) {
 					"transform",
 					"translate-y-0",
 					"transition-transform",
-					"duration-300"
+					"duration-150"
 				);
 				navbarRef.current?.classList.add(
 					"transform",
 					"-translate-y-full",
 					"transition-transform",
-					"duration-300"
+					"duration-150"
 				);
 				// setNavClass(
-				// 	"transform -translate-y-full transition-transform duration-300"
+				// 	"transform -translate-y-full transition-transform duration-150"
 				// );
 			} else {
 				// When showing the navbar
@@ -63,13 +63,13 @@ export default function UserNavigation({}: Props) {
 					"transform",
 					"-translate-y-full",
 					"transition-transform",
-					"duration-300"
+					"duration-150"
 				);
 				navbarRef.current?.classList.add(
 					"transform",
 					"translate-y-0",
 					"transition-transform",
-					"duration-300"
+					"duration-150"
 				);
 				// setNavClass(
 				// 	"transform translate-y-0 transition-transform duration-300"

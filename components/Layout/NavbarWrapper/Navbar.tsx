@@ -5,7 +5,7 @@ import UserNavigation from "./UserNavigation";
 export default function Navbar() {
 	return (
 		<nav
-			className={`w-full p-6 bg-gray-800 items-center justify-center fixed top-0 z-50 opacity-90`}
+			className={`w-full p-6 bg-gray-800 items-center justify-center fixed top-0 z-50`}
 			id="navbar"
 		>
 			<div className="container mx-auto">

@@ -116,7 +116,7 @@ export default async function Dashboard() {
 			</header>
 
 			<main>
-				<Main />
+				<Main data={userData} />
 				{/* <div className="container m-auto">
           <UserData data={userData} />
         </div> */}

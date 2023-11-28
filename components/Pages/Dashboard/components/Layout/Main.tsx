@@ -1,8 +1,8 @@
 import UserProfile from "./Main/UserProfile";
 
-type Props = {};
+type Props = { data: any };
 
-export default function Main({}: Props) {
+export default function Main({ data }: Props) {
 	return (
 		<>
 			{/* List of Items (e.g., Anime List) */}
@@ -15,7 +15,7 @@ export default function Main({}: Props) {
 				</div>
 			</div>
 			<div className="container m-auto">
-				<UserProfile data={userData} />
+				<UserProfile data={data} />
 			</div>
 		</>
 	);

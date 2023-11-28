@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import axios from "axios"; // Make sure to install axios with `npm install axios` or `yarn add axios`
+
 import { useAuthContext } from "@/context/AuthContext";
-import Top10Likes from "@/components/Pages/Dashboard/Top10Likes";
+
+import Top10Likes from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile/Top10Likes";
 
 const UserProfile = ({ data }) => {
 	const { setAuth } = useAuthContext();
