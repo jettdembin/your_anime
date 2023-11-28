@@ -1,6 +1,4 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type ContentLayoutProps = {
 	children: React.ReactNode;
@@ -13,25 +11,13 @@ export const ContentLayout = ({
 	title,
 	category,
 }: ContentLayoutProps) => {
-	const router = useRouter();
-
 	return (
 		<>
 			<section className="xl:mt-16">
 				<header className="max-w-7xl flex items-end justify-between py-6">
 					<h1 className="text-lg font-semibold text-gray-900">{title}</h1>
-					<h6
-						className="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-600 cursor-pointer"
-						onClick={(e) => {
-							// router.push("/discover?search=" + e.target.value, undefined, {
-							// 	shallow: true,
-							// });
-							router.push(`/discover?category=${category}`, undefined, {
-								shallow: true,
-							});
-						}}
-					>
-						View All
+					<h6 className="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-600 cursor-pointer">
+						<Link href={`/discover?category=${category}`}>View All</Link>
 					</h6>
 				</header>
 				<main className="max-w-7xl mx-auto">{children}</main>

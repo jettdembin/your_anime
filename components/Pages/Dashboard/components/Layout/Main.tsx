@@ -1,4 +1,4 @@
-import UserData from "../../UserData";
+import UserProfile from "./Main/UserProfile";
 
 type Props = {};
 
@@ -15,7 +15,7 @@ export default function Main({}: Props) {
 				</div>
 			</div>
 			<div className="container m-auto">
-				<UserData data={userData} />
+				<UserProfile data={userData} />
 			</div>
 		</>
 	);
