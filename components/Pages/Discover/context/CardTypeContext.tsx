@@ -1,27 +1,37 @@
-"use client";
+import { createContext, useContext, ReactNode } from 'react';
+import useCardType from '../hooks/useCardType';
 
-import React, { createContext, useContext, ReactNode } from "react";
+// Updated type to reflect the union of specific string values
+type CardType = 'card' | 'descriptive' | 'list';
 
-type CardType = { handleCardType: () => void };
-interface CardTypeProviderProps {
-	children: ReactNode;
-	value: CardType;
+interface CardTypeContextValue {
+  cardType: CardType;
+  setCardType: (type: CardType) => void;
+  handleCardType: (type: CardType) => void;
 }
 
-const CardTypeContext = createContext<CardType | null>(null);
+interface CardTypeProviderProps {
+  children: ReactNode;
+}
 
-const CardTypeProvider: React.FC<CardTypeProviderProps> = ({
-	children,
-	value,
-}) => {
-	return (
-		<CardTypeContext.Provider value={value}>
-			{children}
-		</CardTypeContext.Provider>
-	);
+const CardTypeContext = createContext<CardTypeContextValue | null>(null);
+
+const CardTypeProvider = ({ children }: CardTypeProviderProps) => {
+  const contextValue = useCardType();
+
+  return (
+    <CardTypeContext.Provider value={contextValue}>
+      {children}
+    </CardTypeContext.Provider>
+  );
 };
 
-const useCardTypeContext = (): CardType | null =>
-	useContext<CardType | null>(CardTypeContext);
+const useCardTypeContext = (): CardTypeContextValue => {
+  const context = useContext<CardTypeContextValue | null>(CardTypeContext);
+  if (!context) {
+    throw new Error('useCardTypeContext must be used within a CardTypeProvider');
+  }
+  return context;
+};
 
-export { CardTypeProvider, useCardTypeContext };
+export { CardTypeProvider
