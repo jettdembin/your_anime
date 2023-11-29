@@ -3,7 +3,38 @@ import HoverModal from "../Modal";
 import { Button } from "@radix-ui/themes";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
-const AddToListModal = () => {
+const AddToListModal = async () => {
+  const handleSubmit = () => {
+    const listData = {
+      animeId: params.id,
+      animeTitle: english,
+      userId: auth?.id,
+      rating: rating,
+      listType: listType,
+    };
+
+    // Show a loading toast first
+    const toastId = toast.loading("Adding to your list...");
+
+    try {
+      const response = await axios.post("/api/postToList", listData);
+      toast.update(toastId, {
+        render: `Added to your ${listType} list 💫`,
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+      });
+    } catch (error) {
+      let errorMessage =
+        error.response?.data?.message || `Failed to add to ${listType} list`;
+      toast.update(toastId, {
+        render: errorMessage,
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
+    }
+  };
   return (
     <HoverModal Icon={<BookmarkIcon />}>
       <div className=" bg-white p-4 m-auto rounded-md">
