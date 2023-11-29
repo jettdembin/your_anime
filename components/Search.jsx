@@ -47,7 +47,7 @@ export default function Search() {
 				<div className="flex gap-8 mb-6">
 					<input
 						ref={navRef}
-						className="w-full px-6 py-4 shadow-custom focus:outline-none"
+						className="w-full px-6 py-4 shadow-custom focus:outline-none bg-white"
 						placeholder="Search for anime..."
 						type="text"
 						name="search"

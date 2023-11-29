@@ -73,11 +73,23 @@ model ToWatchList {
   listId    String?
 }
 
+model DroppedList {
+  id        String   @id @default(cuid())
+  title     String
+  rating    Float?   @default(0)
+  animeId   String
+  userId    String
+  createdAt DateTime @default(now())
+  list      List?    @relation(fields: [listId], references: [id])
+  listId    String?
+}
+
 model List {
   id           String         @id @default(cuid())
   userId       String         @unique
   watchedList  WatchedList[]
   watchingList WatchingList[]
   toWatchList  ToWatchList[]
+  droppedList  DroppedList[]
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

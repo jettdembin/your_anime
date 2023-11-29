@@ -4,21 +4,18 @@ import { useEffect, useState, useCallback } from "react";
 
 import { useSearchParams } from "next/navigation";
 
-import { useTrendingAnime } from "@/graphql/queries";
-
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 
 import AnimeCard from "@/components/Pages/Home/ui/AnimeCard";
-import { CardSectionLoader } from "@/components/Elements/LoadingSection";
+import { CardSectionLoader } from "@/components/ui/LoadingSection";
 
 import { debounce } from "@/components/Pages/Discover/utils";
 import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
-import FilterWidget from "@/components/Pages/Discover/ui/FilterWidget";
-import Filter from "@/components/Elements/Filter";
+import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
-import CategoryWidget from "@/components/Pages/Discover/ui/CategoryWidget";
-import CardWidget from "@/components/Pages/Discover/ui/CardTypeWidget/Widget";
+import CategoryWidget from "@/components/Pages/Discover/components/ui/CategoryWidget";
+import CardWidget from "@/components/Pages/Discover/components/ui/CardTypeWidget/Widget";
 
 export default function Discover() {
 	const searchParams = useSearchParams();
