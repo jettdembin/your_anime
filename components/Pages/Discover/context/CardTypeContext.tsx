@@ -1,8 +1,8 @@
-import { createContext, useContext, ReactNode } from 'react';
-import useCardType from '../hooks/useCardType';
+import { createContext, useContext, ReactNode } from "react";
+import useCardType from "../hooks/useCardType";
 
 // Updated type to reflect the union of specific string values
-type CardType = 'card' | 'descriptive' | 'list';
+type CardType = "card" | "descriptive" | "list";
 
 interface CardTypeContextValue {
   cardType: CardType;
@@ -29,9 +29,11 @@ const CardTypeProvider = ({ children }: CardTypeProviderProps) => {
 const useCardTypeContext = (): CardTypeContextValue => {
   const context = useContext<CardTypeContextValue | null>(CardTypeContext);
   if (!context) {
-    throw new Error('useCardTypeContext must be used within a CardTypeProvider');
+    throw new Error(
+      "useCardTypeContext must be used within a CardTypeProvider"
+    );
   }
   return context;
 };
 
-export { CardTypeProvider
+export { CardTypeProvider, useCardTypeContext };

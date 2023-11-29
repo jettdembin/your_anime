@@ -1,10 +1,8 @@
 "use client";
 
-import { useCardTypeContext } from "../Pages/Discover/context/CardTypeContext";
+import React from "react";
 
-// type AnimeCardLayoutProps = {
-// 	children: React.ReactNode;
-// };
+import { useCardTypeContext } from "../Pages/Discover/context/CardTypeContext";
 
 export const AnimeCardLayout = ({ children }) => {
   const childrenArray = React.Children.toArray(children);
