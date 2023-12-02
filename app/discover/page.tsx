@@ -14,7 +14,7 @@ import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
 import CategoryWidget from "@/components/Pages/Discover/components/ui/CategoryWidget";
 import CardWidget from "@/components/Pages/Discover/components/ui/CardTypeWidget/Widget";
-import AnimeCard from "@/components/ui/AnimeCard";
+import AnimeCardOld from "@/components/Pages/Home/components/ui/AnimeCardOld";
 
 export default function Discover() {
   const searchParams = useSearchParams();
@@ -82,7 +82,7 @@ export default function Discover() {
       {!searchValue ? (
         <AnimeCardLayout>
           {media.map((mediaItem, i) => (
-            <AnimeCard
+            <AnimeCardOld
               key={i}
               media={mediaItem}
               index={i}
@@ -93,7 +93,7 @@ export default function Discover() {
       ) : (
         <AnimeCardLayout>
           {searchData?.Page?.media?.map((media, i) => (
-            <AnimeCard key={i} media={media} cardType={cardType} index={i} />
+            <AnimeCardOld key={i} media={media} cardType={cardType} index={i} />
           ))}
         </AnimeCardLayout>
       )}

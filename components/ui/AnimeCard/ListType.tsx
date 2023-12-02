@@ -1,7 +1,7 @@
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 import AnimeCard from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile/Top10Likes/DraggableList/AnimeCard";
 
-const ListType = ({ media, index }) => {
+const ListType = ({ media: anime, index, like }) => {
   if (!!like?.id) {
     return <AnimeCard like={like} index={index} />;
     // return <div>test</div>;
@@ -35,7 +35,8 @@ const ListType = ({ media, index }) => {
             </td>
             <td className="w-1/6 lg:w-[13.3%]">
               <span>
-                {formatDate(anime?.endDate || anime?.startDate, "seasonYear")}
+                {formatDate(anime?.endDate || anime?.startDate, "seasonYear") ||
+                  "N/A"}
               </span>
               {anime?.status === "RELEASING" && anime?.nextAiringEpisode ? (
                 <span className="text-sm text-gray-500">

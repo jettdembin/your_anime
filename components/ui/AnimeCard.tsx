@@ -79,18 +79,12 @@ export default function AnimeCard({
     card = <ListType anime={media} index={index} />;
   }
 
-  // const card = (
-  //   <>
-
-  // );
-
   return (
     <div
       className="relative flex"
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
     >
-      {/* {cardType === "list" ? <ListCard anime={media} index={index} /> : card} */}
       {card}
     </div>
   );

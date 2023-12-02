@@ -10,6 +10,7 @@ import { useCardTypeContext } from "@/components/Pages/Discover/context/CardType
 
 import CardTypeOld from "./AnimeCard/CardTypeOld";
 import ListTypeOld from "./AnimeCard/ListTypeOld";
+import ListType from "@/components/ui/AnimeCard/ListType";
 
 import AnimeDetails from "@/components/Pages/Home/components/ui/AnimeCard/AnimeDetails";
 import AnimeCardLong from "./ListType";
@@ -71,7 +72,7 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
         debugger;
       }}
     >
-      {cardType === "list" ? <ListCard anime={media} /> : card}
+      {cardType === "list" ? <ListType anime={media} /> : card}
     </div>
   );
 }
