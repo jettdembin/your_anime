@@ -16,18 +16,25 @@ import DescriptiveType from "@/components/ui/AnimeCard/DescriptiveType";
 import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 import AnimeDetails from "../Pages/Home/components/ui/AnimeCard/AnimeDetails";
 
+type CardType = "card" | "descriptive" | "list";
+
 interface AnimeCardProps {
   media: Media;
   isLastCard?: boolean;
+  index: number;
+  type?: CardType;
 }
 
 export default function AnimeCard({
   media,
   isLastCard,
   index,
+  type,
 }: AnimeCardProps) {
-  const router = useRouter();
   const { cardType } = useCardTypeContext();
+
+  const cardTypeUsed = type || cardType;
+
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
     useShowAnimeInfo();
@@ -38,11 +45,11 @@ export default function AnimeCard({
 
   let card;
 
-  if (cardType === "card") {
+  if (cardTypeUsed === "card") {
     card = <CardType media={media} />;
   }
 
-  if (cardType === "descriptive") {
+  if (cardTypeUsed === "descriptive") {
     // card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
     card = (
       <>
@@ -75,7 +82,7 @@ export default function AnimeCard({
     );
   }
 
-  if (cardType === "list") {
+  if (cardTypeUsed === "list") {
     card = <ListType anime={media} index={index} />;
   }
 

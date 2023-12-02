@@ -29,6 +29,7 @@ const CardType = ({ media, isLastCard, index }) => {
         className="relative w-full h-48 xl:h-72 xl:grid xl:grid-cols-[auto,1fr] bg-gray-700 xl:bg-white rounded-md overflow-hidden group xl:shadow-custom"
         onMouseEnter={() => {
           handleMouseEnter(media.id);
+          console.log(media.id);
         }}
         onMouseLeave={handleMouseLeave}
         onClick={() => {

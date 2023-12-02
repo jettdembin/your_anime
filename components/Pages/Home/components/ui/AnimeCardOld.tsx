@@ -20,8 +20,11 @@ interface AnimeCardProps {
   isLastCard?: boolean;
 }
 
-export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
-  const router = useRouter();
+export default function AnimeCard({
+  media,
+  isLastCard,
+  index,
+}: AnimeCardProps) {
   const { cardType } = useCardTypeContext();
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
@@ -67,12 +70,8 @@ export default function AnimeCard({ media, isLastCard }: AnimeCardProps) {
       className="relative flex"
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
-      onClick={() => {
-        router.push(`/anime-details/${media.title.english}`);
-        debugger;
-      }}
     >
-      {cardType === "list" ? <ListType anime={media} /> : card}
+      {cardType === "list" ? <ListType anime={media} index={index} /> : card}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 import AnimeCard from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile/Top10Likes/DraggableList/AnimeCard";
 
-const ListType = ({ media: anime, index, like }) => {
+const ListType = ({ anime, index, like }) => {
   if (!!like?.id) {
     return <AnimeCard like={like} index={index} />;
     // return <div>test</div>;

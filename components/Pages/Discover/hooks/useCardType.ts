@@ -2,13 +2,14 @@ import { useState } from "react";
 
 type CardType = "card" | "descriptive" | "list";
 
-const useCardType = (): {
+const useCardType = (
+  type: CardType = "card"
+): {
   cardType: CardType;
   setCardType: (type: CardType) => void;
   handleCardType: (type: CardType) => void;
 } => {
-  const cardTypes: CardType[] = ["card", "descriptive", "list"];
-  const [cardType, setCardType] = useState<CardType>(cardTypes[1]);
+  const [cardType, setCardType] = useState<CardType>(type);
 
   const handleCardType = (type: CardType): void => {
     setCardType(type);

@@ -12,12 +12,13 @@ interface CardTypeContextValue {
 
 interface CardTypeProviderProps {
   children: ReactNode;
+  type: CardType;
 }
 
 const CardTypeContext = createContext<CardTypeContextValue | null>(null);
 
-const CardTypeProvider = ({ children }: CardTypeProviderProps) => {
-  const contextValue = useCardType();
+const CardTypeProvider = ({ children, type }: CardTypeProviderProps) => {
+  const contextValue = useCardType(type);
 
   return (
     <CardTypeContext.Provider value={contextValue}>

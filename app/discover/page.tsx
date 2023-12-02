@@ -6,8 +6,9 @@ import { debounce } from "@/components/Pages/Discover/utils";
 
 import { useSearchParams } from "next/navigation";
 import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
-import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
+
+import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
 
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
@@ -26,8 +27,6 @@ export default function Discover() {
 
   const [page, setPage] = useState(1);
   const [media, setMedia] = useState([]);
-
-  const { cardType } = useCardTypeContext();
 
   const { error, loading, data } = useViewAll(1, 50); // Updated to accept page as a parameter
   const { data: searchData } = useSearchContext();
@@ -66,37 +65,34 @@ export default function Discover() {
 
   if (!data) return;
   return (
-    <section>
-      <header className="flex justify-between items-center w-full pb-2">
-        <div className="flex w-full items-center justify-between">
-          {!!searchValue && <FilterWidget />}
-          <CategoryWidget />
-        </div>
-        <hr className="h-10 mx-2 border-x border-y border-gray-800" />
-        <div className="flex gap-1">
-          <CardWidget cardType="card" />
-          <CardWidget cardType="descriptive" />
-          <CardWidget cardType="list" />
-        </div>
-      </header>
-      {!searchValue ? (
-        <AnimeCardLayout>
-          {media.map((mediaItem, i) => (
-            <AnimeCardOld
-              key={i}
-              media={mediaItem}
-              index={i}
-              cardType={cardType}
-            />
-          ))}
-        </AnimeCardLayout>
-      ) : (
-        <AnimeCardLayout>
-          {searchData?.Page?.media?.map((media, i) => (
-            <AnimeCardOld key={i} media={media} cardType={cardType} index={i} />
-          ))}
-        </AnimeCardLayout>
-      )}
-    </section>
+    <CardTypeProvider type="card">
+      <section>
+        <header className="flex justify-between items-center w-full pb-2">
+          <div className="flex w-full items-center justify-between">
+            {!!searchValue && <FilterWidget />}
+            <CategoryWidget />
+          </div>
+          <hr className="h-10 mx-2 border-x border-y border-gray-800" />
+          <div className="flex gap-1">
+            <CardWidget cardType="card" />
+            <CardWidget cardType="descriptive" />
+            <CardWidget cardType="list" />
+          </div>
+        </header>
+        {!searchValue ? (
+          <AnimeCardLayout>
+            {media.map((mediaItem, i) => (
+              <AnimeCardOld key={i} media={mediaItem} index={i} />
+            ))}
+          </AnimeCardLayout>
+        ) : (
+          <AnimeCardLayout>
+            {searchData?.Page?.media?.map((media, i) => (
+              <AnimeCardOld key={i} media={media} index={i} />
+            ))}
+          </AnimeCardLayout>
+        )}
+      </section>
+    </CardTypeProvider>
   );
 }

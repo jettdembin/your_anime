@@ -7,6 +7,7 @@ import AnimeCard from "../../../../../ui/AnimeCard";
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
 
 export default function PopularAnime() {
   // const { error, loading, data } = usePopularAnime(1);
@@ -19,10 +20,12 @@ export default function PopularAnime() {
   }
 
   return (
-    <AnimeCardLayout>
-      {data.Page.media.slice(0, 12).map((anime: Media, i: number) => {
-        return <AnimeCard key={i} media={anime} />;
-      })}
-    </AnimeCardLayout>
+    <CardTypeProvider type="card">
+      <AnimeCardLayout>
+        {data.Page.media.slice(0, 12).map((anime: Media, i: number) => {
+          return <AnimeCard key={i} media={anime} index={i} type="card" />;
+        })}
+      </AnimeCardLayout>
+    </CardTypeProvider>
   );
 }
