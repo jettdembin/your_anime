@@ -14,7 +14,7 @@ import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
 import CategoryWidget from "@/components/Pages/Discover/components/ui/CategoryWidget";
 import CardWidget from "@/components/Pages/Discover/components/ui/CardTypeWidget/Widget";
-import AnimeCard from "@/components/Pages/Home/components/ui/AnimeCard";
+import AnimeCard from "@/components/ui/AnimeCard";
 
 export default function Discover() {
   const searchParams = useSearchParams();
