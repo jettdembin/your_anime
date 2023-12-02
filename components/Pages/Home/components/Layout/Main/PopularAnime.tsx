@@ -20,7 +20,7 @@ export default function PopularAnime() {
   }
 
   return (
-    <CardTypeProvider type="card">
+    <CardTypeProvider type="descriptive">
       <AnimeCardLayout>
         {data.Page.media.slice(0, 12).map((anime: Media, i: number) => {
           return <AnimeCard key={i} media={anime} index={i} type="card" />;

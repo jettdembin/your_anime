@@ -13,7 +13,6 @@ import AnimeCardLong from "../../ui/ListType";
 export default function TopAnimeList() {
   const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);
 
-  // if (data) console.log(data, "data");
   if (loading) return <CardSectionLoader />;
   if (error) {
     return <p>Error: {error.message}</p>;

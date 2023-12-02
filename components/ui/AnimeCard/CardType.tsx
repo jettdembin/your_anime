@@ -63,7 +63,7 @@ const CardType = ({ media, isLastCard, index }) => {
       </div>
       {hoveredAnime === media.id && (
         <div
-          className={`xl:hidden absolute top-0 ${
+          className={`absolute top-0 ${
             !!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
           }`}
         >

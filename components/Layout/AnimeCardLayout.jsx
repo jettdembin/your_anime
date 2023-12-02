@@ -8,16 +8,21 @@ export const AnimeCardLayout = ({ children }) => {
   const childrenArray = React.Children.toArray(children);
 
   const { cardType } = useCardTypeContext();
+
+  const styles = {
+    card: "grid grid-cols-4 gap-4",
+    descriptive: "grid grid-cols-2 gap-4",
+    list: "grid grid-cols-1 gap-4",
+  };
   return (
     <>
       <section
         className={
-          // "grid grid-cols-2 gap-4"
-          cardType === "list"
-            ? "grid grid-cols-1 gap-4"
-            : window.innerWidth >= 1280
-            ? "grid grid-cols-2 gap-4"
-            : "grid grid-cols-4 gap-4"
+          cardType === "card"
+            ? styles.card
+            : cardType === "descriptive"
+            ? styles.descriptive
+            : styles.list
         }
       >
         {childrenArray.map((child, index) => {

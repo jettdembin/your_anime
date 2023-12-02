@@ -10,7 +10,6 @@ const AnimeDetailsCardType = ({
   handleMouseLeave,
 }) => {
   const router = useRouter();
-  const { cardType } = useCardTypeContext();
   const studioName = media?.studios?.nodes[0]?.name || "Unknown";
 
   const titleStudioOverlay = (

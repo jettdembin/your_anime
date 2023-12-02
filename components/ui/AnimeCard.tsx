@@ -12,7 +12,7 @@ import ListType from "@/components/ui/AnimeCard/ListType";
 import CardType from "@/components/ui/AnimeCard/CardType";
 import CardTypeOld from "@/components/Pages/Home/components/ui/AnimeCard/CardTypeOld";
 import ListTypeOld from "@/components/Pages/Home/components/ui/AnimeCard/CardTypeOld";
-import DescriptiveType from "@/components/ui/AnimeCard/DescriptiveType";
+import DescriptiveType from "@/components/ui/AnimeCard/CardType";
 import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
 import AnimeDetails from "../Pages/Home/components/ui/AnimeCard/AnimeDetails";
 
@@ -29,11 +29,8 @@ export default function AnimeCard({
   media,
   isLastCard,
   index,
-  type,
 }: AnimeCardProps) {
   const { cardType } = useCardTypeContext();
-
-  const cardTypeUsed = type || cardType;
 
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
@@ -45,44 +42,44 @@ export default function AnimeCard({
 
   let card;
 
-  if (cardTypeUsed === "card") {
-    card = <CardType media={media} />;
+  if (cardType === "card") {
+    card = <CardType media={media} isLastCard={isLastCard} index={index} />;
   }
 
-  if (cardTypeUsed === "descriptive") {
-    // card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
-    card = (
-      <>
-        <CardTypeOld
-          media={media}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
-        />
-        {hoveredAnime === media.id && (
-          <div
-            className={`xl:hidden absolute top-0 ${
-              !!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
-            }`}
-          >
-            <AnimeDetails
-              isVisible={hoveredAnime === media.id}
-              animeDetails={media}
-              isLastCard={isLastCard}
-              nextEpisodeDays={nextEpisodeDays}
-            />
-          </div>
-        )}
-        {/* Content div related to the image */}
-        <ListTypeOld
-          media={media}
-          isCardHovered={isCardHovered}
-          setIsCardHovered={setIsCardHovered}
-        />
-      </>
-    );
+  if (cardType === "descriptive") {
+    card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
+    // card = (
+    //   <>
+    //     <CardTypeOld
+    //       media={media}
+    //       handleMouseEnter={handleMouseEnter}
+    //       handleMouseLeave={handleMouseLeave}
+    //     />
+    //     {hoveredAnime === media.id && (
+    //       <div
+    //         className={`xl:hidden absolute top-0 ${
+    //           !!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
+    //         }`}
+    //       >
+    //         <AnimeDetails
+    //           isVisible={hoveredAnime === media.id}
+    //           animeDetails={media}
+    //           isLastCard={isLastCard}
+    //           nextEpisodeDays={nextEpisodeDays}
+    //         />
+    //       </div>
+    //     )}
+    //     {/* Content div related to the image */}
+    //     <ListTypeOld
+    //       media={media}
+    //       isCardHovered={isCardHovered}
+    //       setIsCardHovered={setIsCardHovered}
+    //     />
+    //   </>
+    // );
   }
 
-  if (cardTypeUsed === "list") {
+  if (cardType === "list") {
     card = <ListType anime={media} index={index} />;
   }
 

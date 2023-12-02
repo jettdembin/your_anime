@@ -21,7 +21,7 @@ export default function Trending({}) {
   }
 
   return (
-    <CardTypeProvider type="card">
+    <CardTypeProvider type="descriptive">
       <AnimeCardLayout>
         {data.Page.media.slice(0, 8)?.map((media: Media, i: number) => (
           <AnimeCardOld key={i} media={media} />

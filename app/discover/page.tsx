@@ -9,13 +9,13 @@ import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
 
 import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
-
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
 import CategoryWidget from "@/components/Pages/Discover/components/ui/CategoryWidget";
 import CardWidget from "@/components/Pages/Discover/components/ui/CardTypeWidget/Widget";
 import AnimeCardOld from "@/components/Pages/Home/components/ui/AnimeCardOld";
+import AnimeCard from "@/components/ui/AnimeCard";
 
 export default function Discover() {
   const searchParams = useSearchParams();
@@ -81,8 +81,8 @@ export default function Discover() {
         </header>
         {!searchValue ? (
           <AnimeCardLayout>
-            {media.map((mediaItem, i) => (
-              <AnimeCardOld key={i} media={mediaItem} index={i} />
+            {media.map((media, i) => (
+              <AnimeCard key={i} media={media} index={i} />
             ))}
           </AnimeCardLayout>
         ) : (
