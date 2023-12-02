@@ -69,8 +69,16 @@ const DescriptiveType = ({ media, isCardHovered }) => {
 
   return (
     <>
-      <div className="relative w-full h-48 xl:h-72 xl:grid xl:grid-cols-[auto,1fr] bg-gray-700 xl:bg-white rounded-md overflow-hidden group xl:shadow-custom"></div>
-      {isExpanded && (
+      <div
+        className="relative w-full h-48 xl:h-72 xl:grid xl:grid-cols-[auto,1fr] bg-gray-700 xl:bg-white rounded-md overflow-hidden group xl:shadow-custom"
+        onMouseEnter={() => {
+          handleMouseEnter(media.id);
+        }}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => {
+          router.push(`/anime-details/${media.id}`);
+        }}
+      >
         <AnimatePresence>
           <div className="hidden xl:flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
             <div
@@ -202,72 +210,70 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               </div>
             </div>
           </div>
-          {isExpanded && (
-            <AnimatePresence>
-              <motion.div
-                initial={{
-                  top: thumbnailBounds?.top || "0",
-                  left: thumbnailBounds?.left || "0",
-                  width: thumbnailBounds?.width || "0",
-                  height: thumbnailBounds?.height || "0",
-                }}
-                animate={{
-                  top: "50%",
-                  left: "50%",
-                  x: "-50%",
-                  y: "-50%",
-                }}
-                exit={{
-                  top: thumbnailBounds?.top || "0",
-                  left: thumbnailBounds?.left || "0",
-                  width: thumbnailBounds?.width || "0",
-                  height: thumbnailBounds?.height || "0",
-                }}
-                transition={{ duration: 0.5 }}
-                className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
-                // style={{
-                // 	position: "fixed",
-                // 	zIndex: 100,
-                // 	borderRadius: "5px",
-                // }}
-              >
-                <Image
-                  className={isThumbnailVisible ? "block" : "hidden"}
-                  src={thumbnail}
-                  alt="Trailer Thumbnail"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </motion.div>
-            </AnimatePresence>
-          )}
-          {isExpanded && (
-            <div
-              className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
-              onClick={handleBackdropClick}
+
+          <AnimatePresence>
+            <motion.div
+              initial={{
+                top: thumbnailBounds?.top || "0",
+                left: thumbnailBounds?.left || "0",
+                width: thumbnailBounds?.width || "0",
+                height: thumbnailBounds?.height || "0",
+              }}
+              animate={{
+                top: "50%",
+                left: "50%",
+                x: "-50%",
+                y: "-50%",
+              }}
+              exit={{
+                top: thumbnailBounds?.top || "0",
+                left: thumbnailBounds?.left || "0",
+                width: thumbnailBounds?.width || "0",
+                height: thumbnailBounds?.height || "0",
+              }}
+              transition={{ duration: 0.5 }}
+              className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
+              // style={{
+              // 	position: "fixed",
+              // 	zIndex: 100,
+              // 	borderRadius: "5px",
+              // }}
             >
-              <motion.section
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, scale: 2 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
-              >
-                <YouTube
-                  videoId={id}
-                  opts={{
-                    playerVars: {
-                      autoplay: 1,
-                      controls: 1,
-                      modestbranding: 1,
-                    },
-                  }}
-                />
-              </motion.section>
-            </div>
-          )}
+              <Image
+                className={isThumbnailVisible ? "block" : "hidden"}
+                src={thumbnail}
+                alt="Trailer Thumbnail"
+                layout="fill"
+                objectFit="cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <div
+            className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
+            onClick={handleBackdropClick}
+          >
+            <motion.section
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, scale: 2 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+            >
+              <YouTube
+                videoId={id}
+                opts={{
+                  playerVars: {
+                    autoplay: 1,
+                    controls: 1,
+                    modestbranding: 1,
+                  },
+                }}
+              />
+            </motion.section>
+          </div>
         </AnimatePresence>
-      )}
+      </div>
       {/* {hoveredAnime === media.id && (
         <div className={`xl:hidden absolute top-0 ...`}>
           <AnimeHoverCardDetails

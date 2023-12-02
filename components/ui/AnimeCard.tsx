@@ -2,14 +2,19 @@
 
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Media } from "@/types/anime";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import ListType from "@/components/ui/AnimeCard/ListType";
 import CardType from "@/components/ui/AnimeCard/CardType";
+import CardTypeOld from "@/components/Pages/Home/components/ui/AnimeCard/CardTypeOld";
+import ListTypeOld from "@/components/Pages/Home/components/ui/AnimeCard/CardTypeOld";
 import DescriptiveType from "@/components/ui/AnimeCard/DescriptiveType";
 import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
+import AnimeDetails from "../Pages/Home/components/ui/AnimeCard/AnimeDetails";
 
 interface AnimeCardProps {
   media: Media;
@@ -21,9 +26,15 @@ export default function AnimeCard({
   isLastCard,
   index,
 }: AnimeCardProps) {
+  const router = useRouter();
   const { cardType } = useCardTypeContext();
-
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
+    useShowAnimeInfo();
+
+  const nextEpisodeDays = media?.nextAiringEpisode
+    ? Math.floor(media.nextAiringEpisode.timeUntilAiring / 86400)
+    : null;
 
   let card;
 
@@ -32,7 +43,36 @@ export default function AnimeCard({
   }
 
   if (cardType === "descriptive") {
-    card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
+    // card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
+    card = (
+      <>
+        <CardTypeOld
+          media={media}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+        />
+        {hoveredAnime === media.id && (
+          <div
+            className={`xl:hidden absolute top-0 ${
+              !!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
+            }`}
+          >
+            <AnimeDetails
+              isVisible={hoveredAnime === media.id}
+              animeDetails={media}
+              isLastCard={isLastCard}
+              nextEpisodeDays={nextEpisodeDays}
+            />
+          </div>
+        )}
+        {/* Content div related to the image */}
+        <ListTypeOld
+          media={media}
+          isCardHovered={isCardHovered}
+          setIsCardHovered={setIsCardHovered}
+        />
+      </>
+    );
   }
 
   if (cardType === "list") {
@@ -41,33 +81,7 @@ export default function AnimeCard({
 
   // const card = (
   //   <>
-  //     <CardType
-  //       media={media}
-  //       handleMouseEnter={handleMouseEnter}
-  //       handleMouseLeave={handleMouseLeave}
-  //     />
 
-  //     {hoveredAnime === media.id && (
-  //       <div
-  //         className={`xl:hidden absolute top-0 ${
-  //           !!isLastCard ? "-left-4 left-triangle" : "right-0 right-triangle"
-  //         }`}
-  //       >
-  //         <AnimeDetails
-  //           isVisible={hoveredAnime === media.id}
-  //           animeDetails={media}
-  //           isLastCard={isLastCard}
-  //           nextEpisodeDays={nextEpisodeDays}
-  //         />
-  //       </div>
-  //     )}
-  //     {/* Content div related to the image */}
-  //     <ListType
-  //       media={media}
-  //       isCardHovered={isCardHovered}
-  //       setIsCardHovered={setIsCardHovered}
-  //     />
-  //   </>
   // );
 
   return (

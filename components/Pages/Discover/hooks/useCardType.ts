@@ -8,7 +8,7 @@ const useCardType = (): {
   handleCardType: (type: CardType) => void;
 } => {
   const cardTypes: CardType[] = ["card", "descriptive", "list"];
-  const [cardType, setCardType] = useState<CardType>(cardTypes[0]);
+  const [cardType, setCardType] = useState<CardType>(cardTypes[1]);
 
   const handleCardType = (type: CardType): void => {
     setCardType(type);
