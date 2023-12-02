@@ -10,7 +10,6 @@ import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
 
 export default function PopularAnime() {
-  // const { error, loading, data } = usePopularAnime(1);
   const { error, loading, data } = useAnilistAPI(GET_POPULAR_ANIME);
 
   if (loading) return <CardSectionLoader />;
