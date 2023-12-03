@@ -7,10 +7,9 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
 
-import AnimeCard from "../../../../../ui/AnimeCard";
-import AnimeCardOld from "@/components/Pages/Home/components/ui/AnimeCardOld";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import AnimeCard from "@/components/ui/AnimeCard";
 
 export default function Trending({}) {
   const { error, loading, data } = useAnilistAPI(GET_TRENDING);
@@ -24,7 +23,7 @@ export default function Trending({}) {
     <CardTypeProvider type="descriptive">
       <AnimeCardLayout>
         {data.Page.media.slice(0, 8)?.map((media: Media, i: number) => (
-          <AnimeCardOld key={i} media={media} />
+          <AnimeCard key={i} media={media} />
         ))}
       </AnimeCardLayout>
     </CardTypeProvider>
