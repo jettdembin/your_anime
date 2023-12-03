@@ -4,17 +4,19 @@ import { useEffect, useState, useCallback } from "react";
 
 import { debounce } from "@/components/Pages/Discover/utils";
 
+import { BoxIcon, DashboardIcon, ListBulletIcon } from "@radix-ui/react-icons";
+
+import { CardTypeProvider } from "@/context/CardTypeContext";
+
 import { useSearchParams } from "next/navigation";
 import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
 
-import { CardTypeProvider } from "@/context/CardTypeContext";
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
-import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
-import CategoryWidget from "@/components/Pages/Discover/components/ui/CategoryWidget";
-import CardWidget from "@/components/Pages/Discover/components/ui/CardTypeWidget/Widget";
-import AnimeCardOld from "@/components/Pages/Home/components/ui/AnimeCardOld";
+import FilterWidget from "@/app/discover/components/FilterWidget";
+import CategoryWidget from "@/app/discover/components/CategoryWidget";
+import CardTypeWidgetWrapper from "@/components/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
 import AnimeCard from "@/components/ui/AnimeCard";
 
 export default function Discover() {
@@ -74,9 +76,15 @@ export default function Discover() {
           </div>
           <hr className="h-10 mx-2 border-x border-y border-gray-800" />
           <div className="flex gap-1">
-            <CardWidget cardType="card" />
-            <CardWidget cardType="descriptive" />
-            <CardWidget cardType="list" />
+            <CardTypeWidgetWrapper cardType="card">
+              <BoxIcon />
+            </CardTypeWidgetWrapper>
+            <CardTypeWidgetWrapper cardType="descriptive">
+              <DashboardIcon />
+            </CardTypeWidgetWrapper>
+            <CardTypeWidgetWrapper cardType="list">
+              <ListBulletIcon />
+            </CardTypeWidgetWrapper>
           </div>
         </header>
         {!searchValue ? (
