@@ -45,3 +45,11 @@ export const selectData = [
 		],
 	},
 ];
+
+export const watchOptions = [
+	{value: "WATCHED", label: "Completed"},
+	{value: "TO_WATCH", label: "Plan to Watch"},
+	{value: "WATCHING", label: "Watching"},
+	{value: "RE_WATCHING", label: "Re-watching"}.
+	{value: "DROPPED", label: "Dropped"}
+]

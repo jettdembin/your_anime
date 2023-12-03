@@ -18,9 +18,7 @@ export default function AnimeDetails({
 }) {
   const { error, loading, data } = useAnimeDetails(params.id);
 
-  const anime = data?.Media;
-  const { title } = anime || {};
-  const { english } = title || {};
+  const anime = data?.Media || {};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -28,18 +26,11 @@ export default function AnimeDetails({
   return (
     <>
       <header>
-        <Hero
-          handleAddToList={handleAddToList}
-          anime={anime}
-          ref={animeDescriptionRef}
-        />
+        <Hero anime={anime} />
       </header>
       <div className="bg-slate-200">
         <main className="container mx-auto py-6">
-          <AnimeDetailsContent
-            handleAddToLikes={handleAddToLikes}
-            anime={anime}
-          />
+          <AnimeDetailsContent anime={anime} />
         </main>
       </div>
       <ToastContainer

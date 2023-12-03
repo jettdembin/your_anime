@@ -10,8 +10,6 @@ export default function RatingForm({}: Props) {
   //listens to user click to close div if button click not contained in div
   const ratingModalRef = useRef(null);
 
-  // const [showModal, setShowModal] = useState(false);
-
   useClickOutside(ratingModalRef, () => {
     document.getElementById("my_modal_2").close();
   });
@@ -49,8 +47,9 @@ export default function RatingForm({}: Props) {
       });
     }
   };
+
   return (
-    <>
+    <div ref={ratingModalRef}>
       <h3 className="font-bold text-lg text-white">
         Add to Favorites with a Rating !! 🐱‍🏍
       </h3>
@@ -144,6 +143,6 @@ export default function RatingForm({}: Props) {
           ✕
         </button>
       </form>
-    </>
+    </div>
   );
 }
