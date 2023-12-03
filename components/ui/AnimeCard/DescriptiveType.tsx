@@ -1,10 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import { useState, useRef } from "react";
+
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image"; // Assuming Image is from 'next/image'
 import YouTube from "react-youtube"; // Assuming YouTube component from 'react-youtube'
+
+import { getEmoji, getMonthName } from "@/util";
+
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
+
+import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
 
 const DescriptiveType = ({ media, isCardHovered }) => {
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
@@ -15,8 +22,6 @@ const DescriptiveType = ({ media, isCardHovered }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [thumbnailBounds, setThumbnailBounds] = useState(null);
   const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
-
-  const isVisible = hoveredAnime === media.id;
 
   const thumbnailRef = useRef(null);
 
@@ -73,7 +78,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
   return (
     <>
       <div
-        className="relative w-full h-48 xl:h-72 xl:grid xl:grid-cols-[auto,1fr] bg-gray-700 xl:bg-white rounded-md overflow-hidden group xl:shadow-custom"
+        className="relative w-full h-72 grid grid-cols-[auto,1fr] bg-white rounded-md overflow-hidden group shadow-custom"
         onMouseEnter={() => {
           handleMouseEnter(media.id);
           console.log(media.id);
@@ -88,29 +93,20 @@ const DescriptiveType = ({ media, isCardHovered }) => {
             <img
               src={media.coverImage.large}
               alt={media.title.english || media.title.native}
-              className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-110 xl:group-hover:scale-105"
+              className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
           </div>
-          {titleStudioOverlay}
-          {/* Title for large screens and up*/}
-          <div className="hidden p-4 z-30 xl:block absolute w-full h-fit bottom-0">
+          <div className="p-4 z-30 block absolute w-full h-fit bottom-0">
             <h3 className="h-full flex flex-col gap-2 text-white font-semibold text-base">
               {media.title.english || media.title.native}
               <span className="text-blue-300 text-xs">{studioName}</span>
             </h3>
           </div>
         </div>
-        {/* Title on screens up to large */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black opacity-40 transition-opacity duration-300 ease-in-out group-hover:opacity-0 xl:bg-transparent xl:opacity-0"></div>
-        <div className="absolute bottom-0 left-0 w-full p-2 text-white transition-all duration-300 ease-in-out group-hover:bottom-2 xl:group-hover:bottom-0  xl:relative xl:p-4 ">
-          <h3 className="text-sm font-semibold lg:text-base">
-            {media.title.english || media.title.native}
-          </h3>
-        </div>
       </div>
 
       <AnimatePresence>
-        <div className="xl:flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
+        <div className="flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
           <div
             className={`mt-6 mr-6 ml-6 h-60 ${
               isCardHovered
@@ -118,41 +114,6 @@ const DescriptiveType = ({ media, isCardHovered }) => {
                 : "overflow-hidden"
             }`}
           >
-            {/* <div className="flex flex-col flex-wr">
-				   <div className="w-full flex justify-between font-medium">
-					   {status === "FINISHED" ? (
-						   <>
-							   <div className="w-full flex items-center justify-between font-medium">
-								   <div className="text-lg flex gap-1 text-gray-700">
-									   <h6>
-										   {season?.split("")[0] + season?.slice(1).toLowerCase()}
-									   </h6>{" "}
-									   <h6>{`${seasonYear}`}</h6>
-								   </div>
-								   <div>
-									   {getEmoji(likedPercentage)} {likedPercentage}%
-								   </div>
-							   </div>
-						   </>
-					   ) : (
-						   <>
-							   <div className="w-3/4">
-								   <h6 className="text-lg text-gray-800">
-									   Ep {!!currentEpisode && currentEpisode + 1} airing in
-									   {nextEpisodeDays
-										   ? ` ${nextEpisodeDays} days`
-										   : ` ${convertTimeUntilAiring(
-												   hoursUntilNextEpisode
-											 )} hours`}
-								   </h6>
-							   </div>
-							   <span>
-								   {getEmoji(likedPercentage)} {likedPercentage}%
-							   </span>
-						   </>
-					   )}
-				   </div>
-			   </div> */}
             <motion.div
               role="button"
               onClick={handleTrailerClick}
@@ -184,31 +145,27 @@ const DescriptiveType = ({ media, isCardHovered }) => {
                 </div>
               </div>
               {!!id && site === "youtube" && (
-                <>
-                  {!!thumbnail && (
-                    <div className="relative flex justify-between gap-2 pr-2 pb-1">
-                      <h6 className="text-lg w-1/2">
-                        <span className="text-2xl font-bold">#</span>
-                        {title?.native}
-                      </h6>
-                      <div
-                        className="relative"
-                        style={{ width: "175px", height: "75px" }}
-                      >
-                        <Image
-                          ref={thumbnailRef}
-                          src={thumbnail}
-                          alt="Trailer Thumbnail"
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <i className="fas fa-play text-white"></i>
-                        </div>
-                      </div>
+                <div className="relative flex justify-between gap-2 pr-2 pb-1">
+                  <h6 className="text-lg w-1/2">
+                    <span className="text-2xl font-bold">#</span>
+                    {title?.native}
+                  </h6>
+                  <div
+                    className="relative"
+                    style={{ width: "175px", height: "75px" }}
+                  >
+                    <Image
+                      ref={thumbnailRef}
+                      src={thumbnail}
+                      alt="Trailer Thumbnail"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <i className="fas fa-play text-white"></i>
                     </div>
-                  )}
-                </>
+                  </div>
+                </div>
               )}
             </motion.div>
             <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
@@ -241,7 +198,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
           </div>
         </div>
 
-        <AnimatePresence>
+        {isExpanded && (
           <motion.div
             initial={{
               top: thumbnailBounds?.top || "0",
@@ -263,11 +220,6 @@ const DescriptiveType = ({ media, isCardHovered }) => {
             }}
             transition={{ duration: 0.5 }}
             className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
-            // style={{
-            // 	position: "fixed",
-            // 	zIndex: 100,
-            // 	borderRadius: "5px",
-            // }}
           >
             <Image
               className={isThumbnailVisible ? "block" : "hidden"}
@@ -277,42 +229,34 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               objectFit="cover"
             />
           </motion.div>
-        </AnimatePresence>
+        )}
 
-        <div
-          className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
-          onClick={handleBackdropClick}
-        >
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, scale: 2 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+        {isExpanded && (
+          <div
+            className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
+            onClick={handleBackdropClick}
           >
-            <YouTube
-              videoId={id}
-              opts={{
-                playerVars: {
-                  autoplay: 1,
-                  controls: 1,
-                  modestbranding: 1,
-                },
-              }}
-            />
-          </motion.section>
-        </div>
+            <motion.section
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, scale: 2 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+            >
+              <YouTube
+                videoId={id}
+                opts={{
+                  playerVars: {
+                    autoplay: 1,
+                    controls: 1,
+                    modestbranding: 1,
+                  },
+                }}
+              />
+            </motion.section>
+          </div>
+        )}
       </AnimatePresence>
-
-      {/* {hoveredAnime === media.id && (
-        <div className={`xl:hidden absolute top-0 ...`}>
-          <AnimeHoverCardDetails
-            isVisible={hoveredAnime === media.id}
-            animeDetails={media}
-            isLastCard={isLastCard}
-          />
-        </div>
-      )} */}
     </>
   );
 };
