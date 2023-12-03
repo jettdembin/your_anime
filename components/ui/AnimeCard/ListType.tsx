@@ -1,14 +1,39 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
+
+import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
+
 import AnimeCard from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile/Top10Likes/DraggableList/AnimeCard";
 
 const ListType = ({ anime, index, like }) => {
+  const router = useRouter();
+
+  const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
+
   if (!!like?.id) {
     return <AnimeCard like={like} index={index} />;
-    // return <div>test</div>;
   }
   return (
-    <li key={anime?.id} className="flex items-center mb-4 w-full">
-      <span className="w-8 mr-4 font-bold text-xl" style={{ color: "#8ba0b2" }}>
+    <li
+      key={anime?.id}
+      className="flex items-center mb-4 w-full"
+      role="button"
+      tabIndex={0}
+      onMouseEnter={() => {
+        handleMouseEnter(anime.id);
+      }}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        router.push(`/anime-details/${anime.id}`);
+      }}
+    >
+      <span
+        className="w-fit mr-4 font-bold text-xl"
+        style={{ color: "#8ba0b2" }}
+      >
         #{index + 1}
       </span>
       <table className="w-full bg-white rounded-md shadow-box  shadow-custom">

@@ -88,7 +88,7 @@ export default function Discover() {
         ) : (
           <AnimeCardLayout>
             {searchData?.Page?.media?.map((media, i) => (
-              <AnimeCardOld key={i} media={media} index={i} />
+              <AnimeCard key={i} media={media} index={i} />
             ))}
           </AnimeCardLayout>
         )}

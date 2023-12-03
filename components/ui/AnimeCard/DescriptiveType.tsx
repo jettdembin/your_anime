@@ -14,8 +14,7 @@ import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
 
 const DescriptiveType = ({ media, isCardHovered }) => {
-  const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
-    useShowAnimeInfo();
+  const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
 
   const [isAnimeHoverOptionsHovered, setIsAnimeHoverOptionsHovered] =
     useState(false);
@@ -79,6 +78,8 @@ const DescriptiveType = ({ media, isCardHovered }) => {
     <>
       <div
         className="relative w-full h-72 grid grid-cols-[auto,1fr] bg-white rounded-md overflow-hidden group shadow-custom"
+        role="button"
+        tabIndex={0}
         onMouseEnter={() => {
           handleMouseEnter(media.id);
           console.log(media.id);
@@ -95,6 +96,14 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               alt={media.title.english || media.title.native}
               className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
+
+            <div className="hidden xl:block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
+              {/* used as a spacer for the opaque background */}
+              <h3 className="opacity-0 text-white font-semibold text-base flex flex-col gap-2">
+                {media.title.english || media.title.native}
+                <span className="text-xs">{studioName}</span>
+              </h3>
+            </div>
           </div>
           <div className="p-4 z-30 block absolute w-full h-fit bottom-0">
             <h3 className="h-full flex flex-col gap-2 text-white font-semibold text-base">
@@ -128,7 +137,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
                   <div className="flex">
                     <h6 className="text-xs">
                       {episodes
-                        ? `${episodes} episodes aired in`
+                        ? `${episodes} episodes aired in `
                         : "Ongoing, aired in "}
                       {season?.split("")[0] + season?.slice(1).toLowerCase()}
                     </h6>
