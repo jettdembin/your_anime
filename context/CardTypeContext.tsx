@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from "react";
-import useCardType from "../hooks/useCardType";
+import useCardType from "../components/Pages/Discover/hooks/useCardType";
 
 // Updated type to reflect the union of specific string values
 type CardType = "card" | "descriptive" | "list";

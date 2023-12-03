@@ -5,7 +5,7 @@ import { Media } from "@/types/anime";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
-import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
+import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";

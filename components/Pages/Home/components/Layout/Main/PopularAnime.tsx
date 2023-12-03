@@ -3,7 +3,7 @@
 import { GET_POPULAR_ANIME } from "@/graphql/queries";
 import { Media } from "@/types/anime";
 
-import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
+import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 

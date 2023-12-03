@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
 
-import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
+import { CardTypeProvider } from "@/context/CardTypeContext";
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import FilterWidget from "@/components/Pages/Discover/components/ui/FilterWidget";
@@ -65,7 +65,7 @@ export default function Discover() {
 
   if (!data) return;
   return (
-    <CardTypeProvider type="card">
+    <CardTypeProvider type="descriptive">
       <section>
         <header className="flex justify-between items-center w-full pb-2">
           <div className="flex w-full items-center justify-between">

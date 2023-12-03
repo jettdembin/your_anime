@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Media } from "@/types/anime";
 
-import { useCardTypeContext } from "@/components/Pages/Discover/context/CardTypeContext";
+import { useCardTypeContext } from "@/context/CardTypeContext";
 
 import ListType from "@/components/ui/AnimeCard/ListType";
 import CardType from "@/components/ui/AnimeCard/CardType";

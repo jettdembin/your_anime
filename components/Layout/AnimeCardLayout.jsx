@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useCardTypeContext } from "../Pages/Discover/context/CardTypeContext";
+import { useCardTypeContext } from "../../context/CardTypeContext";
 
 export const AnimeCardLayout = ({ children }) => {
   const childrenArray = React.Children.toArray(children);

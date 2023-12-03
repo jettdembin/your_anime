@@ -1,9 +1,8 @@
 import React from "react";
-import Tags from "./Aside/ui/Tags";
 
 type Props = {};
 
-export default function Aside({ tags, anime }: Props) {
+export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
   const animeRating = (
     <div className="mb-4">
       <div className="bg-white shadow-sm p-4">
@@ -139,12 +138,25 @@ export default function Aside({ tags, anime }: Props) {
     </div>
   );
 
+  const animeTags = (
+    <div className="py-6">
+      <h6>Tags</h6>
+      <div className="relative space-y-4 pt-4">
+        {tags?.map((tag) => (
+          <div key={tag.name} className="px-3 py-2 bg-white rounded-sm">
+            {tag.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <>
       {animeRating}
       {animePopularity}
       {animeInfo}
-      <Tags tags={anime?.tags} />
+      {animeTags}
     </>
   );
 }

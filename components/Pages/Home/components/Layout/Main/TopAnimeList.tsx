@@ -4,7 +4,7 @@ import { GET_TOP_100_ANIME } from "@/graphql/queries";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
-import { CardTypeProvider } from "@/components/Pages/Discover/context/CardTypeContext";
+import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import AnimeCard from "@/components//ui/AnimeCard";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
