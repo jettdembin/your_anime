@@ -3,7 +3,7 @@ import React from "react";
 import { Media } from "@/types/anime";
 import { getEmoji, convertTimeUntilAiring } from "@/util";
 
-import AnimeDetailsWrapper from "@/components/Pages/Home/components/ui/AnimeCard/AnimeDetailsWrapper";
+import AnimeHoverCardDetailsWrapper from "@/components/ui/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
 interface AnimeDetailsProps {
   episodes: number;
@@ -78,7 +78,7 @@ const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
   );
 
   return (
-    <AnimeDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
+    <AnimeHoverCardDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
       <div className="flex flex-col flex-wr">
         <div className="w-full flex justify-between font-medium">
           {status === "FINISHED" ? (
@@ -130,7 +130,7 @@ const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
             </p>
           ))}
       </div>
-    </AnimeDetailsWrapper>
+    </AnimeHoverCardDetailsWrapper>
   );
 };
 
