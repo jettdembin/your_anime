@@ -9,7 +9,7 @@ import { BoxIcon, DashboardIcon, ListBulletIcon } from "@radix-ui/react-icons";
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { useSearchParams } from "next/navigation";
-import { useViewAll } from "@/components/Pages/Discover/hooks/useViewAll";
+import { useViewAll } from "@/app/discover/hooks/useViewAll";
 import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
 
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";

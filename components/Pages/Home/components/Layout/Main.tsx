@@ -8,21 +8,21 @@ import TopAnimeList from "./Main/TopAnimeList";
 type Props = {};
 
 export default function Main({}: Props) {
-	return (
-		<>
-			<Search />
+  return (
+    <>
+      <Search />
 
-			<ContentLayout title="TRENDING NOW" category="TRENDING">
-				<Trending />
-			</ContentLayout>
+      <ContentLayout title="TRENDING NOW" category="TRENDING">
+        <Trending />
+      </ContentLayout>
 
-			<ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
-				<PopularAnime />
-			</ContentLayout>
+      <ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
+        <PopularAnime />
+      </ContentLayout>
 
-			<ContentLayout title="TOP 100 ANIME" category="TOP_100">
-				<TopAnimeList />
-			</ContentLayout>
-		</>
-	);
+      <ContentLayout title="TOP 100 ANIME" category="TOP_100">
+        <TopAnimeList />
+      </ContentLayout>
+    </>
+  );
 }
