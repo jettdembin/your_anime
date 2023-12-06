@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 
-import AnimeCard from "@/components/ui/AnimeCard";
+import AnimeCard from "@/ui/AnimeCard";
 
 const DraggableList = ({ topAnimes }) => {
   const [sortedLikes, setSortedLikes] = useState(topAnimes);

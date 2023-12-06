@@ -6,9 +6,9 @@ import { Media } from "@/types/anime";
 
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
-import ListType from "@/components/ui/AnimeCard/ListType";
-import CardType from "@/components/ui/AnimeCard/CardType";
-import DescriptiveType from "@/components/ui/AnimeCard/DescriptiveType";
+import ListType from "@/ui/AnimeCard/ListType";
+import CardType from "@/ui/AnimeCard/CardType";
+import DescriptiveType from "@/ui/AnimeCard/DescriptiveType";
 
 type CardType = "card" | "descriptive" | "list";
 

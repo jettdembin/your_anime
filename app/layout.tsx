@@ -6,8 +6,8 @@ import Providers from "../util/providers";
 import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "../components/Layout/Footer";
-import Navbar from "../components/Layout/Navbar";
+import Footer from "../layout/Footer";
+import Navbar from "../layout/Navbar";
 import { ToastContainer } from "react-toastify";
 // In your main file, likely App.js or index.js
 import "react-toastify/dist/ReactToastify.css";

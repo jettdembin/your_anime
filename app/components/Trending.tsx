@@ -8,8 +8,8 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
-import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
-import AnimeCard from "@/components/ui/AnimeCard";
+import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
+import AnimeCard from "@/ui/AnimeCard";
 
 export default function Trending({}) {
   const { error, loading, data } = useAnilistAPI(GET_TRENDING);

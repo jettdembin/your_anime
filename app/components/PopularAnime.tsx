@@ -7,9 +7,9 @@ import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
-import AnimeCard from "@/components/ui/AnimeCard";
+import AnimeCard from "@/ui/AnimeCard";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
-import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 
 export default function PopularAnime() {
   const { error, loading, data } = useAnilistAPI(GET_POPULAR_ANIME);

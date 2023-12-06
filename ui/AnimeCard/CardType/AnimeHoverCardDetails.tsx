@@ -3,7 +3,7 @@ import React from "react";
 import { Media } from "@/types/anime";
 import { getEmoji, convertTimeUntilAiring } from "@/util";
 
-import AnimeHoverCardDetailsWrapper from "@/components/ui/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
+import AnimeHoverCardDetailsWrapper from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
 interface AnimeDetailsProps {
   episodes: number;

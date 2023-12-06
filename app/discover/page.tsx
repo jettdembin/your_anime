@@ -12,12 +12,12 @@ import { useSearchParams } from "next/navigation";
 import { useSearchContext } from "./context/SearchContext";
 import { useViewAll } from "@/app/discover/hooks/useViewAll";
 
-import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
 import FilterWidget from "@/app/discover/ui/FilterWidget";
 import CategoryWidget from "@/app/discover/ui/CategoryWidget";
-import CardTypeWidgetWrapper from "@/components/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
-import AnimeCard from "@/components/ui/AnimeCard";
+import CardTypeWidgetWrapper from "@/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
+import AnimeCard from "@/ui/AnimeCard";
 
 export default function Discover() {
   const searchParams = useSearchParams();

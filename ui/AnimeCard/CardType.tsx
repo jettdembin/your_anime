@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
-import AnimeHoverCardDetails from "@/components/ui/AnimeCard/CardType/AnimeHoverCardDetails";
+import AnimeHoverCardDetails from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails";
 
 const CardType = ({ media, isLastCard, index }) => {
   const router = useRouter();

@@ -6,9 +6,9 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
-import AnimeCard from "@/components//ui/AnimeCard";
+import AnimeCard from "@/ui/AnimeCard";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
-import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
+import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 
 export default function TopAnimeList() {
   const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);

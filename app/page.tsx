@@ -2,7 +2,7 @@ export const metadata = {
   title: "Your Anime",
 };
 
-import { ContentLayout } from "@/components/Layout/ContentLayout";
+import { ContentLayout } from "@/layout/ContentLayout";
 import Header from "@/app/components/Header";
 import LandingPageContent from "@/app/components/LandingPageContent";
 import PopularAnime from "@/app/components/PopularAnime";
