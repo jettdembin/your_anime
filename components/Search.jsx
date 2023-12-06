@@ -5,8 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-import useSearch from "../app/discover/hooks/useSearch";
-import { useSearchContext } from "./Pages/Discover/context/SearchContext";
+import { useSearchContext } from "@/app/discover/context/SearchContext";
 
 export default function Search() {
   const navRef = useRef(null);

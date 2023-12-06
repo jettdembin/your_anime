@@ -2,20 +2,20 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-import { debounce } from "@/components/Pages/Discover/utils";
+import { debounce } from "@/util";
 
 import { BoxIcon, DashboardIcon, ListBulletIcon } from "@radix-ui/react-icons";
 
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { useSearchParams } from "next/navigation";
+import { useSearchContext } from "./context/SearchContext";
 import { useViewAll } from "@/app/discover/hooks/useViewAll";
-import { useSearchContext } from "@/components/Pages/Discover/context/SearchContext";
 
 import { AnimeCardLayout } from "@/components/Layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/components/ui/LoadingSection";
-import FilterWidget from "@/app/discover/components/FilterWidget";
-import CategoryWidget from "@/app/discover/components/CategoryWidget";
+import FilterWidget from "@/app/discover/ui/FilterWidget";
+import CategoryWidget from "@/app/discover/ui/CategoryWidget";
 import CardTypeWidgetWrapper from "@/components/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
 import AnimeCard from "@/components/ui/AnimeCard";
 
@@ -75,15 +75,15 @@ export default function Discover() {
             <CategoryWidget />
           </div>
           <hr className="h-10 mx-2 border-x border-y border-gray-800" />
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             <CardTypeWidgetWrapper cardType="card">
-              <BoxIcon />
+              <BoxIcon className="w-5 h-5" />
             </CardTypeWidgetWrapper>
             <CardTypeWidgetWrapper cardType="descriptive">
-              <DashboardIcon />
+              <DashboardIcon className="w-5 h-5" />
             </CardTypeWidgetWrapper>
             <CardTypeWidgetWrapper cardType="list">
-              <ListBulletIcon />
+              <ListBulletIcon className="w-5 h-5" />
             </CardTypeWidgetWrapper>
           </div>
         </header>

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useCardTypeContext } from "../../context/CardTypeContext";
+import { useCardTypeContext } from "@/context/CardTypeContext";
 
 export const AnimeCardLayout = ({ children }) => {
   const childrenArray = React.Children.toArray(children);
@@ -14,6 +14,7 @@ export const AnimeCardLayout = ({ children }) => {
     descriptive: "grid grid-cols-2 gap-4",
     list: "grid grid-cols-1 gap-4",
   };
+
   return (
     <>
       <section

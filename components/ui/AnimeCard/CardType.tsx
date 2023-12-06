@@ -14,7 +14,7 @@ const CardType = ({ media, isLastCard, index }) => {
   return (
     <>
       <div
-        className="relative w-full h-48 bg-gray-700 rounded-md overflow-hidden group"
+        className="relative w-full h-72 bg-gray-700 rounded-md overflow-hidden group"
         onMouseEnter={() => {
           handleMouseEnter(media.id);
           console.log(media.id);
@@ -35,8 +35,12 @@ const CardType = ({ media, isLastCard, index }) => {
         </div>
         {/* Title on screens up to large */}
         <div className="absolute inset-0 bg-gradient-to-t from-black opacity-40 transition-opacity duration-300 ease-in-out group-hover:opacity-0"></div>
-        <div className="absolute bottom-0 left-0 w-full p-2 text-white transition-all duration-300 ease-in-out group-hover:bottom-2">
-          <h3 className="text-sm font-semibold lg:text-base">
+        <div className="absolute bottom-0 left-0 w-full p-2 text-white transition-all duration-300 ease-in-out group-hover:bottom-2 z-10">
+          {/* Background div */}
+          <div className="absolute inset-0 bg-gray-900 opacity-0 group-hover:opacity-70 z-0"></div>
+
+          {/* Title text */}
+          <h3 className="text-sm font-semibold lg:text-base relative z-10">
             {media.title.english || media.title.native}
           </h3>
         </div>

@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { useSearchContext } from "../../../components/Pages/Discover/context/SearchContext";
+import { useSearchContext } from "../context/SearchContext";
 
 const CategoryWidget = () => {
   const { category, handleCategory, categories } = useSearchContext();

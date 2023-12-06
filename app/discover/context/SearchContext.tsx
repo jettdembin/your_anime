@@ -1,16 +1,18 @@
 // "use client";
 
+import React, { createContext, useContext, ReactNode } from "react";
+
 import { useSearchParams } from "next/navigation";
+
 import {
   GET_POPULAR_ANIME,
   GET_TOP_100_ANIME,
-  GET_TRENDING,
   SEARCH_ANIMES_POPULAR,
   SEARCH_ANIMES_TRENDING,
   SEARCH_ANIMES_UPCOMING,
 } from "@/graphql/queries";
-import React, { createContext, useContext, ReactNode } from "react";
-import useSearch from "../../../../app/discover/hooks/useSearch";
+
+import useSearch from "../hooks/useSearch";
 
 type CardType = {};
 interface CardTypeProviderProps {

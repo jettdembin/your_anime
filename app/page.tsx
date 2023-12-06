@@ -1,21 +1,37 @@
 export const metadata = {
-	title: "Your Anime",
+  title: "Your Anime",
 };
 
-import Header from "@/components/Pages/Home/components/Layout/Header";
-import Main from "@/components/Pages/Home/components/Layout/Main";
-import LandingPageContent from "@/components/Pages/Home/components/Layout/Main/LandingPageContent";
+import { ContentLayout } from "@/components/Layout/ContentLayout";
+import Header from "@/app/components/Header";
+import LandingPageContent from "@/app/components/LandingPageContent";
+import PopularAnime from "@/app/components/PopularAnime";
+import TopAnimeList from "@/app/components/TopAnimeList";
+import Trending from "@/app/components/Trending";
+import Search from "@/components/Search";
 
 export default function Home() {
-	return (
-		<div>
-			<Header />
+  return (
+    <div>
+      <Header />
 
-			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">
-				<LandingPageContent>
-					<Main />
-				</LandingPageContent>
-			</main>
-		</div>
-	);
+      <main className="max-w-7xl md:mx-20 xl:mx-auto relative">
+        <LandingPageContent>
+          <Search />
+
+          <ContentLayout title="TRENDING NOW" category="TRENDING">
+            <Trending />
+          </ContentLayout>
+
+          <ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
+            <PopularAnime />
+          </ContentLayout>
+
+          <ContentLayout title="TOP 100 ANIME" category="TOP_100">
+            <TopAnimeList />
+          </ContentLayout>
+        </LandingPageContent>
+      </main>
+    </div>
+  );
 }
