@@ -8,7 +8,7 @@ import LandingPageContent from "@/app/components/LandingPageContent";
 import PopularAnime from "@/app/components/PopularAnime";
 import TopAnimeList from "@/app/components/TopAnimeList";
 import Trending from "@/app/components/Trending";
-import Search from "@/components/Search";
+import Search from "@/ui/Search";
 
 export default function Home() {
   return (

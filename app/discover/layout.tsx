@@ -1,19 +1,19 @@
 "use client";
 
-import Search from "@/components/Search";
+import Search from "@/ui/Search";
 
 export default function DiscoverLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<div>
-			<header className="max-w-7xl md:mx-20 xl:mx-auto relative">
-				<Search />
-			</header>
+  return (
+    <div>
+      <header className="max-w-7xl md:mx-20 xl:mx-auto relative">
+        <Search />
+      </header>
 
-			<main className="max-w-7xl md:mx-20 xl:mx-auto relative">{children}</main>
-		</div>
-	);
+      <main className="max-w-7xl md:mx-20 xl:mx-auto relative">{children}</main>
+    </div>
+  );
 }

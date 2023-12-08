@@ -6,7 +6,7 @@ import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
-import AnimeCard from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile/Top10Likes/DraggableList/AnimeCard";
+import AnimeCard from "../AnimeCard";
 
 const ListType = ({ anime, index, like }) => {
   const router = useRouter();

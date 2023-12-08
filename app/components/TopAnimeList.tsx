@@ -7,7 +7,7 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import AnimeCard from "@/ui/AnimeCard";
-import { CardSectionLoader } from "@/components/ui/LoadingSection";
+import { CardSectionLoader } from "@/ui/LoadingSection";
 import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 
 export default function TopAnimeList() {
