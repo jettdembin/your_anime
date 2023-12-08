@@ -10,16 +10,18 @@ export default function Navbar() {
     >
       <div className="container mx-auto">
         <ul className="flex justify-between gap-6 text-gray-100">
-          <li
-            className="my-auto font-medium cursor-pointer"
-            // onClick={() => {
-            // 	router.push(`/`, undefined, {
-            // 		shallow: true,
-            // 	});
-            // }}
-          >
-            <Link href={`/`}>YAnime</Link>
-          </li>
+          <Link className="cursor-pointer" href={`/`}>
+            <li
+              className="my-auto font-medium"
+              // onClick={() => {
+              // 	router.push(`/`, undefined, {
+              // 		shallow: true,
+              // 	});
+              // }}
+            >
+              YAnime
+            </li>
+          </Link>
           <div className="flex gap-10">
             <li className="my-auto font-medium cursor-pointer">Search</li>
             <li className="my-auto font-medium8i6 cursor-pointer">Social</li>

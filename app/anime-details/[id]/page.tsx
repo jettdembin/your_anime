@@ -7,9 +7,5 @@ export default function AnimeDetails({
 }: {
   params: { id: string; userId: string };
 }) {
-  return (
-    <Suspense fallback="Loading...">
-      <Main params={params} />
-    </Suspense>
-  );
+  return <Main params={params} />;
 }
