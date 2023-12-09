@@ -1,8 +1,5 @@
 "use client";
 
-import { useRef } from "react";
-
-import useClickOutside from "@/hooks/useClickOutside";
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 
@@ -10,15 +7,8 @@ import { toast } from "react-toastify";
 
 type Props = { english: string; id: string; modalId: string };
 
-export default function Form({ english, id, modalId }: Props) {
+export default function Form({ english, id }: Props) {
   const { userId }: { userId: string | null } = useAuth();
-
-  const likesModalRef = useRef(null);
-
-  //listens to user click to close div if button click not contained in div
-  useClickOutside(likesModalRef, () => {
-    document.getElementById(`${modalId}`).close();
-  });
 
   const handleAddToLikes = async (formData) => {
     // e.preventDefault();
@@ -63,11 +53,7 @@ export default function Form({ english, id, modalId }: Props) {
   };
 
   return (
-    <form
-      className="modal-backdrop"
-      action={handleAddToLikes}
-      ref={likesModalRef}
-    >
+    <form className="modal-backdrop" action={handleAddToLikes}>
       <div className="rating rating-lg rating-half">
         <input type="radio" name="rating-10" className="rating-hidden" />
         <input
