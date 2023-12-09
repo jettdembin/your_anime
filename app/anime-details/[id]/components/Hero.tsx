@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-export default function Hero({ anime }: Props) {
+export default function Hero({ anime, params }: Props) {
   return (
     <div className="header-wrap relative bg-slate-50">
       <div
@@ -52,8 +52,14 @@ export default function Hero({ anime }: Props) {
               className="grid my-5 gap-4"
               style={{ gridTemplateColumns: "auto 35px" }}
             >
-              <AddToListButtonWrapper />
-              <AddToLikesButtonWrapper />
+              <AddToListButtonWrapper
+                params={params}
+                english={anime.title.english || ""}
+              />
+              <AddToLikesButtonWrapper
+                params={params}
+                english={anime.title.english || ""}
+              />
             </div>
           </div>
 

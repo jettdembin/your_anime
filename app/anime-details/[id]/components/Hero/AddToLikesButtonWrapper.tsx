@@ -1,9 +1,10 @@
 import Modal from "@/ui/Modal";
-import RatingForm from "../AnimeDetailsContent/RatingForm";
 
-type Props = {};
+import LikesForm from "./AddToLikesButtonWrapper/LikesForm";
 
-export default function AddToLikesButtonWrapper({}: Props) {
+type Props = { params: { id: string }; english: string };
+
+export default function AddToLikesButtonWrapper({ params, english }: Props) {
   return (
     <>
       <button
@@ -15,7 +16,7 @@ export default function AddToLikesButtonWrapper({}: Props) {
         ♥
       </button>
       <Modal>
-        <RatingForm />
+        <LikesForm english={english} id={params?.id} />
       </Modal>
     </>
   );
