@@ -1,10 +1,21 @@
-import React from "react";
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
+import HeroDescription from "./Hero/HeroDescription";
 
-type Props = {};
+type Props = {
+  anime: {
+    bannerImage: string;
+    coverImage: {
+      extraLarge: string;
+    };
+    title: {
+      english: string;
+    };
+    description: string;
+  };
+};
 
-export default function Hero({ anime, ref }: Props) {
+export default function Hero({ anime }: Props) {
   return (
     <div className="header-wrap relative bg-slate-50">
       <div
@@ -48,7 +59,7 @@ export default function Hero({ anime, ref }: Props) {
 
           <div className="pt-6 pb-4">
             <h2 className="text-3xl mb-2">{anime.title.english}</h2>
-            <p className="text-gray-700" ref={ref}></p>
+            <HeroDescription description={anime.description} />
           </div>
         </div>
       </div>

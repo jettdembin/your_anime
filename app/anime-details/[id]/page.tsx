@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { Main } from "./components/Main";
 
 export default function AnimeDetails({

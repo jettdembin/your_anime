@@ -1,4 +1,5 @@
 "use client";
+
 import { ToastContainer } from "react-toastify";
 
 import { useAnimeDetails } from "@/graphql/queries";
@@ -8,7 +9,11 @@ import AnimeDetailsContent from "./AnimeDetailsContent";
 
 type Props = {};
 
-export const Main = ({ params }) => {
+export const Main = ({
+  params,
+}: {
+  params: { id: string; userId: string };
+}) => {
   const { error, loading, data } = useAnimeDetails(params.id);
 
   const anime = data?.Media || {};

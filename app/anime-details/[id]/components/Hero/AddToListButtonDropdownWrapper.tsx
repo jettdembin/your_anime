@@ -10,7 +10,7 @@ export default function AddToListButtonWrapper({ handleAddToList }: Props) {
           tabIndex={0}
           className="w-full py-2 text-center bg-blue-200 rounded-sm cursor-pointer"
         >
-          "Add to List
+          Add to List
         </button>
         <ul
           tabIndex={0}

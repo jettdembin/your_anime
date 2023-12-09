@@ -25,6 +25,9 @@ export const AnimeCardLayout = ({ children }) => {
             ? styles.descriptive
             : styles.list
         }
+        style={
+          cardType === "card" ? { gridTemplateColumns: "repeat(4, 1fr)" } : null
+        }
       >
         {childrenArray.map((child, index) => {
           const sm = window.innerWidth >= 640 && index % 2 === 1; // For sm screens

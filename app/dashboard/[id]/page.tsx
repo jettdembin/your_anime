@@ -1,11 +1,9 @@
 import axios from "axios";
 
-import { useRouter } from "next/router";
 import { currentUser } from "@clerk/nextjs";
-import UserData from "@/components/Pages/Dashboard/UserData";
 import { ToastContainer } from "react-toastify";
-import Main from "@/components/Pages/Dashboard/components/Layout/Main";
-import UserProfile from "@/components/Pages/Dashboard/components/Layout/Main/UserProfile";
+
+import UserProfile from "./components/UserProfile";
 
 // Function to either fetch user data or create a new user if they don't exist
 async function getUserDataOrCreateUser(user) {
@@ -126,7 +124,7 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="container m-auto">
-          <UserProfile data={data} />
+          <UserProfile data={userData} />
         </div>
       </main>
       <ToastContainer
