@@ -1,3 +1,5 @@
+"use client";
+
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
 export default function CardTypeWidgetWrapper({ cardType, children }) {

@@ -20,11 +20,13 @@ const ListType = ({ anime, index, like }) => {
   if (!!like?.id) {
     return <AnimeCard like={like} index={index} />;
   }
+
+  const animeEpisodes = () =>
+    anime?.episodes ? `${anime?.episodes} eps` : `Ongoing`;
   return (
     <li
       key={anime?.id}
       className="flex items-center mb-4 w-full"
-      role="button"
       tabIndex={0}
       onMouseEnter={() => {
         handleMouseEnter(anime.id);
@@ -54,15 +56,17 @@ const ListType = ({ anime, index, like }) => {
                 </h3>
                 <p className="text-sm">{formatGenres(anime?.genres)}</p>
               </td>
-              <td className="w-1/6 lg:w-[13.3%]">
+              <td className="w-1/6 lg:w-[12.3%]">
                 <p>{`${anime?.averageScore}%`}</p>
-                <p className="text-sm">{`${anime?.popularity} users`}</p>
+                <p className="text-sm">{`${
+                  anime?.popularity && anime?.popularity.toLocaleString()
+                } users`}</p>
               </td>
-              <td className="w-1/6 lg:w-[13.3%]">
+              <td className="w-1/6 lg:w-[12.3%]">
                 <p>{formatMediaType(anime?.format)}</p>
-                <p className="text-sm">{`${anime?.episodes} eps`}</p>
+                <p className="text-sm">{animeEpisodes()}</p>
               </td>
-              <td className="w-1/6 lg:w-[13.3%] text-right pr-4">
+              <td className="w-1/6 lg:w-[15.3%] text-right pr-4">
                 <span className="">
                   {formatDate(
                     anime?.endDate || anime?.startDate,

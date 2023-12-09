@@ -99,6 +99,7 @@ export const GET_TRENDING = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status
