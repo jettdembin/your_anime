@@ -23,7 +23,7 @@ export const Main = ({
   return (
     <>
       <header>
-        <Hero anime={anime} />
+        <Hero anime={anime} params={params}/>
       </header>
       <div className="bg-slate-200">
         <main className="container max-w-5xl mx-auto py-6">

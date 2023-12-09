@@ -1,69 +1,73 @@
-import prisma from "@/prisma/client";
-import { auth } from "@clerk/nextjs";
+"use client";
+
+import { useRef } from "react";
+
+import useClickOutside from "@/hooks/useClickOutside";
+import { useAuth } from "@clerk/nextjs";
+import axios from "axios";
 
 import { toast } from "react-toastify";
 
-type Props = { english: string; id: string };
+type Props = { english: string; id: string; modalId: string };
 
-export default function Form({ english, id }: Props) {
-  const { userId }: { userId: string | null } = auth();
+export default function Form({ english, id, modalId }: Props) {
+  const { userId }: { userId: string | null } = useAuth();
 
-  const addToLikes = async (formData: FormData) => {
-    "use server";
+  const likesModalRef = useRef(null);
 
+  //listens to user click to close div if button click not contained in div
+  useClickOutside(likesModalRef, () => {
+    document.getElementById(`${modalId}`).close();
+  });
+
+  const handleAddToLikes = async (formData) => {
+    // e.preventDefault();
+    // const formData = new FormData(e.currentTarget);
     const rating = formData.get("rating-10");
 
-    const animeTitle = english;
-    const animeId = id;
+    const likeData = {
+      animeId: id,
+      animeTitle: english,
+      userId: userId,
+      rating: Number(rating) ?? 5,
+    };
 
     // Show a loading toast first
     const toastId = toast.loading("Adding your like...");
 
     try {
-      // Check if a like already exists for the given animeId and userId
-      const existingLike = await prisma.like.findFirst({
-        where: {
-          AND: [{ animeId: animeId }, { userId: userId }],
-        },
+      const response = await axios.post("/api/postLike", likeData);
+      toast.update(toastId, {
+        render: "Added to your likes 💘",
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        closeOnClick: true,
       });
-
-      if (!existingLike) {
-        // If a like doesn't exist, create one
-        const newLike = await prisma.like.create({
-          data: {
-            title: animeTitle,
-            animeId: animeId,
-            userId: userId,
-            rating,
-          },
-        });
-
-        toast.update(toastId, {
-          render: "Added to your likes 💘",
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-        });
-      } else {
-        toast.update(toastId, {
-          render: "Already in your likes",
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-        });
+    } catch (error) {
+      let errorMessage = "Failed to add like";
+      if (error?.response && error.response.status === 409) {
+        errorMessage = error?.response.data.message;
+      } else if (error?.message) {
+        errorMessage = error.message;
       }
-    } catch (err) {
-      let errorMessage = error.response?.data?.message || "Failed to add like";
+
       toast.update(toastId, {
         render: errorMessage,
         type: "error",
         isLoading: false,
         autoClose: 5000,
+        closeOnClick: true,
       });
     }
   };
+
   return (
-    <form action={addToLikes} className="modal-backdrop">
+    <form
+      className="modal-backdrop"
+      action={handleAddToLikes}
+      ref={likesModalRef}
+    >
       <div className="rating rating-lg rating-half">
         <input type="radio" name="rating-10" className="rating-hidden" />
         <input

@@ -5,8 +5,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { SignedIn, useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-import { useRouter } from "next/navigation";
-
 import useClickOutside from "@/hooks/useClickOutside";
 import LoginWrapper from "../../ui/LoginWrapper";
 

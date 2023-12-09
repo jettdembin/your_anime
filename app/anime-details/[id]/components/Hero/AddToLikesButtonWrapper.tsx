@@ -10,13 +10,17 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
       <button
         className="py-2 bg-red-400 rounded-sm text-white"
         onClick={() => {
-          document.getElementById("my_modal_2").showModal();
+          document.getElementById("add_to_likes_modal").showModal();
         }}
       >
         ♥
       </button>
-      <Modal>
-        <LikesForm english={english} id={params?.id} />
+      <Modal id="add_to_likes_modal">
+        <LikesForm
+          english={english}
+          id={params?.id}
+          modalId="add_to_likes_modal"
+        />
       </Modal>
     </>
   );

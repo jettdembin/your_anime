@@ -1,8 +1,8 @@
-type Props = { children: React.ReactNode };
+type Props = { children: React.ReactNode; id: string };
 
-export default function Modal({ children }: Props) {
+export default function Modal({ children, id }: Props) {
   return (
-    <dialog id="my_modal_2" className="modal">
+    <dialog id={id} className="modal">
       <div className="modal-box">{children}</div>
     </dialog>
   );
