@@ -12,6 +12,10 @@ import { getEmoji, getMonthName } from "@/util";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
+import Modal from "../Modal";
+import { BookmarkIcon } from "@radix-ui/react-icons";
+import { Button } from "@radix-ui/themes";
+import AddToListForm from "./Modal/AddToListForm";
 
 const DescriptiveType = ({ media, isCardHovered }) => {
   const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
@@ -23,6 +27,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
   const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
 
   const thumbnailRef = useRef(null);
+  const addToListRef = useRef(null);
 
   const router = useRouter();
 
@@ -202,7 +207,18 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               onMouseEnter={() => setIsAnimeHoverOptionsHovered(true)}
               onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
             >
-              <AnimeHoverOptions />
+              {/* <AnimeHoverOptions /> */}
+              <button
+                className="bg-white p-4 rounded-full cursor-pointer"
+                onClick={() =>
+                  document.getElementById("add_to_list_modal").showModal()
+                }
+              >
+                <BookmarkIcon />
+              </button>
+              <Modal id="add_to_list_modal">
+                <AddToListForm />
+              </Modal>
             </div>
           </div>
         </div>
