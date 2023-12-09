@@ -96,9 +96,9 @@ export default function UserNavigation({}: Props) {
       </LoginWrapper>
 
       <SignedIn>
-        <li className="my-auto font-medium cursor-pointer">
-          <Link href={`/dashboard/${userId}`}>Dashboard</Link>
-        </li>
+        <Link className="cursor-pointer" href={`/dashboard/${userId}`}>
+          <li className="my-auto font-medium ">Dashboard</li>
+        </Link>
         <li>
           <UserButton />
         </li>

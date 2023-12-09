@@ -58,11 +58,12 @@ const ListType = ({ anime, index, like }) => {
               <p>{formatMediaType(anime?.format)}</p>
               <p className="text-sm">{`${anime?.episodes} eps`}</p>
             </td>
-            <td className="w-1/6 lg:w-[13.3%]">
-              <span>
+            <td className="w-1/6 lg:w-[13.3%] text-right pr-4">
+              <span className="">
                 {formatDate(anime?.endDate || anime?.startDate, "seasonYear") ||
                   "N/A"}
               </span>
+              <br /> {""}
               {anime?.status === "RELEASING" && anime?.nextAiringEpisode ? (
                 <span className="text-sm text-gray-500">
                   Ep {anime?.nextAiringEpisode?.episode} airing in{" "}

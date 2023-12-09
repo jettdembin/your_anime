@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContentContainer } from "./ContentContainer";
 
 type ContentLayoutProps = {
   children: React.ReactNode;
@@ -13,18 +14,22 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => {
   return (
     <section className="xl:mt-16">
-      <header className="max-w-7xl flex items-end justify-between py-6">
-        <h1 className="text-lg font-semibold text-gray-900">{title}</h1>
-        <Link
-          href={`/discover?category=${category}`}
-          className="cursor-pointer flex items-center"
-        >
-          <h6 className="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-600 ">
-            View All
-          </h6>
-        </Link>
+      <header className="py-6">
+        <ContentContainer className="flex items-end justify-between">
+          <h1 className="text-lg font-semibold text-gray-900">{title}</h1>
+          <Link
+            href={`/discover?category=${category}`}
+            className="cursor-pointer flex items-center"
+          >
+            <h6 className="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-600 ">
+              View All
+            </h6>
+          </Link>
+        </ContentContainer>
       </header>
-      <main className="max-w-7xl mx-auto">{children}</main>
+      <main>
+        <ContentContainer>{children}</ContentContainer>
+      </main>
     </section>
   );
 };

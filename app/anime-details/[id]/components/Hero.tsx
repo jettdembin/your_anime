@@ -35,7 +35,7 @@ export default function Hero({ anime }: Props) {
           }}
         ></div>
       </div>
-      <div className="header container mx-auto">
+      <div className="header container max-w-5xl mx-auto">
         <div
           className="container grid gap-7 max-w-6xl "
           style={{ gridTemplateColumns: "270px auto" }}

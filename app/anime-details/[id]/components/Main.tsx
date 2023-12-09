@@ -26,7 +26,7 @@ export const Main = ({
         <Hero anime={anime} />
       </header>
       <div className="bg-slate-200">
-        <main className="container mx-auto py-6">
+        <main className="container max-w-5xl mx-auto py-6">
           <AnimeDetailsContent anime={anime} />
         </main>
       </div>

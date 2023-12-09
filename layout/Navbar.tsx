@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import UserNavigation from "./Navbar/UserNavigation";
+import { ContentContainer } from "./ContentContainer";
 
 export default function Navbar() {
   return (
@@ -8,7 +9,7 @@ export default function Navbar() {
       className={`w-full p-6 bg-gray-800 items-center justify-center fixed top-0 z-50`}
       id="navbar"
     >
-      <div className="container mx-auto">
+      <ContentContainer>
         <ul className="flex justify-between gap-6 text-gray-100">
           <Link className="cursor-pointer" href={`/`}>
             <li
@@ -32,7 +33,7 @@ export default function Navbar() {
             <UserNavigation />
           </div>
         </ul>
-      </div>
+      </ContentContainer>
     </nav>
   );
 }
