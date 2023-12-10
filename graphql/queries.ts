@@ -371,6 +371,7 @@ export const GET_TOP_100_ANIME = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status

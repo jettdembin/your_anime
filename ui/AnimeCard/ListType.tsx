@@ -39,7 +39,7 @@ const ListType = ({ anime, index, like }) => {
       >
         #{index + 1}
       </span>
-      <Link href={`/anime-details/${anime.id}`} className="flex w-full">
+      <Link href={`/anime-details/${anime?.id}`} className="flex w-full">
         <table className="w-full bg-white rounded-md shadow-box  shadow-custom">
           <tbody className="text-slate-800">
             <tr>

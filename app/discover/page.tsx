@@ -66,8 +66,11 @@ export default function Discover() {
   }
 
   if (!data) return;
+
+  const cardType = () =>
+    categoryValue?.toUpperCase() === "TOP_100" ? "list" : "descriptive";
   return (
-    <CardTypeProvider type="descriptive">
+    <CardTypeProvider type={cardType()}>
       <section>
         <header className="flex justify-between items-center w-full pb-2">
           <div className="flex w-full items-center justify-between">
