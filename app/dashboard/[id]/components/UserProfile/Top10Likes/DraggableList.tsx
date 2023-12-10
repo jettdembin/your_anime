@@ -3,7 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 
-import AnimeCard from "@/ui/AnimeCard";
+// import AnimeCard from "@/ui/AnimeCard";
+// import ListType from "@/ui/AnimeCard/ListType";
+import FetchedAnime from "./DraggableList/FetchedAnime";
 
 const DraggableList = ({ topAnimes }) => {
   const [sortedLikes, setSortedLikes] = useState(topAnimes);
@@ -91,7 +93,10 @@ const DraggableList = ({ topAnimes }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <AnimeCard like={like} index={index} />
+                    <FetchedAnime
+                      id={Number(like?.animeId) || ""}
+                      index={index}
+                    />
                   </li>
                 )}
               </Draggable>

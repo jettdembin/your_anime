@@ -1,6 +1,7 @@
 import DraggableList from "./Top10Likes/DraggableList";
 
-export default function Top10Likes({ likes, topAnimes }) {
+export default async function Top10Likes({ topAnimes }) {
+  // debugger;
   return (
     <>
       <h2 className="uppercase text-lg font-semibold text-gray-900 pb-2">

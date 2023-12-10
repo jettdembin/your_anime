@@ -1,37 +1,29 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
-import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
+// import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
-import AnimeCard from "../AnimeCard";
-import { BookmarkIcon } from "@radix-ui/react-icons";
 import Modal from "../Modal";
 import AddToListForm from "./Modal/AddToListForm";
-import Link from "next/link";
+import { useAnimeDetails } from "@/graphql/queries";
 
-const ListType = ({ anime, index, like }) => {
-  const router = useRouter();
-
-  const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
-
-  if (!!like?.id) {
-    return <AnimeCard like={like} index={index} />;
-  }
-
+const ListType = ({ anime, index }: { anime?: {}; index: number }) => {
   const animeEpisodes = () =>
     anime?.episodes ? `${anime?.episodes} eps` : `Ongoing`;
+
   return (
     <li
       key={anime?.id}
       className="flex items-center mb-4 w-full"
       tabIndex={0}
-      onMouseEnter={() => {
-        handleMouseEnter(anime.id);
-      }}
-      onMouseLeave={handleMouseLeave}
+      // onMouseEnter={() => {
+      //   handleMouseEnter(anime.id);
+      // }}
+      // onMouseLeave={handleMouseLeave}
     >
       <span
         className="w-fit mr-4 font-bold text-xl"
@@ -52,7 +44,7 @@ const ListType = ({ anime, index, like }) => {
               </td>
               <td className="w-1/3 lg:w-1/2 pr-2 lg:pr-0">
                 <h3 className="font-semibold text-lg">
-                  {anime?.title.english}
+                  {anime?.title?.english}
                 </h3>
                 <p className="text-sm">{formatGenres(anime?.genres)}</p>
               </td>

@@ -13,6 +13,7 @@ import DescriptiveType from "@/ui/AnimeCard/DescriptiveType";
 type CardType = "card" | "descriptive" | "list";
 
 interface AnimeCardProps {
+  like?: {};
   media: Media;
   isLastCard?: boolean;
   index: number;

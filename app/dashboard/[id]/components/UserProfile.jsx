@@ -16,7 +16,7 @@ const UserProfile = ({ data }) => {
   }, [data, setAuth]);
 
   const { likes, topAnimes } = data || {};
-  debugger;
+  // debugger;
 
   return (
     <div>
