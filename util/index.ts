@@ -11,10 +11,13 @@ const getEmoji = (percent: number | undefined) => {
       "😶";
   }
 };
+const debounce = <T extends (...args: any[]) => void>(
+  fn: T,
+  delay: number
+): ((...args: Parameters<T>) => void) => {
+  let timeoutID: NodeJS.Timeout | null = null;
 
-const debounce = (fn, delay) => {
-  let timeoutID;
-  return function (...args) {
+  return function (...args: Parameters<T>) {
     if (timeoutID) {
       clearTimeout(timeoutID);
     }
@@ -38,27 +41,29 @@ function convertTimeUntilAiring(timeUntilAiring: number): string {
   return result;
 }
 
-function getMonthName(monthNumber: number): string {
-  // Array of month names
-  const monthNames: string[] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+function getMonthName(monthNumber: number | undefined): string | null {
+  if (monthNumber) {
+    // Array of month names
+    const monthNames: string[] = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-  // Adjust for zero-indexed array (January is 0, December is 11)
-  let adjustedMonthNumber: number = monthNumber - 1;
+    // Adjust for zero-indexed array (January is 0, December is 11)
+    let adjustedMonthNumber: number = monthNumber - 1;
 
-  return monthNames[adjustedMonthNumber];
+    return monthNames[adjustedMonthNumber];
+  } else return null;
 }
 
 export { getEmoji, convertTimeUntilAiring, getMonthName, debounce };

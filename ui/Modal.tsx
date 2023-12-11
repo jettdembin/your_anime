@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef } from "react";
 
 import useClickOutside from "@/hooks/useClickOutside";
@@ -7,11 +5,14 @@ import useClickOutside from "@/hooks/useClickOutside";
 type Props = { children: React.ReactNode; id: string };
 
 export default function Modal({ children, id }: Props) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  //listens to user click to close div if button click not contained in div
+  // Listens to user click to close div if button click not contained in div
   useClickOutside(ref, () => {
-    document.getElementById(`${id}`).close();
+    const dialog = document.getElementById(id) as HTMLDialogElement | null;
+    if (dialog) {
+      dialog.close();
+    }
   });
 
   return (

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Props = {
   characters: Array<{
     image: { large: string };
@@ -23,8 +25,11 @@ export default function Characters({ characters, anime }: Props) {
             style={{ gridTemplateColumns: "20% auto 20%" }}
           >
             <div>
-              <img
-                className="w-full h-full object-cover rounded-sm"
+              <Image
+                layout="fill"
+                objectFit="cover"
+                className="rounded-sm"
+                // className="w-full h-full object-cover rounded-sm"
                 src={character.image.large}
                 alt={character.image.large}
               />
@@ -38,8 +43,11 @@ export default function Characters({ characters, anime }: Props) {
               </p>
             </div>
             <div>
-              <img
-                className="w-full h-full object-cover rounded-sm"
+              <Image
+                layout="fill"
+                objectFit="cover"
+                className="rounded-sm"
+                // className="w-full h-full object-cover rounded-sm"
                 src={anime.coverImage.extraLarge}
                 alt={anime.title.english}
               />

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 type Props = {};
@@ -14,8 +15,10 @@ export default function Relations({ anime, relations }: Props) {
             style={{ gridTemplateColumns: "20% auto" }}
           >
             <div>
-              <img
-                className="w-full object-cover rounded-sm"
+              <Image
+                layout="fill"
+                objectFit="cover"
+                className="rounded-sm" // className="w-full object-cover rounded-sm"
                 src={anime.coverImage.extraLarge}
                 alt={anime.title.english}
               />

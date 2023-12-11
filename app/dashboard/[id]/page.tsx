@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 import { currentUser } from "@clerk/nextjs";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 import UserProfile from "./components/UserProfile";
 
@@ -60,7 +60,6 @@ export default async function Dashboard() {
   return (
     <div>
       <header className="text-white">
-        className="hero height-[400px]"
         <div
           style={{
             backgroundImage:
@@ -92,23 +91,6 @@ export default async function Dashboard() {
             </div>
           </div>
         </div>
-        {/* <div
-					className="banner bg-[#242538] w-full h-[400px] -mt-12 relative"
-					style={{
-						// background: `url(${})`,
-						backgroundSize: "cover",
-						backgroundRepeat: "no-repeat",
-						backgroundPosition: "50% 35%",
-					}}
-				>
-					<div
-						className="absolute inset-0 bg-opacity-50 bg-black shadow-inner"
-						style={{
-							background:
-								"linear-gradient(180deg,rgba(10, 10, 10, 0) 40%,rgba(10, 10, 10, 0.6))",
-						}}
-					></div>
-				</div> */}
         <div className="bg-white text-slate-800 font-bold">
           <div className="container m-auto ">
             <ul className="flex justify-between py-2">
@@ -128,7 +110,6 @@ export default async function Dashboard() {
       <main>
         <div className="container mx-auto py-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Replace with dynamic content */}
             <div className="bg-white p-4 rounded-lg shadow-md">Item 1</div>
             <div className="bg-white p-4 rounded-lg shadow-md">Item 2</div>
             <div className="bg-white p-4 rounded-lg shadow-md">Item 3</div>
@@ -138,7 +119,7 @@ export default async function Dashboard() {
           <UserProfile data={userData} />
         </div>
       </main>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -149,7 +130,7 @@ export default async function Dashboard() {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
     </div>
   );
 }

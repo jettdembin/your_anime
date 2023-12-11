@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 type ContentLayoutProps = {
   children: React.ReactNode;
   className?: string;

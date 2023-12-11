@@ -1,24 +1,24 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { SignedIn, useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 import useClickOutside from "@/hooks/useClickOutside";
+
 import LoginWrapper from "../../ui/LoginWrapper";
 
 type Props = {};
 
 export default function UserNavigation({}: Props) {
-  const [navClass, setNavClass] = useState(
-    "transform translate-y-0 transition-transform duration-300"
-  );
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const signUpFormRef = useRef(null);
   const logInFormRef = useRef(null);
-  const navbarRef = useRef(null);
+
+  // Change here: Specify that navbarRef is a reference to an HTMLDivElement
+  const navbarRef = useRef<HTMLDivElement>(null);
 
   const toggleSignUpForm = () => {
     setIsSigningUp(!isSigningUp);
@@ -33,44 +33,21 @@ export default function UserNavigation({}: Props) {
   const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
-    navbarRef.current = document.getElementById("navbar");
+    // Removed: navbarRef.current = document.getElementById("navbar");
 
     function handleScroll() {
       let st = window.pageYOffset || document.documentElement.scrollTop;
       if (st > lastScrollTopRef.current) {
         // When hiding the navbar
-        navbarRef.current?.classList.remove(
-          "transform",
-          "translate-y-0",
-          "transition-transform",
-          "duration-150"
-        );
-        navbarRef.current?.classList.add(
-          "transform",
-          "-translate-y-full",
-          "transition-transform",
-          "duration-150"
-        );
-        // setNavClass(
-        // 	"transform -translate-y-full transition-transform duration-150"
-        // );
+        navbarRef.current?.classList.remove("translate-y-0", "duration-150");
+        navbarRef.current?.classList.add("-translate-y-full", "duration-150");
       } else {
         // When showing the navbar
         navbarRef.current?.classList.remove(
-          "transform",
           "-translate-y-full",
-          "transition-transform",
           "duration-150"
         );
-        navbarRef.current?.classList.add(
-          "transform",
-          "translate-y-0",
-          "transition-transform",
-          "duration-150"
-        );
-        // setNavClass(
-        // 	"transform translate-y-0 transition-transform duration-300"
-        // );
+        navbarRef.current?.classList.add("translate-y-0", "duration-150");
       }
       lastScrollTopRef.current = st <= 0 ? 0 : st;
     }
@@ -84,15 +61,12 @@ export default function UserNavigation({}: Props) {
   const { userId } = useAuth();
   return (
     <>
-      {/* <SignedOut> */}
       <LoginWrapper signIn>
         <li className="my-auto font-medium cursor-pointer">Sign In</li>
       </LoginWrapper>
-
       <LoginWrapper signUp>
         <li className="my-auto font-medium cursor-pointer">Sign Up</li>
       </LoginWrapper>
-
       <SignedIn>
         <Link
           className="cursor-pointer flex items-center"
@@ -103,7 +77,7 @@ export default function UserNavigation({}: Props) {
         <li>
           <UserButton />
         </li>
-      </SignedIn>
+      </SignedIn>{" "}
     </>
   );
 }

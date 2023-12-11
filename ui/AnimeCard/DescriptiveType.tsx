@@ -1,37 +1,56 @@
 "use client";
 
 import { useState, useRef } from "react";
-
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router"; // Corrected import
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image"; // Assuming Image is from 'next/image'
-import YouTube from "react-youtube"; // Assuming YouTube component from 'react-youtube'
+import Image from "next/image";
+import YouTube from "react-youtube";
 
 import { getEmoji, getMonthName } from "@/util";
-
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
 import Modal from "../Modal";
 import { BookmarkIcon } from "@radix-ui/react-icons";
-import { Button } from "@radix-ui/themes";
 import AddToListForm from "./Modal/AddToListForm";
 
-const DescriptiveType = ({ media, isCardHovered }) => {
+type Media = {
+  id?: string;
+  coverImage: { large: string };
+  title: { english?: string; native?: string };
+  studios?: { nodes?: Array<{ name: string }> };
+  episodes?: number;
+  startDate?: { month?: number; day?: number; year?: number };
+  description?: string;
+  genres?: string[];
+  status?: string;
+  season?: string;
+  seasonYear?: number;
+  trailer?: { id?: string; site?: string; thumbnail: string };
+  nextAiringEpisode?: { timeUntilAiring: number };
+  averageScore?: number;
+};
+
+type Props = {
+  media: Media;
+  isCardHovered: boolean;
+};
+
+const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
 
   const [isAnimeHoverOptionsHovered, setIsAnimeHoverOptionsHovered] =
     useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [thumbnailBounds, setThumbnailBounds] = useState(null);
+  const [thumbnailBounds, setThumbnailBounds] = useState<DOMRect | null>(null);
   const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
 
-  const thumbnailRef = useRef(null);
-  const addToListRef = useRef(null);
+  const thumbnailRef = useRef<HTMLImageElement>(null);
+  const addToListRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
 
-  const studioName = media?.studios?.nodes[0]?.name || "Unknown";
+  const studioName = media?.studios?.nodes?.[0]?.name || "Unknown";
 
   const {
     episodes,
@@ -56,7 +75,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
   const { id, site, thumbnail } = trailer || {
     id: null,
     site: null,
-    thumbnail: null,
+    thumbnail: "",
   };
   const likedPercentage = media?.averageScore;
 
@@ -67,9 +86,10 @@ const DescriptiveType = ({ media, isCardHovered }) => {
   };
 
   const handleTrailerClick = () => {
-    if (thumbnailRef.current === null) return;
-    setThumbnailBounds(thumbnailRef.current.getBoundingClientRect());
-    setIsExpanded(true);
+    if (thumbnailRef.current != null) {
+      setThumbnailBounds(thumbnailRef.current.getBoundingClientRect());
+      setIsExpanded(true);
+    }
 
     if (!isThumbnailVisible) setIsThumbnailVisible(true);
 
@@ -144,7 +164,8 @@ const DescriptiveType = ({ media, isCardHovered }) => {
                       {episodes
                         ? `${episodes} episodes aired in `
                         : "Ongoing, aired in "}
-                      {season?.split("")[0] + season?.slice(1).toLowerCase()}
+                      {!!season &&
+                        season?.split("")[0] + season?.slice(1).toLowerCase()}
                     </h6>
                   </div>
                   <div className="flex gap-1 text-lg">
@@ -187,7 +208,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
                 dangerouslySetInnerHTML={
                   !isCardHovered
                     ? { __html: truncatedDescription + "..." }
-                    : { __html: description }
+                    : { __html: description || "" }
                 }
               ></div>
             </div>
@@ -210,9 +231,15 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               {/* <AnimeHoverOptions /> */}
               <button
                 className="bg-white p-4 rounded-full cursor-pointer"
-                onClick={() =>
-                  document.getElementById("add_to_list_modal").showModal()
-                }
+                onClick={() => {
+                  const dialog = document.getElementById(
+                    "add_to_list_modal"
+                  ) as HTMLDialogElement | null;
+
+                  if (dialog) {
+                    dialog.showModal();
+                  }
+                }}
               >
                 <BookmarkIcon />
               </button>
@@ -269,7 +296,7 @@ const DescriptiveType = ({ media, isCardHovered }) => {
               className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
             >
               <YouTube
-                videoId={id}
+                videoId={id || ""}
                 opts={{
                   playerVars: {
                     autoplay: 1,

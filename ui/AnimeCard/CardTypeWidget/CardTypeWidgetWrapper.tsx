@@ -2,7 +2,14 @@
 
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
-export default function CardTypeWidgetWrapper({ cardType, children }) {
+type CardType = "card" | "descriptive" | "list";
+
+type Props = {
+  children: React.ReactNode;
+  cardType: CardType;
+};
+
+export default function CardTypeWidgetWrapper({ cardType, children }: Props) {
   const { handleCardType } = useCardTypeContext();
 
   return (

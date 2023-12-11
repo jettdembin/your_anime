@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
+
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
-// import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
-
 import Modal from "../Modal";
 import AddToListForm from "./Modal/AddToListForm";
-import { useAnimeDetails } from "@/graphql/queries";
+import { Media } from "@/types/anime";
 
-const ListType = ({ anime, index }: { anime?: {}; index: number }) => {
+const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const animeEpisodes = () =>
     anime?.episodes ? `${anime?.episodes} eps` : `Ongoing`;
 
@@ -85,9 +84,15 @@ const ListType = ({ anime, index }: { anime?: {}; index: number }) => {
       <div className="flex items-center">
         <button
           className="p-4 rounded-full cursor-pointer"
-          onClick={() =>
-            document.getElementById("add_to_list_modal").showModal()
-          }
+          onClick={() => {
+            const dialog = document.getElementById(
+              "add_to_list_modal"
+            ) as HTMLDialogElement | null;
+            if (dialog) {
+              dialog.showModal();
+            }
+            // document.getElementById("add_to_list_modal").showModal()
+          }}
         >
           <BookmarkIcon />
         </button>

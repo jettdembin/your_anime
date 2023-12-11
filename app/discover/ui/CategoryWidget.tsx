@@ -1,7 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
 import { useSearchContext } from "../context/SearchContext";
 
 const CategoryWidget = () => {
@@ -16,7 +14,7 @@ const CategoryWidget = () => {
         tabIndex={0}
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
       >
-        {categories?.map((category) => (
+        {categories?.map((category: { value: string; label: string }) => (
           <li
             key={category?.value}
             data-value={category?.value}

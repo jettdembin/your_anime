@@ -8,16 +8,10 @@ type Props = {
 };
 
 export default function FetchedAnime({ id, index }: Props) {
-  if (!id) return <ContentLoader />;
-
   const { error, loading, data } = useAnimeDetails(id);
 
   if (loading) {
     return <ContentLoader />;
-  }
-
-  if (data) {
-    console.log(data);
   }
 
   return (
