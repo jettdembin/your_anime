@@ -18,6 +18,7 @@ import FilterWidget from "@/app/discover/ui/FilterWidget";
 import CategoryWidget from "@/app/discover/ui/CategoryWidget";
 import CardTypeWidgetWrapper from "@/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
 import AnimeCard from "@/ui/AnimeCard";
+import { Media } from "@/types/anime";
 
 export default function Discover() {
   const searchParams = useSearchParams();
@@ -28,10 +29,11 @@ export default function Discover() {
   // const isTrending = searchParams?.get("page") === "trending";
 
   const [page, setPage] = useState(1);
-  const [media, setMedia] = useState([]);
+  const [media, setMedia] = useState<Media[]>([]);
 
   const { error, loading, data } = useViewAll(1, 50); // Updated to accept page as a parameter
-  const { data: searchData } = useSearchContext();
+  const { data: searchData }: { data: { Page: { media: Media[] } } } =
+    useSearchContext();
 
   useEffect(() => {
     if (data && data.Page && data.Page.media) {
