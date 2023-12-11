@@ -2,15 +2,16 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-import { debounce } from "@/util";
-
 import { BoxIcon, DashboardIcon, ListBulletIcon } from "@radix-ui/react-icons";
 
-import { CardTypeProvider } from "@/context/CardTypeContext";
+import { debounce } from "@/util";
+import { Media } from "@/types/anime";
 
 import { useSearchParams } from "next/navigation";
 import { useSearchContext } from "./context/SearchContext";
 import { useViewAll } from "@/app/discover/hooks/useViewAll";
+
+import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 import { CardSectionLoader } from "@/ui/LoadingSection";
@@ -18,7 +19,6 @@ import FilterWidget from "@/app/discover/ui/FilterWidget";
 import CategoryWidget from "@/app/discover/ui/CategoryWidget";
 import CardTypeWidgetWrapper from "@/ui/AnimeCard/CardTypeWidget/CardTypeWidgetWrapper";
 import AnimeCard from "@/ui/AnimeCard";
-import { Media } from "@/types/anime";
 
 export default function Discover() {
   const searchParams = useSearchParams();

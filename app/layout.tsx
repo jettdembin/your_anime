@@ -9,7 +9,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
 import { ToastContainer } from "react-toastify";
-// In your main file, likely App.js or index.js
 import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
