@@ -1,12 +1,23 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import { currentUser } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 
 import UserProfile from "./components/UserProfile";
 
+export const dynamic = "force-dynamic";
+
+type UserType = {
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  name?: string;
+  email: any;
+  emailAddresses?: any;
+};
+
 // Function to either fetch user data or create a new user if they don't exist
-async function getUserDataOrCreateUser(user) {
+async function getUserDataOrCreateUser(user: UserType | null) {
   const { id } = user || {};
   try {
     // Attempt to get the user's account data
@@ -22,9 +33,10 @@ async function getUserDataOrCreateUser(user) {
     // If successful, return the account data
     return accountDataResponse.data;
   } catch (error) {
+    const axiosError = error as AxiosError | any;
     // If user does not exist, create the user
-    if (error.response?.createUser) {
-      const userData = {
+    if (axiosError.response && axiosError.response.data.createUser) {
+      const userData: UserType = {
         id,
         name: `${user?.firstName} ${user?.lastName}`, // Use actual names from your user context
         email: user?.emailAddresses[0]?.emailAddress, // Use actual email from your user context
@@ -41,15 +53,15 @@ async function getUserDataOrCreateUser(user) {
 }
 
 export default async function Dashboard() {
-  const user = await currentUser();
+  const user: any = await currentUser();
 
   const userData = await getUserDataOrCreateUser(user);
 
   return (
     <div>
       <header className="text-white">
+        className="hero height-[400px]"
         <div
-          className="hero height-[400px]"
           style={{
             backgroundImage:
               "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
@@ -113,7 +125,6 @@ export default async function Dashboard() {
           </div>
         </div>
       </header>
-
       <main>
         <div className="container mx-auto py-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

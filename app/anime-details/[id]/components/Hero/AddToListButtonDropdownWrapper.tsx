@@ -6,7 +6,7 @@ import { Button } from "@radix-ui/themes";
 
 type Props = {};
 
-export default function AddToListButtonWrapper({ handleAddToList }: Props) {
+export default function AddToListButtonWrapper({}: Props) {
   return (
     <>
       <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">

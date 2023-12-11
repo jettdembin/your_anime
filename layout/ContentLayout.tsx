@@ -5,12 +5,13 @@ type ContentLayoutProps = {
   children: React.ReactNode;
   title: string;
   category: string;
+  href: string;
 };
-
 export const ContentLayout = ({
   children,
   title,
   category,
+  href,
 }: ContentLayoutProps) => {
   return (
     <section className="xl:mt-16">
@@ -18,7 +19,7 @@ export const ContentLayout = ({
         <ContentContainer className="flex items-end justify-between">
           <h1 className="text-lg font-semibold text-gray-900">{title}</h1>
           <Link
-            href={`/discover?category=${category}`}
+            href={href || `/discover?category=${category}`}
             className="cursor-pointer flex items-center"
           >
             <h6 className="text-xs font-semibold text-gray-400 transition-colors hover:text-gray-600 ">

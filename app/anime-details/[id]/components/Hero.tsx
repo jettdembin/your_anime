@@ -1,19 +1,24 @@
+import { Media } from "@/types/anime";
+
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
 import HeroDescription from "./Hero/HeroDescription";
 
 type Props = {
-  anime: {
-    bannerImage: string;
-    coverImage: {
-      extraLarge: string;
-    };
-    title: {
-      english: string;
-    };
-    description: string;
-  };
+  anime: Media;
+  params: { id: string };
 };
+// anime: {
+//   bannerImage: string;
+//   coverImage: {
+//     extraLarge: string;
+//   };
+//   title: {
+//     english: string;
+//   };
+//   description: string;
+// };
+// };
 
 export default function Hero({ anime, params }: Props) {
   return (
@@ -52,10 +57,7 @@ export default function Hero({ anime, params }: Props) {
               className="grid my-5 gap-4"
               style={{ gridTemplateColumns: "auto 35px" }}
             >
-              <AddToListButtonWrapper
-                params={params}
-                english={anime.title.english || ""}
-              />
+              <AddToListButtonWrapper />
               <AddToLikesButtonWrapper
                 params={params}
                 english={anime.title.english || ""}
@@ -65,7 +67,7 @@ export default function Hero({ anime, params }: Props) {
 
           <div className="pt-6 pb-4">
             <h2 className="text-3xl mb-2">{anime.title.english}</h2>
-            <HeroDescription description={anime.description} />
+            <HeroDescription description={anime?.description || ""} />
           </div>
         </div>
       </div>

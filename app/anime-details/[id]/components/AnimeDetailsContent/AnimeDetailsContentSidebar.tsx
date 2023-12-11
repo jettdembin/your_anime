@@ -1,6 +1,6 @@
-import React from "react";
+import { Media } from "@/types/anime";
 
-type Props = {};
+type Props = { tags: [{}]; anime: Media };
 
 export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
   const animeRating = (

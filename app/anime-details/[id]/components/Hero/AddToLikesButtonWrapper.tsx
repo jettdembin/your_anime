@@ -10,9 +10,9 @@ import LikesForm from "./AddToLikesButtonWrapper/LikesForm";
 type Props = { params: { id: string }; english: string };
 
 export default function AddToLikesButtonWrapper({ params, english }: Props) {
-  const { userId }: { userId: string | null } = useAuth();
+  const { userId }: any = useAuth();
 
-  const handleAddToLikes = async (formData) => {
+  const handleAddToLikes = async () => {
     // e.preventDefault();
     // const formData = new FormData(e.currentTarget);
     // const rating = formData.get("rating-10");
@@ -36,7 +36,7 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
         autoClose: 5000,
         closeOnClick: true,
       });
-    } catch (error) {
+    } catch (error: unknown) {
       let errorMessage = "Failed to add like";
       if (error?.response && error.response.status === 409) {
         errorMessage = error?.response.data.message;

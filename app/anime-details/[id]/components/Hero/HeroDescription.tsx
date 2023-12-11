@@ -10,7 +10,7 @@ export default function HeroDescription({ description }: Props) {
   const animeDescriptionRef = useRef(null);
 
   useEffect(() => {
-    if (animeDescriptionRef.current) {
+    if (animeDescriptionRef?.current) {
       animeDescriptionRef.current.innerHTML = description;
     }
   }, [description]);

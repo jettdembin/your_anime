@@ -85,7 +85,7 @@ const DraggableList = ({ topAnimes }) => {
       <Droppable droppableId="likes" type="group">
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {sortedLikes?.map((like, index) => (
+            {sortedLikes?.slice(0, 10)?.map((like, index) => (
               <Draggable key={like.id} draggableId={like.id} index={index}>
                 {(provided) => (
                   <li

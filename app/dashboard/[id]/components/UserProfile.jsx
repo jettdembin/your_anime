@@ -7,6 +7,7 @@ import { CardTypeProvider } from "@/context/CardTypeContext";
 import { useAuthContext } from "@/context/AuthContext";
 
 import Top10Likes from "./UserProfile/Top10Likes";
+import { ContentLayout } from "@/layout/ContentLayout";
 
 const UserProfile = ({ data }) => {
   const { setAuth } = useAuthContext();
@@ -16,7 +17,6 @@ const UserProfile = ({ data }) => {
   }, [data, setAuth]);
 
   const { likes, topAnimes } = data || {};
-  // debugger;
 
   return (
     <div>
@@ -31,11 +31,11 @@ const UserProfile = ({ data }) => {
         </div>
       </section>
 
-      <section>
+      <ContentLayout title="YOUR TOP 10 ANIME 🤩">
         <CardTypeProvider type="list">
           <Top10Likes likes={likes} topAnimes={topAnimes} />
         </CardTypeProvider>
-      </section>
+      </ContentLayout>
     </div>
   );
 };
