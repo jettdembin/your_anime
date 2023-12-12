@@ -6,8 +6,9 @@ type ContentLayoutProps = {
   children: React.ReactNode;
   title: string;
   category: string;
-  href: string;
+  href?: string;
 };
+
 export const ContentLayout = ({
   children,
   title,
