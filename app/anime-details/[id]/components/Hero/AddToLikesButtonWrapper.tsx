@@ -36,7 +36,7 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
         autoClose: 5000,
         closeOnClick: true,
       });
-    } catch (error: unknown) {
+    } catch (error: any) {
       let errorMessage = "Failed to add like";
       if (error?.response && error.response.status === 409) {
         errorMessage = error?.response.data.message;

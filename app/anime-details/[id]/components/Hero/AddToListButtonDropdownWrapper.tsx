@@ -1,12 +1,20 @@
-// import { watchOptions } from "@/consts";
+import { BookmarkIcon } from "@radix-ui/react-icons";
+
 import AddToListForm from "@/ui/AnimeCard/Modal/AddToListForm";
 import Modal from "@/ui/Modal";
-import { BookmarkIcon } from "@radix-ui/react-icons";
-import { Button } from "@radix-ui/themes";
 
 type Props = {};
 
 export default function AddToListButtonWrapper({}: Props) {
+  const showModal = () => {
+    const modalElement = document.getElementById(
+      "add_to_list_modal"
+    ) as HTMLDialogElement | null;
+    if (modalElement) {
+      modalElement.showModal();
+    }
+  };
+
   return (
     <>
       <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
@@ -14,7 +22,7 @@ export default function AddToListButtonWrapper({}: Props) {
           tabIndex={0}
           className="flex items-center w-full p-2 bg-blue-200 rounded-sm cursor-pointer relative"
           onClick={() => {
-            document.getElementById("add_to_list_modal").showModal();
+            showModal();
           }}
         >
           <div className="w-full flex items-center justify-end py-2">
@@ -25,7 +33,7 @@ export default function AddToListButtonWrapper({}: Props) {
               className="relative bottom-[.1px] w-2 h-2"
               onClick={(e) => {
                 e.stopPropagation(); // Prevents the modal from opening twice
-                document.getElementById("add_to_list_modal").showModal();
+                showModal();
               }}
             />
           </div>
