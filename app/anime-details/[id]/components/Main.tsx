@@ -16,7 +16,7 @@ export const Main = ({
 }: {
   params: { id: string; userId: string };
 }) => {
-  const { error, loading, data } = useAnimeDetails(params.id);
+  const { error, loading, data } = useAnimeDetails(Number(params?.id) || null);
 
   const anime: Media = data?.Media || {};
 
