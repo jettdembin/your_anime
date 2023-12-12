@@ -1,22 +1,32 @@
 "use client";
 
 import { useRef } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import useClickOutside from "@/hooks/useClickOutside";
-
 import LikesForm from "./LikesForm";
 
-type Props = {};
+// Assuming 'params' and 'english' are passed as props or obtained from a context
+type Props = {
+  params: { id: string }; // Example type, adjust as necessary
+  english: string; // Example type, adjust as necessary
+  auth: { id: string }; // Example type, adjust as necessary
+};
 
-export default function AddToLikesButton({}: Props) {
-  //listens to user click to close div if button click not contained in div
-  const ratingModalRef = useRef(null);
+export default function AddToLikesButton({ params, english, auth }: Props) {
+  const ratingModalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(ratingModalRef, () => {
-    document.getElementById("my_modal_2").close();
+    const modalElement = document.getElementById(
+      "my_modal_2"
+    ) as HTMLDialogElement | null;
+    if (modalElement) {
+      modalElement.close();
+    }
   });
 
-  const handleAddToLikes = async (e) => {
+  const handleAddToLikes = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const rating = formData.get("rating-10");
@@ -28,7 +38,6 @@ export default function AddToLikesButton({}: Props) {
       rating: Number(rating) ?? 5,
     };
 
-    // Show a loading toast first
     const toastId = toast.loading("Adding your like...");
 
     try {
@@ -39,7 +48,7 @@ export default function AddToLikesButton({}: Props) {
         isLoading: false,
         autoClose: 5000,
       });
-    } catch (error) {
+    } catch (error: any) {
       let errorMessage = error.response?.data?.message || "Failed to add like";
       toast.update(toastId, {
         render: errorMessage,
@@ -56,10 +65,13 @@ export default function AddToLikesButton({}: Props) {
         Add to Favorites with a Rating !! 🐱‍🏍
       </h3>
       <div className="mt-4">
-        <LikesForm />
+        <LikesForm english={""} id={""} modalId={""} />
       </div>
-      <form method="dialog" className="modal-backdrop">
-        {/* if there is a button in form, it will close the modal */}
+      <form
+        method="dialog"
+        className="modal-backdrop"
+        onSubmit={handleAddToLikes}
+      >
         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white">
           ✕
         </button>

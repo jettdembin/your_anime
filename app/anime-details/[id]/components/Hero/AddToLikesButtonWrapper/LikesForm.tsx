@@ -8,11 +8,11 @@ import { toast } from "react-toastify";
 type Props = { english: string; id: string; modalId: string };
 
 export default function Form({ english, id }: Props) {
-  const { userId }: { userId: string | null } = useAuth();
+  const { userId }: { userId: any } = useAuth();
 
-  const handleAddToLikes = async (formData) => {
+  const handleAddToLikes = async (formData: any) => {
     // e.preventDefault();
-    // const formData = new FormData(e.currentTarget);
+    // const formData = new FormData(e.currentTarget): void;
     const rating = formData.get("rating-10");
 
     const likeData = {
@@ -34,7 +34,7 @@ export default function Form({ english, id }: Props) {
         autoClose: 5000,
         closeOnClick: true,
       });
-    } catch (error) {
+    } catch (error: any) {
       let errorMessage = "Failed to add like";
       if (error?.response && error.response.status === 409) {
         errorMessage = error?.response.data.message;
@@ -53,7 +53,7 @@ export default function Form({ english, id }: Props) {
   };
 
   return (
-    <form className="modal-backdrop" action={handleAddToLikes}>
+    <form className="modal-backdrop" onSubmit={handleAddToLikes}>
       <div className="rating rating-lg rating-half">
         <input type="radio" name="rating-10" className="rating-hidden" />
         <input
@@ -124,7 +124,15 @@ export default function Form({ english, id }: Props) {
           className="btn"
           type="submit"
           onClick={() => {
-            document.getElementById("my_modal_2").close();
+            const closeModal = () => {
+              const modalElement = document.getElementById(
+                "my_modal_2"
+              ) as HTMLDialogElement | null;
+              if (modalElement) {
+                modalElement.close();
+              }
+            };
+            closeModal();
           }}
         >
           Add
