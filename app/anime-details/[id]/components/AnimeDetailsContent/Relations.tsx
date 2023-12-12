@@ -12,7 +12,7 @@ export default function Relations({ anime, relations }: Props) {
     <section>
       <h3 className="text-base mb-2">Relations</h3>
       <div className="flex flex-col space-y-4">
-        {relations?.map((relation, index) => (
+        {relations?.map((relation: any, index: number) => (
           <div
             key={index}
             className="grid bg-white"
