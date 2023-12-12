@@ -2,6 +2,7 @@ export interface Title {
   english?: string;
   native?: string;
   romaji?: string;
+  userPreferred?: string;
 }
 
 export interface DateProps {
@@ -13,6 +14,13 @@ export interface DateProps {
 export interface CoverImage {
   medium?: string;
   large?: string;
+  extraLarge?: string;
+}
+
+export interface Relations {
+  title: Title;
+  type: string;
+  status: string;
 }
 
 export interface AiringSchedule {

@@ -1,7 +1,11 @@
 import Image from "next/image";
-import React from "react";
 
-type Props = {};
+import { Media, Relations } from "@/types/anime";
+
+type Props = {
+  anime: Media;
+  relations: Relations[];
+};
 
 export default function Relations({ anime, relations }: Props) {
   return (
@@ -19,8 +23,8 @@ export default function Relations({ anime, relations }: Props) {
                 layout="fill"
                 objectFit="cover"
                 className="rounded-sm" // className="w-full object-cover rounded-sm"
-                src={anime.coverImage.extraLarge}
-                alt={anime.title.english}
+                src={anime.coverImage.extraLarge || ""}
+                alt={anime.title.english || "image description"}
               />
             </div>
             <div className="p-4 flex flex-col">
