@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function HeroDescription({ description }: Props) {
-  const animeDescriptionRef = useRef(null);
+  const animeDescriptionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (animeDescriptionRef?.current) {

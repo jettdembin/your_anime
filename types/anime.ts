@@ -67,6 +67,7 @@ export interface Media {
     site: string;
     thumbnail: string;
   };
+  bannerImage: string;
   tags?: [];
   relations?: Relations;
   characters?: Characters;
