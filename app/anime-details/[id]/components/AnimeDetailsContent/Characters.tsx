@@ -12,13 +12,13 @@ type Props = {
   };
 };
 
-export default function Characters({ characters, anime }: Props) {
+export default function Characters({ characters, anime }: any) {
   return (
     <section>
       <h3 className="text-base mb-2">Characters</h3>
 
       <div className="grid grid-cols-2 gap-8">
-        {characters?.map((character, index) => (
+        {characters?.map((character: any, index: number) => (
           <div
             key={index}
             className="grid bg-white"

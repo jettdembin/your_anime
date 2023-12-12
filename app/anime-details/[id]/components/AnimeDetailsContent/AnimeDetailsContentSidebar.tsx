@@ -1,6 +1,6 @@
 import { Media } from "@/types/anime";
 
-type Props = { tags: [{}]; anime: Media };
+type Props = { tags: any; anime: any };
 
 export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
   const animeRating = (

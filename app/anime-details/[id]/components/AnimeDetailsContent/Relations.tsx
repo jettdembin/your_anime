@@ -4,7 +4,7 @@ import { Media, Relations } from "@/types/anime";
 
 type Props = {
   anime: Media;
-  relations: Relations[];
+  relations: any;
 };
 
 export default function Relations({ anime, relations }: Props) {

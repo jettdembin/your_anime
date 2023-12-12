@@ -16,13 +16,26 @@ export interface CoverImage {
   large?: string;
   extraLarge?: string;
 }
-
-export interface Relations {
+export interface Relation {
   title: Title;
   type: string;
   status: string;
 }
 
+export interface Relations {
+  nodes?: Relation[];
+}
+
+export interface Character {
+  name: string;
+  image: {
+    large: string;
+  };
+}
+
+export interface Characters {
+  nodes: Character[];
+}
 export interface AiringSchedule {
   timeUntilAiring: number;
   episode: number | null;
@@ -48,6 +61,9 @@ export interface Media {
     site: string;
     thumbnail: string;
   };
+  tags?: [];
+  relations?: Relations;
+  characters?: Characters;
   status?: string;
   startDate?: DateProps;
   endDate?: DateProps;
