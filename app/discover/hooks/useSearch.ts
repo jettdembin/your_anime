@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router"; // Corrected from 'next/navigation' to 'next/router'
+import { useRouter } from "next/navigation"; // Corrected from 'next/navigation' to 'next/router'
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 import { GET_TRENDING } from "@/graphql/queries";
 
@@ -75,14 +75,15 @@ const useSearch = (userSearch: UserSearch) => {
     }
   };
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newParams = new URLSearchParams(window?.location?.search);
 
     newParams.set("search", e.target.value);
     const newURL = `/discover?${newParams.toString()}`;
-    router.push(newURL, undefined, {
-      shallow: true,
-    });
+    router.push(newURL, undefined);
+    // router.push(newURL, undefined, {
+    //   shallow: true,
+    // });
 
     setSearchValues((prev) => ({
       ...prev,
