@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.16.0",
+    "@types/react-beautiful-dnd": "^13.1.7",
     "autoprefixer": "^10.4.13",
     "babel-plugin-inline-react-svg": "^2.0.2",
     "daisyui": "^3.7.7",

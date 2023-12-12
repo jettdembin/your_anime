@@ -7,11 +7,11 @@ import { toast } from "react-toastify";
 // import ListType from "@/ui/AnimeCard/ListType";
 import FetchedAnime from "./DraggableList/FetchedAnime";
 
-const DraggableList = ({ topAnimes }) => {
+const DraggableList = ({ topAnimes }: any) => {
   const [sortedLikes, setSortedLikes] = useState(topAnimes);
   const isPastInitialRenderRef = useRef(false);
 
-  const handleDragAndDrop = (results) => {
+  const handleDragAndDrop = (results: any) => {
     const { source, destination } = results;
 
     if (!destination) return;
@@ -32,7 +32,7 @@ const DraggableList = ({ topAnimes }) => {
   useEffect(() => {
     let ignore = false;
 
-    const updateLikesOrderOnServer = async (updatedLikes) => {
+    const updateLikesOrderOnServer = async (updatedLikes: any) => {
       const toastId = toast.loading("Updating ranking...");
 
       try {
@@ -59,7 +59,7 @@ const DraggableList = ({ topAnimes }) => {
         } else {
           throw new Error("Server responded with an error!");
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error updating likes order:", error);
         toast.update(toastId, {
           render: `Error: ${error.message || "Failed to update ranking"}`,
@@ -85,7 +85,7 @@ const DraggableList = ({ topAnimes }) => {
       <Droppable droppableId="likes" type="group">
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {sortedLikes?.slice(0, 10)?.map((like, index) => (
+            {sortedLikes?.slice(0, 10)?.map((like: any, index: number) => (
               <Draggable key={like.id} draggableId={like.id} index={index}>
                 {(provided) => (
                   <li
@@ -94,7 +94,7 @@ const DraggableList = ({ topAnimes }) => {
                     {...provided.dragHandleProps}
                   >
                     <FetchedAnime
-                      id={Number(like?.animeId) || ""}
+                      id={Number(like?.animeId) || null}
                       index={index}
                     />
                   </li>

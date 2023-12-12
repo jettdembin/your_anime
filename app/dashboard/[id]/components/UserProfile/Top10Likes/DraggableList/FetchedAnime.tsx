@@ -3,7 +3,7 @@ import ListType from "@/ui/AnimeCard/ListType";
 import ContentLoader from "react-content-loader";
 
 type Props = {
-  id: number;
+  id: number | null;
   index: number;
 };
 
