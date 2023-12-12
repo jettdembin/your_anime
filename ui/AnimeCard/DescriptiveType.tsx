@@ -1,17 +1,19 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useRouter } from "next/router"; // Corrected import
-import { AnimatePresence, motion } from "framer-motion";
+
+import { useRouter } from "next/navigation"; // Corrected import
 import Image from "next/image";
 import YouTube from "react-youtube";
+import { AnimatePresence, motion } from "framer-motion";
+
+import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { getEmoji, getMonthName } from "@/util";
+
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
-import AnimeHoverOptions from "./ListType/AnimeHoverOptions";
 import Modal from "../Modal";
-import { BookmarkIcon } from "@radix-ui/react-icons";
 import AddToListForm from "./Modal/AddToListForm";
 
 type Media = {

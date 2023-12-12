@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
 export const AnimeCardLayout = ({ children }) => {
