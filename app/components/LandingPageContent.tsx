@@ -6,11 +6,14 @@ import { useAuth } from "@clerk/nextjs";
 
 import { useAuthContext } from "@/context/AuthContext";
 
-type Props = {};
+type Props = {
+  children: React.ReactNode;
+};
 
-const LandingPageContent = ({ children }) => {
-  const { setAuth, auth } = useAuthContext();
+const LandingPageContent = ({ children }: Props) => {
   const { userId, isLoaded, isSignedIn } = useAuth();
+
+  const { setAuth, auth } = useAuthContext();
 
   useEffect(() => {
     if (isSignedIn && isLoaded && auth?.id !== userId) {
