@@ -55,7 +55,7 @@ const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
     seasonYear,
     trailer,
     title,
-  } = animeDetails;
+  } = animeDetails || {};
   // debugger;
 
   const currentlyAiring = (
@@ -73,7 +73,7 @@ const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
   const airedPreviously = (
     <h6 className="text-xs">
       {episodes ? `${episodes} episodes aired in` : "Ongoing, aired in "}
-      {season?.split("")[0] + season?.slice(1).toLowerCase()}
+      {!!season && season?.split("")[0] + season?.slice(1).toLowerCase()}
     </h6>
   );
 

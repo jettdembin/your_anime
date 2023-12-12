@@ -9,6 +9,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
+import { Media } from "@/types/anime";
+
 import { getEmoji, getMonthName } from "@/util";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
@@ -16,22 +18,22 @@ import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 import Modal from "../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 
-type Media = {
-  id?: string;
-  coverImage: { large: string };
-  title: { english?: string; native?: string };
-  studios?: { nodes?: Array<{ name: string }> };
-  episodes?: number;
-  startDate?: { month?: number; day?: number; year?: number };
-  description?: string;
-  genres?: string[];
-  status?: string;
-  season?: string;
-  seasonYear?: number;
-  trailer?: { id?: string; site?: string; thumbnail: string };
-  nextAiringEpisode?: { timeUntilAiring: number };
-  averageScore?: number;
-};
+// type Media = {
+//   id: string | number;
+//   coverImage: { large: string };
+//   title: { english?: string; native?: string };
+//   studios?: { nodes?: Array<{ name: string }> };
+//   episodes?: number;
+//   startDate?: { month?: number; day?: number; year?: number };
+//   description?: string;
+//   genres?: string[];
+//   status?: string;
+//   season?: string;
+//   seasonYear?: number;
+//   trailer?: { id?: string; site?: string; thumbnail: string };
+//   nextAiringEpisode?: { timeUntilAiring: number };
+//   averageScore?: number;
+// };
 
 type Props = {
   media: Media;

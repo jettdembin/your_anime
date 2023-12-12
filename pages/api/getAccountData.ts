@@ -2,44 +2,44 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/prisma/client";
 
 export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-	if (req.method === "GET") {
-		try {
-			const id = req.query.id as string;
+  if (req.method === "GET") {
+    try {
+      const id = req.query.id as string;
 
-			if (!id) {
-				return res.status(400).json({ error: "UserId is required" });
-			}
+      if (!id) {
+        return res.status(400).json({ error: "UserId is required" });
+      }
 
-			const userData = await prisma.user.findUnique({
-				where: { id },
-				include: {
-					likes: true,
-					topAnimes: true, // Assumes you have a relation 'likes' in your user model
-				},
-			});
+      const userData = await prisma.user.findUnique({
+        where: { id },
+        include: {
+          likes: true,
+          topAnimes: true, // Assumes you have a relation 'likes' in your user model
+        },
+      });
 
-			if (!userData) {
-				// Indicate that user data was not found and user needs to be created
-				return res
-					.status(404)
-					.json({ error: "User not found", createUser: true });
-			}
+      if (!userData) {
+        // Indicate that user data was not found and user needs to be created
+        return res
+          .status(404)
+          .json({ error: "User not found", createUser: true });
+      }
 
-			return res.status(200).json({
-				...userData,
-				likes: userData.likes.sort((a, b) => b.rating - a.rating),
-				topAnimes: userData.topAnimes.sort((a, b) => a.rank - b.rank),
-			});
-		} catch (err) {
-			console.error(err);
-			return res.status(500).json({ error: err.message });
-		}
-	} else {
-		return res.status(405).json({ error: "Method Not Allowed" });
-	}
+      return res.status(200).json({
+        ...userData,
+        likes: userData.likes.sort((a, b) => b.rating - a.rating),
+        topAnimes: userData.topAnimes.sort((a, b) => a.rank - b.rank),
+      });
+    } catch (err: any) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+  } else {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
 }
 
 // // api/getAccountData.ts

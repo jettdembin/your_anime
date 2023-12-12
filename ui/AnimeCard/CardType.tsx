@@ -1,10 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+
+import { Media } from "@/types/anime";
+
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
+
 import AnimeHoverCardDetails from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails";
 
-const CardType = ({ media, isLastCard, index }) => {
+type Props = {
+  media: Media;
+  isLastCard?: boolean;
+  index?: number;
+};
+
+const CardType = ({ media, isLastCard, index }: Props) => {
   const router = useRouter();
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
     useShowAnimeInfo();
