@@ -422,7 +422,7 @@ const MEDIA_FIELDS = gql`
     seasonYear
   }
 `;
-export const useAnimeDetails = (mediaId) => {
+export const useAnimeDetails = (mediaId: string) => {
   const { error, loading, data } = useQuery(GET_ANIME_DETAILS, {
     variables: {
       id: mediaId,

@@ -26,6 +26,12 @@ export interface Relations {
   nodes?: Relation[];
 }
 
+export interface Relation {
+  title: Title;
+  type: string;
+  status: string;
+}
+
 export interface Character {
   name: string;
   image: {

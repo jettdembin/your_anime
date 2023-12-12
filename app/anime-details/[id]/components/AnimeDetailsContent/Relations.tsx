@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import { Media, Relations } from "@/types/anime";
+import { Media, Relation } from "@/types/anime";
 
 type Props = {
   anime: Media;
-  relations: any;
+  relations: Relation[];
 };
 
 export default function Relations({ anime, relations }: Props) {
@@ -12,7 +12,7 @@ export default function Relations({ anime, relations }: Props) {
     <section>
       <h3 className="text-base mb-2">Relations</h3>
       <div className="flex flex-col space-y-4">
-        {relations?.map((relation: any, index: number) => (
+        {relations?.map((relation, index) => (
           <div
             key={index}
             className="grid bg-white"
@@ -22,7 +22,7 @@ export default function Relations({ anime, relations }: Props) {
               <Image
                 layout="fill"
                 objectFit="cover"
-                className="rounded-sm" // className="w-full object-cover rounded-sm"
+                className="rounded-sm"
                 src={anime.coverImage.extraLarge || ""}
                 alt={anime.title.english || "image description"}
               />
