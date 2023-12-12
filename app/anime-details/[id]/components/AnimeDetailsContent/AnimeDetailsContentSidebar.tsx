@@ -142,7 +142,7 @@ export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
     <div className="py-6">
       <h6>Tags</h6>
       <div className="relative space-y-4 pt-4">
-        {tags?.map((tag) => (
+        {tags?.map((tag: any) => (
           <div key={tag.name} className="px-3 py-2 bg-white rounded-sm">
             {tag.name}
           </div>

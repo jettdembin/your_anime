@@ -1,4 +1,5 @@
 import { Media } from "@/types/anime";
+
 import AnimeDetailsContentSidebar from "./AnimeDetailsContent/AnimeDetailsContentSidebar";
 import Relations from "./AnimeDetailsContent/Relations";
 import Characters from "./AnimeDetailsContent/Characters";
