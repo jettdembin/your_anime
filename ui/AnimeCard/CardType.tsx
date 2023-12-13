@@ -7,6 +7,7 @@ import { Media } from "@/types/anime";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import AnimeHoverCardDetails from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails";
+import Image from "next/image";
 
 type Props = {
   media: Media;
@@ -36,9 +37,10 @@ const CardType = ({ media, isLastCard, index }: Props) => {
       >
         <div className="relative">
           <div className="overflow-hidden max-h-[290px]">
-            <img
-              src={media.coverImage.large}
-              alt={media.title.english || media.title.native}
+            <Image
+              objectFit="cover"
+              src={media.coverImage.large || ""}
+              alt={media.title.english || media.title.native || ""}
               className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
             />
           </div>

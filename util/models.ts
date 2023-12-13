@@ -1,16 +1,14 @@
-import AnimeCard from "../components/Pages/Home/ui/AnimeCard";
-
 export type Anime = {
-	id: string;
-	attributes: {
-		canonicalTitle: string;
-		popularityRank: number;
-		startDate: string;
-		endDate: string;
-		posterImage: {
-			tiny?: string;
-			medium?: string;
-		};
-	};
-	handleAddToFavorites: (attributes: {}) => void;
+  id: string;
+  attributes: {
+    canonicalTitle: string;
+    popularityRank: number;
+    startDate: string;
+    endDate: string;
+    posterImage: {
+      tiny?: string;
+      medium?: string;
+    };
+  };
+  handleAddToFavorites: (attributes: {}) => void;
 };

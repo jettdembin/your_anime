@@ -43,17 +43,14 @@ export default function Discover() {
     }
   }, [data]);
 
-  const handleScroll = useCallback(
-    debounce(() => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 1000
-      ) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    }, 300),
-    []
-  ); // 300ms delay
+  const handleScroll = debounce(() => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 1000
+    ) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, 300);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

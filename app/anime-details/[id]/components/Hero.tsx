@@ -3,6 +3,7 @@ import { Media } from "@/types/anime";
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
 import HeroDescription from "./Hero/HeroDescription";
+import Image from "next/image";
 
 type Props = {
   anime: Media;
@@ -47,10 +48,11 @@ export default function Hero({ anime, params }: Props) {
         >
           <div className="relative -mt-32">
             <div className="static shadow-lg">
-              <img
+              <Image
+                objectFit="cover"
                 className="w-full object-cover rounded-sm"
-                src={anime.coverImage.extraLarge}
-                alt={anime.title.english}
+                src={anime.coverImage.extraLarge || ""}
+                alt={anime.title.english || ""}
               />
             </div>
             <div

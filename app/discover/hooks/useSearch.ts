@@ -59,7 +59,7 @@ const useSearch = (userSearch: UserSearch) => {
     if (!!query && gqlQuery !== query) {
       setGqlQuery(query);
     }
-  }, [query]);
+  }, [gqlQuery, query]);
 
   const { error, loading, data } = useAnilistAPI(gqlQuery ?? "", searchValues);
 

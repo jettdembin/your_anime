@@ -4,6 +4,7 @@ import { currentUser } from "@clerk/nextjs";
 // import { ToastContainer } from "react-toastify";
 
 import UserProfile from "./components/UserProfile";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -73,8 +74,10 @@ export default async function Dashboard() {
               <div className="w-full  py-4">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <div className="flex flex-col md:flex-row md:items-center">
-                    <img
-                      className="w-32 h-32 rounded-full mx-auto md:mx-0"
+                    <Image
+                      width={32}
+                      height={32}
+                      className="rounded-full mx-auto md:mx-0"
                       src="https://via.placeholder.com/150"
                       alt="User Avatar"
                     />

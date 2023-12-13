@@ -18,9 +18,8 @@ const LandingPageContent = ({ children }: Props) => {
   useEffect(() => {
     if (isSignedIn && isLoaded && auth?.id !== userId) {
       setAuth(userId);
-      debugger;
     }
-  }, [isSignedIn, isLoaded, userId]);
+  }, [isSignedIn, isLoaded, auth?.id, userId, setAuth]);
 
   return <div>{children}</div>;
 };

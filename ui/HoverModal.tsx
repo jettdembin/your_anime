@@ -1,6 +1,11 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 
-const HoverModal = ({ children, Icon }) => {
+type Props = {
+  children: React.ReactNode;
+  Icon: React.ReactNode;
+};
+
+export default function HoverModal({ children, Icon }: Props) {
   return (
     <HoverCard.Root>
       <HoverCard.Trigger asChild>
@@ -19,6 +24,4 @@ const HoverModal = ({ children, Icon }) => {
       </HoverCard.Portal>
     </HoverCard.Root>
   );
-};
-
-export default HoverModal;
+}

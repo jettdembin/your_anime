@@ -9,6 +9,7 @@ import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 import Modal from "../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 import { Media } from "@/types/anime";
+import Image from "next/image";
 
 const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const animeEpisodes = () =>
@@ -35,9 +36,12 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           <tbody className="text-slate-800">
             <tr>
               <td className="w-1/6 lg:w-[10%] p-4">
-                <img
+                <Image
+                  width={20}
+                  height={28}
+                  objectFit="cover"
                   className="w-20 h-28 object-cover"
-                  src={anime?.coverImage?.medium}
+                  src={anime?.coverImage?.medium || ""}
                   alt={anime?.title?.english || "Anime Cover"}
                 />
               </td>
