@@ -9,7 +9,7 @@ export default function AddToListForm({}: Props) {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <label
-              for="library_editor_statusSelect"
+              htmlFor="library_editor_statusSelect"
               className="block text-sm font-medium text-gray-700"
             >
               Status
@@ -103,7 +103,7 @@ export default function AddToListForm({}: Props) {
               id="library_editor_notes"
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               name="notes"
-              rows="6"
+              rows={6}
             ></textarea>
             <small className="text-secondary">
               <span>Only visible to you</span>

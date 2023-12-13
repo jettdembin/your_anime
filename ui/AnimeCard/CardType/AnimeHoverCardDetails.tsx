@@ -5,32 +5,17 @@ import { getEmoji, convertTimeUntilAiring } from "@/util";
 
 import AnimeHoverCardDetailsWrapper from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
-interface AnimeDetailsProps {
-  episodes: number;
-  startDate: string;
-  description: string;
-  genres: [string];
-  status: string;
-  season: string;
-  seasonYear: string;
-  trailer: string;
-  title: string;
-}
-
-interface AnimeDetailsProps {
+type Props = {
   isVisible: boolean;
-  media: object;
   animeDetails: Media | null;
   isLastCard: boolean | undefined;
-  nextEpisodeDays: number | null;
-}
+};
 
-const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
+export default function AnimeHoverCardDetails({
   isVisible,
   animeDetails,
   isLastCard,
-  // media,
-}) => {
+}: Props) {
   const nextEpisodeDays = animeDetails?.nextAiringEpisode
     ? Math.floor(animeDetails.nextAiringEpisode.timeUntilAiring / 86400)
     : null;
@@ -132,6 +117,4 @@ const AnimeHoverCardDetails: React.FC<AnimeDetailsProps> = ({
       </div>
     </AnimeHoverCardDetailsWrapper>
   );
-};
-
-export default AnimeHoverCardDetails;
+}

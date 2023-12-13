@@ -1,8 +1,16 @@
 // creates animated wrapper for the anime card details to show left or right depending on amount of cards and its index
 
-import React from "react";
+type Props = {
+  children: React.ReactNode;
+  isLastCard?: boolean;
+  isVisible: boolean;
+};
 
-const AnimeHoverCardDetailsWrapper = ({ children, isLastCard, isVisible }) => {
+export default function AnimeHoverCardDetailsWrapper({
+  children,
+  isLastCard,
+  isVisible,
+}: Props) {
   return (
     <div
       className={`absolute w-80 overflow-hidden ${
@@ -14,6 +22,4 @@ const AnimeHoverCardDetailsWrapper = ({ children, isLastCard, isVisible }) => {
       {children}
     </div>
   );
-};
-
-export default AnimeHoverCardDetailsWrapper;
+}
