@@ -120,10 +120,10 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
       >
         <div className="relative">
           <div className="overflow-hidden max-h-[290px]">
-            <Image
+            <img
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}
-              objectFit="cover"
+              // objectFit="cover"
               className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 

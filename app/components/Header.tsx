@@ -20,13 +20,22 @@ export default function Header() {
             gridGap: "40px",
           }}
         >
-          <Image
-            width={100}
-            height={100}
-            src="https://anilist.co/img/landing/stats.svg"
-            alt="pic"
-            role="presentation"
-          />
+          <div className="relative">
+            <Image
+              objectFit="cover"
+              width={100}
+              height={100}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              // width={100}
+              // height={100}
+              src="https://anilist.co/img/landing/stats.svg"
+              alt="pic"
+              role="presentation"
+            />
+          </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-100">
               Discover your obsessions<span className="ml-2">🔎</span>
@@ -45,13 +54,20 @@ export default function Header() {
             gridGap: "40px",
           }}
         >
-          <Image
-            width={100}
-            height={100}
-            src="	https://anilist.co/img/landing/apps.svg"
-            alt="pic"
-            role="presentation"
-          />
+          <div className="relative">
+            <Image
+              objectFit="cover"
+              width={100}
+              height={100}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src="	https://anilist.co/img/landing/apps.svg"
+              alt="pic"
+              role="presentation"
+            />
+          </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-100">
               Bring YourAnime anywhere <span className="ml-2">🌎</span>
@@ -70,13 +86,20 @@ export default function Header() {
             gridGap: "40px",
           }}
         >
-          <Image
-            width={100}
-            height={100}
-            src="https://anilist.co/img/landing/social.svg"
-            alt="pic"
-            role="presentation"
-          />
+          <div className="relative">
+            <Image
+              objectFit="cover"
+              width={100}
+              height={100}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src="https://anilist.co/img/landing/social.svg"
+              alt="pic"
+              role="presentation"
+            />
+          </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-100">
               Join the conversation <span className="ml-2">📝</span>
@@ -95,13 +118,20 @@ export default function Header() {
             gridGap: "40px",
           }}
         >
-          <Image
-            width={100}
-            height={100}
-            src="https://anilist.co/img/landing/custom.svg"
-            alt="pic"
-            role="presentation"
-          />
+          <div className="relative">
+            <Image
+              objectFit="cover"
+              width={100}
+              height={100}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src="https://anilist.co/img/landing/custom.svg"
+              alt="pic"
+              role="presentation"
+            />
+          </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-100">
               Tweak it to your liking <span className="ml-2">💕</span>

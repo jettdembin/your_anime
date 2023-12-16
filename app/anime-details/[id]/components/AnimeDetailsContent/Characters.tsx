@@ -24,10 +24,15 @@ export default function Characters({ characters, anime }: any) {
             className="grid bg-white"
             style={{ gridTemplateColumns: "20% auto 20%" }}
           >
-            <div>
+            <div className="relative">
               <Image
-                layout="fill"
                 objectFit="cover"
+                width={100}
+                height={100}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
                 className="rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"
                 src={character.image.large}
@@ -42,10 +47,15 @@ export default function Characters({ characters, anime }: any) {
                 {character.name.full} - {character.name.full}
               </p>
             </div>
-            <div>
+            <div className="relative">
               <Image
-                layout="fill"
                 objectFit="cover"
+                width={100}
+                height={100}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
                 className="rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"
                 src={anime.coverImage.extraLarge}

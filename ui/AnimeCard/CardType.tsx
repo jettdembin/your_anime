@@ -37,12 +37,20 @@ const CardType = ({ media, isLastCard, index }: Props) => {
       >
         <div className="relative">
           <div className="overflow-hidden max-h-[290px]">
-            <Image
-              objectFit="cover"
-              src={media.coverImage.large || ""}
-              alt={media.title.english || media.title.native || ""}
-              className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
-            />
+            <div className="relative">
+              <Image
+                objectFit="cover"
+                width={100}
+                height={100}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+                src={media.coverImage.large || ""}
+                alt={media.title.english || media.title.native || ""}
+                className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
+              />
+            </div>
           </div>
         </div>
         {/* Title on screens up to large */}
