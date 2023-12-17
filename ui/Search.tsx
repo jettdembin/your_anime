@@ -79,19 +79,19 @@ export default function Search() {
         <div className="flex gap-8 mb-6">
           <input
             ref={navRef}
-            className="w-full px-6 py-4 shadow-custom focus:outline-none bg-white"
+            className="w-full px-6 py-4 shadow-custom focus:outline-none bg-white rounded-sm"
             placeholder="Search for anime..."
             type="text"
             name="search"
             value={searchValues["search"] || ""}
             onChange={handleSearch}
           />
-          <button
+          {/* <button
             className="py-2 px-4 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 bg-white border-none shadow-custom"
             onClick={() => setIsFilterVisible(!isFilterVisible)}
           >
             <span className="material-icons text-gray-800">menu</span>
-          </button>
+          </button> */}
           {/* {isFilterVisible && (
 						<div
 							ref={filterRef}

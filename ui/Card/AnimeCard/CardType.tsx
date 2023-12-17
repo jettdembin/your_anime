@@ -39,12 +39,10 @@ const CardType = ({ media, isLastCard, index }: Props) => {
           <div className="overflow-hidden max-h-[290px]">
             <div className="relative">
               <Image
-                objectFit="cover"
-                width={100}
-                height={100}
+                fill
                 style={{
                   width: "100%",
-                  height: "auto",
+                  objectFit: "cover",
                 }}
                 src={media.coverImage.large || ""}
                 alt={media.title.english || media.title.native || ""}

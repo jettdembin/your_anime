@@ -49,12 +49,10 @@ export default function Hero({ anime, params }: Props) {
           <div className="relative -mt-32">
             <div className="static shadow-lg">
               <Image
-                objectFit="cover"
-                width={100}
-                height={100}
+                fill
                 style={{
                   width: "100%",
-                  height: "auto",
+                  objectFit: "cover",
                 }}
                 className="w-full object-cover rounded-sm"
                 src={anime.coverImage.extraLarge || ""}

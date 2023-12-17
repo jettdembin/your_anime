@@ -26,12 +26,10 @@ export default function Characters({ characters, anime }: any) {
           >
             <div className="relative">
               <Image
-                objectFit="cover"
-                width={100}
-                height={100}
+                fill
                 style={{
                   width: "100%",
-                  height: "auto",
+                  objectFit: "cover",
                 }}
                 className="rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"
@@ -49,12 +47,10 @@ export default function Characters({ characters, anime }: any) {
             </div>
             <div className="relative">
               <Image
-                objectFit="cover"
-                width={100}
-                height={100}
+                fill
                 style={{
                   width: "100%",
-                  height: "auto",
+                  objectFit: "cover",
                 }}
                 className="rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"

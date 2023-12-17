@@ -21,7 +21,13 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["media.kitsu.io", "anilist.co", "s4.anilist.co", "i.ytimg.com"],
+    domains: [
+      "media.kitsu.io",
+      "anilist.co",
+      "s4.anilist.co",
+      "i.ytimg.com",
+      "via.placeholder.com",
+    ],
     // formats: ["image/avif", "image/webp"],
     // remotePatterns: [
     //   {

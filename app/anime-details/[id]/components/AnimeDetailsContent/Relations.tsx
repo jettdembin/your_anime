@@ -20,12 +20,10 @@ export default function Relations({ anime, relations }: Props) {
           >
             <div className="relative">
               <Image
-                objectFit="cover"
-                width={100}
-                height={100}
+                fill
                 style={{
                   width: "100%",
-                  height: "auto",
+                  objectFit: "cover",
                 }}
                 className="rounded-sm"
                 src={anime.coverImage.extraLarge || ""}

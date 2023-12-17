@@ -25,7 +25,7 @@ export default function AnimeCard({ like, index }) {
               <Image
                 w={20}
                 h={28}
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
                 // className="w-20 h-28 object-cover"
                 src={anime?.coverImage?.medium}
                 alt={anime?.title?.english || "Anime Cover"}

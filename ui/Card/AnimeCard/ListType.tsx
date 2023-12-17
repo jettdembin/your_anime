@@ -69,7 +69,6 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                 <Image
                   width={50}
                   height={62}
-                  objectFit="cover"
                   className="w-20 h-28 object-cover"
                   src={anime?.coverImage?.large || ""}
                   alt={anime?.title?.english || "Anime Cover"}

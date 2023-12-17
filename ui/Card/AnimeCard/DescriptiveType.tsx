@@ -109,7 +109,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
 
   const addToListButton = (
     <button
-      className="p-4 rounded-full cursor-pointer"
+      className="p-4 bg-white rounded-full cursor-pointer"
       onClick={() => {
         if (isSignedIn) {
           const dialog = document.getElementById(
@@ -225,11 +225,14 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     style={{ width: "175px", height: "75px" }}
                   >
                     <Image
+                      fill
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
                       ref={thumbnailRef}
                       src={thumbnail}
                       alt="Trailer Thumbnail"
-                      layout="fill"
-                      objectFit="cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <i className="fas fa-play text-white"></i>
@@ -296,11 +299,11 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
           >
             <Image
+              fill
+              style={{ width: "100%", objectFit: "cover" }}
               className={isThumbnailVisible ? "block" : "hidden"}
               src={thumbnail}
               alt="Trailer Thumbnail"
-              layout="fill"
-              objectFit="cover"
             />
           </motion.div>
         )}

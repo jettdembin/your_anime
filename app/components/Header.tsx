@@ -22,15 +22,11 @@ export default function Header() {
         >
           <div className="relative">
             <Image
-              objectFit="cover"
-              width={100}
-              height={100}
+              fill
               style={{
                 width: "100%",
-                height: "auto",
+                objectFit: "cover",
               }}
-              // width={100}
-              // height={100}
               src="https://anilist.co/img/landing/stats.svg"
               alt="pic"
               role="presentation"
@@ -56,12 +52,10 @@ export default function Header() {
         >
           <div className="relative">
             <Image
-              objectFit="cover"
-              width={100}
-              height={100}
+              fill
               style={{
                 width: "100%",
-                height: "auto",
+                objectFit: "cover",
               }}
               src="	https://anilist.co/img/landing/apps.svg"
               alt="pic"
@@ -88,12 +82,10 @@ export default function Header() {
         >
           <div className="relative">
             <Image
-              objectFit="cover"
-              width={100}
-              height={100}
+              fill
               style={{
                 width: "100%",
-                height: "auto",
+                objectFit: "cover",
               }}
               src="https://anilist.co/img/landing/social.svg"
               alt="pic"
@@ -120,12 +112,10 @@ export default function Header() {
         >
           <div className="relative">
             <Image
-              objectFit="cover"
-              width={100}
-              height={100}
+              fill
               style={{
                 width: "100%",
-                height: "auto",
+                objectFit: "cover",
               }}
               src="https://anilist.co/img/landing/custom.svg"
               alt="pic"
