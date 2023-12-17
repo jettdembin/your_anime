@@ -225,7 +225,8 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     style={{ width: "175px", height: "75px" }}
                   >
                     <Image
-                      fill
+                      width={175}
+                      height={75}
                       style={{
                         width: "100%",
                         objectFit: "cover",
