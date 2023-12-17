@@ -6,7 +6,7 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
-import AnimeCard from "@/ui/AnimeCard";
+import AnimeCard from "@/ui/Card/AnimeCard";
 import { CardSectionLoader } from "@/ui/LoadingSection";
 import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 

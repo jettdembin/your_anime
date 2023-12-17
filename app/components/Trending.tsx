@@ -9,7 +9,7 @@ import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { CardSectionLoader } from "@/ui/LoadingSection";
 import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
-import AnimeCard from "@/ui/AnimeCard";
+import AnimeCard from "@/ui/Card/AnimeCard";
 
 export default function Trending({}) {
   const { error, loading, data } = useAnilistAPI(GET_TRENDING);

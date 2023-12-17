@@ -2,7 +2,7 @@ import ContentLoader from "react-content-loader";
 
 import { useAnimeDetails } from "@/graphql/queries";
 
-import ListType from "@/ui/AnimeCard/ListType";
+import ListType from "@/ui/Card/AnimeCard/ListType";
 
 type Props = {
   id: number | null;

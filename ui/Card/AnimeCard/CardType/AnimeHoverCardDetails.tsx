@@ -3,7 +3,7 @@ import React from "react";
 import { Media } from "@/types/anime";
 import { getEmoji, convertTimeUntilAiring } from "@/util";
 
-import AnimeHoverCardDetailsWrapper from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
+import AnimeHoverCardDetailsWrapper from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
 type Props = {
   isVisible: boolean;

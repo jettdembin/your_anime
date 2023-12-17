@@ -15,8 +15,10 @@ import { getEmoji, getMonthName } from "@/util";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
-import Modal from "../Modal";
+import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
+import { useUser } from "@clerk/nextjs";
+import LoginWrapper from "@/ui/LoginWrapper";
 
 // type Media = {
 //   id: string | number;
@@ -41,6 +43,8 @@ type Props = {
 };
 
 const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
+  const { isSignedIn } = useUser();
+
   const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
 
   const [isAnimeHoverOptionsHovered, setIsAnimeHoverOptionsHovered] =
@@ -102,6 +106,32 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
       setIsThumbnailVisible(false);
     }, 500); // match the duration of the animation
   };
+
+  const addToListButton = (
+    <button
+      className="p-4 rounded-full cursor-pointer"
+      onClick={() => {
+        if (isSignedIn) {
+          const dialog = document.getElementById(
+            "add_to_list_modal"
+          ) as HTMLDialogElement | null;
+          if (dialog) {
+            dialog.showModal();
+          }
+        }
+        // document.getElementById("add_to_list_modal").showModal()
+      }}
+    >
+      <BookmarkIcon />
+    </button>
+  );
+
+  const isSignedInAddToListButton = () =>
+    isSignedIn ? (
+      addToListButton
+    ) : (
+      <LoginWrapper signIn>{addToListButton}</LoginWrapper>
+    );
 
   return (
     <>
@@ -234,20 +264,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
             >
               {/* <AnimeHoverOptions /> */}
-              <button
-                className="bg-white p-4 rounded-full cursor-pointer"
-                onClick={() => {
-                  const dialog = document.getElementById(
-                    "add_to_list_modal"
-                  ) as HTMLDialogElement | null;
-
-                  if (dialog) {
-                    dialog.showModal();
-                  }
-                }}
-              >
-                <BookmarkIcon />
-              </button>
+              {isSignedInAddToListButton()}
               <Modal id="add_to_list_modal">
                 <AddToListForm />
               </Modal>

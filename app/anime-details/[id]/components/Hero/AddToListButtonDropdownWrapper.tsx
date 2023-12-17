@@ -1,6 +1,6 @@
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
-import AddToListForm from "@/ui/AnimeCard/Modal/AddToListForm";
+import AddToListForm from "@/ui/Card/AnimeCard/Modal/AddToListForm";
 import Modal from "@/ui/Modal";
 
 type Props = {};

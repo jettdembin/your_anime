@@ -6,7 +6,7 @@ import { Media } from "@/types/anime";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
-import AnimeHoverCardDetails from "@/ui/AnimeCard/CardType/AnimeHoverCardDetails";
+import AnimeHoverCardDetails from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails";
 import Image from "next/image";
 
 type Props = {

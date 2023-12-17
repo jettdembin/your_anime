@@ -1,19 +1,49 @@
 "use client";
 
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
-import Modal from "../Modal";
+import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 import { Media } from "@/types/anime";
 import Image from "next/image";
+import LoginWrapper from "@/ui/LoginWrapper";
 
 const ListType = ({ anime, index }: { anime: Media; index: number }) => {
+  const { isSignedIn } = useUser();
+
   const animeEpisodes = () =>
     anime?.episodes ? `${anime?.episodes} eps` : `Ongoing`;
+
+  const addToListButton = (
+    <button
+      className="p-4 rounded-full cursor-pointer"
+      onClick={() => {
+        if (isSignedIn) {
+          const dialog = document.getElementById(
+            "add_to_list_modal"
+          ) as HTMLDialogElement | null;
+          if (dialog) {
+            dialog.showModal();
+          }
+        }
+        // document.getElementById("add_to_list_modal").showModal()
+      }}
+    >
+      <BookmarkIcon />
+    </button>
+  );
+
+  const isSignedInAddToListButton = () =>
+    isSignedIn ? (
+      addToListButton
+    ) : (
+      <LoginWrapper signIn>{addToListButton}</LoginWrapper>
+    );
 
   return (
     <li
@@ -37,11 +67,11 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
             <tr>
               <td className="w-1/6 lg:w-[10%] p-4">
                 <Image
-                  width={20}
-                  height={28}
+                  width={50}
+                  height={62}
                   objectFit="cover"
                   className="w-20 h-28 object-cover"
-                  src={anime?.coverImage?.medium || ""}
+                  src={anime?.coverImage?.large || ""}
                   alt={anime?.title?.english || "Anime Cover"}
                 />
               </td>
@@ -86,20 +116,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
         </table>
       </Link>
       <div className="flex items-center">
-        <button
-          className="p-4 rounded-full cursor-pointer"
-          onClick={() => {
-            const dialog = document.getElementById(
-              "add_to_list_modal"
-            ) as HTMLDialogElement | null;
-            if (dialog) {
-              dialog.showModal();
-            }
-            // document.getElementById("add_to_list_modal").showModal()
-          }}
-        >
-          <BookmarkIcon />
-        </button>
+        {isSignedInAddToListButton()}
         <Modal id="add_to_list_modal">
           <AddToListForm />
         </Modal>
