@@ -61,12 +61,18 @@ export default function UserNavigation({}: Props) {
   const { userId } = useAuth();
   return (
     <>
-      <LoginWrapper signIn>
-        <li className="my-auto font-medium cursor-pointer">Sign In</li>
-      </LoginWrapper>
-      <LoginWrapper signUp>
-        <li className="my-auto font-medium cursor-pointer">Sign Up</li>
-      </LoginWrapper>
+      <div className="flex items-center gap-4">
+        <LoginWrapper signIn>
+          <li className="my-auto font-medium cursor-pointer">Sign In</li>
+        </LoginWrapper>
+        <LoginWrapper signUp>
+          <li className="my-auto font-medium cursor-pointer">
+            <button className="btn btn-active bg-blue-500 hover:bg-blue-600 text-slate-100">
+              Sign Up
+            </button>
+          </li>
+        </LoginWrapper>
+      </div>
       <SignedIn>
         <Link
           className="cursor-pointer flex items-center"

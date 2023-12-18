@@ -17,6 +17,7 @@ const CategoryWidget = () => {
         {categories?.map((category: { value: string; label: string }) => (
           <li
             key={category?.value}
+            className="text-slate-100"
             data-value={category?.value}
             onClick={(e) => {
               const selectedCategory =

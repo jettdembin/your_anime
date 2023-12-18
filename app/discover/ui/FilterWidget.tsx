@@ -11,7 +11,7 @@ const FilterWidget = () => {
   // const [searchValue, setSearchValue] = useState(search);
   return (
     <div
-      className={`btn btn-active btn-neutral shadow rounded-box p-2 text-xs  rounded-md`}
+      className={`btn btn-active btn-neutral shadow rounded-md p-2 text-xs text-slate-100`}
     >
       <p className="font-semibold text-sm text-white">Search: {search}</p>
     </div>
