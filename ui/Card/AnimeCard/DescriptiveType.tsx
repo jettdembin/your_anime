@@ -157,7 +157,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 
-            <div className="block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
+            <div className="block z-20 w-full min-w-[220px] bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
               {/* used as a spacer for the opaque background */}
               <h3 className="opacity-0 text-white font-semibold text-base flex flex-col gap-2">
                 {media.title.english || media.title.native}
@@ -186,7 +186,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             <motion.div
               role="button"
               onClick={handleTrailerClick}
-              className="w-[201%] grid grid-cols-2"
+              className="w-[200%] grid grid-cols-2"
               animate={{
                 x: isCardHovered ? "-50%" : "0%",
               }}

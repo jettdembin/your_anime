@@ -10,8 +10,10 @@ const FilterWidget = () => {
 
   // const [searchValue, setSearchValue] = useState(search);
   return (
-    <div className={`p-2 text-xs ${search ? "bg-sky-400" : ""} rounded-md`}>
-      <h6 className="font-semibold text-white">Search: {search}</h6>
+    <div
+      className={`btn btn-active btn-neutral shadow rounded-box p-2 text-xs  rounded-md`}
+    >
+      <p className="font-semibold text-sm text-white">Search: {search}</p>
     </div>
   );
 };
