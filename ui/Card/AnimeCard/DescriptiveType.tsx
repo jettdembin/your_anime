@@ -20,23 +20,6 @@ import AddToListForm from "./Modal/AddToListForm";
 import { useUser } from "@clerk/nextjs";
 import LoginWrapper from "@/ui/LoginWrapper";
 
-// type Media = {
-//   id: string | number;
-//   coverImage: { large: string };
-//   title: { english?: string; native?: string };
-//   studios?: { nodes?: Array<{ name: string }> };
-//   episodes?: number;
-//   startDate?: { month?: number; day?: number; year?: number };
-//   description?: string;
-//   genres?: string[];
-//   status?: string;
-//   season?: string;
-//   seasonYear?: number;
-//   trailer?: { id?: string; site?: string; thumbnail: string };
-//   nextAiringEpisode?: { timeUntilAiring: number };
-//   averageScore?: number;
-// };
-
 type Props = {
   media: Media;
   isCardHovered: boolean;
@@ -106,7 +89,6 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
       setIsThumbnailVisible(false);
     }, 500); // match the duration of the animation
   };
-
   const addToListButton = (
     <button
       className="p-4 bg-white rounded-full cursor-pointer"
@@ -186,7 +168,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             <motion.div
               role="button"
               onClick={handleTrailerClick}
-              className="w-[201%] grid grid-cols-2"
+              className="w-[200%] grid grid-cols-2"
               animate={{
                 x: isCardHovered ? "-50%" : "0%",
               }}

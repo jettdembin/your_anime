@@ -1,16 +1,19 @@
 "use client";
 
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import Modal from "@/ui/Modal";
+import LoginWrapper from "@/ui/LoginWrapper";
 import LikesForm from "./AddToLikesButtonWrapper/LikesForm";
 
 type Props = { params: { id: string }; english: string };
 
 export default function AddToLikesButtonWrapper({ params, english }: Props) {
   const { userId }: any = useAuth();
+
+  const { isSignedIn } = useUser();
 
   const handleAddToLikes = async () => {
     // e.preventDefault();
@@ -54,24 +57,26 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
     }
   };
 
+  const addToLikesButton = (
+  <button className="py-2 bg-red-400 rounded-sm text-white w-full" onClick={() => isSignedIn && handleAddToLikes()}
+    // onClick={() => {
+    //   document.getElementById("add_to_likes_modal").showModal();
+    // }}
+  >
+    ♥
+  </button>)
+
+const isSignedInAddToListButton = () =>
+isSignedIn ? (
+  addToLikesButton
+) : (
+  <LoginWrapper signIn>{addToLikesButton}</LoginWrapper>
+);
+
+
   return (
-    <>
-      <button
-        className="py-2 bg-red-400 rounded-sm text-white"
-        onClick={handleAddToLikes}
-        // onClick={() => {
-        //   document.getElementById("add_to_likes_modal").showModal();
-        // }}
-      >
-        ♥
-      </button>
-      {/* <Modal id="add_to_likes_modal">
-        <LikesForm
-          english={english}
-          id={params?.id}
-          modalId="add_to_likes_modal"
-        />
-      </Modal> */}
-    </>
+    <div> 
+      {isSignedInAddToListButton()}
+    </div>
   );
 }
