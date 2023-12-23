@@ -2,20 +2,20 @@ export const metadata = {
   title: "Your Anime",
 };
 
-import { ContentLayout } from "@/layout/ContentLayout";
 import Header from "@/app/components/Header";
 import LandingPageContent from "@/app/components/LandingPageContent";
 import PopularAnime from "@/app/components/PopularAnime";
 import TopAnimeList from "@/app/components/TopAnimeList";
 import Trending from "@/app/components/Trending";
+import { ContentLayout } from "@/layout/ContentLayout";
 import Search from "@/ui/Search";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col">
       <Header />
 
-      <main className="max-w-7xl md:mx-20 xl:mx-auto relative">
+      <main className="relative">
         <LandingPageContent>
           <Search />
 

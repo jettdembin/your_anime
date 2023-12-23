@@ -3,13 +3,13 @@ import "@radix-ui/themes/styles.css";
 
 import Providers from "../util/providers";
 
-import { Inter } from "next/font/google";
-import { Theme } from "@radix-ui/themes";
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "../layout/Footer";
-import Navbar from "../layout/Navbar";
+import { Theme } from "@radix-ui/themes";
+import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../layout/Footer";
+import Navbar from "../layout/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
             <div className="flex flex-col h-screen">
               <Providers>
                 <Navbar />
-                <div className="pb-4 mt-20">{children}</div>
+                <div className="pb-4">{children}</div>
                 <Footer />
               </Providers>
             </div>

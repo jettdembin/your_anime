@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSearchContext } from "@/app/discover/context/SearchContext";
+import { ContentContainer } from "@/layout/ContentContainer";
 
 // Define a type for the category
 type Category = {
@@ -70,8 +70,8 @@ export default function Search() {
   }, [searchValues, router]);
 
   return (
-    <>
-      <section className="mt-16 mb-8">
+    <section className="mt-16 mb-8">
+      <ContentContainer>
         {/* <form onSubmit={() => {}}> */}
         <div className="mt-6">
           <h3 className="pb-4 text-3xl font-semibold text-gray-900">Browse</h3>
@@ -110,8 +110,8 @@ export default function Search() {
         </div>
 
         {/* </form> */}
-      </section>
-    </>
+      </ContentContainer>
+    </section>
   );
 }
 

@@ -9,9 +9,9 @@ export const AnimeCardLayout = ({ children }) => {
 
   // Define styles for different card types using TailwindCSS responsive utilities
   const styles = {
-    card: "grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4",
-    descriptive: "grid grid-cols-1 lg:grid-cols-2 gap-4",
-    list: "grid grid-cols-1 gap-4",
+    card: "w-full grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4",
+    descriptive: "w-full grid grid-cols-1 lg:grid-cols-2 gap-4",
+    list: "w-full grid grid-cols-1 gap-4",
   };
 
   return (

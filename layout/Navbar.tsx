@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import UserNavigation from "./Navbar/UserNavigation";
 import { ContentContainer } from "./ContentContainer";
+import UserNavigation from "./Navbar/UserNavigation";
 
 export default function Navbar() {
   return (
@@ -10,7 +10,7 @@ export default function Navbar() {
       id="navbar"
     >
       <ContentContainer>
-        <ul className="flex justify-between gap-6 text-gray-100">
+        <ul className="flex justify-between lg:gap-6 text-gray-100">
           <Link className="cursor-pointer" href={`/`}>
             <li
               className="my-auto font-medium"
@@ -23,13 +23,13 @@ export default function Navbar() {
               YAnime
             </li>
           </Link>
-          <div className="flex gap-10">
+          <div className="flex lg:gap-10">
             <li className="my-auto font-medium cursor-pointer">Search</li>
             <li className="my-auto font-medium8i6 cursor-pointer">Social</li>
             <li className="my-auto font-medium cursor-pointer">Forum</li>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex lg:gap-4">
             <UserNavigation />
           </div>
         </ul>
