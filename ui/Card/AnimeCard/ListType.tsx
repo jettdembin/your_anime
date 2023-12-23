@@ -1,23 +1,23 @@
 "use client";
 
-import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
+import { Media } from "@/types/anime";
+import LoginWrapper from "@/ui/LoginWrapper";
+import Image from "next/image";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
-import { Media } from "@/types/anime";
-import Image from "next/image";
-import LoginWrapper from "@/ui/LoginWrapper";
 
 const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const { isSignedIn } = useUser();
 
   const animeEpisodes = () =>
-    anime?.episodes ? `${anime?.episodes} eps` : `Ongoing`;
+    anime?.episodes ? `${anime?.episodes > 1 ? `${anime?.episodes} eps` : "1 episode"}` : `Ongoing`;
 
   const addToListButton = (
     <button
