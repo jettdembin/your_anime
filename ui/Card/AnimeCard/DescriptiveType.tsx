@@ -160,7 +160,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
         <div className="flex absolute flex-col left-[14.3rem] top-0  w-[25.2rem] h-72">
           <div
             className={`mt-6 mr-6 ml-6 h-60 ${
-              isCardHovered
+              isCardHovered 
                 ? "overflow-y-scroll overflow-x-hidden"
                 : "overflow-hidden"
             }`}
@@ -168,10 +168,10 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             <motion.div
               role="button"
               onClick={handleTrailerClick}
-              className="w-[200%] grid grid-cols-2"
-              animate={{
+              className={`${!!thumbnail ? "w-[200%] grid-cols-2" : "w-[100%] grid-cols-1 cursor-default"} grid `}
+              animate={!!thumbnail && ({
                 x: isCardHovered ? "-50%" : "0%",
-              }}
+              })}
               transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
             >
               <div className="w-full flex  justify-between font-medium">
@@ -193,10 +193,10 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                   </div>
                 </div>
                 <div>
-                  {getEmoji(likedPercentage)} {likedPercentage}%
+                  {likedPercentage && `${getEmoji(likedPercentage)} ${likedPercentage}%`}
                 </div>
               </div>
-              {!!id && site === "youtube" && (
+              {!!id && site === "youtube" &&(
                 <div className="relative flex justify-between gap-2 pr-2 pb-1">
                   <h6 className="text-lg w-1/2">
                     <span className="text-2xl font-bold">#</span>
