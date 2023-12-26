@@ -25,7 +25,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
   return (
     <>
       <div
-        className="relative w-full h-72 bg-gray-700 rounded-md overflow-hidden group"
+        className="relative w-full h-72 bg-gray-700 md:rounded-md overflow-hidden group"
         onMouseEnter={() => {
           handleMouseEnter(media.id);
           console.log(media.id);
@@ -43,6 +43,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
                 style={{
                   width: "100%",
                   objectFit: "cover",
+                 
                 }}
                 src={media.coverImage.large || ""}
                 alt={media.title.english || media.title.native || ""}

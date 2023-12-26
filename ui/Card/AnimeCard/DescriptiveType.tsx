@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 
-import { useRouter } from "next/navigation"; // Corrected import
-import Image from "next/image";
-import YouTube from "react-youtube";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useRouter } from "next/navigation"; // Corrected import
+import YouTube from "react-youtube";
 
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
@@ -15,10 +15,10 @@ import { getEmoji, getMonthName } from "@/util";
 
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
+import LoginWrapper from "@/ui/LoginWrapper";
+import { useUser } from "@clerk/nextjs";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
-import { useUser } from "@clerk/nextjs";
-import LoginWrapper from "@/ui/LoginWrapper";
 
 type Props = {
   media: Media;
@@ -136,7 +136,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}
               // objectFit="cover"
-              className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
+              className="min-w-[14.3rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 
             <div className="block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">

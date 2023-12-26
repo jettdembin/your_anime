@@ -18,7 +18,7 @@ export const ContentLayout = ({
   return (
     <section className="xl:mt-16">
       <header className="py-6">
-        <ContentContainer className="flex items-end justify-between">
+        <ContentContainer className="flex items-end justify-between px-4 md:px-0">
           <h1 className="text-lg font-semibold text-gray-900">{title}</h1>
           <Link
             href={href || `/discover?category=${category}`}
