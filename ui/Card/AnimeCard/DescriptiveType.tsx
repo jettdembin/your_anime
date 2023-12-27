@@ -131,7 +131,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
         }}
       >
         <div className="relative">
-          <div className="overflow-hidden max-h-[290px]">
+          <div className="overflow-hidden max-h-[290px] h-full max-w-[14.3rem]">
             <img
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}

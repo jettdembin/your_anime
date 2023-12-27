@@ -10,14 +10,16 @@ type Props = {
 };
 
 export default function CardTypeWidgetWrapper({ cardType, children }: Props) {
-  const { handleCardType } = useCardTypeContext();
+  const { handleCardType, cardType: contextCardType } = useCardTypeContext();
 
   return (
     <span
-      className="text-gray-800 cursor-pointer"
+      className={`text-gray-800 cursor-pointer rounded-full p-2 bg-slate-200`}
       onClick={() => handleCardType(cardType)}
     >
-      {children}
+      
+        {children}
+      
     </span>
   );
 }

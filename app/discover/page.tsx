@@ -77,15 +77,15 @@ export default function Discover() {
             <CategoryWidget />
           </div>
           <hr className="h-10 mx-2 border-x border-y border-gray-800" />
-          <div className="flex gap-2 pr-8">
+          <div className="flex gap-2">
             <CardTypeWidgetWrapper cardType="card">
-              <BoxIcon className="w-5 h-5" />
+              <BoxIcon className="w-4 h-4"  />
             </CardTypeWidgetWrapper>
             <CardTypeWidgetWrapper cardType="descriptive">
-              <DashboardIcon className="w-5 h-5" />
+              <DashboardIcon className="w-4 h-4" />
             </CardTypeWidgetWrapper>
             <CardTypeWidgetWrapper cardType="list">
-              <ListBulletIcon className="w-5 h-5" />
+              <ListBulletIcon className="w-4 h-4" />
             </CardTypeWidgetWrapper>
           </div>
         </header>
