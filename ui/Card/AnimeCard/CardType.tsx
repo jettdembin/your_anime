@@ -21,7 +21,6 @@ const CardType = ({ media, isLastCard, index }: Props) => {
     useShowAnimeInfo();
 
   const studioName = media?.studios?.nodes[0]?.name || "Unknown";
-  
 
   return (
     <>
@@ -44,11 +43,10 @@ const CardType = ({ media, isLastCard, index }: Props) => {
                 height={250}
                 style={{
                   objectFit: "cover",
-                 
                 }}
                 src={media.coverImage.extraLarge || ""}
                 alt={media.title.english || media.title.native || ""}
-                className="w-full transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
+                className="w-full transition duration-300 ease-in-out transform scale-105 group-hover:scale-110 mt-[-15rem] md:mt-[-5rem]"
               />
             </div>
           </div>

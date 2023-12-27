@@ -6,10 +6,10 @@ const CategoryWidget = () => {
   const { category, handleCategory, categories } = useSearchContext();
 
   return (
-    <div className="dropdown">
-      <label tabIndex={0} className="btn m-1">
+    <div className="dropdown dropdown-hover">
+      <div tabIndex={0} role="button" className="btn m-1 bg-slate-200">
         {category?.label}
-      </label>
+      </div>
       <ul
         tabIndex={0}
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"

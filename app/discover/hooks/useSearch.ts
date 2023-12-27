@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Corrected from 'next/navigation' to 'next/router'
-import { useAnilistAPI } from "@/hooks/useAnilistAPI";
+import { useEffect, useState } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation"; // Corrected from 'next/navigation' to 'next/router'
+
 import { GET_TRENDING } from "@/graphql/queries";
+import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 // Define a type for the userSearch parameter
 type UserSearch = {
@@ -20,6 +22,8 @@ type Category = {
 
 const useSearch = (userSearch: UserSearch) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [params, setParams] = useState<URLSearchParams | null>(null);
 
   useEffect(() => {
@@ -69,7 +73,11 @@ const useSearch = (userSearch: UserSearch) => {
     const { value } = selectedCategory || {};
 
     if (params) {
+      const search = searchParams?.get("search") || "";
+
       params.set("category", value);
+      !!search && params.set("search", search);
+
       const newURL = `/discover?${params.toString()}`;
       router.push(newURL);
     }

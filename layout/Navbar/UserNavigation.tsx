@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { SignedIn, useAuth, UserButton } from "@clerk/nextjs";
+import { PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import useClickOutside from "@/hooks/useClickOutside";
@@ -67,17 +68,22 @@ export default function UserNavigation({}: Props) {
       <LoginWrapper signUp>
         <li className="my-auto font-medium cursor-pointer">Sign Up</li>
       </LoginWrapper>
-      <SignedIn>
-        <Link
-          className="cursor-pointer flex items-center"
-          href={`/dashboard/${userId}`}
-        >
-          <li className="my-auto font-medium">Dashboard</li>
-        </Link>
-        <li>
-          <UserButton />
-        </li>
-      </SignedIn>{" "}
+      <div className="flex gap-2 md:gap-4">
+        <SignedIn>
+          <Link
+            className="cursor-pointer flex items-center"
+            href={`/dashboard/${userId}`}
+          >
+            <li className="my-auto font-medium hidden md:block">Dashboard</li>
+            <li className="my-auto font-medium block md:hidden">
+              <PersonIcon />
+            </li>
+          </Link>
+          <li>
+            <UserButton />
+          </li>
+        </SignedIn>{" "}
+      </div>
     </>
   );
 }
