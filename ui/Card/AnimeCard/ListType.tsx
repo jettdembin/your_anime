@@ -76,7 +76,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
               </td>
               <td className="w-1/3 lg:w-1/2 pr-2 lg:pr-0">
                 <h3 className="font-semibold text-lg">
-                anime?.title?.english || anime?.title?.native
+                {anime?.title?.english || anime?.title?.native}
                 </h3>
                 <p className="text-sm">{formatGenres(anime?.genres)}</p>
               </td>

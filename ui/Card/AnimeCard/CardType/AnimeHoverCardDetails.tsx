@@ -1,7 +1,6 @@
-import React from "react";
 
 import { Media } from "@/types/anime";
-import { getEmoji, convertTimeUntilAiring } from "@/util";
+import { convertTimeUntilAiring, getEmoji } from "@/util";
 
 import AnimeHoverCardDetailsWrapper from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
@@ -57,7 +56,7 @@ export default function AnimeHoverCardDetails({
 
   const airedPreviously = (
     <h6 className="text-xs">
-      {episodes ? `${episodes} episodes aired in` : "Ongoing, aired in "}
+      {episodes ? `${episodes} episodes aired in` : "Ongoing"}
       {!!season && season?.split("")[0] + season?.slice(1).toLowerCase()}
     </h6>
   );
