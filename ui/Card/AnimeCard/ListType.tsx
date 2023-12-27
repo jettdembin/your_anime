@@ -71,12 +71,12 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                   height={62}
                   className="w-20 h-28 object-cover"
                   src={anime?.coverImage?.large || ""}
-                  alt={anime?.title?.english || "Anime Cover"}
+                  alt={anime?.title?.english || anime?.title?.native ||"Anime Cover"}
                 />
               </td>
               <td className="w-1/3 lg:w-1/2 pr-2 lg:pr-0">
                 <h3 className="font-semibold text-lg">
-                  {anime?.title?.english}
+                anime?.title?.english || anime?.title?.native
                 </h3>
                 <p className="text-sm">{formatGenres(anime?.genres)}</p>
               </td>

@@ -51,6 +51,9 @@ module.exports = {
       color: {
         genre: "#eff6ff",
       },
+      gridTemplateColumns: {
+        custom: "200px 1fr",
+      },
     },
   },
   daisyui: {

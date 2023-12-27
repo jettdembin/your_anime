@@ -200,7 +200,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                 <div className="relative flex justify-between gap-2 pr-2 pb-1">
                   <h6 className="text-lg w-1/2">
                     <span className="text-2xl font-bold">#</span>
-                    {title?.native}
+                    {title?.native || title?.english}
                   </h6>
                   <div
                     className="relative"

@@ -12,20 +12,26 @@ export default function Header() {
         YourAnime😍
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto my-24 gap-y-20 gap-x-16">
-        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
-          <div className="relative md:order-2 xl:order-1">
+        <div className="grid grid-cols-custom md:grid-cols-1 xl:grid-cols-custom">
+          <div className="relative grid grid-cols-custom md:order-2 xl:order-1">
             <Image
-              fill
+              width={500}
+              height={500}
               style={{
-                width: "100%",
+                width: "auto",
+                height: "100%",
+                position: "absolute",
                 objectFit: "cover",
+                left: "50%",
+                transform: "translateX(-50%)",
               }}
+              className="order-1 md:order-2 xl:order-1"
               src="https://anilist.co/img/landing/stats.svg"
               alt="pic"
               role="presentation"
             />
           </div>
-          <div className="md:order-1 xl:order-2">
+          <div className="order-2 md:order-1 xl:order-2">
             <h3 className="text-lg font-semibold text-gray-100">
               Discover your obsessions<span className="ml-2">🔎</span>
             </h3>
@@ -36,13 +42,18 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
+        <div className="grid grid-cols-custom md:grid-cols-1 xl:grid-cols-custom">
           <div className="relative md:order-2 xl:order-1">
             <Image
-              fill
+              width={500}
+              height={500}
               style={{
-                width: "100%",
+                width: "auto",
+                height: "100%",
+                position: "absolute",
                 objectFit: "cover",
+                left: "50%",
+                transform: "translateX(-50%)",
               }}
               src="https://anilist.co/img/landing/apps.svg"
               alt="pic"
@@ -60,13 +71,18 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
+        <div className="grid grid-cols-custom md:grid-cols-1 xl:grid-cols-custom">
           <div className="relative md:order-2 xl:order-1">
             <Image
-              fill
+              width={500}
+              height={500}
               style={{
-                width: "100%",
+                width: "auto",
+                height: "100%",
+                position: "absolute",
                 objectFit: "cover",
+                left: "50%",
+                transform: "translateX(-50%)",
               }}
               src="https://anilist.co/img/landing/social.svg"
               alt="pic"
@@ -84,13 +100,18 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2">
+        <div className="grid grid-cols-custom md:grid-cols-1 xl:grid-cols-custom">
           <div className="relative md:order-2 xl:order-1">
             <Image
-              fill
+              width={500}
+              height={500}
               style={{
-                width: "100%",
+                width: "auto",
+                height: "100%",
+                position: "absolute",
                 objectFit: "cover",
+                left: "50%",
+                transform: "translateX(-50%)",
               }}
               src="https://anilist.co/img/landing/custom.svg"
               alt="pic"

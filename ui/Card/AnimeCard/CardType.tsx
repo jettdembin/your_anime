@@ -21,6 +21,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
     useShowAnimeInfo();
 
   const studioName = media?.studios?.nodes[0]?.name || "Unknown";
+  
 
   return (
     <>
@@ -37,17 +38,17 @@ const CardType = ({ media, isLastCard, index }: Props) => {
       >
         <div className="relative">
           <div className="overflow-hidden max-h-[290px]">
-            <div className="relative">
+            <div className="relative w-full h-full">
               <Image
-                fill
+                width={250}
+                height={250}
                 style={{
-                  width: "100%",
                   objectFit: "cover",
                  
                 }}
-                src={media.coverImage.large || ""}
+                src={media.coverImage.extraLarge || ""}
                 alt={media.title.english || media.title.native || ""}
-                className="w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
+                className="w-full transition duration-300 ease-in-out transform scale-105 group-hover:scale-110"
               />
             </div>
           </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import { gql } from "@apollo/client";
-import { useQuery, QueryResult } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 export const GET_POPULAR_ANIME = gql`
   query GetPopularAnime($page: Int) {
@@ -15,8 +14,9 @@ export const GET_POPULAR_ANIME = gql`
         description
         source
         coverImage {
-          large
           medium
+          large
+          extraLarge
         }
         trailer {
           id
@@ -76,8 +76,9 @@ export const GET_TRENDING = gql`
         description
         source
         coverImage {
-          large
           medium
+          large
+          extraLarge
         }
         trailer {
           id
@@ -141,7 +142,9 @@ export const GET_BROWSE_FILTERS = gql`
         description
         source
         coverImage {
+          medium
           large
+          extraLarge
         }
         trailer {
           id
@@ -185,8 +188,9 @@ export const SEARCH_ANIMES_UPCOMING = gql`
         description
         source
         coverImage {
-          large
           medium
+          large
+          extraLarge
         }
         trailer {
           id
@@ -236,8 +240,9 @@ export const SEARCH_ANIMES_POPULAR = gql`
         description
         source
         coverImage {
-          large
           medium
+          large
+          extraLarge
         }
         trailer {
           id
@@ -282,7 +287,9 @@ export const SEARCH_ANIMES_TRENDING = gql`
         description
         source
         coverImage {
+          medium
           large
+          extraLarge
         }
         trailer {
           id
@@ -348,8 +355,9 @@ export const GET_TOP_100_ANIME = gql`
         description
         source
         coverImage {
-          large
           medium
+          large
+          extraLarge
         }
         trailer {
           id
@@ -392,8 +400,9 @@ const MEDIA_FIELDS = gql`
     description
     source
     coverImage {
-      large
       medium
+      large
+      extraLarge
     }
     trailer {
       id
