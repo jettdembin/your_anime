@@ -246,6 +246,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             </motion.div>
             <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
               <div
+                className={`${isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"}`}
                 dangerouslySetInnerHTML={
                   !isCardHovered
                     ? { __html: truncatedDescription }
