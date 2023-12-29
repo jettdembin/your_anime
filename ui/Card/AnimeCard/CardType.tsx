@@ -46,7 +46,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
                 }}
                 src={media.coverImage.extraLarge || ""}
                 alt={media.title.english || media.title.native || ""}
-                className="w-full transition duration-300 ease-in-out transform scale-105 group-hover:scale-110 mt-[-15rem] md:mt-[-5rem]"
+                className="w-full transition duration-300 ease-in-out transform scale-100 md:scale-105 group-hover:scale-110 mt-[-20%] md:mt-[-15%]"
               />
             </div>
           </div>

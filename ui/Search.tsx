@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSearchContext } from "@/app/discover/context/SearchContext";
 import { ContentContainer } from "@/layout/ContentContainer";
-
 // Define a type for the category
 type Category = {
   label: string;

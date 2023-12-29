@@ -1,46 +1,77 @@
 "use client";
 
+import { useRef, useState } from "react";
+
+import {
+  Cross2Icon,
+  GearIcon,
+  MagnifyingGlassIcon,
+  PersonIcon,
+  RowsIcon,
+} from "@radix-ui/react-icons";
+
 import { showModal } from "@/util";
 
-import Modal from "@/ui/Modal";
+import useClickOutside from "@/hooks/useClickOutside";
 
-import { GearIcon } from "@radix-ui/react-icons";
+import Modal from "@/ui/Modal";
 
 type Props = {};
 
 export default function MobileNavWiget({}: Props) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const mobileNavWidgetRef = useRef(null);
+
+  useClickOutside(mobileNavWidgetRef, () => {
+    setIsModalOpen(false);
+    // debugger;
+  });
+
   return (
-    <nav className="z-50 fixed bottom-8 right-4 bg-white p-4 rounded-lg">
-      <button
+    <>
+      <nav
+        ref={mobileNavWidgetRef}
+        className={`z-50 fixed bottom-8 right-4  p-4 rounded-lg shadow-custom cursor-pointer transition-all duration-150 ease-linear ${
+          isModalOpen ? "bg-transparent scale-75" : "bg-white scale-100"
+        } `}
         tabIndex={0}
-        className="flex items-center w-full p-2 bg-blue-200 rounded-sm cursor-pointer relative"
-        onClick={() => showModal("navbar_modal")}
+        onClick={() => {
+          setIsModalOpen(true);
+          showModal("navbar_modal");
+        }}
       >
-        <GearIcon />
-      </button>
+        <div className={`flex items-center w-full`}>
+          <RowsIcon className="w-6 h-6 text-slate-800" />
+        </div>
+      </nav>
       <Modal
         id="navbar_modal"
-        className="fixed bottom-8 right-4 w-32 shadow-md"
+        className={`fixed bottom-8 right-4 w-32 shadow-md`}
       >
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2">
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center">
-              <GearIcon className="w-8 h-8" />
+              <PersonIcon
+                strokeWidth={5}
+                stroke="5"
+                className="w-6 h-6 text-blue-400"
+              />
             </div>
             <div className="flex items-center justify-center">
-              <GearIcon className="w-8 h-8" />
+              <MagnifyingGlassIcon className="w-6 h-6 text-blue-400" />
             </div>
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center">
-              <GearIcon className="w-8 h-8" />
+              <GearIcon className="w-6 h-6 text-blue-400" />
             </div>
             <div className="flex items-center justify-center">
-              <GearIcon className="w-8 h-8" />
+              <Cross2Icon className="w-6 h-6 text-blue-400" />
             </div>
           </div>
         </div>
       </Modal>
-    </nav>
+    </>
   );
 }
