@@ -25,7 +25,6 @@ export default function MobileNavWiget({}: Props) {
 
   useClickOutside(mobileNavWidgetRef, () => {
     setIsModalOpen(false);
-    // debugger;
   });
 
   return (

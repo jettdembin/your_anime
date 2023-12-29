@@ -118,7 +118,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   return (
     <>
       <div
-        className="relative w-full h-72 grid grid-cols-[auto,1fr] bg-white rounded-md overflow-hidden group shadow-custom"
+        className="relative w-full h-72 grid grid-cols-[auto,1fr] bg-white rounded-none md:rounded-md overflow-hidden group shadow-custom"
         role="button"
         tabIndex={0}
         onMouseEnter={() => {
@@ -131,12 +131,12 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
         }}
       >
         <div className="relative">
-          <div className="overflow-hidden max-h-[290px] h-full max-w-[14.3rem]">
+          <div className="overflow-hidden max-h-[290px] h-full max-w-[12rem] lg:max-w-[14.3rem]">
             <img
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}
               // objectFit="cover"
-              className="min-w-[14.3rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
+              className="min-w-[12rem] lg:min-w-[14.3rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 
             <div className="block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
@@ -158,8 +158,8 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
 
       <AnimatePresence>
         <div
-          className="flex absolute flex-col left-[14.3rem] top-0 h-72"
-          style={{ width: "calc(100% - 14.3rem)" }}
+          className="flex absolute flex-col left-[12rem] lg:left-[14.3rem] top-0 h-72 w-[calc(100%-12rem)] lg:w-[calc(100%-14.3rem)]"
+          // style={{ width: "calc(100% - 14.3rem)" }}
         >
           <div
             className={`mt-6 mr-6 ml-6 h-60 ${
@@ -246,7 +246,9 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             </motion.div>
             <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
               <div
-                className={`${isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"}`}
+                className={`${
+                  isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"
+                }`}
                 dangerouslySetInnerHTML={
                   !isCardHovered
                     ? { __html: truncatedDescription }
@@ -255,8 +257,8 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               ></div>
             </div>
           </div>
-          <div className="px-4 py-2 flex justify-between mt-auto bg-genre">
-            <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="px-4 py-2 flex items-center justify-between mt-auto bg-genre">
+            <div className="flex flex-wrap items-center mr-2 gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
                   className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
