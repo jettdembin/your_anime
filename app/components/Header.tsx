@@ -18,14 +18,14 @@ export default function Header() {
               width={500}
               height={500}
               style={{
+                minWidth: "100px",
                 width: "auto",
                 height: "100%",
                 position: "absolute",
-                objectFit: "cover",
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
-              className="order-1 md:order-2 xl:order-1"
+              className="pr-6 lg:pr-0 order-1 md:order-2 xl:order-1"
               src="https://anilist.co/img/landing/stats.svg"
               alt="pic"
               role="presentation"
@@ -48,14 +48,15 @@ export default function Header() {
               width={500}
               height={500}
               style={{
+                minWidth: "100px",
                 width: "auto",
                 height: "100%",
                 position: "absolute",
-                objectFit: "cover",
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
               src="https://anilist.co/img/landing/apps.svg"
+              className="pr-6 lg:pr-0 order-1 md:order-2 xl:order-1"
               alt="pic"
               role="presentation"
             />
@@ -77,13 +78,14 @@ export default function Header() {
               width={500}
               height={500}
               style={{
+                minWidth: "100px",
                 width: "auto",
                 height: "100%",
                 position: "absolute",
-                objectFit: "cover",
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
+              className="pr-6 lg:pr-0 order-1 md:order-2 xl:order-1"
               src="https://anilist.co/img/landing/social.svg"
               alt="pic"
               role="presentation"
@@ -106,13 +108,14 @@ export default function Header() {
               width={500}
               height={500}
               style={{
+                minWidth: "100px",
                 width: "auto",
                 height: "100%",
                 position: "absolute",
-                objectFit: "cover",
                 left: "50%",
                 transform: "translateX(-50%)",
               }}
+              className="pr-6 lg:pr-0 order-1 md:order-2 xl:order-1"
               src="https://anilist.co/img/landing/custom.svg"
               alt="pic"
               role="presentation"

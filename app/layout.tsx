@@ -8,8 +8,10 @@ import { Theme } from "@radix-ui/themes";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "../layout/Footer";
-import Navbar from "../layout/Navbar";
+
+import Footer from "@/layout/Footer";
+import MobileNavWidget from "@/layout/MobileNavWidget";
+import Navbar from "@/layout/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +42,12 @@ export default function RootLayout({
           <Theme>
             <div className="flex flex-col h-screen">
               <Providers>
-                <Navbar />
+                <div className="hidden lg:block">
+                  <Navbar />
+                </div>
+                <div className="block lg:hidden">
+                  <MobileNavWidget />
+                </div>
                 <div className="pb-4">{children}</div>
                 <Footer />
               </Providers>

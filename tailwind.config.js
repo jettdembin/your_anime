@@ -52,7 +52,7 @@ module.exports = {
         genre: "#eff6ff",
       },
       gridTemplateColumns: {
-        custom: "200px 1fr",
+        custom: "100px 1fr",
       },
     },
   },
@@ -66,5 +66,19 @@ module.exports = {
     prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        // Apply the media query for medium screens and larger
+        "@screen md": {
+          ".grid-cols-custom": {
+            "grid-template-columns": "200px 1fr", // setting for md screens and larger
+          },
+        },
+      };
+
+      addUtilities(newUtilities);
+    },
+  ],
 };

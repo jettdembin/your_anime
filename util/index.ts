@@ -66,4 +66,14 @@ function getMonthName(monthNumber: number | undefined): string | null {
   } else return null;
 }
 
-export { getEmoji, convertTimeUntilAiring, getMonthName, debounce };
+function showModal(modalId: string): void {
+  const modalElement = document.getElementById(
+    modalId
+  ) as HTMLDialogElement | null;
+  if (modalElement) {
+    modalElement.showModal();
+  }
+};
+
+export { convertTimeUntilAiring, debounce, getEmoji, getMonthName, showModal };
+
