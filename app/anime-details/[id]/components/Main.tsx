@@ -7,16 +7,23 @@ import { useAnimeDetails } from "@/graphql/queries";
 import { Media } from "@/types/anime";
 
 import Hero from "@/app/anime-details/[id]/components/Hero";
+import { useSearchParams } from "next/navigation";
 import AnimeDetailsContent from "./AnimeDetailsContent";
 
 type Props = {};
+
+type Type = {
+  type?: "ANIME" | "MANGA";
+};
 
 export const Main = ({
   params,
 }: {
   params: { id: string; userId: string };
 }) => {
-  const { error, loading, data } = useAnimeDetails(Number(params?.id) || null);
+  const search = useSearchParams() || null;
+  const type: any = search?.get("type") || "ANIME";
+  const { error, loading, data } = useAnimeDetails(Number(params?.id), type);
 
   const anime: Media = data?.Media || {};
 

@@ -264,7 +264,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               {genres.slice(0, 4).map((genre, i) => (
                 <span
                   className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-                  key={i}
+                  key={`${genre + i}`}
                 >
                   {genre?.toLowerCase()}
                 </span>
@@ -323,7 +323,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
           >
             <motion.section
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, scale: 2 }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 1, delay: 0.5 }}
               className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"

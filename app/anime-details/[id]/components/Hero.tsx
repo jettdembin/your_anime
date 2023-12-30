@@ -28,8 +28,11 @@ export default function Hero({ anime, params }: Props) {
         <div
           className="banner w-full h-[210px] md:h-[400px] -mt-12 relative"
           style={{
-            background: `url(${anime.bannerImage})`,
-            backgroundSize: "cover",
+            background: `url(${
+              anime.bannerImage ||
+              "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg"
+            })`,
+            backgroundSize: `${anime.bannerImage ? "cover" : "contain"}`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "50% 35%",
           }}
@@ -45,7 +48,7 @@ export default function Hero({ anime, params }: Props) {
       </div>
       <div className="header container max-w-5xl mx-auto">
         <div
-          className="container px-4 gap-7 max-w-6xl flex flex-col md:grid md:grid-cols-anime-details"
+          className="container px-4 lg:px-0 gap-7 max-w-6xl flex flex-col md:grid md:grid-cols-anime-details"
           // style={{ gridTemplateColumns: "270px auto" }}
         >
           <div className="w-full flex md:flex-col justify-between md:justify-normal relative -mt-20 md:-mt-32 mx-auto">

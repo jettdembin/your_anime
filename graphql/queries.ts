@@ -431,10 +431,12 @@ const MEDIA_FIELDS = gql`
     seasonYear
   }
 `;
-export const useAnimeDetails = (mediaId: number | null) => {
+
+export const useAnimeDetails = (mediaId: number | null, type?: "ANIME" | "MANGA") => {
   const { error, loading, data } = useQuery(GET_ANIME_DETAILS, {
     variables: {
       id: mediaId,
+      type: type || "ANIME",
     },
   });
   return { error, loading, data };
@@ -507,6 +509,7 @@ export const GET_ANIME_DETAILS = gql`
             romaji
           }
           type
+          id
           status
           coverImage {
             large

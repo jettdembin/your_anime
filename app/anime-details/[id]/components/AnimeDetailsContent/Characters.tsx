@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 type Character = {
   role: string;
@@ -24,9 +25,11 @@ type Props = {
 };
 
 export default function Characters({ characters, anime }: Props) {
+  const search = useSearchParams() || null;
+  const type: any = search?.get("type") || "ANIME";
   return (
     <section>
-      <h3 className="text-sm font-semibold text-slate-600 mb-2 lg:mt-6">
+      <h3 className="mt-8 text-sm font-semibold text-slate-600 mb-2 lg:mt-6">
         Characters
       </h3>
 
@@ -34,8 +37,12 @@ export default function Characters({ characters, anime }: Props) {
         {characters?.map((character, index) => (
           <div
             key={index}
-            className="h-24 grid bg-white rounded-sm"
-            style={{ gridTemplateColumns: "5rem auto 5rem" }}
+            className="h-24 grid bg-white rounded-sm shadow-md"
+            style={
+              type === "ANIME"
+                ? { gridTemplateColumns: "5rem auto 5rem" }
+                : { gridTemplateColumns: "5rem auto" }
+            }
           >
             <div className="relative w-20">
               <Image
@@ -63,19 +70,24 @@ export default function Characters({ characters, anime }: Props) {
                 {character.node.description || "No description... yet!"}
               </p>
             </div>
-            <div className="relative w-20">
-              <Image
-                fill
-                style={{
-                  width: "100%",
-                  objectFit: "cover",
-                }}
-                className="max-h-24 rounded-sm"
-                // src={anime.coverImage.extraLarge}
-                src={character?.voiceActors[0]?.image?.large || ""}
-                alt={anime.title.english}
-              />
-            </div>
+            {type === "ANIME" && (
+              <div className="relative w-20">
+                <Image
+                  fill
+                  style={{
+                    width: "100%",
+                    objectFit: "cover",
+                  }}
+                  className="max-h-24 rounded-sm"
+                  // src={anime.coverImage.extraLarge}
+                  src={
+                    character?.voiceActors[0]?.image?.large ||
+                    "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg"
+                  }
+                  alt={anime.title.english}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
