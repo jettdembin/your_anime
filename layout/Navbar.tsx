@@ -23,22 +23,37 @@ const Navbar: React.FC = () => {
         window.pageYOffset || document.documentElement.scrollTop;
 
       if (st > lastScrollTopRef.current) {
-        navbarRef.current?.classList.remove("translate-y-0", "duration-150");
-        navbarRef.current?.classList.add("-translate-y-full", "duration-150");
+        navbarRef.current?.classList.remove(
+          "translate-y-0",
+          "duration-150",
+          "ease-out"
+        );
+        navbarRef.current?.classList.add(
+          "-translate-y-full",
+          "duration-150",
+          "ease-in"
+        );
       } else {
         navbarRef.current?.classList.remove(
           "-translate-y-full",
-          "duration-150"
+          "duration-150",
+          "ease-out"
         );
-        navbarRef.current?.classList.add("translate-y-0", "duration-150");
+        navbarRef.current?.classList.add(
+          "translate-y-0",
+          "duration-150",
+          "ease-inß"
+        );
       }
 
       lastScrollTopRef.current = st;
 
-      if (pathname?.includes("anime-details") && st <= 0) {
-        setNavbarOpacity("bg-opacity-80");
-      } else {
-        setNavbarOpacity("bg-opacity-100");
+      if (pathname?.includes("anime-details")) {
+        if (st < 200) {
+          setNavbarOpacity("bg-opacity-80");
+        } else {
+          setNavbarOpacity("bg-opacity-100");
+        }
       }
     };
 
@@ -58,7 +73,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`w-full p-6 bg-gray-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center`}
+      className={`w-full p-6 bg-gray-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
       id="navbar"
     >
       <ContentContainer>
