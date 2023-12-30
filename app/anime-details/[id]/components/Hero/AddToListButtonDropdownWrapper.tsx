@@ -50,7 +50,7 @@ export default function AddToListButtonWrapper({}: Props) {
 
   return (
     <>
-      <div className="w-44 lg:w-full max-h-[35px]lg:w-auto">
+      <div className="w-44 md:w-80 lg:w-full max-h-[35px]lg:w-auto">
         {isSignedInAddToListButton()}
 
         <Modal id="add_to_list_modal">
