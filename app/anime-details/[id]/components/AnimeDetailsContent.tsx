@@ -1,8 +1,8 @@
 import { Media } from "@/types/anime";
 
 import AnimeDetailsContentSidebar from "./AnimeDetailsContent/AnimeDetailsContentSidebar";
-import Relations from "./AnimeDetailsContent/Relations";
 import Characters from "./AnimeDetailsContent/Characters";
+import Relations from "./AnimeDetailsContent/Relations";
 
 type Props = {
   anime: Media;
@@ -12,7 +12,7 @@ export default function AnimeDetailsContent({ anime }: Props) {
   return (
     <>
       <div
-        className="grid gap-10"
+        className="flex flex-col lg:grid gap-10"
         style={{ gridTemplateColumns: "270px auto" }}
       >
         <aside>

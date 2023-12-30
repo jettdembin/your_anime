@@ -17,7 +17,7 @@ export default function Characters({ characters, anime }: any) {
     <section>
       <h3 className="text-base mb-2">Characters</h3>
 
-      <div className="grid grid-cols-2 gap-8">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-8">
         {characters?.map((character: any, index: number) => (
           <div
             key={index}
