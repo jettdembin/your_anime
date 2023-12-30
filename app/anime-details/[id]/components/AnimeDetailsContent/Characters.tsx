@@ -17,42 +17,38 @@ export default function Characters({ characters, anime }: any) {
     <section>
       <h3 className="text-base mb-2">Characters</h3>
 
-      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-8">
+      <div className="flex flex-col md:grid md:grid-cols-2 gap-4 lg:gap-8">
         {characters?.map((character: any, index: number) => (
           <div
             key={index}
-            className="grid bg-white"
-            style={{ gridTemplateColumns: "20% auto 20%" }}
+            className="h-24 grid bg-white"
+            style={{ gridTemplateColumns: "5rem auto 5rem" }}
           >
-            <div className="relative">
+            <div className="relative w-20">
               <Image
                 fill
                 style={{
                   width: "100%",
                   objectFit: "cover",
                 }}
-                className="rounded-sm"
+                className="max-h-24 rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"
                 src={character.image.large}
                 alt={character.image.large}
               />
             </div>
-            <div className="p-4 flex flex-col">
-              <h6>Source</h6>
-              <p className="mt-1">{character.name.full}</p>
-              {/* <p className="mt-auto">{character.description}</p> */}
-              <p className="mt-auto">
-                {character.name.full} - {character.name.full}
-              </p>
+            <div className="p-4 flex flex-col justify-between">
+              <p className="text-xs text-gray-600">{character.name.full}</p>
+              <p className="text-xs text-gray-600">{character.name.full}</p>
             </div>
-            <div className="relative">
+            <div className="relative w-20">
               <Image
                 fill
                 style={{
                   width: "100%",
                   objectFit: "cover",
                 }}
-                className="rounded-sm"
+                className="max-h-24 rounded-sm"
                 // className="w-full h-full object-cover rounded-sm"
                 src={anime.coverImage.extraLarge}
                 alt={anime.title.english}
