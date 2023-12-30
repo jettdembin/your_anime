@@ -16,18 +16,18 @@ export default function AddToListButtonWrapper({}: Props) {
   const addToListButton = (
     <button
       tabIndex={0}
-      className="flex items-center w-full p-2 bg-blue-200 rounded-sm cursor-pointer relative"
+      className="flex items-center w-full p-2 bg-[#3CB4F1] text-white rounded-sm cursor-pointer relative"
       onClick={() => {
         if (isSignedIn) {
           showModal();
         }
       }}
     >
-      <div className="w-full flex items-center justify-end py-2">
+      <div className="w-full flex items-center justify-end lg:py-2">
         <span className="absolute inset-0 flex justify-center items-center">
           Add to List
         </span>
-        <BookmarkIcon className="relative bottom-[.1px] w-2 h-2" />
+        <BookmarkIcon className="relative bottom-[.1px] w-5 h-5" />
       </div>
     </button>
   );
@@ -50,7 +50,7 @@ export default function AddToListButtonWrapper({}: Props) {
 
   return (
     <>
-      <div className="w-52 lg:w-auto">
+      <div className="w-44 lg:w-full max-h-[35px]lg:w-auto">
         {isSignedInAddToListButton()}
 
         <Modal id="add_to_list_modal">

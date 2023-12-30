@@ -26,7 +26,7 @@ export default function Hero({ anime, params }: Props) {
     <div className="relative bg-slate-50">
       <div className="header-wrapper">
         <div
-          className="banner w-full h-[400px] -mt-12 relative"
+          className="banner w-full h-[210px] lg:h-[400px] -mt-12 relative"
           style={{
             background: `url(${anime.bannerImage})`,
             backgroundSize: "cover",
@@ -45,21 +45,21 @@ export default function Hero({ anime, params }: Props) {
       </div>
       <div className="header container max-w-5xl mx-auto">
         <div
-          className="container px-2 gap-7 max-w-6xl flex flex-col lg:grid lg:grid-cols-[270px auto]"
+          className="container px-4 gap-7 max-w-6xl flex flex-col lg:grid lg:grid-cols-anime-details"
           // style={{ gridTemplateColumns: "270px auto" }}
         >
-          <div className="w-full flex gap-4 relative -mt-36 lg:-mt-32 mx-auto">
+          <div className="w-full flex lg:flex-col justify-between lg:justify-normal relative -mt-20 lg:-mt-32 mx-auto">
             <div className="static shadow-lg">
               <Image
                 width={270}
                 height={360}
                 style={{ position: "relative" }}
-                className="w-full object-cover rounded-sm"
+                className="w-[100px] lg:w-full max-w-[130px] lg:max-w-none max-h-[130px] lg:max-h-none object-cover rounded-sm shadow-md"
                 src={anime.coverImage.extraLarge || ""}
                 alt={anime.title.english || ""}
               />
             </div>
-            <div className="flex items-end lg:grid lg:grid-cols-[auto 35px] lg:my-5 gap-4">
+            <div className="flex items-end lg:my-5 gap-4">
               <AddToListButtonWrapper />
               <AddToLikesButtonWrapper
                 params={params}

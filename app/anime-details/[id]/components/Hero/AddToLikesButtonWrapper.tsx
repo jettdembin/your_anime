@@ -57,7 +57,7 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
 
   const addToLikesButton = (
     <button
-      className="py-2 bg-red-400 rounded-sm text-white w-full"
+      className="py-1 max-h-[35px] h-[35px] lg:max-h-[none] lg:h-full bg-red-400 rounded-sm text-white w-full"
       onClick={() => isSignedIn && handleAddToLikes()}
       // onClick={() => {
       //   document.getElementById("add_to_likes_modal").showModal();
@@ -74,5 +74,7 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
       <LoginWrapper signIn>{addToLikesButton}</LoginWrapper>
     );
 
-  return <div className="w-10 lg:w-auto">{isSignedInAddToListButton()}</div>;
+  return (
+    <div className="w-10 lg:w-12 lg:h-full">{isSignedInAddToListButton()}</div>
+  );
 }

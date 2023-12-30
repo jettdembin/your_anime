@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   GearIcon,
@@ -27,6 +27,10 @@ export default function MobileNavWiget({}: Props) {
   useClickOutside(mobileNavWidgetRef, () => {
     setIsModalOpen(false);
   });
+
+  useEffect(() => {
+    console.log("mounted nav widget");
+  }, []);
 
   return (
     <>

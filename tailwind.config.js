@@ -53,6 +53,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         custom: "100px 1fr",
+        "anime-details": "270px 1fr",
+        "anime-details-actions": "1fr 350px",
       },
     },
   },
