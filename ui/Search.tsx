@@ -72,7 +72,7 @@ export default function Search() {
     <section className="px-8 xl:px-0 lg:mt-40 mb-8">
       <ContentContainer>
         {/* <form onSubmit={() => {}}> */}
-        <div className="mt-6">
+        <div className="">
           <h3 className="pb-4 text-3xl font-semibold text-gray-900">Browse</h3>
         </div>
         <div className="flex gap-8 mb-6">

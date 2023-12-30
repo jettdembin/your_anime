@@ -1,13 +1,25 @@
-"use client";
+import React, { ReactNode } from "react";
 
 import { useCardTypeContext } from "@/context/CardTypeContext";
-import React from "react";
 
-export const AnimeCardLayout = ({ children }) => {
+// Define the props for child components that accept `isLastCard`
+interface ChildComponentProps {
+  isLastCard?: boolean;
+}
+
+// Extend the ReactElement type to include `isLastCard` in props
+type ExtendedElement = React.ReactElement & { props: ChildComponentProps };
+
+interface AnimeCardLayoutProps {
+  children: ReactNode;
+}
+
+export const AnimeCardLayout: React.FC<AnimeCardLayoutProps> = ({
+  children,
+}) => {
   const childrenArray = React.Children.toArray(children);
   const { cardType } = useCardTypeContext();
 
-  // Define styles for different card types using TailwindCSS responsive utilities
   const styles = {
     card: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-4",
     descriptive: "grid grid-cols-1 xl:grid-cols-2 gap-2 md:gap-4",
@@ -17,8 +29,8 @@ export const AnimeCardLayout = ({ children }) => {
   return (
     <section className={styles[cardType]}>
       {childrenArray.map((child, index) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
+        if (React.isValidElement(child) && typeof child.type !== "string") {
+          return React.cloneElement(child as ExtendedElement, {
             isLastCard: index === childrenArray.length - 1,
           });
         }

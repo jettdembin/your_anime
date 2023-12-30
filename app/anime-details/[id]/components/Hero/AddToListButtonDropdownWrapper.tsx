@@ -1,12 +1,12 @@
 "use client";
 
-import { BookmarkIcon } from "@radix-ui/react-icons";
 import { useUser } from "@clerk/nextjs";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import AddToListForm from "@/ui/Card/AnimeCard/Modal/AddToListForm";
 
-import Modal from "@/ui/Modal";
 import LoginWrapper from "@/ui/LoginWrapper";
+import Modal from "@/ui/Modal";
 
 type Props = {};
 
@@ -50,7 +50,7 @@ export default function AddToListButtonWrapper({}: Props) {
 
   return (
     <>
-      <div className="">
+      <div className="w-52 lg:w-auto">
         {isSignedInAddToListButton()}
 
         <Modal id="add_to_list_modal">

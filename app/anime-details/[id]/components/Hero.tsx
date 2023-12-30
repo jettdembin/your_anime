@@ -1,9 +1,9 @@
 import { Media } from "@/types/anime";
 
-import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
-import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
-import HeroDescription from "./Hero/HeroDescription";
 import Image from "next/image";
+import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
+import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
+import HeroDescription from "./Hero/HeroDescription";
 
 type Props = {
   anime: Media;
@@ -23,30 +23,32 @@ type Props = {
 
 export default function Hero({ anime, params }: Props) {
   return (
-    <div className="header-wrap relative bg-slate-50">
-      <div
-        className="banner w-full h-[400px] -mt-12 relative"
-        style={{
-          background: `url(${anime.bannerImage})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "50% 35%",
-        }}
-      >
+    <div className="relative bg-slate-50">
+      <div className="header-wrapper">
         <div
-          className="absolute inset-0 bg-opacity-50 bg-black shadow-inner"
+          className="banner w-full h-[400px] -mt-12 relative"
           style={{
-            background:
-              "linear-gradient(180deg,rgba(10, 10, 10, 0) 40%,rgba(10, 10, 10, 0.6))",
+            background: `url(${anime.bannerImage})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "50% 35%",
           }}
-        ></div>
+        >
+          <div
+            className="absolute inset-0 bg-opacity-50 bg-black shadow-inner"
+            style={{
+              background:
+                "linear-gradient(180deg,rgba(10, 10, 10, 0) 40%,rgba(10, 10, 10, 0.6))",
+            }}
+          ></div>
+        </div>
       </div>
       <div className="header container max-w-5xl mx-auto">
         <div
-          className="container grid gap-7 max-w-6xl "
-          style={{ gridTemplateColumns: "270px auto" }}
+          className="container px-2 gap-7 max-w-6xl flex flex-col lg:grid lg:grid-cols-[270px auto]"
+          // style={{ gridTemplateColumns: "270px auto" }}
         >
-          <div className="relative -mt-32">
+          <div className="w-full flex gap-4 relative -mt-36 lg:-mt-32 mx-auto">
             <div className="static shadow-lg">
               <Image
                 width={270}
@@ -57,10 +59,7 @@ export default function Hero({ anime, params }: Props) {
                 alt={anime.title.english || ""}
               />
             </div>
-            <div
-              className="grid my-5 gap-4"
-              style={{ gridTemplateColumns: "auto 35px" }}
-            >
+            <div className="flex items-end lg:grid lg:grid-cols-[auto 35px] lg:my-5 gap-4">
               <AddToListButtonWrapper />
               <AddToLikesButtonWrapper
                 params={params}

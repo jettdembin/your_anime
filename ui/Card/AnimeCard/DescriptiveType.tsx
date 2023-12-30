@@ -212,9 +212,11 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     </h6>
                   </div>
                 </div>
-                <div>
-                  {likedPercentage &&
-                    `${getEmoji(likedPercentage)} ${likedPercentage}%`}
+                <div className="flex justify-end">
+                  <p>
+                    {likedPercentage &&
+                      `${getEmoji(likedPercentage)} ${likedPercentage}%`}
+                  </p>
                 </div>
               </div>
               {!!id && site === "youtube" && (

@@ -15,7 +15,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Header />
 
-      <main className="relative">
+      <main className="relative mt-32 md:mt-6">
         <LandingPageContent>
           <Search />
 

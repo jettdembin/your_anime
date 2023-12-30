@@ -9,7 +9,7 @@ export default function DiscoverLayout({
 }) {
   return (
     <div>
-      <header className="max-w-7xl md:mx-20 xl:mx-auto relative">
+      <header className="max-w-7xl md:mx-20 xl:mx-auto relative mt-6">
         <Search />
       </header>
 

@@ -3,8 +3,8 @@
 import { useRef, useState } from "react";
 
 import {
-  Cross2Icon,
   GearIcon,
+  HomeIcon,
   MagnifyingGlassIcon,
   PersonIcon,
   RowsIcon,
@@ -15,6 +15,7 @@ import { showModal } from "@/util";
 import useClickOutside from "@/hooks/useClickOutside";
 
 import Modal from "@/ui/Modal";
+import Link from "next/link";
 
 type Props = {};
 
@@ -58,15 +59,17 @@ export default function MobileNavWiget({}: Props) {
               />
             </div>
             <div className="flex items-center justify-center">
-              <MagnifyingGlassIcon className="w-6 h-6 text-blue-400" />
+              <GearIcon className="w-6 h-6 text-blue-400" />
             </div>
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center">
-              <GearIcon className="w-6 h-6 text-blue-400" />
+              <MagnifyingGlassIcon className="w-6 h-6 text-blue-400" />
             </div>
             <div className="flex items-center justify-center">
-              <Cross2Icon className="w-6 h-6 text-blue-400" />
+              <Link href="/">
+                <HomeIcon className="w-6 h-6 text-blue-400" />
+              </Link>
             </div>
           </div>
         </div>
