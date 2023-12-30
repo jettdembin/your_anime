@@ -1,11 +1,42 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 import Link from "next/link";
 
 import { ContentContainer } from "./ContentContainer";
 import UserNavigation from "./Navbar/UserNavigation";
 
 export default function Navbar() {
+  const navbarRef = useRef<HTMLDivElement>(null);
+  const lastScrollTopRef = useRef(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTopRef.current) {
+        // When hiding the navbar
+        navbarRef.current?.classList.remove("translate-y-0", "duration-150");
+        navbarRef.current?.classList.add("-translate-y-full", "duration-150");
+      } else {
+        // When showing the navbar
+        navbarRef.current?.classList.remove(
+          "-translate-y-full",
+          "duration-150"
+        );
+        navbarRef.current?.classList.add("translate-y-0", "duration-150");
+      }
+      lastScrollTopRef.current = st <= 0 ? 0 : st;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Removed lastScrollTop from dependencies
   return (
     <nav
+      ref={navbarRef}
       className={`w-full p-6 bg-gray-800 items-center justify-center fixed top-0 z-50`}
       id="navbar"
     >
