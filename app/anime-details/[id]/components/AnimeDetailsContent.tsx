@@ -201,11 +201,11 @@ export default function AnimeDetailsContent({ anime }: Props) {
     <>
       <div className="flex flex-col lg:grid lg:grid-cols-[270px_auto] gap-10">
         <aside className="order-2 lg:order-1">
-          <div>
+          <div className="hidden lg:block">
             {animeRating}
             {animePopularity}
             {animeInfo}
-            <div className="hidden md:block">{animeTags}</div>
+            <div className="hidden lg:block">{animeTags}</div>
           </div>
         </aside>
 
@@ -215,7 +215,7 @@ export default function AnimeDetailsContent({ anime }: Props) {
             {animePopularity}
           </div>
           <Relations relations={anime?.relations?.nodes} anime={anime} />
-          <Characters characters={anime?.characters?.nodes} anime={anime} />
+          <Characters characters={anime?.characters?.edges} anime={anime} />
           <div className="block lg:hidden">{animeTags}</div>
         </div>
       </div>

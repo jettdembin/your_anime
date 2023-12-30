@@ -1,24 +1,36 @@
+import { DotFilledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
-type Props = {
-  characters: Array<{
+type Character = {
+  role: string;
+  voiceActors: Array<{
+    id: string;
+    name: { full: string };
+    image: { large: string };
+  }>;
+  node: {
+    id: string;
     image: { large: string };
     name: { full: string };
     description: string;
-  }>;
+  };
+};
+
+type Props = {
+  characters: Array<Character>;
   anime: {
     coverImage: { extraLarge: string };
     title: { english: string };
   };
 };
 
-export default function Characters({ characters, anime }: any) {
+export default function Characters({ characters, anime }: Props) {
   return (
     <section>
       <h3 className="text-base mb-2">Characters</h3>
 
       <div className="flex flex-col md:grid md:grid-cols-2 gap-4 lg:gap-8">
-        {characters?.map((character: any, index: number) => (
+        {characters?.map((character, index) => (
           <div
             key={index}
             className="h-24 grid bg-white"
@@ -32,14 +44,23 @@ export default function Characters({ characters, anime }: any) {
                   objectFit: "cover",
                 }}
                 className="max-h-24 rounded-sm"
-                // className="w-full h-full object-cover rounded-sm"
-                src={character.image.large}
-                alt={character.image.large}
+                src={character.node.image.large}
+                alt={character.node.name.full}
               />
             </div>
-            <div className="p-4 flex flex-col justify-between">
-              <p className="text-xs text-gray-600">{character.name.full}</p>
-              <p className="text-xs text-gray-600">{character.name.full}</p>
+            <div className="p-4 flex flex-col justify-between gap-4 overflow-y-auto">
+              <div className="flex flex-wrap gap-1">
+                <p className="text-xs text-slate-800">
+                  {character.node.name.full}
+                </p>
+                <span className="flex items-center">
+                  <DotFilledIcon className="w-2 h-2" />
+                </span>
+                <p className="text-xs text-slate-500">{character.role}</p>
+              </div>
+              <p className="text-xs text-slate-600">
+                {character.node.description || "No description... yet!"}
+              </p>
             </div>
             <div className="relative w-20">
               <Image
@@ -49,8 +70,8 @@ export default function Characters({ characters, anime }: any) {
                   objectFit: "cover",
                 }}
                 className="max-h-24 rounded-sm"
-                // className="w-full h-full object-cover rounded-sm"
-                src={anime.coverImage.extraLarge}
+                // src={anime.coverImage.extraLarge}
+                src={character?.voiceActors[0]?.image?.large || ""}
                 alt={anime.title.english}
               />
             </div>

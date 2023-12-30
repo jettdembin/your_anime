@@ -498,24 +498,7 @@ export const GET_ANIME_DETAILS = gql`
         name
         rank
       }
-      # staff {
-      # 	nodes {
-      # 		name
-      # 		role
-      # 	}
-      # }
-      # characters {
-      # 	nodes {
-      # 		name {
-      # 			full
-      # 		}
-      # 		voiceActor(language: JAPANESE) {
-      # 			name {
-      # 				full
-      # 			}
-      # 		}
-      # 	}
-      # }
+     
       relations {
         nodes {
           title {
@@ -527,17 +510,27 @@ export const GET_ANIME_DETAILS = gql`
         }
       }
       characters {
-        nodes {
-          name {
-            full
+        edges {
+          node {
+            id
+            name {
+              full
+            }
+            image {
+              large
+            }
+            description
           }
-          # voiceActor(language: JAPANESE) {
-          # 	name {
-          # 		full
-          # 	}
-          # }
-          image {
-            large
+          role
+          voiceActors {
+            id
+            name {
+              full
+            }
+            
+            image {
+              large
+            }
           }
         }
       }
