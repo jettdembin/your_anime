@@ -1,12 +1,12 @@
-import { Media } from "@/types/anime";
-
 type Props = { tags: any; anime: any };
 
 export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
   const animeRating = (
     <div className="mb-4">
       <div className="bg-white shadow-sm p-4">
-        <h6>⭐#{anime.averageScore} Highest Rated All Time</h6>
+        <h6 className="text-slate-500 w-max">
+          ⭐#{anime.averageScore} Highest Rated All Time
+        </h6>
       </div>
     </div>
   );
@@ -23,115 +23,157 @@ export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
 
   const animeInfo = (
     <div className="">
-      <ul className="flex flex-col space-y-4 rounded-md bg-white shadow-sm p-4">
+      <ul className="overflow-x-auto flex gap-6 lg:gap-0 lg:flex-col lg:space-y-4 rounded-md bg-white shadow-sm p-4">
         {anime.format && (
-          <li>
-            <h6>Format</h6>
-            <p className="text-sm text-slate-700">{anime.format}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Format</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.format}</span>
+            </div>
           </li>
         )}
         {anime.duration && (
-          <li>
-            <h6>Episode Duration</h6>
-            <p className="text-sm text-slate-700">{anime.duration}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Episode Duration</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.duration}</span>
+            </div>
           </li>
         )}
         {anime.status && (
-          <li>
-            <h6>Status</h6>
-            <p className="text-sm text-slate-700">{anime.status}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Status</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.status}</span>
+            </div>
           </li>
         )}
         {anime.startDate.year && (
-          <li>
-            <h6>Start Date</h6>
-            <p className="text-sm text-slate-700">{anime.startDate.year}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Start Date</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span></span>
+              {anime.startDate.year}
+            </div>
           </li>
         )}
         {anime.season && (
-          <li>
-            <h6>Season</h6>
-            <p className="text-sm text-slate-700">{anime.season}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Season</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.season}</span>
+            </div>
           </li>
         )}
         {anime.averageScore && (
-          <li>
-            <h6>Average Score</h6>
-            <p className="text-sm text-slate-700">{anime.averageScore}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Average Score</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.averageScore}</span>
+            </div>
           </li>
         )}
         {anime.meanScore && (
-          <li>
-            <h6>Mean Score</h6>
-            <p className="text-sm text-slate-700">{anime.meanScore}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Mean Score</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.meanScore}</span>
+            </div>
           </li>
         )}
         {anime.popularity && (
-          <li>
-            <h6>Popularity</h6>
-            <p className="text-sm text-slate-700">{anime.popularity}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Popularity</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.popularity}</span>
+            </div>
           </li>
         )}
         {anime.favourites && (
-          <li>
-            <h6>Favorites</h6>
-            <p className="text-sm text-slate-700">{anime.favourites}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Favorites</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.favourites}</span>
+            </div>
           </li>
         )}
         {anime.studios?.nodes?.name && (
-          <li>
-            <h6>Studios</h6>
-            <p className="text-sm text-slate-700">
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Studios</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span></span>
               {anime.studios?.nodes?.name}
-            </p>
+            </div>
           </li>
         )}
         {anime.producers && (
-          <li>
-            <h6>Producers</h6>
-            <p className="text-sm text-slate-700">{anime.producers}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Producers</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.producers}</span>
+            </div>
           </li>
         )}
         {anime.source && (
-          <li>
-            <h6>Source</h6>
-            <p className="text-sm text-slate-700">{anime.source}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Source</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.source}</span>
+            </div>
           </li>
         )}
         {anime.hashtag && (
-          <li>
-            <h6>Hashtag</h6>
-            <p className="text-sm text-slate-700">{anime.hashtag}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Hashtag</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.hashtag}</span>
+            </div>
           </li>
         )}
         {anime.genres && anime.genres.length > 0 && (
-          <li>
-            <h6>Genres</h6>
-            <p className="text-sm text-slate-700">{anime.genres.join(", ")}</p>
+          <li className="flex flex-col justify-between gap-2">
+            <h6 className="text-slate-500 w-max">Genres</h6>
+            <div className="text-sm text-slate-800 w-max flex-wrap">
+              {anime.genres.map((genre: string, index: number) => (
+                <span key={index}>
+                  {genre}
+                  {index < anime.genres.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </div>
           </li>
         )}
+
         {anime.title.romaji && (
-          <li>
-            <h6>Romaji</h6>
-            <p className="text-sm text-slate-700">{anime.title.romaji}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Romaji</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.title.romaji}</span>
+            </div>
           </li>
         )}
         {anime.title.english && (
-          <li>
-            <h6>English</h6>
-            <p className="text-sm text-slate-700">{anime.title.english}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">English</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.title.english}</span>
+            </div>
           </li>
         )}
         {anime.title.native && (
-          <li>
-            <h6>Native</h6>
-            <p className="text-sm text-slate-700">{anime.title.native}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Native</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.title.native}</span>
+            </div>
           </li>
         )}
         {anime.synonyms && (
-          <li>
-            <h6>Synonyms</h6>
-            <p className="text-sm text-slate-700">{anime.synonyms}</p>
+          <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
+            <h6 className="text-slate-500 w-max">Synonyms</h6>
+            <div className="text-sm text-slate-800 w-max">
+              <span>{anime.synonyms}</span>
+            </div>
           </li>
         )}
       </ul>
@@ -140,7 +182,7 @@ export default function AnimeDetailsContentSidebar({ tags, anime }: Props) {
 
   const animeTags = (
     <div className="py-6">
-      <h6>Tags</h6>
+      <h6 className="text-slate-500 w-max">Tags</h6>
       <div className="relative space-y-4 pt-4">
         {tags?.map((tag: any) => (
           <div key={tag.name} className="px-3 py-2 bg-white rounded-sm">
