@@ -57,7 +57,7 @@ export default function AddToLikesButtonWrapper({ params, english }: Props) {
 
   const addToLikesButton = (
     <button
-      className="py-1 max-h-[35px] h-[35px] lg:max-h-[none] lg:h-full bg-red-400 rounded-sm text-white w-full"
+      className="py-1 max-h-[35px] min-h-[36px] lg:max-h-[none] lg:h-full bg-[#EC294B] rounded-md text-white w-full"
       onClick={() => isSignedIn && handleAddToLikes()}
       // onClick={() => {
       //   document.getElementById("add_to_likes_modal").showModal();

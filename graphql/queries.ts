@@ -504,9 +504,13 @@ export const GET_ANIME_DETAILS = gql`
           title {
             english
             userPreferred
+            romaji
           }
           type
           status
+          coverImage {
+            large
+          }
         }
       }
       characters {

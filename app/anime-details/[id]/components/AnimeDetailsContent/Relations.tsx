@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { Media, Relations } from "@/types/anime";
+import { Media } from "@/types/anime";
+import { DotFilledIcon } from "@radix-ui/react-icons";
 
 type Props = {
   anime: Media;
@@ -8,33 +9,50 @@ type Props = {
 };
 
 export default function Relations({ anime, relations }: Props) {
+  console.log(relations);
   return (
     <section>
-      <h3 className="text-base mb-2">Relations</h3>
-      <div className="flex flex-col space-y-4">
+      <h3 className="text-sm font-semibold text-slate-600 mb-2">Relations</h3>
+
+      <div className="flex lg:flex-col lg:grid lg:grid-cols-2 overflow-auto gap-4  pb-1">
         {relations?.map((relation: any, index: number) => (
           <div
             key={index}
-            className="grid bg-white"
-            style={{ gridTemplateColumns: "20% auto" }}
+            className="grid  bg-white h-24 rounded-sm max-w-[400px] min-w-[400px] lg:max-w-[auto] lg:min-w-[auto]"
+            style={{ gridTemplateColumns: "5rem auto" }}
           >
-            <div className="relative">
+            <div className="relative w-20">
               <Image
                 fill
                 style={{
                   width: "100%",
                   objectFit: "cover",
                 }}
-                className="rounded-sm"
-                src={anime.coverImage.extraLarge || ""}
+                className="h-full rounded-sm"
+                src={relation.coverImage.large || ""}
                 alt={anime.title.english || "image description"}
               />
             </div>
             <div className="p-4 flex flex-col">
-              <h6>Source</h6>
-              <p className="mt-1">{relation.title.english}</p>
-              <p className="mt-auto">
-                {relation.type} - {relation.status}
+              <div className="flex flex-col gap-1">
+                <p className="font-semibold text-xxs text-[#3CB4F1]">
+                  {relation.type}
+                </p>
+
+                <h6 className="text-sm">
+                  {relation.title.english ||
+                    relation.title.romaji ||
+                    relation.title.userPreferred}
+                </h6>
+              </div>
+              <p className="flex gap-[1px] font-light text-xs mt-auto text-slate-500">
+                {relation.type.slice(0, 1) +
+                  relation.type.slice(1).toLowerCase()}{" "}
+                <span className="flex items-center">
+                  <DotFilledIcon className="w-2 h-2" />
+                </span>
+                {relation.status.slice(0, 1) +
+                  relation.status.slice(1).toLowerCase()}
               </p>
             </div>
           </div>
