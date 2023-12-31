@@ -149,10 +149,10 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     ref={thumbnailRef}
                   />
                 </div>
-                <div className="flex flex-col py-3 md:flex-row md:items-center w-full">
+                <div className="flex flex-col py-4 md:flex-row md:items-center w-full">
                   <div className="w-full h-full flex flex-col lg:justify-center md:w-2/4 lg:w-1/3 pr-2 mr-8 lg:pr-0 cursor-pointer">
                     <div className="flex items-center">
-                      <h3 className="mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
+                      <h3 className="mt-2 mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg lg:mt-0">
                         {anime?.title?.english || anime?.title?.native}
                       </h3>
 
