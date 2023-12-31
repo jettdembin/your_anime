@@ -1,21 +1,19 @@
 import { useState } from "react";
 
 export const useShowAnimeInfo = () => {
-	const [hoveredAnime, setHoveredAnime] = useState();
+  const [hoveredAnime, setHoveredAnime] = useState();
 
-	const handleMouseEnter = (animeId) => {
-		setHoveredAnime(animeId);
-		console.log(animeId);
-	};
+  const handleMouseEnter = (animeId) => {
+    setHoveredAnime(animeId);
+  };
 
-	const handleMouseLeave = () => {
-		// debugger;
-		setHoveredAnime(null);
-	};
+  const handleMouseLeave = () => {
+    setHoveredAnime(null);
+  };
 
-	return {
-		hoveredAnime,
-		handleMouseEnter,
-		handleMouseLeave,
-	};
+  return {
+    hoveredAnime,
+    handleMouseEnter,
+    handleMouseLeave,
+  };
 };

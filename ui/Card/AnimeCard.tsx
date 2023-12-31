@@ -26,6 +26,9 @@ export default function AnimeCard({
   index,
 }: AnimeCardProps) {
   const { cardType } = useCardTypeContext();
+  const columns = cardType === "card" ? 4 : cardType === "descriptive" ? 2 : 1;
+  const isLastIndexOfRow = (index: number) => index % 3 == 0;
+  console.log(index);
 
   const [isCardHovered, setIsCardHovered] = useState(false);
 

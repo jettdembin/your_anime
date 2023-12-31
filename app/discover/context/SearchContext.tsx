@@ -1,6 +1,6 @@
 // "use client";
 
-import React, { createContext, useContext, ReactNode } from "react";
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
@@ -46,6 +46,7 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   } else if (categoryValue?.toUpperCase() === "POPULAR_ANIME") {
     query = GET_POPULAR_ANIME;
   }
+  const [queryValue, setQueryValue] = useState(query);
 
   const {
     category,
@@ -59,7 +60,7 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
     error,
     loading,
     data,
-  } = useSearch({ searchValue, categoryValue, query });
+  } = useSearch({ searchValue, categoryValue, query: queryValue });
 
   return (
     <SearchContext.Provider

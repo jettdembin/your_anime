@@ -118,7 +118,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   return (
     <>
       <div
-        className="flex flex-col relative w-full h-full md:h-72 md:grid md:grid-cols-[auto,1fr] bg-white rounded-sm sm:rounded-md overflow-hidden group shadow-custom min-h-[290px]"
+        className="flex flex-col relative w-full h-full  md:grid md:grid-cols-[auto,1fr] bg-white rounded-sm sm:rounded-md overflow-hidden group shadow-custom min-h-[260px]"
         role="button"
         tabIndex={0}
         onMouseEnter={() => {
@@ -131,15 +131,15 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
         }}
       >
         <div className="relative">
-          <div className="overflow-hidden max-h-[290px] h-full max-w-[12rem] lg:max-w-[14.3rem]">
+          <div className="overflow-hidden max-h-[260px] h-full max-w-[10rem] md:max-w-[12rem] lg:max-w-[12.5rem]">
             <img
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}
               // objectFit="cover"
-              className="min-w-[12rem] lg:min-w-[14.3rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
+              className="min-w-[10rem] lg:min-w-[12.5rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 
-            <div className="block z-20 w-[12rem] md:w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-3 md:p-4">
+            <div className="block z-20 w-[10rem] md:w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-3 md:p-4">
               {/* used as a spacer for the opaque background */}
               <h3 className="w-full md:w-auto opacity-0 text-white font-semibold text-sm flex flex-col gap-2">
                 {media.title.english || media.title.native}
@@ -147,7 +147,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               </h3>
             </div>
           </div>
-          <div className="p-3 md:p-4 z-30 block absolute w-[12rem] md:w-full h-fit bottom-0">
+          <div className="p-3 md:p-4 z-30 block absolute w-[10rem] md:w-full h-fit bottom-0">
             <h3 className="w-full md:w-auto h-full flex flex-col gap-2 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
               <span className="text-blue-300 text-xs">{studioName}</span>
@@ -180,8 +180,8 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
 
       <AnimatePresence>
         <div
-          className="flex absolute flex-col left-[12rem] lg:left-[14.3rem] top-0 h-72 w-[calc(100%-12rem)] lg:w-[calc(100%-14.3rem)]"
-          // style={{ width: "calc(100% - 14.3rem)" }}
+          className="flex absolute flex-col left-[10rem] md:left-[12rem] lg:left-[12.5rem] top-0 h-64 w-[calc(100%-10rem)]  md:w-[calc(100%-12rem)] lg:w-[calc(100%-12.5rem)]"
+          // style={{ width: "calc(100% - 12.5rem)" }}
         >
           <div
             className={`mt-6 mr-6 ml-6 mb-6 md:mb-0 h-full md:h-60 ${
@@ -208,7 +208,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               <div className="w-full flex  justify-between font-medium">
                 <div className="flex flex-col gap-1 text-gray-700">
                   <div className="flex">
-                    <h6 className="text-xs">
+                    <h6 className="text-xxs">
                       {episodes && !!season
                         ? `${episodes} ${
                             episodes != 1 ? "episodes" : "episode"
@@ -231,7 +231,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     </h6>
                   </div>
                   <div className="flex gap-1 text-lg">
-                    <h6>
+                    <h6 className="text-sm md:text-base">
                       {!!startDate?.month
                         ? `${getMonthName(startDate?.month)} ${
                             startDate?.day

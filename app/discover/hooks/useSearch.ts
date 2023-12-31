@@ -62,6 +62,7 @@ const useSearch = (userSearch: UserSearch) => {
   useEffect(() => {
     if (!!query && gqlQuery !== query) {
       setGqlQuery(query);
+      debugger
     }
   }, [gqlQuery, query]);
 

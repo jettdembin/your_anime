@@ -1,6 +1,12 @@
+"use client";
+
+import { useRef } from "react";
 
 import { Media } from "@/types/anime";
+
 import { convertTimeUntilAiring, getEmoji } from "@/util";
+
+import useClickOutside from "@/hooks/useClickOutside";
 
 import AnimeHoverCardDetailsWrapper from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
 
@@ -8,13 +14,20 @@ type Props = {
   isVisible: boolean;
   animeDetails: Media | null;
   isLastCard: boolean | undefined;
+  handleMouseLeave: () => void;
 };
 
 export default function AnimeHoverCardDetails({
   isVisible,
   animeDetails,
   isLastCard,
+  handleMouseLeave,
 }: Props) {
+  const hoverCardRef = useRef<HTMLDivElement>(null);
+  useClickOutside(hoverCardRef, () => {
+    handleMouseLeave();
+  });
+
   const nextEpisodeDays = animeDetails?.nextAiringEpisode
     ? Math.floor(animeDetails.nextAiringEpisode.timeUntilAiring / 86400)
     : null;
@@ -41,6 +54,7 @@ export default function AnimeHoverCardDetails({
     title,
   } = animeDetails || {};
   // debugger;
+  console.log("mounted anime hover card");
 
   const currentlyAiring = (
     <h6 className="text-lg text-gray-800">
@@ -63,7 +77,7 @@ export default function AnimeHoverCardDetails({
 
   return (
     <AnimeHoverCardDetailsWrapper isLastCard={isLastCard} isVisible={isVisible}>
-      <div className="flex flex-col flex-wr">
+      <div className="flex flex-col" ref={hoverCardRef}>
         <div className="w-full flex justify-between font-medium">
           {status === "FINISHED" ? (
             <>

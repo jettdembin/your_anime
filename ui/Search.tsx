@@ -69,7 +69,7 @@ export default function Search() {
   }, [searchValues, router]);
 
   return (
-    <section className="px-8 sm:px-0  sm:mx-2 md:mx-0 md:px-8 lg:mt-40 mb-8">
+    <section className="px-8 sm:px-0  md:mx-0 md:px-8 lg:mt-40 mb-8">
       <ContentContainer>
         {/* <form onSubmit={() => {}}> */}
         <div className="">

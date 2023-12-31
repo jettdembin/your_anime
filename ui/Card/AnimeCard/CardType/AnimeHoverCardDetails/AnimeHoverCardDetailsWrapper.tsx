@@ -13,9 +13,7 @@ export default function AnimeHoverCardDetailsWrapper({
 }: Props) {
   return (
     <div
-      className={`absolute w-80 overflow-hidden ${
-        isLastCard ? "right-full" : "left-full"
-      } top-1/4 ml-4 w-64 p-6 bg-white text-gray-900 shadow-md rounded-lg z-10 ease-in opacity-0 ${
+      className={`absolute lg:w-80 overflow-hidden top-1/4 ml-4 w-64 p-6 bg-white text-gray-900 shadow-md rounded-lg z-10 ease-in opacity-0 ${
         isVisible && "animate-appearing-card"
       }`}
     >

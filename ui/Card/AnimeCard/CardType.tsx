@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
 
 import { Media } from "@/types/anime";
@@ -15,18 +17,48 @@ type Props = {
   index?: number;
 };
 
+interface LongPressComponentProps {
+  onLongPress: () => void;
+  duration?: number;
+}
+
 const CardType = ({ media, isLastCard, index }: Props) => {
   const router = useRouter();
   const { hoveredAnime, handleMouseEnter, handleMouseLeave } =
     useShowAnimeInfo();
+
+  const [pressing, setPressing] = useState<boolean>(false);
+  const onLongPress = (): void => {
+    handleMouseEnter(media.id);
+  };
+
+  useEffect(() => {
+    let duration = 100;
+
+    if (pressing && hoveredAnime) {
+      // Start a timer when the user starts pressing
+      setTimeout(onLongPress, duration);
+    }
+  }, [pressing, onLongPress]);
+
+  const handleTouchStart = (): void => {
+    setPressing(true); // User starts pressing
+  };
+
+  const handleTouchEnd = (): void => {
+    setPressing(false); // User stops pressing
+  };
 
   const studioName = media?.studios?.nodes[0]?.name || "Unknown";
 
   return (
     <>
       <div
-        className="relative w-full h-72 xl:h-80 max-h-[230px] lg:max-h-[230px] xl:max-h-none bg-gray-700 md:rounded-md overflow-hidden group"
+        className="relative w-full h-72 xl:h-80 max-h-[230px] lg:max-h-[230px] xl:max-h-[250px] bg-gray-700 md:rounded-md overflow-hidden group"
+        onMouseEnter={() => handleMouseEnter(media.id)}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         onClick={() => {
           router.push(`/anime-details/${media.id}`);
         }}
@@ -68,6 +100,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
           <AnimeHoverCardDetails
             isVisible={hoveredAnime === media.id}
             animeDetails={media}
+            handleMouseLeave={handleMouseLeave}
             isLastCard={isLastCard}
           />
         </div>

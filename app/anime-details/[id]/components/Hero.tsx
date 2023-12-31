@@ -33,7 +33,7 @@ export default function Hero({ anime, params }: Props) {
               "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg"
             })`,
             backgroundSize: `${anime.bannerImage ? "cover" : "contain"}`,
-            backgroundRepeat: "no-repeat",
+            backgroundRepeat: `${anime.bannerImage ? "no-repeat" : "repeat"}`,
             backgroundPosition: "50% 35%",
           }}
         >

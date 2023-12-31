@@ -150,7 +150,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                   />
                 </div>
                 <div className="flex flex-col py-4 md:flex-row md:items-center w-full">
-                  <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-1/3 pr-2 mr-8 lg:pr-0 cursor-pointer">
+                  <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-2/3  pr-2 mr-8 lg:pr-0 cursor-pointer">
                     <div className="flex items-center">
                       <h3 className="mt-2 mr-12 md:mr-0 font-semibold text-sm  text-slate-700 lg:text-lg lg:mt-0">
                         {anime?.title?.english || anime?.title?.native}
@@ -275,7 +275,8 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     {anime?.status === "RELEASING" &&
                     anime?.nextAiringEpisode ? (
                       <span className="text-xs md:text-sm text-gray-500">
-                        Ep {anime?.nextAiringEpisode?.episode} airing in{" "}
+                        Ep {anime?.nextAiringEpisode?.episode} airing in
+                        <br />
                         {Math.floor(
                           anime?.nextAiringEpisode?.timeUntilAiring / 86400
                         )}{" "}

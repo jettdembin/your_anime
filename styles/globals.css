@@ -7,6 +7,38 @@ body {
   color: #020617;
 }
 
+/* Common styles for both triangles */
+.right-triangle, .left-triangle {
+  position: relative;
+}
+
+/* Left triangle */
+.left-triangle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* Aligns the triangle to the left */
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent white transparent transparent; /* Right border is white */
+  transform: translateY(-50%);
+  z-index: 1;
+  box-shadow: #020617;
+}
+
+/* Left triangle */
+.right-triangle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(100% - 1rem); /* Aligns the triangle to the left */
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent white transparent transparent; /* Right border is white */
+  transform: translateY(-50%);
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
