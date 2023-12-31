@@ -38,6 +38,7 @@ export const GET_POPULAR_ANIME = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status
@@ -166,6 +167,7 @@ export const GET_BROWSE_FILTERS = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status
@@ -212,6 +214,7 @@ export const SEARCH_ANIMES_UPCOMING = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status
@@ -264,6 +267,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status
@@ -311,6 +315,7 @@ export const SEARCH_ANIMES_TRENDING = gql`
             name
           }
         }
+        popularity
         episodes
         genres
         status

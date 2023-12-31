@@ -8,7 +8,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import YouTube from "react-youtube";
 
-import { BookmarkIcon, DotFilledIcon } from "@radix-ui/react-icons";
+import {
+  BookmarkIcon,
+  DotFilledIcon,
+  PersonIcon,
+  PlayIcon,
+} from "@radix-ui/react-icons";
 
 import { Media } from "@/types/anime";
 
@@ -26,8 +31,9 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const [thumbnailBounds, setThumbnailBounds] = useState<DOMRect | null>(null);
   const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
 
+  const playTailerButtonRef = useRef<HTMLButtonElement>(null);
+  const addToListButtonRef = useRef<HTMLButtonElement>(null);
   const thumbnailRef = useRef<HTMLImageElement>(null);
-  const thumbnailImageDivRef = useRef<HTMLDivElement>(null);
 
   const { trailer } = anime;
   const { id, site, thumbnail } = trailer || {
@@ -35,8 +41,6 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
     site: null,
     thumbnail: "",
   };
-  console.log(thumbnail);
-  console.log(anime?.trailer?.thumbnail);
 
   // Handler functions
   const handleBackdropClick = () => {
@@ -66,6 +70,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const addToListButton = (
     <button
       className="p-4 rounded-full cursor-pointer"
+      ref={addToListButtonRef}
       onClick={() => {
         if (isSignedIn) {
           const dialog = document.getElementById(
@@ -97,10 +102,18 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
         onClick={(e) => {
           // Check if the click is on the image or its child elements
           if (
-            thumbnailImageDivRef.current &&
-            thumbnailImageDivRef.current.contains(e.target as Node)
+            playTailerButtonRef.current &&
+            playTailerButtonRef.current.contains(e.target as Node)
           ) {
+            // Do nothing
             handleTrailerClick();
+            return;
+          } else if (
+            addToListButtonRef.current &&
+            addToListButtonRef.current.contains(e.target as Node)
+          ) {
+            // Do nothing
+            return;
           } else {
             // Navigate to anime details
             router.push(`/anime-details/${anime?.id}`);
@@ -121,7 +134,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                   className={`relative md:w-24 lg:w-[7rem] p-3 md:p-4 ${
                     !!anime?.trailer?.thumbnail !== false && "cursor-pointer"
                   }`}
-                  ref={thumbnailImageDivRef}
+                  // ref={thumbnailImageDivRef}
                 >
                   <Image
                     width={50}
@@ -135,14 +148,9 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     }
                     ref={thumbnailRef}
                   />
-                  {!!id && site === "youtube" && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <i className="fas fa-play text-white"></i>
-                    </div>
-                  )}
                 </div>
                 <div className="flex flex-col py-3 md:flex-row md:items-center w-full">
-                  <div className="w-full h-full flex flex-col lg:justify-center md:w-2/3 lg:w-1/2 pr-2 lg:pr-0 cursor-pointer">
+                  <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-1/2 pr-2 mr-8 lg:pr-0 cursor-pointer">
                     <div className="flex items-center">
                       <h3 className="mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
                         {anime?.title?.english || anime?.title?.native}
@@ -189,12 +197,18 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-[.3px] flex-row">
-                    <p className="text-xs md:text-sm">{animeEpisodes()}</p>
-                    <DotFilledIcon className="w-2 h-2" />
-                    <p className="text-xs md:text-sm">{`${
-                      anime?.popularity && anime?.popularity.toLocaleString()
-                    } users`}</p>
+                  <div className="flex flex-row items-center gap-[.3px] md:grid grid-cols-2 lg:grid-cols-3 lg:gap-0 ">
+                    <p className="order-1 lg:order:2 text-xs md:text-sm">
+                      {animeEpisodes()}
+                    </p>
+                    <DotFilledIcon className="order-2 md:hidden w-2 h-2" />
+                    <p className="order-2 -mt-2 absolute top-1/2 -translate-y-1/2 right-4 text-sm lg:hidden">{`${anime?.averageScore}%`}</p>
+                    <p className="flex items-center gap-1 order-3 lg:order-1 text-xs md:text-sm">
+                      <PersonIcon className="w-3 h-3" />
+                      {`${
+                        anime?.popularity && anime?.popularity.toLocaleString()
+                      }`}
+                    </p>
                   </div>
                   <div className="md:hidden flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
                     <span className="text-xs lg:text-sm">
@@ -247,7 +261,24 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
             </div>
           </div>
         </div>
-        <div className="order-7 lg:order-7 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-white shadow-lg lg:shadow-none lg:bg-transparent  lg:flex lg:items-center">
+
+        <div
+          className={`${
+            !!id && site === "youtube" ? "block tooltip" : "hidden"
+          } order-7 lg:order-7 absolute lg:relative lg:top-0 top-[-.8rem] right-16 lg:hidden  rounded-full bg-white shadow-lg`}
+          data-tip="Play Trailer"
+        >
+          <button
+            className="p-4 rounded-full cursor-pointer"
+            ref={playTailerButtonRef}
+          >
+            <PlayIcon />
+          </button>
+        </div>
+        <div
+          className="tooltip order-8 lg:order-8 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-white shadow-lg lg:shadow-none lg:bg-transparent  lg:flex lg:items-center"
+          data-tip="Add to List"
+        >
           {isSignedInAddToListButton()}
           <Modal id="add_to_list_modal">
             <AddToListForm />

@@ -91,7 +91,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   };
   const addToListButton = (
     <button
-      className="p-4 bg-white rounded-full cursor-pointer"
+      className="p-2 md:p-4 bg-white rounded-full cursor-pointer"
       onClick={() => {
         if (isSignedIn) {
           const dialog = document.getElementById(
@@ -154,7 +154,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             </h3>
           </div>
         </div>
-        <div className="flex  px-4 md:flex items-center justify-between mt-auto bg-genre">
+        <div className="flex  px-4 py-2 md:flex items-center justify-between mt-auto bg-genre">
           <div className="flex flex-wrap items-center mr-2 gap-2">
             {genres.slice(0, 4).map((genre, i) => (
               <span
