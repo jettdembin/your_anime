@@ -118,7 +118,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   return (
     <>
       <div
-        className="relative w-full h-72 grid grid-cols-[auto,1fr] bg-white rounded-none md:rounded-md overflow-hidden group shadow-custom"
+        className="flex flex-col relative w-full h-full md:h-72 md:grid md:grid-cols-[auto,1fr] bg-white rounded-none md:rounded-md overflow-hidden group shadow-custom"
         role="button"
         tabIndex={0}
         onMouseEnter={() => {
@@ -139,19 +139,41 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               className="min-w-[12rem] lg:min-w-[14.3rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"
             />
 
-            <div className="block z-20 w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-4">
+            <div className="block z-20 w-[12rem] md:w-full bg-gray-900 h-fit absolute bottom-0 opacity-70 p-3 md:p-4">
               {/* used as a spacer for the opaque background */}
-              <h3 className="opacity-0 text-white font-semibold text-base flex flex-col gap-2">
+              <h3 className="w-full md:w-auto opacity-0 text-white font-semibold text-sm flex flex-col gap-2">
                 {media.title.english || media.title.native}
                 <span className="text-xs">{studioName}</span>
               </h3>
             </div>
           </div>
-          <div className="p-4 z-30 block absolute w-full h-fit bottom-0">
-            <h3 className="h-full flex flex-col gap-2 text-white font-semibold text-base">
+          <div className="p-3 md:p-4 z-30 block absolute w-[12rem] md:w-full h-fit bottom-0">
+            <h3 className="w-full md:w-auto h-full flex flex-col gap-2 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
               <span className="text-blue-300 text-xs">{studioName}</span>
             </h3>
+          </div>
+        </div>
+        <div className="flex  px-4 md:flex items-center justify-between mt-auto bg-genre">
+          <div className="flex flex-wrap items-center mr-2 gap-2">
+            {genres.slice(0, 4).map((genre, i) => (
+              <span
+                className="h-4 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                key={`${genre + i}`}
+              >
+                {genre?.toLowerCase()}
+              </span>
+            ))}
+          </div>
+          <div
+            onMouseEnter={() => setIsAnimeHoverOptionsHovered(true)}
+            onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
+          >
+            {/* <AnimeHoverOptions /> */}
+            {isSignedInAddToListButton()}
+            <Modal id="add_to_list_modal">
+              <AddToListForm />
+            </Modal>
           </div>
         </div>
       </div>
@@ -162,7 +184,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
           // style={{ width: "calc(100% - 14.3rem)" }}
         >
           <div
-            className={`mt-6 mr-6 ml-6 h-60 ${
+            className={`mt-6 mr-6 ml-6 mb-6 md:mb-0 h-full md:h-60 ${
               isCardHovered
                 ? "overflow-y-scroll overflow-x-hidden"
                 : "overflow-hidden"
@@ -259,7 +281,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               ></div>
             </div>
           </div>
-          <div className="px-4 py-2 flex items-center justify-between mt-auto bg-genre">
+          <div className="hidden px-4 py-2 md:flex items-center justify-between mt-auto bg-genre">
             <div className="flex flex-wrap items-center mr-2 gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
