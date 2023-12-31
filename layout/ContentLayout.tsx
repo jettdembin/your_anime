@@ -16,7 +16,7 @@ export const ContentLayout = ({
   href,
 }: ContentLayoutProps) => {
   return (
-    <section className="xl:mt-16 md:px-8 xl:px-0">
+    <section className="mt-24 md:px-8 xl:px-0">
       <header className="py-6">
         <ContentContainer className="flex items-end justify-between px-4 md:px-0">
           <h1 className="text-lg font-semibold text-gray-900">{title}</h1>

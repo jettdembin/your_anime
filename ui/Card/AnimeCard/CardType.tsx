@@ -25,18 +25,14 @@ const CardType = ({ media, isLastCard, index }: Props) => {
   return (
     <>
       <div
-        className="relative w-full h-72 bg-gray-700 md:rounded-md overflow-hidden group"
-        onMouseEnter={() => {
-          handleMouseEnter(media.id);
-          console.log(media.id);
-        }}
+        className="relative w-full h-72 max-h-[230px] md:max-h-none bg-gray-700 md:rounded-md overflow-hidden group"
         onMouseLeave={handleMouseLeave}
         onClick={() => {
           router.push(`/anime-details/${media.id}`);
         }}
       >
         <div className="relative">
-          <div className="overflow-hidden max-h-[290px]">
+          <div className="overflow-hidden max-h-[230px] md:max-h-[290px]">
             <div className="relative w-full h-full">
               <Image
                 width={250}

@@ -6,9 +6,9 @@ import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
+import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 import AnimeCard from "@/ui/Card/AnimeCard";
 import { CardSectionLoader } from "@/ui/LoadingSection";
-import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
 
 export default function TopAnimeList() {
   const { error, loading, data } = useAnilistAPI(GET_TOP_100_ANIME);
@@ -19,15 +19,13 @@ export default function TopAnimeList() {
   }
   return (
     <CardTypeProvider type="list">
-      <div className="max-w-7xl mx-auto">
-        <AnimeCardLayout>
-          <ul>
-            {data.Page.media.slice(0, 10).map((anime: any, index: number) => (
-              <AnimeCard key={anime.id} media={anime} index={index} />
-            ))}
-          </ul>
-        </AnimeCardLayout>
-      </div>
+      <AnimeCardLayout>
+        <ul>
+          {data.Page.media.slice(0, 10).map((anime: any, index: number) => (
+            <AnimeCard key={anime.id} media={anime} index={index} />
+          ))}
+        </ul>
+      </AnimeCardLayout>
     </CardTypeProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type CardType = "card" | "descriptive" | "list";
 
@@ -39,7 +39,10 @@ const useCardType = (
     const debouncedHandleResize = debounce(function handleResize() {
       if (window.innerWidth >= 1024) { // Tailwind's 'large' breakpoint
         handleCardType(defaultType);
-      } else {
+      } else if  (window.innerWidth <= 640 && defaultType === "list") { // Tailwind's 'small' breakpoint
+        handleCardType("list");
+      }
+      else {
         handleCardType("card");
       }
     }, 100);

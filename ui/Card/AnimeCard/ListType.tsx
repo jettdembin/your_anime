@@ -12,7 +12,7 @@ import { BookmarkIcon, DotFilledIcon } from "@radix-ui/react-icons";
 
 import { Media } from "@/types/anime";
 
-import { formatDate, formatGenres, formatMediaType } from "@/util/format";
+import { formatDate } from "@/util/format";
 
 import LoginWrapper from "@/ui/LoginWrapper";
 import Modal from "../../Modal";
@@ -118,7 +118,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
             <div className="text-slate-800">
               <div className="flex w-full">
                 <div
-                  className={`relative md:w-1/6 lg:w-[7rem] p-3 md:p-4 ${
+                  className={`relative md:w-24 lg:w-[7rem] p-3 md:p-4 ${
                     !!anime?.trailer?.thumbnail !== false && "cursor-pointer"
                   }`}
                   ref={thumbnailImageDivRef}
@@ -141,17 +141,31 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center w-full">
-                  <div className="w-full md:w-2/3 lg:w-1/2 pr-2 lg:pr-0 cursor-pointer">
-                    <h3 className="font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
-                      {anime?.title?.english || anime?.title?.native}
-                    </h3>
+                <div className="flex flex-col py-3 md:flex-row md:items-center w-full">
+                  <div className="w-full h-full flex flex-col lg:justify-center md:w-2/3 lg:w-1/2 pr-2 lg:pr-0 cursor-pointer">
+                    <div className="flex items-center">
+                      <h3 className="mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
+                        {anime?.title?.english || anime?.title?.native}
+                      </h3>
+                      <p className="-mt-2 absolute top-1/2 -translate-y-1/2 right-4 text-sm md:hidden">{`${anime?.averageScore}%`}</p>
+                    </div>
 
-                    <p className="text-xs md:text-sm">
-                      {formatGenres(anime?.genres)}
-                    </p>
-                    <div className="flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
-                      <span className="text-sm">
+                    <div
+                      className="flex flex-wrap gap-1 mt-1"
+                      style={{ width: "calc(100% - 2rem" }}
+                    >
+                      {anime?.genres &&
+                        anime?.genres.slice(0, 3).map((genre, i) => (
+                          <span
+                            className="h-3 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                            key={`${genre + i}`}
+                          >
+                            {genre?.toLowerCase()}
+                          </span>
+                        ))}{" "}
+                    </div>
+                    <div className="hidden md:mt-auto md:flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
+                      <span className="text-xs lg:text-sm">
                         {formatDate(
                           anime?.endDate || anime?.startDate,
                           "seasonYear"
@@ -160,7 +174,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       <DotFilledIcon className="w-2 h-2" />
                       {anime?.status === "RELEASING" &&
                       anime?.nextAiringEpisode ? (
-                        <span className="text-xs md:text-sm text-gray-500">
+                        <span className="text-xs lg:text-sm text-gray-500">
                           Ep {anime?.nextAiringEpisode?.episode} airing in{" "}
                           {Math.floor(
                             anime?.nextAiringEpisode?.timeUntilAiring / 86400
@@ -175,19 +189,35 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     </div>
                   </div>
 
-                  <div className="flex md:w-2/3 lg:w-1/3 ">
-                    <div className="md:flex-col w-full">
-                      <p className="text-xs md:text-base">{`${anime?.averageScore}%`}</p>
-                      <p className="text-xs md:text-sm">{`${
-                        anime?.popularity && anime?.popularity.toLocaleString()
-                      } users`}</p>
-                    </div>
-                    <div className="w-full flex items-center">
-                      <p className="text-xs md:text-base">
-                        {formatMediaType(anime?.format)}
-                      </p>
-                      <p className="text-xs md:text-sm">{animeEpisodes()}</p>
-                    </div>
+                  <div className="flex items-center gap-[.3px] flex-row">
+                    <p className="text-xs md:text-sm">{animeEpisodes()}</p>
+                    <DotFilledIcon className="w-2 h-2" />
+                    <p className="text-xs md:text-sm">{`${
+                      anime?.popularity && anime?.popularity.toLocaleString()
+                    } users`}</p>
+                  </div>
+                  <div className="md:hidden flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
+                    <span className="text-xs lg:text-sm">
+                      {formatDate(
+                        anime?.endDate || anime?.startDate,
+                        "seasonYear"
+                      ) || "N/A"}
+                    </span>
+                    <DotFilledIcon className="w-2 h-2" />
+                    {anime?.status === "RELEASING" &&
+                    anime?.nextAiringEpisode ? (
+                      <span className="text-xs lg:text-sm text-gray-500">
+                        Ep {anime?.nextAiringEpisode?.episode} airing in{" "}
+                        {Math.floor(
+                          anime?.nextAiringEpisode?.timeUntilAiring / 86400
+                        )}{" "}
+                        days
+                      </span>
+                    ) : (
+                      <span className="text-xs md:text-sm text-gray-500">
+                        {anime?.status}
+                      </span>
+                    )}
                   </div>
                   <div className="hidden lg:block w-full md:w-1/6 lg:w-[15.3%] text-left md:text-right pr-4 md:ml-auto">
                     <span className="text-xs md:text-sm">
