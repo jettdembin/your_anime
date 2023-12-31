@@ -83,7 +83,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
         // document.getElementById("add_to_list_modal").showModal()
       }}
     >
-      <BookmarkIcon />
+      <BookmarkIcon className="lg:text-slate-800" />
     </button>
   );
 
@@ -126,10 +126,10 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
         >
           #{index + 1}
         </span>
-        <div className="flex w-full">
+        <div className="flex w-full min-h-[115px]">
           <div className="w-full bg-white rounded-md shadow-box shadow-custom">
             <div className="text-slate-800">
-              <div className="flex w-full">
+              <div className="flex w-full min-h-[115px]">
                 <div
                   className={`relative md:w-24 lg:w-[7rem] p-3 md:p-4 ${
                     !!anime?.trailer?.thumbnail !== false && "cursor-pointer"
@@ -150,11 +150,12 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                   />
                 </div>
                 <div className="flex flex-col py-3 md:flex-row md:items-center w-full">
-                  <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-1/2 pr-2 mr-8 lg:pr-0 cursor-pointer">
+                  <div className="w-full h-full flex flex-col lg:justify-center md:w-2/4 lg:w-1/3 pr-2 mr-8 lg:pr-0 cursor-pointer">
                     <div className="flex items-center">
                       <h3 className="mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
                         {anime?.title?.english || anime?.title?.native}
                       </h3>
+
                       <p className="-mt-2 absolute top-1/2 -translate-y-1/2 right-4 text-sm md:hidden">{`${anime?.averageScore}%`}</p>
                     </div>
 
@@ -196,7 +197,25 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       )}
                     </div>
                   </div>
-
+                  <div
+                    className={`${
+                      !!id && site === "youtube"
+                        ? "lg:block tooltip"
+                        : "lg:block opacity-0"
+                    }  rounded-full hidden mr-auto bg-white shadow-md`}
+                    data-tip="Play Trailer"
+                  >
+                    <button
+                      className={`p-4 rounded-full ${
+                        !!id && site === "youtube"
+                          ? "cursor-pointer"
+                          : "cursor-default"
+                      }`}
+                      ref={playTailerButtonRef}
+                    >
+                      <PlayIcon className="text-[#3CB4F0]" />
+                    </button>
+                  </div>
                   <div className="flex flex-row items-center gap-[.3px] md:grid grid-cols-2 lg:grid-cols-3 lg:gap-0 ">
                     <p className="order-1 lg:order:2 text-xs md:text-sm">
                       {animeEpisodes()}
@@ -272,11 +291,11 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
             className="p-4 rounded-full cursor-pointer"
             ref={playTailerButtonRef}
           >
-            <PlayIcon />
+            <PlayIcon className="text-[#3CB4F0]" />
           </button>
         </div>
         <div
-          className="tooltip order-8 lg:order-8 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-white shadow-lg lg:shadow-none lg:bg-transparent  lg:flex lg:items-center"
+          className="tooltip order-8 lg:order-8 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-yellow-300 lg:bg-transparent shadow-lg lg:shadow-none lg:flex lg:items-center"
           data-tip="Add to List"
         >
           {isSignedInAddToListButton()}

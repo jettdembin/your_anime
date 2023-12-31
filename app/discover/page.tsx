@@ -79,7 +79,7 @@ export default function Discover() {
           <hr className="h-10 mx-2 border-x border-y border-gray-800" />
           <div className="flex gap-2">
             <CardTypeWidgetWrapper cardType="card">
-              <BoxIcon className="w-4 h-4"  />
+              <BoxIcon className="w-4 h-4" />
             </CardTypeWidgetWrapper>
             <CardTypeWidgetWrapper cardType="descriptive">
               <DashboardIcon className="w-4 h-4" />
@@ -90,17 +90,21 @@ export default function Discover() {
           </div>
         </header>
         {!searchValue ? (
-          <AnimeCardLayout>
-            {media.map((media, i) => (
-              <AnimeCard key={i} media={media} index={i} />
-            ))}
-          </AnimeCardLayout>
+          <div className="mt-6">
+            <AnimeCardLayout>
+              {media.map((media, i) => (
+                <AnimeCard key={i} media={media} index={i} />
+              ))}
+            </AnimeCardLayout>
+          </div>
         ) : (
-          <AnimeCardLayout>
-            {searchData?.Page?.media?.map((media, i) => (
-              <AnimeCard key={i} media={media} index={i} />
-            ))}
-          </AnimeCardLayout>
+          <div className="mt-6">
+            <AnimeCardLayout>
+              {searchData?.Page?.media?.map((media, i) => (
+                <AnimeCard key={i} media={media} index={i} />
+              ))}
+            </AnimeCardLayout>
+          </div>
         )}
       </section>
     </CardTypeProvider>
