@@ -64,7 +64,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
 
   const animeEpisodes = () =>
     anime?.episodes
-      ? `${anime?.episodes > 1 ? `${anime?.episodes} eps` : "1 episode"}`
+      ? `${anime?.episodes > 1 ? `${anime?.episodes} eps` : "1 ep"}`
       : `Ongoing`;
 
   const addToListButton = (
@@ -121,7 +121,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
         }}
       >
         <span
-          className="hidden md:block w-fit mr-4 font-bold text-xl"
+          className="hidden lg:block w-fit mr-4 font-bold text-xl"
           style={{ color: "#8ba0b2" }}
         >
           #{index + 1}
@@ -152,7 +152,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                 <div className="flex flex-col py-4 md:flex-row md:items-center w-full">
                   <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-1/3 pr-2 mr-8 lg:pr-0 cursor-pointer">
                     <div className="flex items-center">
-                      <h3 className="mt-2 mr-12 md:mr-0 font-semibold text-sm md:text-base text-slate-700 lg:text-lg lg:mt-0">
+                      <h3 className="mt-2 mr-12 md:mr-0 font-semibold text-sm  text-slate-700 lg:text-lg lg:mt-0">
                         {anime?.title?.english || anime?.title?.native}
                       </h3>
 
@@ -191,8 +191,13 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                           days
                         </span>
                       ) : (
-                        <span className="text-xs md:text-sm text-gray-500">
-                          {anime?.status}
+                        <span className="text-xs lg:text-sm text-gray-500">
+                          {anime?.status &&
+                            anime?.status?.slice(0, 1) +
+                              anime?.status
+                                ?.replace(/_/g, " ")
+                                .toLowerCase()
+                                .slice(1)}
                         </span>
                       )}
                     </div>
@@ -216,12 +221,14 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       <PlayIcon className="text-[#3CB4F0]" />
                     </button>
                   </div> */}
-                  <div className="flex flex-row items-center gap-[.3px] md:grid grid-cols-2 lg:grid-cols-3 lg:gap-0 ">
+                  <div className="md:w-1/5 flex flex-row items-center gap-[.3px] md:grid grid-cols-2 md:gap-1 lg:gap-0 ">
                     <p className="order-1 lg:order:2 text-xs md:text-sm">
                       {animeEpisodes()}
                     </p>
                     <DotFilledIcon className="order-2 md:hidden w-2 h-2" />
-                    <p className="order-2 -mt-2 absolute top-1/2 -translate-y-1/2 right-4 text-sm lg:hidden">{`${anime?.averageScore}%`}</p>
+                    <p className="order-2 -mt-2 absolute top-1/2 -translate-y-1/2 right-4 text-sm lg:hidden">{`${
+                      (anime?.averageScore && anime?.averageScore + "%") || ""
+                    }`}</p>
                     <p className="flex items-center gap-1 order-3 lg:order-1 text-xs md:text-sm">
                       <PersonIcon className="w-3 h-3" />
                       {`${
@@ -247,8 +254,13 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                         days
                       </span>
                     ) : (
-                      <span className="text-xs md:text-sm text-gray-500">
-                        {anime?.status}
+                      <span className="text-xs lg:text-sm text-gray-500">
+                        {anime?.status &&
+                          anime?.status?.slice(0, 1) +
+                            anime?.status
+                              ?.replace(/_/g, " ")
+                              .toLowerCase()
+                              .slice(1)}
                       </span>
                     )}
                   </div>
@@ -270,8 +282,13 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                         days
                       </span>
                     ) : (
-                      <span className="text-xs md:text-sm text-gray-500">
-                        {anime?.status}
+                      <span className="text-xs lg:text-sm text-gray-500">
+                        {anime?.status &&
+                          anime?.status?.slice(0, 1) +
+                            anime?.status
+                              ?.replace(/_/g, " ")
+                              .toLowerCase()
+                              .slice(1)}
                       </span>
                     )}
                   </div>

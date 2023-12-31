@@ -209,28 +209,34 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                 <div className="flex flex-col gap-1 text-gray-700">
                   <div className="flex">
                     <h6 className="text-xs">
-                      {episodes
-                        ? `${episodes} episodes aired in ${
-                            !!season &&
-                            season?.split("")[0] +
-                              season?.slice(1).toLowerCase()
-                          }`
-                        : `${
+                      {episodes && !!season
+                        ? `${episodes} ${
+                            episodes != 1 ? "episodes" : "episode"
+                          } aired in ${
                             !!season
-                              ? `Ongoing, aired in ${
-                                  season?.split("")[0] +
-                                  season?.slice(1).toLowerCase()
-                                }`
-                              : "Ongoing"
-                          }`}
+                              ? season?.split("")[0] +
+                                season?.slice(1).toLowerCase()
+                              : ""
+                          }`
+                        : !episodes
+                        ? !!season
+                          ? `Ongoing, aired in ${
+                              season?.split("")[0] +
+                              season?.slice(1).toLowerCase()
+                            }`
+                          : "Ongoing"
+                        : `Unknown`}
                       {/* {!!season &&
                         season?.split("")[0] + season?.slice(1).toLowerCase()} */}
                     </h6>
                   </div>
                   <div className="flex gap-1 text-lg">
                     <h6>
-                      {getMonthName(startDate?.month)} {startDate?.day},{" "}
-                      {startDate?.year}{" "}
+                      {!!startDate?.month
+                        ? `${getMonthName(startDate?.month)} ${
+                            startDate?.day
+                          } ${startDate?.year}`
+                        : "Not yet released"}
                     </h6>
                   </div>
                 </div>
