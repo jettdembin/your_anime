@@ -118,7 +118,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   return (
     <>
       <div
-        className="flex flex-col relative w-full h-full md:h-72 md:grid md:grid-cols-[auto,1fr] bg-white rounded-none md:rounded-md overflow-hidden group shadow-custom min-h-[290px]"
+        className="flex flex-col relative w-full h-full md:h-72 md:grid md:grid-cols-[auto,1fr] bg-white rounded-sm sm:rounded-md overflow-hidden group shadow-custom min-h-[290px]"
         role="button"
         tabIndex={0}
         onMouseEnter={() => {

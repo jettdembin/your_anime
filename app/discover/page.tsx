@@ -70,7 +70,7 @@ export default function Discover() {
     categoryValue?.toUpperCase() === "TOP_100" ? "list" : "descriptive";
   return (
     <CardTypeProvider type={cardType()}>
-      <section>
+      <section className="mt-6 mx-2 md:mx-0">
         <header className="flex justify-between items-center w-full pb-2">
           <div className="flex w-full items-center justify-between">
             {!!searchValue && <FilterWidget />}
@@ -90,21 +90,17 @@ export default function Discover() {
           </div>
         </header>
         {!searchValue ? (
-          <div className="mt-6">
-            <AnimeCardLayout>
-              {media.map((media, i) => (
-                <AnimeCard key={i} media={media} index={i} />
-              ))}
-            </AnimeCardLayout>
-          </div>
+          <AnimeCardLayout>
+            {media.map((media, i) => (
+              <AnimeCard key={i} media={media} index={i} />
+            ))}
+          </AnimeCardLayout>
         ) : (
-          <div className="mt-6">
-            <AnimeCardLayout>
-              {searchData?.Page?.media?.map((media, i) => (
-                <AnimeCard key={i} media={media} index={i} />
-              ))}
-            </AnimeCardLayout>
-          </div>
+          <AnimeCardLayout>
+            {searchData?.Page?.media?.map((media, i) => (
+              <AnimeCard key={i} media={media} index={i} />
+            ))}
+          </AnimeCardLayout>
         )}
       </section>
     </CardTypeProvider>
