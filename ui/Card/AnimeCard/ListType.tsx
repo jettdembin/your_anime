@@ -1,20 +1,62 @@
 "use client";
 
+import { useRef, useState } from "react";
+
 import { useUser } from "@clerk/nextjs";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import YouTube from "react-youtube";
 
 import { BookmarkIcon, DotFilledIcon } from "@radix-ui/react-icons";
 
+import { Media } from "@/types/anime";
+
 import { formatDate, formatGenres, formatMediaType } from "@/util/format";
 
-import { Media } from "@/types/anime";
 import LoginWrapper from "@/ui/LoginWrapper";
-import Image from "next/image";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 
 const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const { isSignedIn } = useUser();
+  const router = useRouter();
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [thumbnailBounds, setThumbnailBounds] = useState<DOMRect | null>(null);
+  const [isThumbnailVisible, setIsThumbnailVisible] = useState(true);
+
+  const thumbnailRef = useRef<HTMLImageElement>(null);
+  const thumbnailImageDivRef = useRef<HTMLDivElement>(null);
+
+  const { trailer } = anime;
+  const { id, site, thumbnail } = trailer || {
+    id: null,
+    site: null,
+    thumbnail: "",
+  };
+  console.log(thumbnail);
+  console.log(anime?.trailer?.thumbnail);
+
+  // Handler functions
+  const handleBackdropClick = () => {
+    setIsExpanded(false);
+    setIsThumbnailVisible(false);
+  };
+
+  const handleTrailerClick = () => {
+    if (thumbnailRef.current != null) {
+      setThumbnailBounds(thumbnailRef.current.getBoundingClientRect());
+      setIsExpanded(true);
+    }
+
+    if (!isThumbnailVisible) setIsThumbnailVisible(true);
+
+    // Hide the thumbnail after animation is complete
+    setTimeout(() => {
+      setIsThumbnailVisible(false);
+    }, 500); // match the duration of the animation
+  };
 
   const animeEpisodes = () =>
     anime?.episodes
@@ -48,53 +90,113 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
     );
 
   return (
-    <li
-      key={anime?.id}
-      className="flex flex-col md:flex-row items-center mb-4 w-full"
-      tabIndex={0}
-    >
-      <span
-        className="order-2 md:order-1 hidden md:block w-fit mr-4 font-bold text-xl"
-        style={{ color: "#8ba0b2" }}
+    <>
+      <li
+        key={anime?.id}
+        className="flex flex-col md:flex-row items-center mb-4 w-full "
+        onClick={(e) => {
+          // Check if the click is on the image or its child elements
+          if (
+            thumbnailImageDivRef.current &&
+            thumbnailImageDivRef.current.contains(e.target as Node)
+          ) {
+            handleTrailerClick();
+          } else {
+            // Navigate to anime details
+            router.push(`/anime-details/${anime?.id}`);
+          }
+        }}
       >
-        #{index + 1}
-      </span>
-      <Link
-        href={`/anime-details/${anime?.id}`}
-        className="order-1 md:order-2 flex w-full"
-      >
-        <div className="w-full bg-white rounded-md shadow-box shadow-custom">
-          <div className="text-slate-800">
-            <div className="flex w-full">
-              <div className="md:w-1/6 lg:w-[7rem] p-3 md:p-4">
-                <Image
-                  width={50}
-                  height={62}
-                  className="w-20 h-full md:h-20 lg:h-28 md:w-full object-cover"
-                  src={anime?.coverImage?.large || ""}
-                  alt={
-                    anime?.title?.english ||
-                    anime?.title?.native ||
-                    "Anime Cover"
-                  }
-                />
-              </div>
-              <div className="flex flex-col md:flex-row md:items-center w-full">
-                <div className="order-3 md:order-3 w-full md:w-2/3 lg:w-1/2 pr-2 lg:pr-0">
-                  <h3 className="font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
-                    {anime?.title?.english || anime?.title?.native}
-                  </h3>
-                  <p className="text-xs md:text-sm">
-                    {formatGenres(anime?.genres)}
-                  </p>
-                  <div className="flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
-                    <span className="text-sm">
+        <span
+          className="hidden md:block w-fit mr-4 font-bold text-xl"
+          style={{ color: "#8ba0b2" }}
+        >
+          #{index + 1}
+        </span>
+        <div className="flex w-full">
+          <div className="w-full bg-white rounded-md shadow-box shadow-custom">
+            <div className="text-slate-800">
+              <div className="flex w-full">
+                <div
+                  className={`relative md:w-1/6 lg:w-[7rem] p-3 md:p-4 ${
+                    !!anime?.trailer?.thumbnail !== false && "cursor-pointer"
+                  }`}
+                  ref={thumbnailImageDivRef}
+                >
+                  <Image
+                    width={50}
+                    height={62}
+                    className="w-20 h-full md:h-20 lg:h-28 md:w-full object-cover"
+                    src={anime?.coverImage?.large || ""}
+                    alt={
+                      anime?.title?.english ||
+                      anime?.title?.native ||
+                      "Anime Cover"
+                    }
+                    ref={thumbnailRef}
+                  />
+                  {!!id && site === "youtube" && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <i className="fas fa-play text-white"></i>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col md:flex-row md:items-center w-full">
+                  <div className="w-full md:w-2/3 lg:w-1/2 pr-2 lg:pr-0 cursor-pointer">
+                    <h3 className="font-semibold text-sm md:text-base text-slate-700 lg:text-lg">
+                      {anime?.title?.english || anime?.title?.native}
+                    </h3>
+
+                    <p className="text-xs md:text-sm">
+                      {formatGenres(anime?.genres)}
+                    </p>
+                    <div className="flex items-center gap-[.3px] lg:hidden w-full pr-4 md:ml-auto">
+                      <span className="text-sm">
+                        {formatDate(
+                          anime?.endDate || anime?.startDate,
+                          "seasonYear"
+                        ) || "N/A"}
+                      </span>
+                      <DotFilledIcon className="w-2 h-2" />
+                      {anime?.status === "RELEASING" &&
+                      anime?.nextAiringEpisode ? (
+                        <span className="text-xs md:text-sm text-gray-500">
+                          Ep {anime?.nextAiringEpisode?.episode} airing in{" "}
+                          {Math.floor(
+                            anime?.nextAiringEpisode?.timeUntilAiring / 86400
+                          )}{" "}
+                          days
+                        </span>
+                      ) : (
+                        <span className="text-xs md:text-sm text-gray-500">
+                          {anime?.status}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex md:w-2/3 lg:w-1/3 ">
+                    <div className="md:flex-col w-full">
+                      <p className="text-xs md:text-base">{`${anime?.averageScore}%`}</p>
+                      <p className="text-xs md:text-sm">{`${
+                        anime?.popularity && anime?.popularity.toLocaleString()
+                      } users`}</p>
+                    </div>
+                    <div className="w-full flex items-center">
+                      <p className="text-xs md:text-base">
+                        {formatMediaType(anime?.format)}
+                      </p>
+                      <p className="text-xs md:text-sm">{animeEpisodes()}</p>
+                    </div>
+                  </div>
+                  <div className="hidden lg:block w-full md:w-1/6 lg:w-[15.3%] text-left md:text-right pr-4 md:ml-auto">
+                    <span className="text-xs md:text-sm">
                       {formatDate(
                         anime?.endDate || anime?.startDate,
                         "seasonYear"
                       ) || "N/A"}
                     </span>
-                    <DotFilledIcon className="w-2 h-2" />
+                    <br /> {""}
                     {anime?.status === "RELEASING" &&
                     anime?.nextAiringEpisode ? (
                       <span className="text-xs md:text-sm text-gray-500">
@@ -111,54 +213,76 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     )}
                   </div>
                 </div>
-                <div className="flex md:w-2/3 lg:w-1/3 order-4">
-                  <div className="md:flex-col w-full">
-                    <p className="text-xs md:text-base">{`${anime?.averageScore}%`}</p>
-                    <p className="text-xs md:text-sm">{`${
-                      anime?.popularity && anime?.popularity.toLocaleString()
-                    } users`}</p>
-                  </div>
-                  <div className="w-full flex items-center">
-                    <p className="text-xs md:text-base">
-                      {formatMediaType(anime?.format)}
-                    </p>
-                    <p className="text-xs md:text-sm">{animeEpisodes()}</p>
-                  </div>
-                </div>
-                <div className="hidden lg:block order-5 md:order-6 w-full md:w-1/6 lg:w-[15.3%] text-left md:text-right pr-4 md:ml-auto">
-                  <span className="text-xs md:text-sm">
-                    {formatDate(
-                      anime?.endDate || anime?.startDate,
-                      "seasonYear"
-                    ) || "N/A"}
-                  </span>
-                  <br /> {""}
-                  {anime?.status === "RELEASING" && anime?.nextAiringEpisode ? (
-                    <span className="text-xs md:text-sm text-gray-500">
-                      Ep {anime?.nextAiringEpisode?.episode} airing in{" "}
-                      {Math.floor(
-                        anime?.nextAiringEpisode?.timeUntilAiring / 86400
-                      )}{" "}
-                      days
-                    </span>
-                  ) : (
-                    <span className="text-xs md:text-sm text-gray-500">
-                      {anime?.status}
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
           </div>
         </div>
-      </Link>
-      <div className="order-7 lg:order-7 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-white shadow-lg lg:shadow-none lg:bg-transparent  lg:flex lg:items-center">
-        {isSignedInAddToListButton()}
-        <Modal id="add_to_list_modal">
-          <AddToListForm />
-        </Modal>
-      </div>
-    </li>
+        <div className="order-7 lg:order-7 absolute lg:relative lg:top-0 top-[-.8rem] right-2 lg:right-0 rounded-full bg-white shadow-lg lg:shadow-none lg:bg-transparent  lg:flex lg:items-center">
+          {isSignedInAddToListButton()}
+          <Modal id="add_to_list_modal">
+            <AddToListForm />
+          </Modal>
+        </div>
+      </li>
+      {isExpanded && (
+        <motion.div
+          initial={{
+            top: thumbnailBounds?.top || "0",
+            left: thumbnailBounds?.left || "0",
+            width: thumbnailBounds?.width || "0",
+            height: thumbnailBounds?.height || "0",
+          }}
+          animate={{
+            top: "50%",
+            left: "50%",
+            x: "-50%",
+            y: "-50%",
+          }}
+          exit={{
+            top: thumbnailBounds?.top || "0",
+            left: thumbnailBounds?.left || "0",
+            width: thumbnailBounds?.width || "0",
+            height: thumbnailBounds?.height || "0",
+          }}
+          transition={{ duration: 0.5 }}
+          className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
+        >
+          <Image
+            fill
+            style={{ width: "100%", objectFit: "cover" }}
+            className={isThumbnailVisible ? "block" : "hidden"}
+            src={thumbnail}
+            alt="Trailer Thumbnail"
+          />
+        </motion.div>
+      )}
+
+      {isExpanded && (
+        <div
+          className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
+          onClick={handleBackdropClick}
+        >
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+          >
+            <YouTube
+              videoId={id || ""}
+              opts={{
+                playerVars: {
+                  autoplay: 1,
+                  controls: 1,
+                  modestbranding: 1,
+                },
+              }}
+            />
+          </motion.section>
+        </div>
+      )}
+    </>
   );
 };
 
