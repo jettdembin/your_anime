@@ -1,8 +1,8 @@
-// "use client";
+"use client";
 
-import React, { ReactNode, createContext, useContext, useState } from "react";
+// SearchProvider.js
 
-import { useSearchParams } from "next/navigation";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import {
   GET_POPULAR_ANIME,
@@ -11,15 +11,15 @@ import {
   SEARCH_ANIMES_TRENDING,
   SEARCH_ANIMES_UPCOMING,
 } from "@/graphql/queries";
-
+import { useSearchParams } from "next/navigation";
 import useSearch from "../hooks/useSearch";
 
 type CardType = {};
 interface CardTypeProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-const SearchContext = createContext<CardType | null>(null);
+const SearchContext = createContext<any>(null);
 
 const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   const searchParams = useSearchParams();
@@ -27,7 +27,7 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   const searchValue = searchParams?.get("search") || "";
   const categoryValue = searchParams?.get("category") || "";
 
-  let query;
+  let query: any;
   if (!!searchValue && categoryValue?.toUpperCase() === "TRENDING_DESC") {
     query = SEARCH_ANIMES_TRENDING;
   } else if (
@@ -46,21 +46,24 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   } else if (categoryValue?.toUpperCase() === "POPULAR_ANIME") {
     query = GET_POPULAR_ANIME;
   }
+
   const [queryValue, setQueryValue] = useState(query);
 
   const {
     category,
     categories,
-
     handleCategory,
     handleSearch,
     setSearchValues,
     searchValues,
-
     error,
     loading,
     data,
   } = useSearch({ searchValue, categoryValue, query: queryValue });
+
+  useEffect(() => {
+    setQueryValue(query);
+  }, [searchValue, categoryValue]);
 
   return (
     <SearchContext.Provider
@@ -81,6 +84,6 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   );
 };
 
-const useSearchContext = (): any => useContext<CardType | null>(SearchContext);
+const useSearchContext = () => useContext(SearchContext);
 
 export { SearchProvider, useSearchContext };
