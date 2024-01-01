@@ -6,8 +6,8 @@ import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import { useAuthContext } from "@/context/AuthContext";
 
-import Top10Likes from "./UserProfile/Top10Likes";
 import { ContentLayout } from "@/layout/ContentLayout";
+import Top10Likes from "./UserProfile/Top10Likes";
 
 const UserProfile = ({ data }) => {
   const { setAuth } = useAuthContext();

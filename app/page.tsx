@@ -8,7 +8,7 @@ import PopularAnime from "@/app/components/PopularAnime";
 import TopAnimeList from "@/app/components/TopAnimeList";
 import Trending from "@/app/components/Trending";
 import { ContentLayout } from "@/layout/ContentLayout";
-import Search from "@/ui/Search";
+import SearchWrapper from "./components/SearchWrapper";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
 
       <main className="relative mt-32 md:mt-6">
         <LandingPageContent>
-          <Search />
+          <SearchWrapper />
 
           <ContentLayout title="TRENDING NOW" category="TRENDING">
             <Trending />

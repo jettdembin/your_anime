@@ -6,8 +6,11 @@ import { useAnimeDetails } from "@/graphql/queries";
 
 import { Media } from "@/types/anime";
 
-import Hero from "@/app/anime-details/[id]/components/Hero";
 import { useSearchParams } from "next/navigation";
+
+import { SearchProvider } from "@/app/discover/context/SearchContext";
+
+import Hero from "@/app/anime-details/[id]/components/Hero";
 import AnimeDetailsContent from "./AnimeDetailsContent";
 
 type Props = {};
@@ -30,7 +33,7 @@ export const Main = ({
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   return (
-    <>
+    <SearchProvider>
       <header>
         <Hero anime={anime} params={params} />
       </header>
@@ -51,6 +54,6 @@ export const Main = ({
         pauseOnHover
         theme="light"
       />
-    </>
+    </SearchProvider>
   );
 };

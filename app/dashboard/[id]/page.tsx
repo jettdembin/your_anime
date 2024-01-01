@@ -3,8 +3,8 @@ import axios, { AxiosError } from "axios";
 import { currentUser } from "@clerk/nextjs";
 // import { ToastContainer } from "react-toastify";
 
-import UserProfile from "./components/UserProfile";
 import Image from "next/image";
+import UserProfile from "./components/UserProfile";
 
 export const dynamic = "force-dynamic";
 
