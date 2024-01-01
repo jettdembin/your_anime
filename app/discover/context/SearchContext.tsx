@@ -63,7 +63,7 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     setQueryValue(query);
-  }, [searchValue, categoryValue]);
+  }, [searchValue, query, categoryValue]);
 
   return (
     <SearchContext.Provider

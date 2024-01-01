@@ -18,7 +18,10 @@ export default function Relations({ anime, relations }: Props) {
 
       <div className="flex lg:flex-col lg:grid lg:grid-cols-2 overflow-auto gap-4  pb-1">
         {relations?.map((relation: any, index: number) => (
-          <Link href={`/anime-details/${relation?.id}?type=${relation.type}`}>
+          <Link
+            href={`/anime-details/${relation?.id}?type=${relation.type}`}
+            key={relation.id}
+          >
             <div
               key={index}
               className="grid  bg-white shadow-md h-[6rem] rounded-sm max-w-[400px] min-w-[400px] lg:max-w-[auto] lg:min-w-[auto] overflow-hidden hover:overflow-auto"
