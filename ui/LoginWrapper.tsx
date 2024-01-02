@@ -1,16 +1,18 @@
 "use client";
 
-import { useRef, useState } from "react";
+import ReactDOM from "react-dom";
 
-import { SignIn, SignUp } from "@clerk/clerk-react";
 import { SignedOut } from "@clerk/nextjs";
+import { useEffect, useRef, useState } from "react";
 
 import useClickOutside from "@/hooks/useClickOutside";
 
+import { SignIn, SignUp } from "@clerk/clerk-react";
+
 interface FilterProps {
   children: any;
-  signIn?: Boolean;
-  signUp?: Boolean;
+  signIn?: boolean;
+  signUp?: boolean;
 }
 
 const LoginWrapper: React.FC<FilterProps> = ({ children, signIn, signUp }) => {
@@ -23,25 +25,31 @@ const LoginWrapper: React.FC<FilterProps> = ({ children, signIn, signUp }) => {
 
   useClickOutside(signUpFormRef, toggleSignUpForm);
 
+  // Use a state to hold the modal root element
+  const [modalRoot, setModalRoot] = useState<Element | null>(null);
+
+  useEffect(() => {
+    // Set the modal root element once the component mounts
+    setModalRoot(document.getElementById("modal-root"));
+  }, []);
+
+  const modalContent = isSigningIn && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-gray-600 opacity-50"></div>
+      <div className="relative z-10" ref={signUpFormRef}>
+        {signIn && <SignIn />}
+        {signUp && <SignUp />}
+      </div>
+    </div>
+  );
+
   return (
     <SignedOut>
-      <div
-        onClick={() => {
-          setIsSigningIn(true);
-        }}
-      >
+      <div onClick={() => setIsSigningIn(true)}>
         {children}
-        {isSigningIn && (
-          <div className="overflow-hidden">
-            <div className="fixed w-screen h-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-600 z-10 opacity-50"></div>
-            <div className="fixed w-screen h-screen z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  flex items-center justify-center">
-              <div ref={signUpFormRef}>
-                {signIn && <SignIn />}
-                {signUp && <SignUp />}
-              </div>
-            </div>
-          </div>
-        )}
+        {modalRoot &&
+          modalContent &&
+          ReactDOM.createPortal(modalContent, modalRoot)}
       </div>
     </SignedOut>
   );

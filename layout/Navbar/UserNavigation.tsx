@@ -32,11 +32,9 @@ export default function UserNavigation({}: Props) {
   return (
     <>
       <LoginWrapper signIn>
-        <li className="my-auto font-medium cursor-pointer">Sign In</li>
+        <li className="my-auto font-medium cursor-pointer">Log In</li>
       </LoginWrapper>
-      <LoginWrapper signUp>
-        <li className="my-auto font-medium cursor-pointer">Sign Up</li>
-      </LoginWrapper>
+
       <div className="flex gap-2 md:gap-4">
         <SignedIn>
           <Link
