@@ -1,6 +1,6 @@
 "use client";
 
-import SearchWrapper from "../components/SearchWrapper";
+import Search from "@/ui/Search";
 
 export default function DiscoverLayout({
   children,
@@ -10,7 +10,7 @@ export default function DiscoverLayout({
   return (
     <div>
       <header className="max-w-6xl md:mx-14 lg:mx-auto lg:max-w-4xl xl:max-w-screen-lg relative mt-6">
-        <SearchWrapper />
+        <Search />
       </header>
 
       <main className="max-w-6xl md:mx-14 lg:mx-auto  lg:max-w-4xl xl:max-w-screen-lg relative">

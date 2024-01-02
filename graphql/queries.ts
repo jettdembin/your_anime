@@ -279,7 +279,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
 `;
 export const SEARCH_ANIMES_TRENDING = gql`
   query SearchAnimes(
-    $search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
+    $search: String # 
   ) {
     Page(page: 1, perPage: 50) {
       media(search: $search, type: ANIME, isAdult: false, sort: TRENDING_DESC) {

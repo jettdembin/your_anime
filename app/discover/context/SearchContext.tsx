@@ -84,6 +84,12 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   );
 };
 
-const useSearchContext = () => useContext(SearchContext);
+const useSearchContext = () => {
+  const context = useContext(SearchContext);
+  if (!context) {
+    throw new Error("useSearchContext must be used within a SearchProvider");
+  }
+  return context;
+};
 
 export { SearchProvider, useSearchContext };

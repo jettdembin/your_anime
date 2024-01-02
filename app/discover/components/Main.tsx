@@ -10,7 +10,6 @@ import { debounce } from "@/util";
 import { useSearchParams } from "next/navigation";
 import { useViewAll } from "../hooks/useViewAll";
 
-import { SearchProvider } from "@/app/discover/context/SearchContext";
 import { CardTypeProvider } from "@/context/CardTypeContext";
 
 import CategoryWidget from "@/app/discover/ui/CategoryWidget";
@@ -30,6 +29,7 @@ export default function Main({}: Props) {
   const searchParams = useSearchParams();
 
   const searchValue = searchParams?.get("search");
+  console.log("searchValue", searchValue);
   const categoryValue = searchParams?.get("category");
 
   const cardType = () =>
@@ -53,9 +53,12 @@ export default function Main({}: Props) {
 
   useEffect(() => {
     if (data && data.Page && data.Page.media) {
-      setMedia((prevMedia) => [...prevMedia, ...data.Page.media]);
+      setMedia(data.Page.media || []);
     }
   }, [data]);
+
+  const animeResults = () => (searchValue ? media : data?.Page.media);
+  console.log("animeResults", animeResults());
 
   if (loading) return <CardSectionLoader />;
   if (error) {
@@ -65,29 +68,27 @@ export default function Main({}: Props) {
   if (!data) return null;
 
   return (
-    <SearchProvider>
-      <CardTypeProvider type={cardType()}>
-        <header className="flex justify-between items-center w-full pb-2">
-          <div className="flex w-full items-center justify-between">
-            {!!searchValue && <FilterWidget />}
-            <CategoryWidget />
-          </div>
-          <hr className="h-10 mx-2 border-x border-y border-gray-800" />
-          <div className="flex gap-2">
-            <CardTypeWidgetWrapper cardType="card">
-              <BoxIcon className="w-4 h-4" />
-            </CardTypeWidgetWrapper>
-            <CardTypeWidgetWrapper cardType="descriptive">
-              <DashboardIcon className="w-4 h-4" />
-            </CardTypeWidgetWrapper>
-            <CardTypeWidgetWrapper cardType="list">
-              <ListBulletIcon className="w-4 h-4" />
-            </CardTypeWidgetWrapper>
-          </div>
-        </header>
+    <CardTypeProvider type={cardType()}>
+      <header className="flex justify-between items-center w-full pb-2">
+        <div className="flex w-full items-center justify-between">
+          {!!searchValue && <FilterWidget />}
+          <CategoryWidget />
+        </div>
+        <hr className="h-10 mx-2 border-x border-y border-gray-800" />
+        <div className="flex gap-2">
+          <CardTypeWidgetWrapper cardType="card">
+            <BoxIcon className="w-4 h-4" />
+          </CardTypeWidgetWrapper>
+          <CardTypeWidgetWrapper cardType="descriptive">
+            <DashboardIcon className="w-4 h-4" />
+          </CardTypeWidgetWrapper>
+          <CardTypeWidgetWrapper cardType="list">
+            <ListBulletIcon className="w-4 h-4" />
+          </CardTypeWidgetWrapper>
+        </div>
+      </header>
 
-        <AnimeQueryResults media={media} searchData={data} />
-      </CardTypeProvider>
-    </SearchProvider>
+      <AnimeQueryResults media={animeResults()} />
+    </CardTypeProvider>
   );
 }

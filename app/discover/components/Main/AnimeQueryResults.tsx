@@ -7,18 +7,23 @@ import { useSearchParams } from "next/navigation";
 
 type Props = {
   media: any;
-  searchData: any;
 };
 
-export default function AnimeQueryResults({ media, searchData }: Props) {
+export default function AnimeQueryResults({ media }: Props) {
   const searchParams = useSearchParams();
 
   const searchValue = searchParams?.get("search");
   const categoryValue = searchParams?.get("category");
+  console.log("media", media);
 
   return (
     <section>
-      {!searchValue ? (
+      <AnimeCardLayout>
+        {media?.map((media: any, i: number) => (
+          <AnimeCard key={i} media={media} index={i} />
+        ))}
+      </AnimeCardLayout>
+      {/* {!searchValue ? (
         <AnimeCardLayout>
           {media.map((media: any, i: number) => (
             <AnimeCard key={i} media={media} index={i} />
@@ -30,7 +35,7 @@ export default function AnimeQueryResults({ media, searchData }: Props) {
             <AnimeCard key={i} media={media} index={i} />
           ))}
         </AnimeCardLayout>
-      )}
+      )} */}
     </section>
   );
 }
