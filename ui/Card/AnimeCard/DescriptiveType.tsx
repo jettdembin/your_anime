@@ -346,7 +346,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
 
         {isExpanded && (
           <div
-            className="fixed z-50 top-0 left-0 w-screen h-screen bg-gray-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
+            className="fixed z-50 top-0 left-0 w-screen h-screen bg-slate-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
             onClick={handleBackdropClick}
           >
             <motion.section

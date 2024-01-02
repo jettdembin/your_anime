@@ -8,7 +8,8 @@ body {
 }
 
 /* Common styles for both triangles */
-.right-triangle, .left-triangle {
+.right-triangle,
+.left-triangle {
   position: relative;
 }
 
@@ -37,7 +38,6 @@ body {
   border-color: transparent white transparent transparent; /* Right border is white */
   transform: translateY(-50%);
 }
-
 
 @layer base {
   :root {

@@ -1,8 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+
+import yourAnimeImg from "@/public/favicon.ico";
+
 import { ContentContainer } from "./ContentContainer";
 import UserNavigation from "./Navbar/UserNavigation";
 
@@ -73,13 +78,15 @@ const Navbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`w-full p-6 bg-gray-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
+      className={`w-full p-6 bg-slate-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
       id="navbar"
     >
       <ContentContainer>
-        <ul className="flex justify-between lg:gap-6 text-gray-100">
+        <ul className="flex items-center justify-between lg:gap-6 text-gray-100">
           <Link href={`/`}>
-            <li className="my-auto font-medium cursor-pointer">YAnime</li>
+            <li className="my-auto font-medium cursor-pointer">
+              <Image width={60} height={60} src={yourAnimeImg} alt="YAnime" />
+            </li>
           </Link>
           <div className="flex gap-2 lg:gap-10">
             <li className="my-auto font-medium cursor-pointer">Search</li>

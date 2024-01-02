@@ -17,9 +17,7 @@ export default function CardTypeWidgetWrapper({ cardType, children }: Props) {
       className={`text-gray-800 cursor-pointer rounded-md p-2 bg-slate-200 hover:bg-slate-400`}
       onClick={() => handleCardType(cardType)}
     >
-      
-        {children}
-      
+      {children}
     </span>
   );
 }
