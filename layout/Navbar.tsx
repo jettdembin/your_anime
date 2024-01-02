@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`w-full p-6 bg-slate-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
+      className={`w-full max-h-20 p-6 bg-slate-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
       id="navbar"
     >
       <ContentContainer>
