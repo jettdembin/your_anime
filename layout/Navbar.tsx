@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import yourAnimeImg from "@/public/favicon.ico";
-
 import { ContentContainer } from "./ContentContainer";
 import UserNavigation from "./Navbar/UserNavigation";
 
@@ -85,7 +83,7 @@ const Navbar: React.FC = () => {
         <ul className="flex items-center justify-between lg:gap-6 text-gray-100">
           <Link href={`/`}>
             <li className="my-auto font-medium cursor-pointer">
-              <Image width={60} height={60} src={yourAnimeImg} alt="YAnime" />
+              <Image width={60} height={60} src="/favicon.ico" alt="YAnime" />
             </li>
           </Link>
           <div className="flex gap-2 lg:gap-10">
