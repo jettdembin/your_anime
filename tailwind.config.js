@@ -6,7 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./layout/**/*.{js,ts,jsx,tsx,mdx}",
-    "./public/**/*.{js,ts,jsx,tsx,mdx}",
+    "./public/**/*.{js,ts,jsx,tsx,mdx,ico,png,jpg,jpeg,svg}",
   ],
   theme: {
     extend: {
