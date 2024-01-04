@@ -3,8 +3,6 @@
 import { BoxIcon, DashboardIcon, ListBulletIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 
-import { Media } from "@/types/anime";
-
 import { debounce } from "@/util";
 
 import { useSearchParams } from "next/navigation";
@@ -22,14 +20,14 @@ type Props = {};
 
 export default function Main({}: Props) {
   const [page, setPage] = useState(1);
-  const [media, setMedia] = useState<Media[]>([]);
+  // const [media, setMedia] = useState<Media[]>([]);
 
   const { error, loading, data } = useViewAll(1, 50);
 
   const searchParams = useSearchParams();
 
   const searchValue = searchParams?.get("search");
-  console.log("searchValue", searchValue);
+
   const categoryValue = searchParams?.get("category");
 
   const cardType = () =>
@@ -51,14 +49,13 @@ export default function Main({}: Props) {
     };
   }, [data, handleScroll]);
 
-  useEffect(() => {
-    if (data && data.Page && data.Page.media) {
-      setMedia(data.Page.media || []);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.Page && data.Page.media) {
+  //     setMedia(data.Page.media || []);
+  //   }
+  // }, [data]);
 
-  const animeResults = () => (searchValue ? media : data?.Page.media);
-  console.log("animeResults", animeResults());
+  const animeResults = data?.Page?.media || [];
 
   if (loading) return <CardSectionLoader />;
   if (error) {
@@ -88,7 +85,7 @@ export default function Main({}: Props) {
         </div>
       </header>
 
-      <AnimeQueryResults media={animeResults()} />
+      <AnimeQueryResults media={animeResults} />
     </CardTypeProvider>
   );
 }

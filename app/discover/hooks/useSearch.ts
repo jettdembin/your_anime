@@ -11,6 +11,7 @@ type UserSearch = {
   searchValue?: string;
   categoryValue?: string;
   query?: any;
+  variables: any;
 };
 
 type Category = {
@@ -27,6 +28,7 @@ const useSearch = (userSearch: UserSearch) => {
     status: null,
     season: null,
     year: null,
+    sort: null,
   });
 
   useEffect(() => {
@@ -35,7 +37,8 @@ const useSearch = (userSearch: UserSearch) => {
     }
   }, [userSearch.query, gqlQuery]);
 
-  const { error, loading, data } = useAnilistAPI(gqlQuery, searchValues);
+  const { error, loading, data } = useAnilistAPI(gqlQuery, userSearch.variables);
+  debugger;
 
   const categories: Category[] = [
     { label: "Trending", value: "TRENDING_DESC" },
@@ -53,19 +56,27 @@ const useSearch = (userSearch: UserSearch) => {
   const [category, setCategory] = useState<Category>(initialCategory);
 
   const handleCategory = (selectedCategory: Category) => {
-    setCategory(selectedCategory);
     const { value } = selectedCategory || {};
-    const newURL = `/discover?category=${value}`;
+    setCategory(selectedCategory);
+
+    const newParams = new URLSearchParams(window?.location?.search);
+    
+    newParams.set("category", value);
+    const newURL = `/discover?${newParams.toString()}`;
     router.push(newURL);
   };
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchValues((prev) => ({
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newParams = new URLSearchParams(window?.location?.search);
+
+    newParams.set("search", e.target.value);
+    const newURL = `/discover?${newParams.toString()}`;
+    router.push(newURL);
+
+    setSearchValues((prev: any) => ({
       ...prev,
       search: e.target.value,
     }));
-    const newURL = `/discover?search=${e.target.value}`;
-    router.push(newURL);
   };
 
   return {

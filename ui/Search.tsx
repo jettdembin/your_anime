@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -17,59 +17,25 @@ type Category = {
 
 export default function Search() {
   const navRef = useRef<HTMLInputElement>(null);
-  const router: any = useRouter();
+  const { searchValues, searchValue, handleSearch } = useSearchContext();
+  const [isFilterVisible, setIsFilterVisible] = useState(true);
 
+  const router: any = useRouter();
   const searchParams = useSearchParams();
 
   const categoryValue = searchParams?.get("category");
 
-  const [isFilterVisible, setIsFilterVisible] = useState(true);
+  // useEffect(() => {
+  //   if (!!navRef.current) navRef.current.focus();
 
-  const { searchValues, setCategory, params, setSearchValues } =
-    useSearchContext();
-  // const { searchValues, handleSearch } = useSearch({
-  // 	searchValue,
-  // 	categoryValue,
-  // });
-
-  const handleCategory = (selectedCategory: Category) => {
-    setCategory(selectedCategory);
-
-    const { value } = selectedCategory || {};
-
-    if (params) {
-      params.set("category", value);
-      const newURL = `/discover?${params.toString()}`;
-      router.push(newURL);
-    }
-  };
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newParams = new URLSearchParams(window?.location?.search);
-
-    newParams.set("search", e.target.value);
-    const newURL = `/discover?${newParams.toString()}`;
-    router.push(newURL, undefined, {
-      shallow: true,
-    });
-
-    setSearchValues((prev: any) => ({
-      ...prev,
-      search: e.target.value,
-    }));
-  };
-
-  useEffect(() => {
-    if (!!navRef.current) navRef.current.focus();
-
-    if (!searchValues?.search) {
-      if (!categoryValue) {
-        router.push("/", undefined, {
-          shallow: true,
-        });
-      }
-    }
-  }, [searchValues, router]);
+  //   if (!searchValues?.search) {
+  //     if (!categoryValue) {
+  //       router.push("/", undefined, {
+  //         shallow: true,
+  //       });
+  //     }
+  //   }
+  // }, [searchValues, router]);
 
   return (
     <section className="px-8 sm:px-0  md:mx-0 md:px-8 lg:mt-40 mb-8">
@@ -88,7 +54,7 @@ export default function Search() {
               placeholder="Search for anime..."
               type="text"
               name="search"
-              value={searchValues["search"] || ""}
+              value={searchValue || ""}
               onChange={handleSearch}
             />
             {/* <button
