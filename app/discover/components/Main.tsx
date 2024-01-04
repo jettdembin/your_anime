@@ -72,7 +72,7 @@ export default function Main({}: Props) {
       <header className="flex justify-between items-center w-full pb-2">
         <div className="flex w-full items-center justify-between">
           {!!searchValue && <FilterWidget />}
-          <CategoryWidget />
+          <CategoryWidget />{" "}
         </div>
         <hr className="h-10 mx-2 border-x border-y border-gray-800" />
         <div className="flex gap-2">

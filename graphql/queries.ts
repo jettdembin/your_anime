@@ -226,7 +226,7 @@ export const SEARCH_ANIMES_UPCOMING = gql`
 `;
 export const SEARCH_ANIMES_POPULAR = gql`
   query SearchAnimes(
-    $search: String # $sort: [MediaSort] =  # $status: String # $season: String # $year: Int
+    $search: String # $sort: [MediaSort] = POPULARITY_DESC # $status: String # $season: String # $year: Int
   ) {
     Page(page: 1, perPage: 50) {
       media(
@@ -280,9 +280,10 @@ export const SEARCH_ANIMES_POPULAR = gql`
 export const SEARCH_ANIMES_TRENDING = gql`
   query SearchAnimes(
     $search: String # 
+    $sort: [MediaSort] = POPULARITY_DESC #
   ) {
     Page(page: 1, perPage: 50) {
-      media(search: $search, type: ANIME, isAdult: false, sort: TRENDING_DESC) {
+      media(search: $search, type: ANIME, isAdult: false, sort: $sort) {
         id
         title {
           english
