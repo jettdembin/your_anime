@@ -87,7 +87,9 @@ const Navbar: React.FC = () => {
             </li>
           </Link>
           <div className="flex gap-2 lg:gap-10">
-            <li className="my-auto font-medium cursor-pointer">Search</li>
+            <li className="my-auto font-medium cursor-pointer">
+              <Link href={`/discover`}>Search</Link>
+            </li>
           </div>
           <div className="flex lg:gap-4">
             <UserNavigation />
