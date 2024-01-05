@@ -3,12 +3,12 @@
 import { useSearchParams } from "next/navigation";
 
 import {
-  GET_POPULAR_ANIME,
-  GET_TOP_100_ANIME,
-  GET_TRENDING,
-  SEARCH_ANIMES_POPULAR,
-  SEARCH_ANIMES_TRENDING,
-  SEARCH_ANIMES_UPCOMING,
+    GET_POPULAR_ANIME,
+    GET_TOP_100_ANIME,
+    GET_TRENDING,
+    SEARCH_ANIMES_POPULAR,
+    SEARCH_ANIMES_TRENDING,
+    SEARCH_ANIMES_UPCOMING,
 } from "@/graphql/queries";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";

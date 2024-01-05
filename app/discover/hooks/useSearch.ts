@@ -38,7 +38,7 @@ const useSearch = (userSearch: UserSearch) => {
   }, [userSearch.query, gqlQuery]);
 
   const { error, loading, data } = useAnilistAPI(gqlQuery, userSearch.variables);
-  debugger;
+  //debugger;
 
   const categories: Category[] = [
     { label: "Trending", value: "TRENDING_DESC" },
