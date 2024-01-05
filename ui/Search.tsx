@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -17,7 +17,7 @@ type Category = {
 
 export default function Search() {
   const navRef = useRef<HTMLInputElement>(null);
-  const { searchValues, searchValue, handleSearch } = useSearchContext();
+  const { searchValues, setSearchValues, handleSearch } = useSearchContext();
   const [isFilterVisible, setIsFilterVisible] = useState(true);
 
   const router: any = useRouter();
@@ -25,17 +25,31 @@ export default function Search() {
 
   const categoryValue = searchParams?.get("category");
 
-  // useEffect(() => {
-  //   if (!!navRef.current) navRef.current.focus();
+  useEffect(() => {
+    if (!!searchParams?.get("search")) {
+      setSearchValues((prev: any) => ({
+        ...prev,
+        search: searchParams?.get("search"),
+      }));
+    }
+  }, []);
 
-  //   if (!searchValues?.search) {
-  //     if (!categoryValue) {
-  //       router.push("/", undefined, {
-  //         shallow: true,
-  //       });
-  //     }
-  //   }
-  // }, [searchValues, router]);
+  useEffect(() => {
+    if (!!navRef.current) navRef.current.focus();
+
+    let goToHome: any;
+    if (!searchValues?.search) {
+      goToHome = setTimeout(() => {
+        router.push("/", undefined, {
+          shallow: true,
+        });
+      }, 2000);
+    }
+
+    return () => {
+      clearTimeout(goToHome);
+    };
+  }, [searchValues, router]);
 
   return (
     <section className="px-8 sm:px-0  md:mx-0 md:px-8 lg:mt-40 mb-8">
@@ -54,7 +68,7 @@ export default function Search() {
               placeholder="Search for anime..."
               type="text"
               name="search"
-              value={searchValue || ""}
+              value={searchValues["search"] || ""}
               onChange={handleSearch}
             />
             {/* <button

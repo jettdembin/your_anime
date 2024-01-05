@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type UserSearch = {
-  searchValue?: string;
+  search?: string;
   categoryValue?: string;
   query?: any;
   variables: any;
@@ -24,7 +24,7 @@ const useSearch = (userSearch: UserSearch) => {
 
   const [gqlQuery, setGqlQuery] = useState(userSearch.query ?? GET_TRENDING);
   const [searchValues, setSearchValues] = useState({
-    search: userSearch.searchValue,
+    search: userSearch.search,
     status: null,
     season: null,
     year: null,
