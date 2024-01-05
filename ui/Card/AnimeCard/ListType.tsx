@@ -69,7 +69,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
 
   const addToListButton = (
     <button
-      className="p-3 rounded-full cursor-pointer shadow-lg lg:shadow-none"
+      className="p-3 rounded-full cursor-pointer shadow-lg"
       ref={addToListButtonRef}
       onClick={() => {
         if (isSignedIn) {
@@ -98,7 +98,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
     <>
       <li
         key={anime?.id}
-        className="flex flex-col md:flex-row items-center mb-4 w-full "
+        className="flex flex-col md:flex-row items-center mb-4 w-full relative"
         onClick={(e) => {
           // Check if the click is on the image or its child elements
           if (
