@@ -3,7 +3,6 @@ import axios, { AxiosError } from "axios";
 import { currentUser } from "@clerk/nextjs";
 // import { ToastContainer } from "react-toastify";
 
-import Image from "next/image";
 import UserProfile from "./components/UserProfile";
 
 export const dynamic = "force-dynamic";
@@ -62,15 +61,15 @@ export default async function Dashboard() {
         <div
           className=""
           style={{
-            backgroundImage:
-              "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+            backgroundImage: "url(/dashboard-banner.jpg)",
+            backgroundSize: "contain",
           }}
         >
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="h-80 container m-auto hero-content text-center text-neutral-content">
             <div className="">
               {/* Profile Section */}
-              <div className="w-full  py-4">
+              {/* <div className="w-full  py-4">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <div className="flex flex-col md:flex-row md:items-center">
                     <Image
@@ -83,11 +82,10 @@ export default async function Dashboard() {
                     <div className="mt-4 md:mt-0 md:ml-6">
                       <h2 className="text-lg font-bold">{userData?.name}</h2>
 
-                      {/* Additional user info */}
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

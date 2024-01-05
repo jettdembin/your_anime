@@ -41,6 +41,7 @@ module.exports = {
       },
       backgroundColor: {
         genre: "#eff6ff",
+        tag: "#f4929e",
       },
       fontSize: {
         xxs: ".65rem",

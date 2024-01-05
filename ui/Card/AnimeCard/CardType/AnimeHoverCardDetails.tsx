@@ -53,8 +53,7 @@ export default function AnimeHoverCardDetails({
     trailer,
     title,
   } = animeDetails || {};
-  // debugger;
-  console.log("mounted anime hover card");
+  // debugger  console.log("mounted anime hover card");
 
   const currentlyAiring = (
     <h6 className="text-lg text-gray-800">
