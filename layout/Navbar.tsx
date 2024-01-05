@@ -15,9 +15,10 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   // Set initial opacity based on whether the pathname includes "anime-details"
-  const initialOpacity = pathname?.includes("anime-details")
-    ? "bg-opacity-80"
-    : "bg-opacity-100";
+  const initialOpacity =
+    pathname?.includes("anime-details") || pathname?.includes("dashboard")
+      ? "bg-opacity-80"
+      : "bg-opacity-100";
   const [navbarOpacity, setNavbarOpacity] = useState(initialOpacity);
 
   useEffect(() => {
@@ -61,7 +62,10 @@ const Navbar: React.FC = () => {
     };
 
     // Update opacity immediately when pathname changes
-    if (pathname?.includes("anime-details")) {
+    if (
+      pathname?.includes("anime-details") ||
+      pathname?.includes("dashboard")
+    ) {
       setNavbarOpacity("bg-opacity-80");
     } else {
       setNavbarOpacity("bg-opacity-100");

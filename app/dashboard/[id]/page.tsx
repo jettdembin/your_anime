@@ -62,13 +62,14 @@ export default async function Dashboard() {
     <div>
       <header className="text-white">
         <div
+          className=""
           style={{
             backgroundImage:
               "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
           }}
         >
           <div className="hero-overlay bg-opacity-60"></div>
-          <div className="container m-auto hero-content text-center text-neutral-content">
+          <div className="h-80 container m-auto hero-content text-center text-neutral-content">
             <div className="">
               {/* Profile Section */}
               <div className="w-full  py-4">
@@ -82,10 +83,8 @@ export default async function Dashboard() {
                       alt="User Avatar"
                     />
                     <div className="mt-4 md:mt-0 md:ml-6">
-                      <h2 className="text-lg font-bold">Username</h2>
-                      <p className="text-gray-600">
-                        User description or bio goes here...
-                      </p>
+                      <h2 className="text-lg font-bold">{userData?.name}</h2>
+
                       {/* Additional user info */}
                     </div>
                   </div>

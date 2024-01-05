@@ -98,7 +98,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
     <>
       <li
         key={anime?.id}
-        className="flex flex-col md:flex-row items-center mb-4 w-full "
+        className="flex flex-col md:flex-row items-center mb-4 w-full relative"
         onClick={(e) => {
           // Check if the click is on the image or its child elements
           if (
