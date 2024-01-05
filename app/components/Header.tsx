@@ -66,8 +66,8 @@ export default function Header() {
               Bring YourAnime anywhere <span className="ml-2">🌎</span>
             </h3>
             <p className="text-md text-blue-200">
-              What are your highest rated genres or most watched voice actors?
-              Follow your watching habits over time with in-depth statistics.
+              Built with phone and tablet in mind, YourAnime is the perfect
+              webiste to use on the go.
             </p>
           </div>
         </div>
@@ -96,8 +96,7 @@ export default function Header() {
               Join the conversation <span className="ml-2">📝</span>
             </h3>
             <p className="text-md text-blue-200">
-              What are your highest rated genres or most watched voice actors?
-              Follow your watching habits over time with in-depth statistics.
+              Comment, review, and rate anime and manga alongside your friends.
             </p>
           </div>
         </div>
@@ -126,8 +125,7 @@ export default function Header() {
               Tweak it to your liking <span className="ml-2">💕</span>
             </h3>
             <p className="text-md text-blue-200">
-              What are your highest rated genres or most watched voice actors?
-              Follow your watching habits over time with in-depth statistics.
+              From dark mode to custom themes, YourAnime is yours to customize.
             </p>
           </div>
         </div>
