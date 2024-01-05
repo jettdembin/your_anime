@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -25,17 +25,22 @@ export default function Search() {
 
   const categoryValue = searchParams?.get("category");
 
-  // useEffect(() => {
-  //   if (!!navRef.current) navRef.current.focus();
+  useEffect(() => {
+    if (!!navRef.current) navRef.current.focus();
 
-  //   if (!searchValues?.search) {
-  //     if (!categoryValue) {
-  //       router.push("/", undefined, {
-  //         shallow: true,
-  //       });
-  //     }
-  //   }
-  // }, [searchValues, router]);
+    let goToHome: any;
+    if (!searchValues?.search) {
+      goToHome = setTimeout(() => {
+        router.push("/", undefined, {
+          shallow: true,
+        });
+      }, 2000);
+    }
+
+    return () => {
+      clearTimeout(goToHome);
+    };
+  }, [searchValues, router]);
 
   return (
     <section className="px-8 sm:px-0  md:mx-0 md:px-8 lg:mt-40 mb-8">
