@@ -91,7 +91,8 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
   };
   const addToListButton = (
     <button
-      className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md"
+      className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md tooltip"
+      data-tip="Add to list"
       onClick={() => {
         if (isSignedIn) {
           const dialog = document.getElementById(

@@ -54,7 +54,7 @@ export default function Search() {
               placeholder="Search for anime..."
               type="text"
               name="search"
-              value={searchValue || ""}
+              value={searchValues["search"] || ""}
               onChange={handleSearch}
             />
             {/* <button
