@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation"; // Corrected import
 import YouTube from "react-youtube";
 
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
 
 import { Media } from "@/types/anime";
 
@@ -170,6 +170,12 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
           >
             {/* <AnimeHoverOptions /> */}
+            <button
+              className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
+              onClick={handleTrailerClick}
+            >
+              <PlayIcon className="text-[#3CB4F0]" />
+            </button>
             {isSignedInAddToListButton()}
             <Modal id="add_to_list_modal">
               <AddToListForm />
@@ -303,6 +309,12 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               onMouseLeave={() => setIsAnimeHoverOptionsHovered(false)}
             >
               {/* <AnimeHoverOptions /> */}
+              <button
+                className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
+                onClick={handleTrailerClick}
+              >
+                <PlayIcon className="text-[#3CB4F0]" />
+              </button>
               {isSignedInAddToListButton()}
               <Modal id="add_to_list_modal">
                 <AddToListForm />
