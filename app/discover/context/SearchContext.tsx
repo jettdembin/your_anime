@@ -64,7 +64,7 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
   } else {
     query = GET_TRENDING;
     variables = { sort: "TRENDING_DESC", search: searchValue };
-    debugger;
+    // debugger;
   }
 
   const [queryValue, setQueryValue] = useState(query);

@@ -43,11 +43,13 @@ const Navbar: React.FC = () => {
           "duration-150",
           "ease-out"
         );
-        navbarRef.current?.classList.add(
-          "translate-y-0",
-          "duration-150",
-          "ease-inß"
-        );
+        if (!navbarRef?.current?.classList.contains("translate-y-0")) {
+          navbarRef.current?.classList.add(
+            "translate-y-0",
+            "duration-150",
+            "ease-inß"
+          );
+        }
       }
 
       lastScrollTopRef.current = st;
@@ -80,7 +82,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`w-full max-h-20 p-6 bg-slate-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all`}
+      className={`w-full max-h-20 p-6 bg-slate-800 ${navbarOpacity} fixed top-0 z-50 flex items-center justify-center transition-all translate-y-0`}
       id="navbar"
     >
       <ContentContainer>
