@@ -37,18 +37,18 @@ export default function Search() {
   useEffect(() => {
     if (!!navRef.current) navRef.current.focus();
 
-    let goToHome: any;
-    if (!searchValues?.search) {
-      goToHome = setTimeout(() => {
-        router.push("/", undefined, {
-          shallow: true,
-        });
-      }, 2000);
-    }
+    // let goToHome: any;
+    // if (!searchValues?.search) {
+    //   goToHome = setTimeout(() => {
+    //     router.push("/", undefined, {
+    //       shallow: true,
+    //     });
+    //   }, 2000);
+    // }
 
-    return () => {
-      clearTimeout(goToHome);
-    };
+    // return () => {
+    //   clearTimeout(goToHome);
+    // };
   }, [searchValues, router]);
 
   return (
