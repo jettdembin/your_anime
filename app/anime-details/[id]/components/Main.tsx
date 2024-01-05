@@ -1,7 +1,5 @@
 "use client";
 
-import { ToastContainer } from "react-toastify";
-
 import { useAnimeDetails } from "@/graphql/queries";
 
 import { Media } from "@/types/anime";
@@ -30,7 +28,22 @@ export const Main = ({
 
   const anime: Media = data?.Media || {};
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="w-screen h-screen flex justify-center items-center">
+        <div>
+          <img src="/loading-anime-dance.gif" alt="Loading" />
+          <div className="flex items-center justify-center">
+            <span className="loading loading-dots loading-lg"></span>
+          </div>
+        </div>
+      </div>
+
+      // <header>
+      //   <Hero anime={anime} params={params} />
+      // </header>
+    );
+
   if (error) return <p>Error: {error.message}</p>;
   return (
     <SearchProvider>
@@ -42,18 +55,6 @@ export const Main = ({
           <AnimeDetailsContent anime={anime} />
         </main>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </SearchProvider>
   );
 };

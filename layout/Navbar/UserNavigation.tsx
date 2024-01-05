@@ -46,7 +46,7 @@ export default function UserNavigation({}: Props) {
               <PersonIcon />
             </li>
           </Link>
-          <li>
+          <li className="min-w-[32px]">
             <UserButton />
           </li>
         </SignedIn>{" "}
