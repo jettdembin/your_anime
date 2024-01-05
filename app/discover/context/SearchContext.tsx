@@ -55,13 +55,16 @@ const SearchProvider: React.FC<CardTypeProviderProps> = ({ children }) => {
     //debugger;
   } else if (categoryValue?.toUpperCase() === "TOP_100") {
     query = GET_TOP_100_ANIME;
+    variables = { sort: "SCORE_DESC", search: searchValue };
     //debugger;
   } else if (categoryValue?.toUpperCase() === "POPULAR_ANIME") {
     query = GET_POPULAR_ANIME;
+    variables = { sort: "POPULARITY_DESC", search: searchValue };
     //debugger;
   } else {
     query = GET_TRENDING;
-    //debugger;
+    variables = { sort: "TRENDING_DESC", search: searchValue };
+    debugger;
   }
 
   const [queryValue, setQueryValue] = useState(query);

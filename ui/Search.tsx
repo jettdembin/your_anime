@@ -17,13 +17,22 @@ type Category = {
 
 export default function Search() {
   const navRef = useRef<HTMLInputElement>(null);
-  const { searchValues, searchValue, handleSearch } = useSearchContext();
+  const { searchValues, setSearchValues, handleSearch } = useSearchContext();
   const [isFilterVisible, setIsFilterVisible] = useState(true);
 
   const router: any = useRouter();
   const searchParams = useSearchParams();
 
   const categoryValue = searchParams?.get("category");
+
+  useEffect(() => {
+    if (!!searchParams?.get("search")) {
+      setSearchValues((prev: any) => ({
+        ...prev,
+        search: searchParams?.get("search"),
+      }));
+    }
+  }, []);
 
   useEffect(() => {
     if (!!navRef.current) navRef.current.focus();
