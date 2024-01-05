@@ -29,8 +29,6 @@ async function getUserDataOrCreateUser(user: UserType | null) {
         headers: { "Cache-Control": "no-store" },
       }
     );
-    console.log(accountDataResponse.data, "user data");
-
     // If successful, return the account data
     return accountDataResponse.data;
   } catch (error) {
@@ -94,7 +92,7 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="bg-white text-slate-800 font-bold">
-          <div className="container m-auto ">
+          {/* <div className="container m-auto ">
             <ul className="flex justify-between py-2">
               <li className="hover:text-[#4ad3fc] cursor-pointer">
                 <p className="px-12">Overview</p>
@@ -106,17 +104,17 @@ export default async function Dashboard() {
                 <p className="px-12">Reviews</p>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </header>
       <main>
-        <div className="container mx-auto py-4">
+        {/* <div className="container mx-auto py-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg shadow-md">Item 1</div>
             <div className="bg-white p-4 rounded-lg shadow-md">Item 2</div>
             <div className="bg-white p-4 rounded-lg shadow-md">Item 3</div>
           </div>
-        </div>
+        </div> */}
         <div className="container m-auto">
           <UserProfile data={userData} />
         </div>
