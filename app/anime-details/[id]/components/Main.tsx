@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { SearchProvider } from "@/app/discover/context/SearchContext";
 
 import Hero from "@/app/anime-details/[id]/components/Hero";
+import Loading from "@/layout/Loading";
 import AnimeDetailsContent from "./AnimeDetailsContent";
 
 type Props = {};
@@ -28,21 +29,7 @@ export const Main = ({
 
   const anime: Media = data?.Media || {};
 
-  if (loading)
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <div>
-          <img src="/loading-anime-dance.gif" alt="Loading" />
-          <div className="flex items-center justify-center">
-            <span className="loading loading-dots loading-lg"></span>
-          </div>
-        </div>
-      </div>
-
-      // <header>
-      //   <Hero anime={anime} params={params} />
-      // </header>
-    );
+  if (loading) return <Loading />;
 
   if (error) return <p>Error: {error.message}</p>;
   return (
