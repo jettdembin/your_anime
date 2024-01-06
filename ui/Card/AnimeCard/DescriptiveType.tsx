@@ -187,9 +187,9 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence key={media?.id + "animate"}>
         <div
-          className="flex absolute flex-col left-[10rem] md:left-[12rem] lg:left-[12.5rem] top-0 h-64 w-[calc(100%-10rem)]  md:w-[calc(100%-12rem)] lg:w-[calc(100%-12.5rem)]"
+          className="flex absolute flex-col left-[10rem] md:left-[12rem] lg:left-[12.5rem] top-0 h-56 sm:h-64 w-[calc(100%-10rem)]  md:w-[calc(100%-12rem)] lg:w-[calc(100%-12.5rem)]"
           // style={{ width: "calc(100% - 12.5rem)" }}
         >
           <div
