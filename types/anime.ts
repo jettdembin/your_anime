@@ -84,7 +84,7 @@ export interface Studio {
 //   seasonYear?: string | null;
 // }
 export interface Media {
-  id: number | string;
+  id: string;
   title: Title; // Assuming Title is defined elsewhere
   coverImage: CoverImage; // Assuming CoverImage is defined elsewhere
   format?: string;

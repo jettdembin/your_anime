@@ -20,7 +20,7 @@ export default function Relations({ anime, relations }: Props) {
         {relations?.map((relation: any, index: number) => (
           <Link
             href={`/anime-details/${relation?.id}?type=${relation.type}`}
-            key={relation.id}
+            key={relation.id + index}
           >
             <div
               key={index}
@@ -30,6 +30,7 @@ export default function Relations({ anime, relations }: Props) {
               <div className="relative w-20">
                 <Image
                   fill
+                  sizes="(max-width: 1200px) 100%"
                   style={{
                     width: "100%",
                     objectFit: "cover",

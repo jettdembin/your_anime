@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { Fragment, ReactNode } from "react";
 
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
@@ -39,7 +39,8 @@ export const AnimeCardLayout: React.FC<AnimeCardLayoutProps> = ({
         //     isLastCard: isLastIndexOfRow(index),
         //   });
         // }
-        return child;
+
+        return <Fragment key={index + cardType}>{child}</Fragment>;
       })}
     </section>
   );

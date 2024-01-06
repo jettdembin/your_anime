@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 
 // import AnimeCard from "@/ui/AnimeCard";
@@ -86,7 +86,11 @@ const DraggableList = ({ topAnimes }: any) => {
         {(provided) => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
             {sortedLikes?.slice(0, 10)?.map((like: any, index: number) => (
-              <Draggable key={like.id} draggableId={like.id} index={index}>
+              <Draggable
+                key={like.id + index}
+                draggableId={like.id}
+                index={index}
+              >
                 {(provided) => (
                   <li
                     ref={provided.innerRef}

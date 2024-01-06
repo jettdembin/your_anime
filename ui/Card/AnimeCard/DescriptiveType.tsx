@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import { useUser } from "@clerk/nextjs";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Corrected import
@@ -13,10 +14,10 @@ import { Media } from "@/types/anime";
 
 import { getEmoji, getMonthName } from "@/util";
 
+import useCardType from "@/hooks/useCardType";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import LoginWrapper from "@/ui/LoginWrapper";
-import { useUser } from "@clerk/nextjs";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 
@@ -26,6 +27,7 @@ type Props = {
 };
 
 const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
+  const { cardType } = useCardType();
   const { isSignedIn } = useUser();
 
   const { handleMouseEnter, handleMouseLeave } = useShowAnimeInfo();
@@ -158,7 +160,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             {genres.slice(0, 4).map((genre, i) => (
               <span
                 className="h-4 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-                key={`${genre + i + "first"}`}
+                key={`${genre + i + cardType + "first"}`}
               >
                 {genre?.toLowerCase()}
               </span>
@@ -266,6 +268,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                   >
                     <Image
                       fill
+                      sizes="(max-width: 1200px) 100%"
                       style={{
                         width: "100%",
                         objectFit: "cover",
@@ -299,7 +302,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               {genres.slice(0, 4).map((genre, i) => (
                 <span
                   className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-                  key={`${genre + i}`}
+                  key={`${genre + i + cardType + "second"}`}
                 >
                   {genre?.toLowerCase()}
                 </span>
@@ -351,6 +354,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
           >
             <Image
               fill
+              sizes="(max-width: 1200px) 100%"
               style={{ width: "100%", objectFit: "cover" }}
               className={isThumbnailVisible ? "block" : "hidden"}
               src={thumbnail}
