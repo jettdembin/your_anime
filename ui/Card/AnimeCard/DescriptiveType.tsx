@@ -120,20 +120,18 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
     <>
       <div
         className="flex flex-col relative w-full h-full  md:grid md:grid-cols-[auto,1fr] bg-white rounded-sm sm:rounded-md overflow-hidden group shadow-custom min-h-[260px]"
-        role="button"
-        tabIndex={0}
         onMouseEnter={() => {
           handleMouseEnter(media.id);
-          console.log(media.id);
         }}
         onMouseLeave={handleMouseLeave}
-        onClick={() => {
-          router.push(`/anime-details/${media.id}`);
-        }}
       >
         <div className="relative">
           <div className="overflow-hidden max-h-[260px] h-full max-w-[10rem] md:max-w-[12rem] lg:max-w-[12.5rem]">
             <img
+              role="button"
+              onClick={() => {
+                router.push(`/anime-details/${media.id}`);
+              }}
               src={media.coverImage.large || ""}
               alt={media.title.english || media.title.native || ""}
               // objectFit="cover"
@@ -160,7 +158,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             {genres.slice(0, 4).map((genre, i) => (
               <span
                 className="h-4 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-                key={`${genre + i}`}
+                key={`${genre + i + "first"}`}
               >
                 {genre?.toLowerCase()}
               </span>
@@ -173,7 +171,9 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             {/* <AnimeHoverOptions /> */}
             <button
               className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
-              onClick={handleTrailerClick}
+              onClick={() => {
+                handleTrailerClick();
+              }}
             >
               <PlayIcon className="text-[#3CB4F0]" />
             </button>
@@ -312,7 +312,9 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               {/* <AnimeHoverOptions /> */}
               <button
                 className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
-                onClick={handleTrailerClick}
+                onClick={() => {
+                  handleTrailerClick();
+                }}
               >
                 <PlayIcon className="text-[#3CB4F0]" />
               </button>
