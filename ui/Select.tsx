@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
+import { useEffect, useRef, useState } from "react";
 
 type Option = {
   value: string;
@@ -83,9 +83,9 @@ const SelectWrapper: React.FC<Props> = ({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {options.map((option) => (
+            {options.map((option: any, index: string | number) => (
               <button
-                key={option.value}
+                key={option.value + index}
                 onClick={() => handleChange(option)}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"

@@ -19,6 +19,8 @@ import { Media } from "@/types/anime";
 
 import { formatDate } from "@/util/format";
 
+import useCardType from "@/hooks/useCardType";
+
 import LoginWrapper from "@/ui/LoginWrapper";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
@@ -26,6 +28,7 @@ import AddToListForm from "./Modal/AddToListForm";
 const ListType = ({ anime, index }: { anime: Media; index: number }) => {
   const { isSignedIn } = useUser();
   const router = useRouter();
+  const { cardType } = useCardType();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [thumbnailBounds, setThumbnailBounds] = useState<DOMRect | null>(null);
@@ -167,7 +170,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                         anime?.genres.slice(0, 3).map((genre, i) => (
                           <span
                             className="h-3 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-                            key={`${genre + i}`}
+                            key={`${genre + i + cardType}`}
                           >
                             {genre?.toLowerCase()}
                           </span>

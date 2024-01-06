@@ -167,7 +167,7 @@ export default function AnimeDetailsContent({ anime }: Props) {
             </h6>
             <div className="text-xs text-slate-500 w-max flex-wrap">
               {anime.genres.map((genre: string, index: number) => (
-                <span key={index}>
+                <span key={genre + index}>
                   {genre}
                   {index < anime.genres.length - 1 ? ", " : ""}
                 </span>
@@ -213,7 +213,7 @@ export default function AnimeDetailsContent({ anime }: Props) {
             </h6>
             <div className="text-xs text-slate-500 flex flex-wrap gap-1">
               {anime.synonyms.map((synonym: string, index: number) => (
-                <span key={index}>
+                <span key={synonym + index}>
                   {synonym}
                   {index < anime.synonyms.length - 1 ? ", " : ""}
                 </span>
@@ -229,9 +229,9 @@ export default function AnimeDetailsContent({ anime }: Props) {
     <div className="py-6">
       <h6 className="font-semibold text-sm text-slate-600 w-max">Tags</h6>
       <div className="text-slate-800 relative space-y-4 pt-4">
-        {anime?.tags?.map((tag: any) => (
+        {anime?.tags?.map((tag: { name: string; rank: string }, i: number) => (
           <div
-            key={tag.name}
+            key={tag.name + i}
             className="px-3 py-2 shadow-md bg-white rounded-sm flex justify-between"
           >
             <p className="text-sm">{tag.name}</p>

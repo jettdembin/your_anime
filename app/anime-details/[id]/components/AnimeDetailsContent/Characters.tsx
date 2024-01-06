@@ -34,9 +34,9 @@ export default function Characters({ characters, anime }: Props) {
       </h3>
 
       <div className="flex flex-col md:grid md:grid-cols-2 gap-4 lg:gap-8">
-        {characters?.map((character, index) => (
+        {characters?.map((character, index: number) => (
           <div
-            key={index}
+            key={character?.node?.name?.full + index}
             className="h-24 grid bg-white rounded-sm shadow-md"
             style={
               type === "ANIME"
@@ -47,6 +47,7 @@ export default function Characters({ characters, anime }: Props) {
             <div className="relative w-20">
               <Image
                 fill
+                sizes="(max-width: 1200px) 100%"
                 style={{
                   width: "100%",
                   objectFit: "cover",
@@ -74,6 +75,7 @@ export default function Characters({ characters, anime }: Props) {
               <div className="relative w-20">
                 <Image
                   fill
+                  sizes="(max-width: 1200px) 100%"
                   style={{
                     width: "100%",
                     objectFit: "cover",

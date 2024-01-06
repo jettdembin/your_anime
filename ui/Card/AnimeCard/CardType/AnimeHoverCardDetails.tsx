@@ -6,6 +6,7 @@ import { Media } from "@/types/anime";
 
 import { convertTimeUntilAiring, getEmoji } from "@/util";
 
+import useCardType from "@/hooks/useCardType";
 import useClickOutside from "@/hooks/useClickOutside";
 
 import AnimeHoverCardDetailsWrapper from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails/AnimeHoverCardDetailsWrapper";
@@ -23,6 +24,7 @@ export default function AnimeHoverCardDetails({
   isLastCard,
   handleMouseLeave,
 }: Props) {
+  const { cardType } = useCardType();
   const hoverCardRef = useRef<HTMLDivElement>(null);
   useClickOutside(hoverCardRef, () => {
     handleMouseLeave();
@@ -122,7 +124,10 @@ export default function AnimeHoverCardDetails({
       <div className="w-full  flex flex-wrap gap-2">
         {!!animeDetails &&
           animeDetails?.genres?.slice(0, 3).map((genre: any, i: number) => (
-            <p className="text-xs bg-yellow-300 rounded-3xl px-2 py-1" key={i}>
+            <p
+              className="text-xs bg-yellow-300 rounded-3xl px-2 py-1"
+              key={genre + i + cardType}
+            >
               {genre?.toLowerCase()}
             </p>
           ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimeCardLayout } from "@/layout/AnimeCardLayout";
+import { Media } from "@/types/anime";
 import AnimeCard from "@/ui/Card/AnimeCard";
 
 import { useSearchParams } from "next/navigation";
@@ -19,8 +20,8 @@ export default function AnimeQueryResults({ media }: Props) {
   return (
     <section>
       <AnimeCardLayout>
-        {media?.map((media: any, i: number) => (
-          <AnimeCard key={i} media={media} index={i} />
+        {media?.map((media: Media, i: number) => (
+          <AnimeCard key={media?.id + i} media={media} index={i} />
         ))}
       </AnimeCardLayout>
       {/* {!searchValue ? (

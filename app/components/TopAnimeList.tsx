@@ -22,7 +22,7 @@ export default function TopAnimeList() {
       <AnimeCardLayout>
         <ul>
           {data.Page.media.slice(0, 10).map((anime: any, index: number) => (
-            <AnimeCard key={anime.id} media={anime} index={index} />
+            <AnimeCard key={anime.id + index} media={anime} index={index} />
           ))}
         </ul>
       </AnimeCardLayout>
