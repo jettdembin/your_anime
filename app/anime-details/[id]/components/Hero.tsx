@@ -23,10 +23,10 @@ type Props = {
 
 export default function Hero({ anime, params }: Props) {
   return (
-    <div className="relative bg-slate-50">
+    <div className="relative bg-slate-50 md:min-h-[730px]">
       <div className="header-wrapper">
         <div
-          className="banner w-full h-[210px] md:h-[400px] -mt-12 relative"
+          className="banner w-full h-[210px] md:h-[400px] md:min-h-[400px] -mt-12 relative"
           style={{
             background: `url(${
               anime.bannerImage ||
@@ -57,7 +57,7 @@ export default function Hero({ anime, params }: Props) {
                 width={270}
                 height={360}
                 style={{ position: "relative" }}
-                className="w-[100px] md:w-full max-w-[130px] md:max-w-none max-h-[130px] md:max-h-none object-cover rounded-sm shadow-md"
+                className="w-[100px] md:w-full max-w-[130px] md:max-w-none max-h-[130px] md:max-h-none md:min-h-[380px] object-cover rounded-sm shadow-md"
                 src={anime.coverImage.extraLarge || ""}
                 alt={anime.title.english || ""}
               />

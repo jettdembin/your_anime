@@ -1,7 +1,5 @@
 "use client";
 
-import { ToastContainer } from "react-toastify";
-
 import { useAnimeDetails } from "@/graphql/queries";
 
 import { Media } from "@/types/anime";
@@ -11,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { SearchProvider } from "@/app/discover/context/SearchContext";
 
 import Hero from "@/app/anime-details/[id]/components/Hero";
+import Loading from "@/layout/Loading";
 import AnimeDetailsContent from "./AnimeDetailsContent";
 
 type Props = {};
@@ -30,7 +29,8 @@ export const Main = ({
 
   const anime: Media = data?.Media || {};
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+
   if (error) return <p>Error: {error.message}</p>;
   return (
     <SearchProvider>
@@ -42,18 +42,6 @@ export const Main = ({
           <AnimeDetailsContent anime={anime} />
         </main>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </SearchProvider>
   );
 };
