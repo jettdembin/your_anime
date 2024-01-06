@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Flex, Text, Button } from "@radix-ui/themes";
 import { BookmarkIcon } from "@radix-ui/react-icons";
+import { Button } from "@radix-ui/themes";
 
 import * as HoverCard from "@radix-ui/react-hover-card";
 
@@ -29,38 +29,79 @@ const AddToListModal = () => {
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <label
-                    for="library_editor_statusSelect"
+                    htmlFor="status"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Status
                   </label>
                   <select value={status} onValueChange={setStatus}>
-                    <option value="WATCHED">Completed</option>
-                    <option value="">Rewatching</option>
-                    <option value="WATCHING">Watching</option>
-                    <option value="TO_WATCH">Planning</option>
-                    <option value="considering">Considering</option>
-                    <option value="paused">Paused</option>
-                    <option value="DROPPED">Dropped</option>
-                    <option value="skipping">Skipping</option>
+                    <option id="status" value="WATCHED">
+                      Completed
+                    </option>
+                    <option id="status" value="">
+                      Rewatching
+                    </option>
+                    <option id="status" value="WATCHING">
+                      Watching
+                    </option>
+                    <option id="status" value="TO_WATCH">
+                      Planning
+                    </option>
+                    <option id="status" value="considering">
+                      Considering
+                    </option>
+                    <option id="status" value="paused">
+                      Paused
+                    </option>
+                    <option id="status" value="DROPPED">
+                      Dropped
+                    </option>
+                    <option id="status" value="skipping">
+                      Skipping
+                    </option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="raank"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Rating
                   </label>
                   <select className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <option value="10">10 (Masterpiece)</option>
-                    <option value="9">9 (Incredible)</option>
-                    <option value="8">8 (Great)</option>
-                    <option value="7">7 (Good)</option>
-                    <option value="6">6 (Okay)</option>
-                    <option value="5">5 (Mediocre)</option>
-                    <option value="4">4 (Poor)</option>
-                    <option value="3">3 (Bad)</option>
-                    <option value="2">2 (Awful)</option>
-                    <option value="1">1 (Atrocious)</option>
-                    <option value="">–</option>
+                    <option id="rank" value="10">
+                      10 (Masterpiece)
+                    </option>
+                    <option id="rank" value="9">
+                      9 (Incredible)
+                    </option>
+                    <option id="rank" value="8">
+                      8 (Great)
+                    </option>
+                    <option id="rank" value="7">
+                      7 (Good)
+                    </option>
+                    <option id="rank" value="6">
+                      6 (Okay)
+                    </option>
+                    <option id="rank" value="5">
+                      5 (Mediocre)
+                    </option>
+                    <option id="rank" value="4">
+                      4 (Poor)
+                    </option>
+                    <option id="rank" value="3">
+                      3 (Bad)
+                    </option>
+                    <option id="rank" value="2">
+                      2 (Awful)
+                    </option>
+                    <option id="rank" value="1">
+                      1 (Atrocious)
+                    </option>
+                    <option id="rank" value="">
+                      –
+                    </option>
                   </select>
                 </div>
 
