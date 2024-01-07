@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
+import { noImg } from "@/consts";
+
 type Character = {
   role: string;
   voiceActors: Array<{
@@ -53,7 +55,7 @@ export default function Characters({ characters, anime }: Props) {
                   objectFit: "cover",
                 }}
                 className="max-h-24 rounded-sm"
-                src={character.node.image.large}
+                src={character.node.image.large || noImg}
                 alt={character.node.name.full}
               />
             </div>
@@ -82,10 +84,7 @@ export default function Characters({ characters, anime }: Props) {
                   }}
                   className="max-h-24 rounded-sm"
                   // src={anime.coverImage.extraLarge}
-                  src={
-                    character?.voiceActors[0]?.image?.large ||
-                    "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg"
-                  }
+                  src={character?.voiceActors[0]?.image?.large || noImg}
                   alt={anime.title.english}
                 />
               </div>

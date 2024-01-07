@@ -58,7 +58,7 @@ export default function Hero({ anime, params }: Props) {
                 height={360}
                 style={{ position: "relative" }}
                 className="w-[100px] md:w-full max-w-[130px] md:max-w-none max-h-[130px] md:max-h-none md:min-h-[380px] object-cover rounded-sm shadow-md"
-                src={anime.coverImage.extraLarge || ""}
+                src={anime.coverImage.extraLarge || noImg}
                 alt={anime.title.english || ""}
               />
             </div>
