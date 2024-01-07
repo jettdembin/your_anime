@@ -53,3 +53,6 @@ export const watchOptions = [
   { value: "RE_WATCHING", label: "Re-watching" },
   { value: "DROPPED", label: "Dropped" },
 ];
+
+export const noImg =
+  "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg";

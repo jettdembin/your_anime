@@ -3,16 +3,17 @@
 import { useRef, useState } from "react";
 
 import { useUser } from "@clerk/nextjs";
+import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Corrected import
 import YouTube from "react-youtube";
 
-import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
-
 import { Media } from "@/types/anime";
 
 import { getEmoji, getMonthName } from "@/util";
+
+import { noImg } from "@/consts";
 
 import useCardType from "@/hooks/useCardType";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
@@ -134,7 +135,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
               onClick={() => {
                 router.push(`/anime-details/${media.id}`);
               }}
-              src={media.coverImage.large || ""}
+              src={media.coverImage.large || noImg}
               alt={media.title.english || media.title.native || ""}
               // objectFit="cover"
               className="min-w-[10rem] lg:min-w-[12.5rem] w-full h-full object-cover transition duration-300 ease-in-out transform scale-105 group-hover:scale-105"

@@ -1,6 +1,9 @@
 import { Media } from "@/types/anime";
 
 import Image from "next/image";
+
+import { noImg } from "@/consts";
+
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import HeroDescription from "./Hero/HeroDescription";
@@ -28,10 +31,7 @@ export default function Hero({ anime, params }: Props) {
         <div
           className="banner w-full h-[210px] md:h-[400px] md:min-h-[400px] -mt-12 relative"
           style={{
-            background: `url(${
-              anime.bannerImage ||
-              "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg"
-            })`,
+            background: `url(${anime.bannerImage || noImg})`,
             backgroundSize: `${anime.bannerImage ? "cover" : "contain"}`,
             backgroundRepeat: `${anime.bannerImage ? "no-repeat" : "repeat"}`,
             backgroundPosition: "50% 35%",
