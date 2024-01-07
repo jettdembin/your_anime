@@ -1,5 +1,6 @@
 import { Media } from "@/types/anime";
 
+import { noImg } from "@/consts";
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import HeroDescription from "./Hero/HeroDescription";
