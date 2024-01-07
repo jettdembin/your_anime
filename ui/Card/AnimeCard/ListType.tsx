@@ -3,21 +3,22 @@
 import { useRef, useState } from "react";
 
 import { useUser } from "@clerk/nextjs";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import YouTube from "react-youtube";
-
 import {
   BookmarkIcon,
   DotFilledIcon,
   PersonIcon,
   PlayIcon,
 } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import YouTube from "react-youtube";
 
 import { Media } from "@/types/anime";
 
 import { formatDate } from "@/util/format";
+
+import { noImg } from "@/consts";
 
 import useCardType from "@/hooks/useCardType";
 
@@ -143,7 +144,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                     width={50}
                     height={62}
                     className="w-20 h-full md:h-20 lg:h-28 md:w-full object-cover"
-                    src={anime?.coverImage?.large || ""}
+                    src={anime?.coverImage?.large || noImg}
                     alt={
                       anime?.title?.english ||
                       anime?.title?.native ||
