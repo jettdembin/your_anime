@@ -7,7 +7,7 @@ import { Media } from "@/types/anime";
 import { useCardTypeContext } from "@/context/CardTypeContext";
 
 import CardType from "@/ui/Card/AnimeCard/CardType";
-import DescriptiveType from "@/ui/Card/AnimeCard/DescriptiveType";
+import DescriptiveTypeRefactored from "@/ui/Card/AnimeCard/DescriptiveTypeRefactored";
 import ListType from "@/ui/Card/AnimeCard/ListType";
 
 type CardType = "card" | "descriptive" | "list";
@@ -42,7 +42,9 @@ export default function AnimeCard({
   }
 
   if (cardType === "descriptive") {
-    card = <DescriptiveType media={media} isCardHovered={isCardHovered} />;
+    card = (
+      <DescriptiveTypeRefactored media={media} isCardHovered={isCardHovered} />
+    );
   }
 
   if (cardType === "list") {

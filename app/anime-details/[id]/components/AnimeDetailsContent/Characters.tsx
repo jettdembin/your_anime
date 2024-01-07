@@ -47,7 +47,12 @@ export default function Characters({ characters, anime }: Props) {
             }
           >
             <div className="relative w-20">
-              <Image
+              <img
+                className="w-full max-h-24 rounded-sm"
+                src={character.node.image.large}
+                alt={character.node.name.full}
+              />
+              {/* <Image
                 fill
                 sizes="(max-width: 1200px) 100%"
                 style={{
@@ -57,7 +62,7 @@ export default function Characters({ characters, anime }: Props) {
                 className="max-h-24 rounded-sm"
                 src={character.node.image.large || noImg}
                 alt={character.node.name.full}
-              />
+              /> */}
             </div>
             <div className="p-4 flex flex-col justify-between gap-4 overflow-y-hidden hover:overflow-y-auto">
               <div className="flex flex-col flex-wrap gap-[1px]">

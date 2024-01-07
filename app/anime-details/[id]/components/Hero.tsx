@@ -1,9 +1,5 @@
 import { Media } from "@/types/anime";
 
-import Image from "next/image";
-
-import { noImg } from "@/consts";
-
 import AddToLikesButtonWrapper from "./Hero/AddToLikesButtonWrapper";
 import AddToListButtonWrapper from "./Hero/AddToListButtonDropdownWrapper";
 import HeroDescription from "./Hero/HeroDescription";
@@ -53,14 +49,22 @@ export default function Hero({ anime, params }: Props) {
         >
           <div className="w-full flex md:flex-col justify-between md:justify-normal relative -mt-20 md:-mt-32 mx-auto">
             <div className="static shadow-lg">
-              <Image
+              <img
+                // width={270}
+                // height={360}
+                style={{ position: "relative" }}
+                className="w-[100px] md:w-full max-w-[130px] md:max-w-none max-h-[130px] md:max-h-none md:min-h-[380px] object-cover rounded-sm shadow-md"
+                src={anime.coverImage.extraLarge || ""}
+                alt={anime.title.english || ""}
+              />
+              {/* <Image
                 width={270}
                 height={360}
                 style={{ position: "relative" }}
                 className="w-[100px] md:w-full max-w-[130px] md:max-w-none max-h-[130px] md:max-h-none md:min-h-[380px] object-cover rounded-sm shadow-md"
-                src={anime.coverImage.extraLarge || noImg}
+                src={anime.coverImage.extraLarge || ""}
                 alt={anime.title.english || ""}
-              />
+              /> */}
             </div>
             <div className="flex w-full md:w-auto items-end md:my-5 gap-4">
               <AddToListButtonWrapper />

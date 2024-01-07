@@ -1,5 +1,5 @@
 const getEmoji = (percent: number | undefined) => {
-  if (!percent) return;
+  if (!percent) return ""
   switch (true) {
     case percent >= 75:
       return "😍";
