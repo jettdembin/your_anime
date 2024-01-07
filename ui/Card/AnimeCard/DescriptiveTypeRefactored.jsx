@@ -89,12 +89,12 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
       <LoginWrapper signIn>{addToListButton}</LoginWrapper>
     );
   const descriptionClass = isCardHovered
-    ? "overflow-y-auto h-52" // Enable scrolling and set a max height
+    ? "overflow-y-auto" // Enable scrolling and set a max height
     : "overflow-hidden";
 
   return (
     <div className="w-full shadow-custom overflow-hidden rounded-sm">
-      <div className="flex w-full max-h-52 md:max-h-64">
+      <div className="flex w-full max-h-52 md:max-h-56">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
           <Image
@@ -129,7 +129,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             <div
               className={`${
                 isCardHovered ? "overflow-x-hidden" : "overflow-hidden"
-              }`}
+              } h-52 md:h-max-h-56`}
             >
               <motion.div
                 role="button"
