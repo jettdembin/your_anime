@@ -97,14 +97,23 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
       <div className="flex w-full max-h-52 md:max-h-56">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
-          <Image
+          <img
+            role="button"
+            onClick={() => {
+              router.push(`/anime-details/${media.id}`);
+            }}
+            className="max-h-full"
+            src={media.coverImage.large || ""}
+            alt="Cover Image"
+          />
+          {/* <Image
             sizes="(max-width: 1200px) 100%"
             width={media.coverImage.large ? 225 : 150}
             height={media.coverImage.large ? 350 : 250}
             className="max-h-full"
             src={media.coverImage.large || ""}
             alt="Cover Image"
-          />
+          /> */}
           {/* Opaque Background */}
           <div className="z-20 absolute w-full h-fit bg-gray-900 bottom-0 opacity-70 p-3 md:p-4">
             {/* used as a spacer for the opaque background */}
