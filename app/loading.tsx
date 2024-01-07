@@ -1,13 +1,11 @@
-import { CardSectionLoader } from "@/ui/LoadingSection";
-import Header from "./components/Header";
+import Loading from "@/layout/Loading";
 
 type Props = {};
 
 export default function loading({}: Props) {
   return (
     <>
-      <Header />
-      <CardSectionLoader />
+      <Loading />
     </>
   );
 }
