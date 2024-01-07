@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 import { noImg } from "@/consts";
@@ -80,7 +79,13 @@ export default function Characters({ characters, anime }: Props) {
             </div>
             {type === "ANIME" && (
               <div className="relative w-20">
-                <Image
+                <img
+                  className="w-full object-cover max-h-24 rounded-sm"
+                  // src={anime.coverImage.extraLarge}
+                  src={character?.voiceActors[0]?.image?.large || noImg}
+                  alt={anime.title.english}
+                />
+                {/* <Image
                   fill
                   sizes="(max-width: 1200px) 100%"
                   style={{
@@ -91,7 +96,7 @@ export default function Characters({ characters, anime }: Props) {
                   // src={anime.coverImage.extraLarge}
                   src={character?.voiceActors[0]?.image?.large || noImg}
                   alt={anime.title.english}
-                />
+                /> */}
               </div>
             )}
           </div>
