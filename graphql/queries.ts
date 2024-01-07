@@ -14,7 +14,6 @@ export const GET_POPULAR_ANIME = gql`
         description
         source
         coverImage {
-          medium
           large
           extraLarge
         }
@@ -77,7 +76,6 @@ export const GET_TRENDING = gql`
         description
         source
         coverImage {
-          medium
           large
           extraLarge
         }
@@ -143,7 +141,7 @@ export const GET_BROWSE_FILTERS = gql`
         description
         source
         coverImage {
-          medium
+          
           large
           extraLarge
         }
@@ -189,8 +187,7 @@ export const SEARCH_ANIMES_UPCOMING = gql`
         }
         description
         source
-        coverImage {
-          medium
+        coverImage {   
           large
           extraLarge
         }
@@ -243,7 +240,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
         description
         source
         coverImage {
-          medium
+          
           large
           extraLarge
         }
@@ -292,7 +289,7 @@ export const SEARCH_ANIMES_TRENDING = gql`
         description
         source
         coverImage {
-          medium
+          
           large
           extraLarge
         }
@@ -361,7 +358,6 @@ export const GET_TOP_100_ANIME = gql`
         description
         source
         coverImage {
-          medium
           large
           extraLarge
         }
@@ -406,7 +402,7 @@ const MEDIA_FIELDS = gql`
     description
     source
     coverImage {
-      medium
+      
       large
       extraLarge
     }
@@ -484,7 +480,7 @@ export const GET_ANIME_DETAILS = gql`
         }
       }
       coverImage {
-        medium
+        
         large
         extraLarge
       }
