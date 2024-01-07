@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Media } from "@/types/anime";
 import { DotFilledIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
@@ -28,7 +26,12 @@ export default function Relations({ anime, relations }: Props) {
               style={{ gridTemplateColumns: "5rem auto" }}
             >
               <div className="relative w-20">
-                <Image
+                <img
+                  className="w-full h-full object-cover rounded-sm"
+                  src={relation.coverImage.large || ""}
+                  alt={anime.title.english || "image description"}
+                />
+                {/* <Image
                   fill
                   sizes="(max-width: 1200px) 100%"
                   style={{
@@ -38,7 +41,7 @@ export default function Relations({ anime, relations }: Props) {
                   className="h-full rounded-sm"
                   src={relation.coverImage.large || ""}
                   alt={anime.title.english || "image description"}
-                />
+                /> */}
               </div>
               <div className="p-4 flex flex-col">
                 <div className="flex flex-col gap-1">
