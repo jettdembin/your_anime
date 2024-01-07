@@ -28,7 +28,7 @@ export default function AnimeDetailsContent({ anime }: Props) {
 
   const animeInfo = (
     <div className="">
-      <ul className="overflow-x-auto flex gap-6 lg:gap-0 lg:flex-col lg:space-y-4 rounded-md bg-white shadow-sm p-4">
+      <ul className="overflow-x-auto flex gap-6 lg:gap-0 lg:flex-col lg:space-y-4 rounded-sm bg-white shadow-md p-4">
         {anime.format && (
           <li className="flex flex-col  gap-2 lg:gap-0 justify-between lg:justify-normal">
             <h6 className="mb-1 text-sm font-semibold text-slate-600 w-max">
