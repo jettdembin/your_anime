@@ -93,8 +93,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     : "overflow-hidden";
 
   return (
-    <div className="w-full shadow-custom overflow-hidden rounded-sm">
-      <div className="flex w-full max-h-52 md:max-h-56">
+    <div className="w-full shadow-custom rounded-sm">
+      <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
           <img
@@ -102,7 +102,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             onClick={() => {
               router.push(`/anime-details/${media.id}`);
             }}
-            className="max-h-full"
+            className="w-full max-h-full"
             src={media.coverImage.large || ""}
             alt="Cover Image"
           />
@@ -133,202 +133,207 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
           </div>
         </div>
         {/* Right Side */}
-        <div className={`w-full p-6 bg-white ${descriptionClass}`}>
-          <AnimatePresence key={media?.id + "animate"}>
-            <div
-              className={`${
-                isCardHovered ? "overflow-x-hidden" : "overflow-hidden"
-              } h-52 md:h-max-h-56`}
-            >
-              <motion.div
-                role="button"
-                onClick={handleTrailerClick}
+        <div
+          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass}`}
+        >
+          <div className="overflow-y-auto p-6">
+            <AnimatePresence key={media?.id + "animate"}>
+              <div
                 className={`${
-                  !!thumbnail
-                    ? "w-[200%] grid-cols-2"
-                    : "w-[100%] grid-cols-1 cursor-default"
-                } grid `}
-                animate={
-                  !!thumbnail && {
-                    x: isCardHovered ? "-50%" : "0%",
-                  }
-                }
-                transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
+                  isCardHovered ? "overflow-x-hidden" : "overflow-hidden"
+                } h-full `}
               >
-                <div className="w-full flex  justify-between font-medium">
-                  <div className="flex flex-col gap-1 text-gray-700">
-                    <div className="flex">
-                      <h6 className="text-xxs">
-                        {episodes && !!season
-                          ? `${episodes} ${
-                              episodes != 1 ? "episodes" : "episode"
-                            } aired in ${
-                              !!season
-                                ? season?.split("")[0] +
-                                  season?.slice(1).toLowerCase()
-                                : ""
-                            }`
-                          : !episodes
-                          ? !!season
-                            ? `Ongoing, aired in ${
-                                season?.split("")[0] +
-                                season?.slice(1).toLowerCase()
+                <motion.div
+                  role="button"
+                  onClick={handleTrailerClick}
+                  className={`${
+                    !!thumbnail
+                      ? "w-[200%] grid-cols-2"
+                      : "w-[100%] grid-cols-1 cursor-default"
+                  } grid `}
+                  animate={
+                    !!thumbnail && {
+                      x: isCardHovered ? "-50%" : "0%",
+                    }
+                  }
+                  transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
+                >
+                  <div className="w-full flex  justify-between font-medium">
+                    <div className="flex flex-col gap-1 text-gray-700">
+                      <div className="flex">
+                        <h6 className="text-xxs">
+                          {episodes && !!season
+                            ? `${episodes} ${
+                                episodes != 1 ? "episodes" : "episode"
+                              } aired in ${
+                                !!season
+                                  ? season?.split("")[0] +
+                                    season?.slice(1).toLowerCase()
+                                  : ""
                               }`
-                            : "Ongoing"
-                          : `Unknown`}
-                        {/* {!!season &&
+                            : !episodes
+                            ? !!season
+                              ? `Ongoing, aired in ${
+                                  season?.split("")[0] +
+                                  season?.slice(1).toLowerCase()
+                                }`
+                              : "Ongoing"
+                            : `Unknown`}
+                          {/* {!!season &&
                         season?.split("")[0] + season?.slice(1).toLowerCase()} */}
-                      </h6>
-                    </div>
-                    <div className="flex gap-1 text-lg">
-                      <h6 className="text-sm md:text-base">
-                        {!!startDate?.month
-                          ? `${getMonthName(startDate?.month)} ${
-                              startDate?.day
-                            } ${startDate?.year}`
-                          : "Not yet released"}
-                      </h6>
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <p>
-                      {likedPercentage &&
-                        `${getEmoji(likedPercentage)} ${likedPercentage}%`}
-                    </p>
-                  </div>
-                </div>
-                {!!id && site === "youtube" && (
-                  <div className="relative flex justify-between gap-2">
-                    <h6 className="text-lg w-1/2">
-                      <span className="text-2xl font-bold">#</span>
-                      {title?.native || title?.english}
-                    </h6>
-                    <div
-                      className="relative"
-                      style={{ width: "175px", height: "75px" }}
-                    >
-                      <Image
-                        fill
-                        sizes="(max-width: 1200px) 100%"
-                        style={{
-                          width: "100%",
-                          objectFit: "cover",
-                        }}
-                        ref={thumbnailRef}
-                        src={thumbnail}
-                        alt="Trailer Thumbnail"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <i className="fas fa-play text-white"></i>
+                        </h6>
+                      </div>
+                      <div className="flex gap-1 text-lg">
+                        <h6 className="text-sm md:text-base">
+                          {!!startDate?.month
+                            ? `${getMonthName(startDate?.month)} ${
+                                startDate?.day
+                              } ${startDate?.year}`
+                            : "Not yet released"}
+                        </h6>
                       </div>
                     </div>
+                    <div className="flex justify-end">
+                      <p>
+                        {likedPercentage &&
+                          `${getEmoji(likedPercentage)} ${likedPercentage}%`}
+                      </p>
+                    </div>
                   </div>
-                )}
-              </motion.div>
-              <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
-                <div
-                  className={`${
-                    isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"
-                  }`}
-                  dangerouslySetInnerHTML={
-                    !isCardHovered
-                      ? { __html: truncatedDescription }
-                      : { __html: description || "" }
-                  }
-                ></div>
+                  {!!id && site === "youtube" && (
+                    <div className="relative flex justify-between gap-2">
+                      <h6 className="text-lg w-1/2">
+                        <span className="text-2xl font-bold">#</span>
+                        {title?.native || title?.english}
+                      </h6>
+                      <div
+                        className="relative"
+                        style={{ width: "175px", height: "75px" }}
+                      >
+                        <Image
+                          fill
+                          sizes="(max-width: 1200px) 100%"
+                          style={{
+                            width: "100%",
+                            objectFit: "cover",
+                          }}
+                          ref={thumbnailRef}
+                          src={thumbnail}
+                          alt="Trailer Thumbnail"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <i className="fas fa-play text-white"></i>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+                <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
+                  <div
+                    className={`${
+                      isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"
+                    }`}
+                    dangerouslySetInnerHTML={
+                      !isCardHovered
+                        ? { __html: truncatedDescription }
+                        : { __html: description || "" }
+                    }
+                  ></div>
+                </div>
               </div>
-            </div>
 
-            {isExpanded && (
-              <motion.div
-                initial={{
-                  top: thumbnailBounds?.top || "0",
-                  left: thumbnailBounds?.left || "0",
-                  width: thumbnailBounds?.width || "0",
-                  height: thumbnailBounds?.height || "0",
-                }}
-                animate={{
-                  top: "50%",
-                  left: "50%",
-                  x: "-50%",
-                  y: "-50%",
-                }}
-                exit={{
-                  top: thumbnailBounds?.top || "0",
-                  left: thumbnailBounds?.left || "0",
-                  width: thumbnailBounds?.width || "0",
-                  height: thumbnailBounds?.height || "0",
-                }}
-                transition={{ duration: 0.5 }}
-                className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
-              >
-                <Image
-                  fill
-                  sizes="(max-width: 1200px) 100%"
-                  style={{ width: "100%", objectFit: "cover" }}
-                  className={isThumbnailVisible ? "block" : "hidden"}
-                  src={thumbnail}
-                  alt="Trailer Thumbnail"
-                />
-              </motion.div>
-            )}
-
-            {isExpanded && (
-              <div
-                className="fixed z-50 top-0 left-0 w-screen h-screen bg-slate-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
-                onClick={handleBackdropClick}
-              >
-                <motion.section
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+              {isExpanded && (
+                <motion.div
+                  initial={{
+                    top: thumbnailBounds?.top || "0",
+                    left: thumbnailBounds?.left || "0",
+                    width: thumbnailBounds?.width || "0",
+                    height: thumbnailBounds?.height || "0",
+                  }}
+                  animate={{
+                    top: "50%",
+                    left: "50%",
+                    x: "-50%",
+                    y: "-50%",
+                  }}
+                  exit={{
+                    top: thumbnailBounds?.top || "0",
+                    left: thumbnailBounds?.left || "0",
+                    width: thumbnailBounds?.width || "0",
+                    height: thumbnailBounds?.height || "0",
+                  }}
+                  transition={{ duration: 0.5 }}
+                  className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
                 >
-                  <YouTube
-                    videoId={id || ""}
-                    opts={{
-                      playerVars: {
-                        autoplay: 1,
-                        controls: 1,
-                        modestbranding: 1,
-                      },
-                    }}
+                  <Image
+                    fill
+                    sizes="(max-width: 1200px) 100%"
+                    style={{ width: "100%", objectFit: "cover" }}
+                    className={isThumbnailVisible ? "block" : "hidden"}
+                    src={thumbnail}
+                    alt="Trailer Thumbnail"
                   />
-                </motion.section>
-              </div>
-            )}
-          </AnimatePresence>
+                </motion.div>
+              )}
+
+              {isExpanded && (
+                <div
+                  className="fixed z-50 top-0 left-0 w-screen h-screen bg-slate-800 bg-opacity-75 flex items-center justify-center overflow-hidden"
+                  onClick={handleBackdropClick}
+                >
+                  <motion.section
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+                  >
+                    <YouTube
+                      videoId={id || ""}
+                      opts={{
+                        playerVars: {
+                          autoplay: 1,
+                          controls: 1,
+                          modestbranding: 1,
+                        },
+                      }}
+                    />
+                  </motion.section>
+                </div>
+              )}
+            </AnimatePresence>
+          </div>
+          {/* Genres */}
+          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
+            <div className="flex flex-wrap items-center mr-2 gap-2">
+              {genres.slice(0, 4).map((genre, i) => (
+                <span
+                  className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                  key={`${genre + i + cardType + "second"}`}
+                >
+                  {genre?.toLowerCase()}
+                </span>
+              ))}
+            </div>
+            <div>
+              {/* <AnimeHoverOptions /> */}
+              <button
+                className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
+                onClick={() => {
+                  handleTrailerClick();
+                }}
+              >
+                <PlayIcon className="text-[#3CB4F0]" />
+              </button>
+              {isSignedInAddToListButton()}
+              <Modal id="add_to_list_modal">
+                <AddToListForm />
+              </Modal>
+            </div>
+          </div>
         </div>
       </div>
-      {/* Genres */}
-      <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
-        <div className="flex flex-wrap items-center mr-2 gap-2">
-          {genres.slice(0, 4).map((genre, i) => (
-            <span
-              className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
-              key={`${genre + i + cardType + "second"}`}
-            >
-              {genre?.toLowerCase()}
-            </span>
-          ))}
-        </div>
-        <div>
-          {/* <AnimeHoverOptions /> */}
-          <button
-            className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
-            onClick={() => {
-              handleTrailerClick();
-            }}
-          >
-            <PlayIcon className="text-[#3CB4F0]" />
-          </button>
-          {isSignedInAddToListButton()}
-          <Modal id="add_to_list_modal">
-            <AddToListForm />
-          </Modal>
-        </div>
-      </div>
+
       {/* Expanded Trailer Section */}
       {isExpanded && (
         <motion.div
