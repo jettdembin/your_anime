@@ -93,8 +93,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     : "overflow-hidden";
 
   return (
-    <div className="w-full shadow-custom rounded-sm">
-      <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden">
+    <div className="w-full shadow-custom rounded-md">
+      <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
           <img
@@ -134,7 +134,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
         </div>
         {/* Right Side */}
         <div
-          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass}`}
+          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass} rounded-md`}
         >
           <div className="overflow-y-auto p-6">
             <AnimatePresence key={media?.id + "animate"}>
@@ -304,18 +304,20 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </AnimatePresence>
           </div>
           {/* Genres */}
-          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
+          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre overflow-hidden">
             <div className="flex flex-wrap items-center mr-2 gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
-                  className="h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                  className={`${
+                    i > 1 ? "hidden md:block" : ""
+                  } h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
                   key={`${genre + i + cardType + "second"}`}
                 >
                   {genre?.toLowerCase()}
                 </span>
               ))}
             </div>
-            <div>
+            <div className="flex">
               {/* <AnimeHoverOptions /> */}
               <button
                 className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
