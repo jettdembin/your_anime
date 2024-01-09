@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   SearchProvider,
@@ -21,6 +21,7 @@ export default function Search() {
   const [isFilterVisible, setIsFilterVisible] = useState(true);
 
   const router: any = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const categoryValue = searchParams?.get("category");
@@ -35,8 +36,9 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    if (!!navRef.current) navRef.current.focus();
-
+    if (pathname !== "/") {
+      if (!!navRef.current) navRef.current.focus();
+    }
     // let goToHome: any;
     // if (!searchValues?.search) {
     //   goToHome = setTimeout(() => {
@@ -63,6 +65,7 @@ export default function Search() {
           </div>
           <div className="flex gap-8 mb-6">
             <input
+              tabIndex={0}
               ref={navRef}
               className="w-full px-6 py-4 shadow-custom focus:outline-none bg-white rounded-sm"
               placeholder="Search for anime..."
