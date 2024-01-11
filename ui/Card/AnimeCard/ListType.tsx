@@ -362,7 +362,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           <img
             style={{ width: "100%", objectFit: "cover" }}
             className={isThumbnailVisible ? "block" : "hidden"}
-            src={thumbnail}
+            src={thumbnail || noImg}
             alt="Trailer Thumbnail"
           />
           {/* <Image
