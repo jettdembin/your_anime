@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { ContentContainer } from "./ContentContainer";
 
@@ -21,10 +22,13 @@ const Footer: React.FC = () => {
       <ContentContainer>
         <div className="px-4 py-8 flex flex-col md:flex-row items-center justify-between">
           <div className="mb-4 md:mb-0">
-            <h3 className="text-lg font-bold">YourAnime</h3>
+            <div className="flex items-center gap-2">
+              <Image width={40} height={40} src="/favicon.ico" alt="YAnime" />
+              <h3 className="text-lg font-bold">YourAnime</h3>
+            </div>
             <p className="mt-2">Discover new anime and track your progress.</p>
           </div>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <button
               className={`mr-4 focus:outline-none transition duration-300 ${
                 isDarkMode ? "text-gray-400" : "text-white"
@@ -44,7 +48,7 @@ const Footer: React.FC = () => {
                 } transition duration-300`}
               ></div>
             </div>
-          </div>
+          </div> */}
         </div>
       </ContentContainer>
     </footer>
