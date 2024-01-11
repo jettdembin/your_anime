@@ -3,16 +3,16 @@
 import { useRef, useState } from "react";
 
 import { useUser } from "@clerk/nextjs";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import YouTube from "react-youtube";
+
 import {
   BookmarkIcon,
   DotFilledIcon,
   PersonIcon,
   PlayIcon,
 } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import YouTube from "react-youtube";
 
 import { Media } from "@/types/anime";
 
@@ -140,7 +140,17 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                   }`}
                   // ref={thumbnailImageDivRef}
                 >
-                  <Image
+                  <img
+                    className="w-20 h-full md:h-20 lg:h-28 md:w-full object-cover"
+                    src={anime?.coverImage?.large || noImg}
+                    alt={
+                      anime?.title?.english ||
+                      anime?.title?.native ||
+                      "Anime Cover"
+                    }
+                    ref={thumbnailRef}
+                  />
+                  {/* <Image
                     width={50}
                     height={62}
                     className="w-20 h-full md:h-20 lg:h-28 md:w-full object-cover"
@@ -151,7 +161,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       "Anime Cover"
                     }
                     ref={thumbnailRef}
-                  />
+                  /> */}
                 </div>
                 <div className="flex flex-col py-4 md:flex-row md:items-center w-full">
                   <div className="w-full h-full flex flex-col lg:justify-center md:w-1/2 lg:w-2/3  pr-2 mr-8 lg:pr-0 cursor-pointer">
@@ -349,13 +359,19 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           transition={{ duration: 0.5 }}
           className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
         >
-          <Image
-            fill
+          <img
             style={{ width: "100%", objectFit: "cover" }}
             className={isThumbnailVisible ? "block" : "hidden"}
             src={thumbnail}
             alt="Trailer Thumbnail"
           />
+          {/* <Image
+            fill
+            style={{ width: "100%", objectFit: "cover" }}
+            className={isThumbnailVisible ? "block" : "hidden"}
+            src={thumbnail}
+            alt="Trailer Thumbnail"
+          /> */}
         </motion.div>
       )}
 
