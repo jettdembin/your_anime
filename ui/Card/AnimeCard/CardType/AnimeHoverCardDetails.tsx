@@ -71,7 +71,7 @@ export default function AnimeHoverCardDetails({
 
   const airedPreviously = (
     <h6 className="text-xs">
-      {episodes ? `${episodes} episodes aired in` : "Ongoing"}
+      {episodes ? `${episodes} episodes aired in ` : "Ongoing"}
       {!!season && season?.split("")[0] + season?.slice(1).toLowerCase()}
     </h6>
   );
