@@ -1,7 +1,11 @@
-import React from "react";
+import { CardSectionLoader } from "@/ui/LoadingSection";
 
 type Props = {};
 
 export default function loading({}: Props) {
-  return <div>loading</div>;
+  return (
+    <div>
+      <CardSectionLoader />
+    </div>
+  );
 }
