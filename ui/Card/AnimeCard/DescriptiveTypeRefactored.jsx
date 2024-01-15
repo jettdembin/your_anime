@@ -191,7 +191,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                         </h6>
                       </div>
                       <div className="flex gap-1 text-lg">
-                        <h6 className="text-sm md:text-base">
+                        <h6 className="text-xs sm:text-sm md:text-base">
                           {!!startDate?.month
                             ? `${getMonthName(startDate?.month)} ${
                                 startDate?.day
@@ -201,7 +201,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                       </div>
                     </div>
                     <div className="flex justify-end">
-                      <p>
+                      <p className="text-xs sm:text-sm md:text-base">
                         {likedPercentage &&
                           `${getEmoji(likedPercentage)} ${likedPercentage}%`}
                       </p>
@@ -245,7 +245,9 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                     </div>
                   )}
                 </motion.div>
-                <div className={`${!!thumbnail ? "" : "mt-4"} text-sm`}>
+                <div
+                  className={`${!!thumbnail ? "" : "mt-4"} text-xxs md:text-sm`}
+                >
                   <div
                     className={`${
                       isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"
