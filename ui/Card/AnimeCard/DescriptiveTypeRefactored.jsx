@@ -103,7 +103,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     <div className="w-full shadow-custom rounded-md">
       <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
-        <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
+        <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
           <img
             role="button"
             onClick={() => {
@@ -141,7 +141,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
         </div>
         {/* Right Side */}
         <div
-          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass} rounded-md`}
+          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass}`}
         >
           <div className="overflow-y-auto px-6 pt-6">
             <AnimatePresence key={media?.id + "animate"}>
