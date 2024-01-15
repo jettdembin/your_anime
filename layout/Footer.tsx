@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
         isDarkMode ? "text-white" : "text-gray-400"
       } mt-auto`}
     >
-      <ContentContainer>
+      <ContentContainer className="flex justify-between">
         <div className="px-4 py-8 flex flex-col md:flex-row items-center justify-between">
           <div className="mb-4 md:mb-0">
             <div className="flex items-center gap-2">
@@ -49,6 +49,9 @@ const Footer: React.FC = () => {
               ></div>
             </div>
           </div> */}
+        </div>
+        <div className="py-8 mt-auto">
+          <h6>ⓒ 2024 Engineered by Jett Dembin</h6>
         </div>
       </ContentContainer>
     </footer>
