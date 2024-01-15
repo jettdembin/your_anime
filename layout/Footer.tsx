@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState } from "react";
 import { ContentContainer } from "./ContentContainer";
 
@@ -23,7 +22,7 @@ const Footer: React.FC = () => {
         <div className="px-4 py-8 flex flex-col md:flex-row items-center justify-between">
           <div className="mb-4 md:mb-0">
             <div className="flex items-center gap-2">
-              <Image width={40} height={40} src="/favicon.ico" alt="YAnime" />
+              <img src="/favicon.ico" alt="YAnime" className="w-10 h-10" />
               <h3 className="text-lg font-bold">YourAnime</h3>
             </div>
             <p className="mt-2">Discover new anime and track your progress.</p>
