@@ -295,6 +295,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                           autoplay: 1,
                           controls: 1,
                           modestbranding: 1,
+                          // Mute the video when it's not visible
+                          mute: window.innerWidth > 768 ? 1 : 0,
                         },
                         height: "250",
                         width: "350",
