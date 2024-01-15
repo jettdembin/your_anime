@@ -290,12 +290,12 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
           </div>
           {/* Genres */}
           <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
-            <div className="flex flex-wrap items-center mr-2 gap-2">
+            <div className="flex flex-wrap items-center mr-2 gap-1 md:gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
                   className={`${
                     i > 1 ? "hidden md:block" : ""
-                  } h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
+                  } h-3 md:h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
                   key={`${genre + i + cardType + "second"}`}
                 >
                   {genre?.toLowerCase()}
@@ -305,7 +305,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             <div className="relative flex">
               {/* <AnimeHoverOptions /> */}
               <button
-                className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
+                className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-1 md:mr-2"
                 onClick={() => {
                   handleTrailerClick();
                 }}
