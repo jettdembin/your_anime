@@ -100,8 +100,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     : "overflow-hidden";
 
   return (
-    <div className="w-full shadow-custom rounded-none sm:rounded-md">
-      <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
+    <div className="w-full h-full shadow-custom rounded-none sm:rounded-md">
+      <div className="flex w-full h-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
           <img
@@ -109,7 +109,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             onClick={() => {
               router.push(`/anime-details/${media.id}`);
             }}
-            className="w-full max-h-full"
+            className="w-full h-full max-h-full"
             src={media.coverImage.large || noImg}
             alt="Cover Image"
           />
