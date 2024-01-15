@@ -100,7 +100,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     : "overflow-hidden";
 
   return (
-    <div className="w-full shadow-custom rounded-md">
+    <div className="w-full shadow-custom rounded-none sm:rounded-md">
       <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
