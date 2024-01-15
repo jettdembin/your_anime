@@ -6,7 +6,6 @@ import { useUser } from "@clerk/nextjs";
 import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import YouTube from "react-youtube";
 
 import { getEmoji, getMonthName } from "@/util";
 
@@ -15,6 +14,7 @@ import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import { noImg } from "@/consts";
 import LoginWrapper from "@/ui/LoginWrapper";
+import YouTube from "react-youtube";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
 
@@ -103,13 +103,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     <div className="w-full shadow-custom rounded-md">
       <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
-        <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
+        <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
           <img
             role="button"
             onClick={() => {
               router.push(`/anime-details/${media.id}`);
             }}
-            className="w-full max-h-full md:h-full"
+            className="w-full max-h-full"
             src={media.coverImage.large || noImg}
             alt="Cover Image"
           />
@@ -271,16 +271,33 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 1, delay: 0.5 }}
-                    className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+                    className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl flex items-center justify-center"
                   >
                     <YouTube
                       videoId={id || ""}
+                      style={{ width: "100%", height: "100%" }}
+                      className="hidden md:block"
+                      opts={{
+                        playerVars: {
+                          autoplay: 1,
+                          controls: 1,
+                          modestbranding: 1,
+                          // Mute the video when it's not visible
+                          mute: window.innerWidth < 768 ? 1 : 0,
+                        },
+                      }}
+                    />
+                    <YouTube
+                      videoId={id || ""}
+                      className="md:hidden flex items-center justify-center"
                       opts={{
                         playerVars: {
                           autoplay: 1,
                           controls: 1,
                           modestbranding: 1,
                         },
+                        height: "250",
+                        width: "350",
                       }}
                     />
                   </motion.section>
