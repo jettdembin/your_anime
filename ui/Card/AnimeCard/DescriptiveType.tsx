@@ -269,6 +269,7 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     <img
                       style={{
                         width: "100%",
+                        maxHeight: "100%",
                         objectFit: "cover",
                       }}
                       ref={thumbnailRef}
