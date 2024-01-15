@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useRouter } from "next/navigation"; // Corrected import
 import YouTube from "react-youtube";
 
@@ -267,7 +266,16 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                     className="relative"
                     style={{ width: "175px", height: "75px" }}
                   >
-                    <Image
+                    <img
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
+                      ref={thumbnailRef}
+                      src={thumbnail || noImg}
+                      alt="Trailer Thumbnail"
+                    />
+                    {/* <Image
                       fill
                       sizes="(max-width: 1200px) 100%"
                       style={{
@@ -275,9 +283,9 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
                         objectFit: "cover",
                       }}
                       ref={thumbnailRef}
-                      src={thumbnail}
+                      src={thumbnail || noImg}
                       alt="Trailer Thumbnail"
-                    />
+                    /> */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <i className="fas fa-play text-white"></i>
                     </div>
@@ -353,14 +361,20 @@ const DescriptiveType: React.FC<Props> = ({ media, isCardHovered }) => {
             transition={{ duration: 0.5 }}
             className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
           >
-            <Image
+            <img
+              style={{ width: "100%", objectFit: "cover" }}
+              className={isThumbnailVisible ? "block" : "hidden"}
+              src={thumbnail || noImg}
+              alt="Trailer Thumbnail"
+            />
+            {/* <Image
               fill
               sizes="(max-width: 1200px) 100%"
               style={{ width: "100%", objectFit: "cover" }}
               className={isThumbnailVisible ? "block" : "hidden"}
               src={thumbnail}
               alt="Trailer Thumbnail"
-            />
+            /> */}
           </motion.div>
         )}
 
