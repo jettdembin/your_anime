@@ -103,13 +103,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     <div className="w-full shadow-custom rounded-md">
       <div className="flex w-full max-h-52 md:max-h-56 overflow-hidden rounded-md">
         {/* Left Side */}
-        <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
+        <div className="w-2/5 min-w-[150px] max-w-[160px] relative">
           <img
             role="button"
             onClick={() => {
               router.push(`/anime-details/${media.id}`);
             }}
-            className="w-full max-h-full"
+            className="w-full max-h-full md:h-full"
             src={media.coverImage.large || noImg}
             alt="Cover Image"
           />
