@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import YouTube from "react-youtube";
 
@@ -14,6 +13,7 @@ import { getEmoji, getMonthName } from "@/util";
 import useCardType from "@/hooks/useCardType";
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
+import { noImg } from "@/consts";
 import LoginWrapper from "@/ui/LoginWrapper";
 import Modal from "../../Modal";
 import AddToListForm from "./Modal/AddToListForm";
@@ -67,6 +67,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
       setThumbnailBounds(thumbnailRef.current.getBoundingClientRect());
       setIsExpanded(true);
     }
+
+    if (!isThumbnailVisible) setIsThumbnailVisible(true);
+
+    // Hide the thumbnail after animation is complete
+    setTimeout(() => {
+      setIsThumbnailVisible(false);
+    }, 500); // match the duration of the animation
   };
   const handleBackdropClick = () => {
     setIsExpanded(false);
@@ -103,7 +110,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
               router.push(`/anime-details/${media.id}`);
             }}
             className="w-full max-h-full"
-            src={media.coverImage.large || ""}
+            src={media.coverImage.large || noImg}
             alt="Cover Image"
           />
           {/* <Image
@@ -202,7 +209,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   </div>
                   {!!id && site === "youtube" && (
                     <div className="relative flex justify-between gap-2">
-                      <h6 className="text-lg w-1/2">
+                      <h6 className="text-xs md:text-lg w-1/2">
                         <span className="text-2xl font-bold">#</span>
                         {title?.native || title?.english}
                       </h6>
@@ -210,7 +217,17 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                         className="relative"
                         style={{ width: "175px", height: "75px" }}
                       >
-                        <Image
+                        <img
+                          style={{
+                            width: "100%",
+                            maxHeight: "100%",
+                            objectFit: "cover",
+                          }}
+                          ref={thumbnailRef}
+                          src={thumbnail || noImg}
+                          alt="Trailer Thumbnail"
+                        />
+                        {/* <Image
                           fill
                           sizes="(max-width: 1200px) 100%"
                           style={{
@@ -220,7 +237,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                           ref={thumbnailRef}
                           src={thumbnail}
                           alt="Trailer Thumbnail"
-                        />
+                        /> */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <i className="fas fa-play text-white"></i>
                         </div>
@@ -241,40 +258,6 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   ></div>
                 </div>
               </div>
-
-              {isExpanded && (
-                <motion.div
-                  initial={{
-                    top: thumbnailBounds?.top || "0",
-                    left: thumbnailBounds?.left || "0",
-                    width: thumbnailBounds?.width || "0",
-                    height: thumbnailBounds?.height || "0",
-                  }}
-                  animate={{
-                    top: "50%",
-                    left: "50%",
-                    x: "-50%",
-                    y: "-50%",
-                  }}
-                  exit={{
-                    top: thumbnailBounds?.top || "0",
-                    left: thumbnailBounds?.left || "0",
-                    width: thumbnailBounds?.width || "0",
-                    height: thumbnailBounds?.height || "0",
-                  }}
-                  transition={{ duration: 0.5 }}
-                  className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
-                >
-                  <Image
-                    fill
-                    sizes="(max-width: 1200px) 100%"
-                    style={{ width: "100%", objectFit: "cover" }}
-                    className={isThumbnailVisible ? "block" : "hidden"}
-                    src={thumbnail}
-                    alt="Trailer Thumbnail"
-                  />
-                </motion.div>
-              )}
 
               {isExpanded && (
                 <div
@@ -344,24 +327,34 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             left: thumbnailBounds?.left || "0",
             width: thumbnailBounds?.width || "0",
             height: thumbnailBounds?.height || "0",
+            opacity: 0,
           }}
-          animate={{ top: "50%", left: "50%", x: "-50%", y: "-50%" }}
+          animate={{
+            top: "50%",
+            left: "50%",
+            x: "-50%",
+            y: "-50%",
+            opacity: 1,
+          }}
           exit={{
             top: thumbnailBounds?.top || "0",
             left: thumbnailBounds?.left || "0",
             width: thumbnailBounds?.width || "0",
             height: thumbnailBounds?.height || "0",
+            opacity: 0,
           }}
           transition={{ duration: 0.5 }}
-          className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
+          className="fixed z-50 aspect-w-16 aspect-h-9 translate-x-1/2 translate-y-1/2 max-w-screen-2xl"
           onClick={() => setIsExpanded(false)}
         >
-          <YouTube
-            videoId={trailer?.id || ""}
-            opts={{
-              playerVars: { autoplay: 1, controls: 1, modestbranding: 1 },
-            }}
-          />
+          <div style={{ width: "175px", height: "75px" }}>
+            <img
+              style={{ width: "100%", objectFit: "cover", maxHeight: "100%" }}
+              className={isThumbnailVisible ? "block" : "hidden"}
+              src={thumbnail || noImg}
+              alt="Trailer Thumbnail"
+            />
+          </div>
         </motion.div>
       )}
     </div>
