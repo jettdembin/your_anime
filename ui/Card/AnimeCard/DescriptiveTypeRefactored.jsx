@@ -265,9 +265,9 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   onClick={handleBackdropClick}
                 >
                   <motion.section
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0, scale: 0.3 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 1, delay: 0.5 }}
                     className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
                   >

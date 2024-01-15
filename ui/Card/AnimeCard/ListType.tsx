@@ -336,44 +336,6 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           </Modal>
         </div>
       </li>
-      {isExpanded && (
-        <motion.div
-          initial={{
-            top: thumbnailBounds?.top || "0",
-            left: thumbnailBounds?.left || "0",
-            width: thumbnailBounds?.width || "0",
-            height: thumbnailBounds?.height || "0",
-          }}
-          animate={{
-            top: "50%",
-            left: "50%",
-            x: "-50%",
-            y: "-50%",
-          }}
-          exit={{
-            top: thumbnailBounds?.top || "0",
-            left: thumbnailBounds?.left || "0",
-            width: thumbnailBounds?.width || "0",
-            height: thumbnailBounds?.height || "0",
-          }}
-          transition={{ duration: 0.5 }}
-          className="fixed z-50 aspect-w-16 aspect-h-9 max-w-screen-2xl"
-        >
-          <img
-            style={{ width: "100%", objectFit: "cover" }}
-            className={isThumbnailVisible ? "block" : "hidden"}
-            src={thumbnail || noImg}
-            alt="Trailer Thumbnail"
-          />
-          {/* <Image
-            fill
-            style={{ width: "100%", objectFit: "cover" }}
-            className={isThumbnailVisible ? "block" : "hidden"}
-            src={thumbnail}
-            alt="Trailer Thumbnail"
-          /> */}
-        </motion.div>
-      )}
 
       {isExpanded && (
         <div
@@ -381,10 +343,10 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           onClick={handleBackdropClick}
         >
           <motion.section
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
           >
             <YouTube
