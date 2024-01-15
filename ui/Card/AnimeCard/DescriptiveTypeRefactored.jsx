@@ -165,7 +165,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   }
                   transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
                 >
-                  <div className="w-full flex  justify-between font-medium">
+                  <div className="min-h-[75px] w-full flex  justify-between font-medium">
                     <div className="flex flex-col gap-1 text-gray-700">
                       <div className="flex">
                         <h6 className="text-xxs">
