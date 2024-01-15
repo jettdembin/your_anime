@@ -165,7 +165,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   }
                   transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
                 >
-                  <div className="w-full flex  justify-between font-medium">
+                  <div className="min-h-[75px] w-full flex  justify-between font-medium">
                     <div className="flex flex-col gap-1 text-gray-700">
                       <div className="flex">
                         <h6 className="text-xxs">
@@ -209,8 +209,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   </div>
                   {!!id && site === "youtube" && (
                     <div className="relative flex justify-between gap-2">
-                      <h6 className="text-xs md:text-lg w-1/2">
-                        <span className="text-2xl font-bold">#</span>
+                      <h6 className="text-xs md:text-sm w-1/2">
+                        {/* <span className="text-2xl font-bold">#</span> */}
                         {title?.native || title?.english}
                       </h6>
                       <div
