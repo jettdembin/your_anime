@@ -209,7 +209,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   </div>
                   {!!id && site === "youtube" && (
                     <div className="relative flex justify-between gap-2">
-                      <h6 className="text-xs md:text-lg w-1/2">
+                      <h6 className="text-xs md:text-base w-1/2">
                         <span className="text-2xl font-bold">#</span>
                         {title?.native || title?.english}
                       </h6>
