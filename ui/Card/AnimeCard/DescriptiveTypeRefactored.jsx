@@ -82,7 +82,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
 
   const addToListButton = (
     <button
-      className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md tooltip"
+      className="p-2 md:p-3 bg-white rounded-full cursor-pointer shadow-md tooltip"
       data-tip="Add to list"
     >
       <BookmarkIcon />
@@ -122,7 +122,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             alt="Cover Image"
           /> */}
           {/* Opaque Background */}
-          <div className="z-20 absolute w-full h-fit bg-gray-900 bottom-0 opacity-70 p-3 md:p-4">
+          <div className="z-10 absolute w-full h-fit bg-gray-900 bottom-0 opacity-70 p-3 md:p-4">
             {/* used as a spacer for the opaque background */}
             <h3 className="w-full flex flex-col gap-2 opacity-0 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
@@ -130,7 +130,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </h3>
           </div>
           {/*  Anime Title Text */}
-          <div className="z-30 absolute h-fit bottom-0 p-3 md:p-4">
+          <div className="z-20 absolute h-fit bottom-0 p-3 md:p-4">
             <h3 className="w-full flex flex-col gap-2 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
               <span className="text-blue-300 text-xs text-left ">
@@ -143,7 +143,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
         <div
           className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass} rounded-md`}
         >
-          <div className="overflow-y-auto p-6">
+          <div className="overflow-y-auto px-6 pt-6">
             <AnimatePresence key={media?.id + "animate"}>
               <div
                 className={`${
@@ -289,7 +289,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </AnimatePresence>
           </div>
           {/* Genres */}
-          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre overflow-hidden">
+          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
             <div className="flex flex-wrap items-center mr-2 gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
@@ -302,7 +302,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                 </span>
               ))}
             </div>
-            <div className="flex">
+            <div className="relative flex">
               {/* <AnimeHoverOptions /> */}
               <button
                 className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-2"
