@@ -12,24 +12,26 @@ import SearchWrapper from "./components/SearchWrapper";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden">
       <Header />
 
       <main className="relative mt-32 md:mt-6">
         <LandingPageContent>
           <SearchWrapper />
 
-          <ContentLayout title="TRENDING NOW" category="TRENDING">
-            <Trending />
-          </ContentLayout>
+          <div className="mx-2 md:mx-0">
+            <ContentLayout title="TRENDING NOW" category="TRENDING">
+              <Trending />
+            </ContentLayout>
 
-          <ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
-            <PopularAnime />
-          </ContentLayout>
+            <ContentLayout title="ALL TIME POPULAR" category="POPULAR_ANIME">
+              <PopularAnime />
+            </ContentLayout>
 
-          <ContentLayout title="TOP 100 ANIME" category="TOP_100">
-            <TopAnimeList />
-          </ContentLayout>
+            <ContentLayout title="TOP 100 ANIME" category="TOP_100">
+              <TopAnimeList />
+            </ContentLayout>
+          </div>
         </LandingPageContent>
       </main>
     </div>
