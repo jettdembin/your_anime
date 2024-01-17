@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 
 import { useUser } from "@clerk/nextjs";
-import { BookmarkIcon, PlayIcon } from "@radix-ui/react-icons";
+import { BookmarkIcon, DotFilledIcon, PlayIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -99,6 +99,21 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     ? "overflow-y-auto" // Enable scrolling and set a max height
     : "overflow-hidden";
 
+  const seasonClass =
+    season == "SPRING"
+      ? "text-emerald-500"
+      : season == "SUMMER"
+      ? "text-amber-500"
+      : season == "FALL"
+      ? "text-yellow-500"
+      : season == "WINTER"
+      ? "text-cyan-500"
+      : "text-grey-700";
+
+  const seasonText = !!season
+    ? season?.split("")[0] + season?.slice(1).toLowerCase()
+    : "";
+
   return (
     <div className="w-full h-full shadow-custom rounded-none sm:rounded-md">
       <div className="flex w-full h-full max-h-52 md:max-h-56 overflow-hidden rounded-none md:rounded-md">
@@ -122,7 +137,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             alt="Cover Image"
           /> */}
           {/* Opaque Background */}
-          <div className="z-10 absolute w-full h-fit bg-gray-900 bottom-0 opacity-70 p-3 md:p-4">
+          <div className="z-10 absolute w-full h-fit bg-slate-900 bottom-0 opacity-70 p-3 md:p-4">
             {/* used as a spacer for the opaque background */}
             <h3 className="w-full flex flex-col gap-2 opacity-0 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
@@ -143,7 +158,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
         <div
           className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass}`}
         >
-          <div className="overflow-y-auto px-6 pt-6">
+          <div className="overflow-y-auto px-4 pt-4 md:px-6 md:pt-6">
             <AnimatePresence key={media?.id + "animate"}>
               <div
                 className={`${
@@ -166,32 +181,28 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
                 >
                   <div className="min-h-[75px] w-full flex  justify-between font-medium">
-                    <div className="flex flex-col gap-1 text-gray-700">
+                    <div className="flex flex-col gap-1 ">
                       <div className="flex">
-                        <h6 className="text-xxs">
+                        <h6 className="flex items-center text-xxs md:text-xs text-grey-500">
                           {episodes && !!season
                             ? `${episodes} ${
                                 episodes != 1 ? "episodes" : "episode"
-                              } aired in ${
-                                !!season
-                                  ? season?.split("")[0] +
-                                    season?.slice(1).toLowerCase()
-                                  : ""
                               }`
                             : !episodes
                             ? !!season
-                              ? `Ongoing, aired in ${
-                                  season?.split("")[0] +
-                                  season?.slice(1).toLowerCase()
-                                }`
+                              ? `Ongoing`
                               : "Ongoing"
                             : `Unknown`}
+                          <span>
+                            <DotFilledIcon className="w-2 h-2 mx-1" />
+                          </span>
+                          <span className={seasonClass}>{seasonText}</span>
                           {/* {!!season &&
                         season?.split("")[0] + season?.slice(1).toLowerCase()} */}
                         </h6>
                       </div>
                       <div className="flex gap-1 text-lg">
-                        <h6 className="text-xs sm:text-sm md:text-base">
+                        <h6 className="text-xs sm:text-sm md:text-base text-grey-700">
                           {!!startDate?.month
                             ? `${getMonthName(startDate?.month)} ${
                                 startDate?.day
@@ -209,7 +220,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   </div>
                   {!!id && site === "youtube" && (
                     <div className="relative flex justify-between gap-2">
-                      <h6 className="text-xs md:text-sm w-1/2">
+                      <h6 className="text-xxs md:text-xs w-1/2">
                         {/* <span className="text-2xl font-bold">#</span> */}
                         {title?.native || title?.english}
                       </h6>
@@ -250,7 +261,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                 >
                   <div
                     className={`${
-                      isCardHovered ? "pb-6 text-gray-700" : "text-gray-700"
+                      isCardHovered ? "pb-6 text-grey-700" : "text-grey-700"
                     }`}
                     dangerouslySetInnerHTML={
                       !isCardHovered
@@ -308,13 +319,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </AnimatePresence>
           </div>
           {/* Genres */}
-          <div className="w-full flex items-center justify-between px-4 py-2 mt-auto bg-genre">
+          <div className="w-full flex items-center justify-between px-4 md:px-6 py-2 mt-auto bg-genre">
             <div className="flex flex-wrap items-center mr-2 gap-1 md:gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
                   className={`${
-                    i > 1 ? "hidden md:block" : ""
-                  } h-3 md:h-6 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
+                    i > 1 ? "hidden md:flex" : ""
+                  } h-3 md:h-4  text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
                   key={`${genre + i + cardType + "second"}`}
                 >
                   {genre?.toLowerCase()}

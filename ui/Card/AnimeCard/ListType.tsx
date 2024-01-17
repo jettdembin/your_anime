@@ -180,7 +180,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       {anime?.genres &&
                         anime?.genres.slice(0, 3).map((genre, i) => (
                           <span
-                            className="h-3 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                            className="h-3 md:h-4 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
                             key={`${genre + i + cardType}`}
                           >
                             {genre?.toLowerCase()}
