@@ -323,14 +323,17 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </div>
             <div className="relative flex">
               {/* <AnimeHoverOptions /> */}
-              <button
-                className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-1 md:mr-2"
-                onClick={() => {
-                  handleTrailerClick();
-                }}
-              >
-                <PlayIcon className="text-[#3CB4F0]" />
-              </button>
+              {!!id && site === "youtube" && (
+                <button
+                  className="p-2 md:p-4 bg-white rounded-full cursor-pointer shadow-md md:hidden mr-1 md:mr-2"
+                  onClick={() => {
+                    handleTrailerClick();
+                  }}
+                >
+                  <PlayIcon className="text-[#3CB4F0]" />
+                </button>
+              )}
+
               {isSignedInAddToListButton()}
               <Modal id="add_to_list_modal">
                 <AddToListForm />

@@ -312,20 +312,21 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
             </div>
           </div>
         </div>
-
-        <div
-          className={`${
-            !!id && site === "youtube" ? "block tooltip" : "hidden"
-          } order-7 lg:order-7 absolute top-[-.8rem] right-14   rounded-full bg-white shadow-lg`}
-          data-tip="Play Trailer"
-        >
-          <button
-            className="p-3 rounded-full cursor-pointer"
-            ref={playTailerButtonRef}
+        {!!id && site === "youtube" && (
+          <div
+            className={`${
+              !!id && site === "youtube" ? "block tooltip" : "hidden"
+            } order-7 lg:order-7 absolute top-[-.8rem] right-14   rounded-full bg-white shadow-lg`}
+            data-tip="Play Trailer"
           >
-            <PlayIcon className="text-[#3CB4F0]" />
-          </button>
-        </div>
+            <button
+              className="p-3 rounded-full cursor-pointer"
+              ref={playTailerButtonRef}
+            >
+              <PlayIcon className="text-[#3CB4F0]" />
+            </button>
+          </div>
+        )}
         <div
           className="tooltip order-8 lg:order-8 absolute  top-[-.8rem] right-2 rounded-full bg-yellow-300 lshadow-lg "
           data-tip="Add to List"
