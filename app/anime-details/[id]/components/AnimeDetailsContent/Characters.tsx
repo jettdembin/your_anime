@@ -34,18 +34,18 @@ export default function Characters({ characters, anime }: Props) {
         Characters
       </h3>
 
-      <div className="flex flex-col md:grid md:grid-cols-2 gap-4 lg:gap-8">
+      <div className="flex flex-col justify-between md:grid md:grid-cols-2 gap-4 lg:gap-8">
         {characters?.map((character, index: number) => (
           <div
             key={character?.node?.name?.full + index}
             className="h-24 grid bg-white rounded-sm shadow-md"
             style={
               type === "ANIME"
-                ? { gridTemplateColumns: "5rem auto 5rem" }
-                : { gridTemplateColumns: "5rem auto" }
+                ? { gridTemplateColumns: "4rem auto 4rem" }
+                : { gridTemplateColumns: "4rem auto" }
             }
           >
-            <div className="relative w-20">
+            <div className="relative w-16">
               <img
                 className="w-full max-h-24 rounded-sm"
                 src={character.node.image.large}
@@ -78,7 +78,7 @@ export default function Characters({ characters, anime }: Props) {
               </p>
             </div>
             {type === "ANIME" && (
-              <div className="relative w-20">
+              <div className="relative w-16">
                 <img
                   className="w-full object-cover max-h-24 rounded-sm"
                   // src={anime.coverImage.extraLarge}

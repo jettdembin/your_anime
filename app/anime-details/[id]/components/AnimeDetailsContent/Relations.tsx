@@ -25,7 +25,7 @@ export default function Relations({ anime, relations }: Props) {
               className="grid  bg-white shadow-md h-[6rem] rounded-sm max-w-[400px] min-w-[400px] lg:max-w-[auto] lg:min-w-[auto] overflow-hidden hover:overflow-auto"
               style={{ gridTemplateColumns: "5rem auto" }}
             >
-              <div className="relative w-20">
+              <div className="relative w-16">
                 <img
                   className="w-full h-full object-cover rounded-sm"
                   src={relation.coverImage.large || ""}
