@@ -73,7 +73,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
 
   const addToListButton = (
     <button
-      className="p-3 rounded-full cursor-pointer shadow-lg"
+      className="p-2 md:p-3 rounded-full cursor-pointer shadow-lg"
       ref={addToListButtonRef}
       onClick={() => {
         if (isSignedIn) {
@@ -316,11 +316,11 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           <div
             className={`${
               !!id && site === "youtube" ? "block tooltip" : "hidden"
-            } order-7 lg:order-7 absolute top-[-.8rem] right-14   rounded-full bg-white shadow-lg`}
+            } order-7 lg:order-7 absolute top-[-.8rem] right-12 md:right-14 rounded-full bg-white shadow-lg`}
             data-tip="Play Trailer"
           >
             <button
-              className="p-3 rounded-full cursor-pointer"
+              className="p-2 md:p-3 rounded-full cursor-pointer"
               ref={playTailerButtonRef}
             >
               <PlayIcon className="text-[#3CB4F0]" />
@@ -344,20 +344,39 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           onClick={handleBackdropClick}
         >
           <motion.section
-            initial={{ opacity: 0, scale: 0.7 }}
+            initial={{ opacity: 0, scale: 0.3 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl"
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 1 }}
+            className="relative aspect-w-16 aspect-h-9 max-w-screen-2xl flex items-center justify-center"
           >
             <YouTube
               videoId={id || ""}
+              style={{ width: "100%", height: "100%" }}
+              className="hidden md:block"
               opts={{
                 playerVars: {
                   autoplay: 1,
                   controls: 1,
                   modestbranding: 1,
+                  // Mute the video when it's not visible
+                  mute: window.innerWidth < 768 ? 1 : 0,
                 },
+              }}
+            />
+            <YouTube
+              videoId={id || ""}
+              className="md:hidden flex items-center justify-center"
+              opts={{
+                playerVars: {
+                  autoplay: 1,
+                  controls: 1,
+                  modestbranding: 1,
+                  // Mute the video when it's not visible
+                  mute: window.innerWidth > 768 ? 1 : 0,
+                },
+                height: "250",
+                width: "350",
               }}
             />
           </motion.section>
