@@ -73,7 +73,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
 
   const addToListButton = (
     <button
-      className="p-2 md:p-3 rounded-full cursor-pointer shadow-lg"
+      className="p-2 md:p-3 rounded-full cursor-pointer shadow-md"
       ref={addToListButtonRef}
       onClick={() => {
         if (isSignedIn) {
@@ -316,7 +316,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           <div
             className={`${
               !!id && site === "youtube" ? "block tooltip" : "hidden"
-            } order-7 lg:order-7 absolute top-[-.8rem] right-12 md:right-14 rounded-full bg-white shadow-lg`}
+            } order-7 lg:order-7 absolute top-[-.8rem] right-12 md:right-14 rounded-full bg-white shadow-md`}
             data-tip="Play Trailer"
           >
             <button
@@ -328,7 +328,7 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
           </div>
         )}
         <div
-          className="tooltip order-8 lg:order-8 absolute  top-[-.8rem] right-2 rounded-full bg-yellow-300 lshadow-lg "
+          className="tooltip order-8 lg:order-8 absolute  top-[-.8rem] right-2 rounded-full bg-yellow-300 lshadow-md "
           data-tip="Add to List"
         >
           {isSignedInAddToListButton()}
