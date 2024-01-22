@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useUser } from "@clerk/nextjs";
 import { BookmarkIcon, DotFilledIcon, PlayIcon } from "@radix-ui/react-icons";
@@ -32,6 +32,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
 
   const {
     episodes,
+    nextAiringEpisode,
     startDate,
     description,
     genres = [],
@@ -39,6 +40,42 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     trailer,
     title,
   } = media;
+
+  const { timeUntilAiring, episode } = nextAiringEpisode || {
+    timeUntilAiring: "",
+    episode: "",
+  };
+
+  const [seconds, setSeconds] = useState(timeUntilAiring);
+
+  useEffect(() => {
+    if (seconds <= 0) {
+      // Stop the countdown when it reaches 0
+      return;
+    }
+
+    const intervalId = setInterval(() => {
+      setSeconds((seconds) => seconds - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [seconds]);
+
+  function convertSecondsToDHMS(seconds) {
+    const days = Math.floor(seconds / (3600 * 24));
+    const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const sec = Math.floor(seconds % 60);
+
+    let timeString = "";
+    if (days > 0) timeString += `${days}d `;
+    if (hours > 0) timeString += `${hours}h `;
+    if (minutes > 0) timeString += `${minutes}m `;
+    timeString += `${sec}s`;
+
+    return timeString;
+  }
+
   const studioName = media?.studios?.nodes?.[0]?.name || "Unknown";
   const MAX_DESCRIPTION_LENGTH = 220;
   const truncatedDescription =
@@ -119,6 +156,22 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
       <div className="flex w-full h-full max-h-52 md:max-h-56 overflow-hidden rounded-none md:rounded-md">
         {/* Left Side */}
         <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
+          {convertSecondsToDHMS(seconds) !== "0s" && (
+            <div className="flex items-center text-center z-10 absolute w-full h-fit bg-slate-900 top-0 opacity-50 p-3 md:p-4 text-xxs">
+              {" "}
+              <span className="text-white">
+                Ep {episode}: {convertSecondsToDHMS(seconds)}
+              </span>
+            </div>
+          )}
+          {convertSecondsToDHMS(seconds) !== "0s" && (
+            <div className="flex items-center text-center z-10 absolute w-full h-fit bg-none top-0 p-3 md:p-4 text-xxs">
+              {" "}
+              <span className="text-white text-center">
+                Ep {episode}: {convertSecondsToDHMS(seconds)}
+              </span>
+            </div>
+          )}
           <img
             role="button"
             onClick={() => {
@@ -197,6 +250,18 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                             <DotFilledIcon className="w-2 h-2 mx-1" />
                           </span>
                           <span className={seasonClass}>{seasonText}</span>
+                          {convertSecondsToDHMS(seconds) !== "0s" && (
+                            <>
+                              {" "}
+                              <span>
+                                <DotFilledIcon className="w-2 h-2 mx-1" />
+                              </span>
+                              <span className={seasonClass}>
+                                Ep {episode}: {convertSecondsToDHMS(seconds)}
+                              </span>
+                            </>
+                          )}
+
                           {/* {!!season &&
                         season?.split("")[0] + season?.slice(1).toLowerCase()} */}
                         </h6>

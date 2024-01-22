@@ -23,6 +23,7 @@ export const GET_POPULAR_ANIME = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -65,6 +66,7 @@ export const GET_SEASON = gql`
       media(
         type: ANIME
         season: WINTER
+        sort: POPULARITY_DESC
         seasonYear: 2024
         isAdult: false
       ) {
@@ -85,6 +87,7 @@ export const GET_SEASON = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -136,6 +139,7 @@ export const GET_TRENDING = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -202,6 +206,7 @@ export const GET_BROWSE_FILTERS = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -248,6 +253,7 @@ export const SEARCH_ANIMES_UPCOMING = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -301,6 +307,7 @@ export const SEARCH_ANIMES_POPULAR = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -350,6 +357,7 @@ export const SEARCH_ANIMES_TRENDING = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
@@ -418,6 +426,7 @@ export const GET_TOP_100_ANIME = gql`
           thumbnail
         }
         nextAiringEpisode {
+          airingAt
           timeUntilAiring
           episode
         }
