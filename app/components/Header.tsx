@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="max-w-7xl mx-0 lg:mx-20 xl:mx-auto relative bg-slate-800 py-16  px-8 md:px-0 lg:px-10 shadow-2xl lg:mt-28 lg:rounded-3xl">
+    <header className="max-w-7xl mx-0 lg:mx-20 xl:mx-auto relative bg-slate-800 py-16  px-4 sm:px-8 md:px-0 lg:px-10 shadow-2xl lg:mt-28 lg:rounded-3xl">
       <h1 className="text-3xl font-bold text-gray-100 pt-12 md:pt-0 mb-10 mx-auto max-w-full text-center">
         The next generation anime platform
       </h1>
@@ -32,7 +32,7 @@ export default function Header() {
             />
           </div>
           <div className="order-2 md:order-1 xl:order-2">
-            <h3 className="text-base md:text-lg font-semibold text-gray-100">
+            <h3 className="text-lg font-semibold text-gray-100">
               Discover your obsessions<span className="ml-2">🔎</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -62,7 +62,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="md:text-lg font-semibold text-gray-100">
+            <h3 className="text-lg font-semibold text-gray-100">
               Bring YourAnime anywhere <span className="ml-2">🌎</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -92,7 +92,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="md:text-lg font-semibold text-gray-100">
+            <h3 className="text-lg font-semibold text-gray-100">
               Join the conversation <span className="ml-2">📝</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -121,7 +121,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="md:text-lg font-semibold text-gray-100">
+            <h3 className="text-lg font-semibold text-gray-100">
               Tweak it to your liking <span className="ml-2">💕</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">

@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       } mt-auto`}
     >
       <ContentContainer className="flex justify-between">
-        <div className="w-full px-4 py-8 flex flex-col sm:flex-row items-center justify-between">
+        <div className="w-full px-4 py-8 flex flex-col sm:flex-row justify-between">
           <div className="mb-4 sm:mb-0 text-sm md:text-base">
             <div className="flex flex-col justify-between">
               <div className="flex items-center gap-2">

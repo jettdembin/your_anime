@@ -13,9 +13,7 @@ body {
   position: relative;
 }
 
-.tooltip::before {
-  z-index: 100;
-}
+
 
 /* Left triangle */
 .left-triangle::before {
