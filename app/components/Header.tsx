@@ -20,7 +20,7 @@ export default function Header() {
               style={{
                 minWidth: "100px",
                 width: "auto",
-
+                maxWidth: "100px",
                 position: "absolute",
                 left: "50%",
                 transform: "translateX(-50%)",
@@ -32,7 +32,7 @@ export default function Header() {
             />
           </div>
           <div className="order-2 md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="mb-1 text-lg font-semibold text-gray-100">
               Discover your obsessions<span className="ml-2">🔎</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -50,7 +50,7 @@ export default function Header() {
               style={{
                 minWidth: "100px",
                 width: "auto",
-
+                maxWidth: "100px",
                 position: "absolute",
                 left: "50%",
                 transform: "translateX(-50%)",
@@ -62,7 +62,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="mb-1 text-lg font-semibold text-gray-100">
               Bring YourAnime anywhere <span className="ml-2">🌎</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -80,7 +80,7 @@ export default function Header() {
               style={{
                 minWidth: "100px",
                 width: "auto",
-
+                maxWidth: "100px",
                 position: "absolute",
                 left: "50%",
                 transform: "translateX(-50%)",
@@ -92,7 +92,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="mb-1 text-lg font-semibold text-gray-100">
               Join the conversation <span className="ml-2">📝</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
@@ -109,6 +109,7 @@ export default function Header() {
               style={{
                 minWidth: "100px",
                 width: "auto",
+                maxWidth: "100px",
                 position: "absolute",
                 left: "50%",
                 transform: "translateX(-50%)",
@@ -120,7 +121,7 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="mb-1 text-lg font-semibold text-gray-100">
               Tweak it to your liking <span className="ml-2">💕</span>
             </h3>
             <p className="text-sm md:text-base text-blue-200">
