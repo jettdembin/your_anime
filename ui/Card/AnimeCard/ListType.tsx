@@ -178,9 +178,11 @@ const ListType = ({ anime, index }: { anime: Media; index: number }) => {
                       style={{ width: "calc(100% - 2rem" }}
                     >
                       {anime?.genres &&
-                        anime?.genres.slice(0, 3).map((genre, i) => (
+                        anime?.genres.slice(0, 4).map((genre, i) => (
                           <span
-                            className="h-3 md:h-4 text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1"
+                            className={`${
+                              i > 1 ? "hidden md:flex" : ""
+                            } h-3 md:h-4  text-xxs font-bold flex items-center bg-yellow-300 rounded-3xl px-2 py-1`}
                             key={`${genre + i + cardType}`}
                           >
                             {genre?.toLowerCase()}

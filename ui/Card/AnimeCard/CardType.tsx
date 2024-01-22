@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 
 import { Media } from "@/types/anime";
 
-import { noImg } from "@/consts";
-
 import { useShowAnimeInfo } from "@/hooks/useShowAnimeInfo";
 
 import AnimeHoverCardDetails from "@/ui/Card/AnimeCard/CardType/AnimeHoverCardDetails";
@@ -55,7 +53,7 @@ const CardType = ({ media, isLastCard, index }: Props) => {
   return (
     <>
       <div
-        className="relative w-full h-72 xl:h-80 max-h-[230px] lg:max-h-[230px] xl:max-h-[250px] bg-gray-700 md:rounded-md overflow-hidden group"
+        className="relative w-full h-52 md:h-64 xl:h-72 max-h-[230px] lg:max-h-[230px] xl:max-h-[250px] bg-gray-700 md:rounded-md overflow-hidden group"
         onMouseEnter={() => handleMouseEnter(media.id)}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
