@@ -19,13 +19,17 @@ const Footer: React.FC = () => {
       } mt-auto`}
     >
       <ContentContainer className="flex justify-between">
-        <div className="px-4 py-8 flex flex-col md:flex-row items-center justify-between">
-          <div className="mb-4 md:mb-0">
-            <div className="flex items-center gap-2">
-              <img src="/favicon.ico" alt="YAnime" className="w-10 h-10" />
-              <h3 className="text-lg font-bold">YourAnime</h3>
+        <div className="w-full px-4 py-8 flex flex-col sm:flex-row items-center justify-between">
+          <div className="mb-4 sm:mb-0 text-sm md:text-base">
+            <div className="flex flex-col justify-between">
+              <div className="flex items-center gap-2">
+                <img src="/favicon.ico" alt="YAnime" className="w-10 h-10" />
+                <h3 className="text-lg font-bold">YourAnime</h3>
+              </div>
+              <p className="mt-2">
+                Discover new anime and track your progress.
+              </p>
             </div>
-            <p className="mt-2">Discover new anime and track your progress.</p>
           </div>
           {/* <div className="flex items-center">
             <button
@@ -48,9 +52,11 @@ const Footer: React.FC = () => {
               ></div>
             </div>
           </div> */}
-        </div>
-        <div className="py-8 mt-auto">
-          <h6>ⓒ 2024 Engineered by Jett Dembin</h6>
+          <div className="mt-auto">
+            <h6 className="text-sm md:text-base">
+              ⓒ 2024 Engineered by Jett Dembin
+            </h6>
+          </div>
         </div>
       </ContentContainer>
     </footer>

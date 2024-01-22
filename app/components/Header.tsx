@@ -32,10 +32,10 @@ export default function Header() {
             />
           </div>
           <div className="order-2 md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="text-base md:text-lg font-semibold text-gray-100">
               Discover your obsessions<span className="ml-2">🔎</span>
             </h3>
-            <p className="text-md text-blue-200">
+            <p className="text-sm md:text-base text-blue-200">
               What are your highest rated genres or most watched voice actors?
               Follow your watching habits over time with in-depth statistics.
             </p>
@@ -62,10 +62,10 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="md:text-lg font-semibold text-gray-100">
               Bring YourAnime anywhere <span className="ml-2">🌎</span>
             </h3>
-            <p className="text-md text-blue-200">
+            <p className="text-sm md:text-base text-blue-200">
               Built with phone and tablet in mind, YourAnime is the perfect
               webiste to use on the go.
             </p>
@@ -92,10 +92,10 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="md:text-lg font-semibold text-gray-100">
               Join the conversation <span className="ml-2">📝</span>
             </h3>
-            <p className="text-md text-blue-200">
+            <p className="text-sm md:text-base text-blue-200">
               Comment, review, and rate anime and manga alongside your friends.
             </p>
           </div>
@@ -121,10 +121,10 @@ export default function Header() {
             />
           </div>
           <div className="md:order-1 xl:order-2">
-            <h3 className="text-lg font-semibold text-gray-100">
+            <h3 className="md:text-lg font-semibold text-gray-100">
               Tweak it to your liking <span className="ml-2">💕</span>
             </h3>
-            <p className="text-md text-blue-200">
+            <p className="text-sm md:text-base text-blue-200">
               From dark mode to custom themes, YourAnime is yours to customize.
             </p>
           </div>
