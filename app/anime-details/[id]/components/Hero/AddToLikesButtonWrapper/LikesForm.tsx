@@ -1,8 +1,9 @@
 "use client";
 
+import { Fragment } from "react";
+
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 
 type Props = { english: string; id: string; modalId: string };
@@ -11,8 +12,6 @@ export default function Form({ english, id }: Props) {
   const { userId }: { userId: any } = useAuth();
 
   const handleAddToLikes = async (formData: any) => {
-    // e.preventDefault();
-    // const formData = new FormData(e.currentTarget): void;
     const rating = formData.get("rating-10");
 
     const likeData = {
@@ -22,7 +21,6 @@ export default function Form({ english, id }: Props) {
       rating: Number(rating) ?? 5,
     };
 
-    // Show a loading toast first
     const toastId = toast.loading("Adding your like...");
 
     try {
@@ -55,71 +53,26 @@ export default function Form({ english, id }: Props) {
   return (
     <form className="modal-backdrop" onSubmit={handleAddToLikes}>
       <div className="rating rating-lg rating-half">
-        <input type="radio" name="rating-10" className="rating-hidden" />
-        <input
-          type="radio"
-          name="rating-10"
-          value={0.5}
-          className="bg-green-500 mask mask-star-2 mask-half-1"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={1}
-          className="bg-green-500 mask mask-star-2 mask-half-2"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={1.5}
-          className="bg-green-500 mask mask-star-2 mask-half-1"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={2}
-          className="bg-green-500 mask mask-star-2 mask-half-2"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={2.5}
-          className="bg-green-500 mask mask-star-2 mask-half-1"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={3}
-          className="bg-green-500 mask mask-star-2 mask-half-2"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={3.5}
-          className="bg-green-500 mask mask-star-2 mask-half-1"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={4}
-          className="bg-green-500 mask mask-star-2 mask-half-2"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={4.5}
-          className="bg-green-500 mask mask-star-2 mask-half-1"
-        />
-        <input
-          type="radio"
-          name="rating-10"
-          value={5}
-          className="bg-green-500 mask mask-star-2 mask-half-2"
-        />
+        {/* Labels for screen readers */}
+        {[...Array(10)].map((_, index) => (
+          <Fragment key={index}>
+            <label htmlFor={`rating-${index / 2 + 0.5}`} className="sr-only">
+              Rating {index / 2 + 0.5} stars
+            </label>
+            <input
+              type="radio"
+              id={`rating-${index / 2 + 0.5}`}
+              name="rating-10"
+              value={index / 2 + 0.5}
+              className={`bg-green-500 mask mask-star-2 ${
+                index % 2 === 0 ? "mask-half-1" : "mask-half-2"
+              }`}
+            />
+          </Fragment>
+        ))}
       </div>
 
       <div className="modal-action">
-        {/* if there is a button in form, it will close the modal */}
         <button
           className="btn"
           type="submit"

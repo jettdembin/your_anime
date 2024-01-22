@@ -14,7 +14,7 @@ export default function AddToListForm({}: Props) {
             >
               Status
             </label>
-            <select name="status">
+            <select name="status" id="library_editor_statusSelect">
               <option value="WATCHED">Completed</option>
               <option value="">Rewatching</option>
               <option value="WATCHING">Watching</option>
@@ -26,10 +26,14 @@ export default function AddToListForm({}: Props) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="rating"
+            >
               Rating
             </label>
             <select
+              id="rating"
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               name="rating"
             >
@@ -48,10 +52,14 @@ export default function AddToListForm({}: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="rewatches"
+            >
               Progress
             </label>
             <input
+              id="rewatches"
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               name="rewatches"
               type="number"
@@ -61,10 +69,14 @@ export default function AddToListForm({}: Props) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="full_rewatches"
+            >
               Full Rewatches
             </label>
             <input
+              id="full_rewatches"
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               name="full_rewatches"
               type="number"
@@ -74,7 +86,10 @@ export default function AddToListForm({}: Props) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="library_editor_startedAt"
+            >
               Started
             </label>
             <input
@@ -85,7 +100,10 @@ export default function AddToListForm({}: Props) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="library_editor_finishedAt"
+            >
               Finished
             </label>
             <input
@@ -96,7 +114,10 @@ export default function AddToListForm({}: Props) {
             />
           </div>
           <div className="col-span-full">
-            <label className="block text-sm font-medium text-gray-700">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="library_editor_notes"
+            >
               Personal Notes
             </label>
             <textarea
