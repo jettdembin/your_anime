@@ -9,6 +9,7 @@ import TopAnimeList from "@/app/components/TopAnimeList";
 import Trending from "@/app/components/Trending";
 import { ContentLayout } from "@/layout/ContentLayout";
 import SearchWrapper from "./components/SearchWrapper";
+import ThisSeason from "./components/ThisSeason";
 
 export default function Home() {
   return (
@@ -20,6 +21,10 @@ export default function Home() {
           <SearchWrapper />
 
           <div className="mx-2 md:mx-0">
+            <ContentLayout title="WINTER 2024" category="THIS_SEASON">
+              <ThisSeason />
+            </ContentLayout>
+
             <ContentLayout title="TRENDING NOW" category="TRENDING">
               <Trending />
             </ContentLayout>

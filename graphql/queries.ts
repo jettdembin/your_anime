@@ -59,6 +59,57 @@ export const usePopularAnime = (page: number = 1, perPage: number = 50) => {
   return { error, loading, data };
 };
 
+export const GET_SEASON = gql`
+  query GetSeason($page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
+      media(
+        type: ANIME
+        season: WINTER
+        seasonYear: 2024
+        isAdult: false
+      ) {
+        id
+        title {
+          english
+          native
+        }
+        description
+        source
+        coverImage {
+          large
+          extraLarge
+        }
+        trailer {
+          id
+          site
+          thumbnail
+        }
+        nextAiringEpisode {
+          timeUntilAiring
+          episode
+        }
+        startDate {
+          year
+          month
+          day
+        }
+        averageScore
+        studios(isMain: true) {
+          nodes {
+            name
+          }
+        }
+        popularity
+        episodes
+        genres
+        status
+        season
+        seasonYear
+      }
+    }
+  }
+`;
+
 export const GET_TRENDING = gql`
   query GetTrending($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
