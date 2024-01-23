@@ -155,7 +155,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     <div className="w-full h-full shadow-custom rounded-none sm:rounded-md">
       <div className="flex w-full h-full max-h-52 md:max-h-56 overflow-hidden rounded-none md:rounded-md">
         {/* Left Side */}
-        <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
+        <div
+          className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full"
+          role="button"
+          onClick={() => {
+            router.push(`/anime-details/${media.id}`);
+          }}
+        >
           {convertSecondsToDHMS(seconds) !== "0s" && (
             <div className="flex items-center justify-center  z-10 absolute w-full h-fit bg-slate-900 top-0 opacity-80 p-1 text-xs">
               {" "}
@@ -173,10 +179,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </div>
           )}
           <img
-            role="button"
-            onClick={() => {
-              router.push(`/anime-details/${media.id}`);
-            }}
+            // role="button"
+
             className="w-full h-full max-h-full"
             src={media.coverImage.large || noImg}
             alt="Cover Image"
@@ -219,8 +223,6 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                 } h-full `}
               >
                 <motion.div
-                  role="button"
-                  onClick={handleTrailerClick}
                   className={`${
                     !!thumbnail
                       ? "w-[200%] grid-cols-2"
@@ -277,6 +279,8 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                       </h6>
                       <div
                         className="relative"
+                        role="button"
+                        onClick={handleTrailerClick}
                         style={{ width: "175px", height: "75px" }}
                       >
                         <img
