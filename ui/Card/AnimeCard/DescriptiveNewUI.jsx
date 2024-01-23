@@ -136,7 +136,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
     ? "overflow-y-auto" // Enable scrolling and set a max height
     : "overflow-hidden";
 
-  const seasonClass =
+  const seasonTextClass =
     season == "SPRING"
       ? "text-emerald-500"
       : season == "SUMMER"
@@ -146,6 +146,16 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
       : season == "WINTER"
       ? "text-cyan-500"
       : "text-grey-700";
+  const seasonBgClass =
+    season == "SPRING"
+      ? "bg-emerald-500"
+      : season == "SUMMER"
+      ? "bg-amber-500"
+      : season == "FALL"
+      ? "bg-yellow-500"
+      : season == "WINTER"
+      ? "bg-cyan-500"
+      : "bg-grey-700";
 
   const seasonText = !!season
     ? season?.split("")[0] + season?.slice(1).toLowerCase()
@@ -153,22 +163,28 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
 
   return (
     <div className="w-full h-full shadow-custom rounded-none sm:rounded-md">
+      <div className="flex flex-col items-center justify-center bg-white">
+        <h2 className="text-center font-semibold py-2 text-sm text-slate-800">
+          {media.title.english || media.title.native}
+        </h2>
+        <h3 className="py-1 text-xs text-left ">{studioName}</h3>
+      </div>
       <div className="flex w-full h-full max-h-52 md:max-h-56 overflow-hidden rounded-none md:rounded-md">
         {/* Left Side */}
-        <div className="w-2/5 min-w-[150px] max-w-[160px] relative md:h-full">
+        <div className="w-1/4 relative md:h-full">
           {convertSecondsToDHMS(seconds) !== "0s" && (
-            <div className="flex items-center justify-center  z-10 absolute w-full h-fit bg-slate-900 top-0 opacity-80 p-1 text-xs">
+            <div className="flex items-center text-center z-10 absolute w-full h-fit bg-slate-900 top-0 opacity-50 p-3 md:p-4 text-xxs">
               {" "}
-              <span className="text-white invisible">
-                EP{episode}: {convertSecondsToDHMS(seconds)}
+              <span className="text-white">
+                Ep {episode}: {convertSecondsToDHMS(seconds)}
               </span>
             </div>
           )}
           {convertSecondsToDHMS(seconds) !== "0s" && (
-            <div className="flex items-center justify-center z-10 absolute w-full h-fit bg-none top-0  p-1 text-xs ">
+            <div className="flex items-center text-center z-10 absolute w-full h-fit bg-none top-0 p-3 md:p-4 text-xxs ">
               {" "}
               <span className="text-white text-center">
-                EP{episode}: {convertSecondsToDHMS(seconds)}
+                Ep {episode}: {convertSecondsToDHMS(seconds)}
               </span>
             </div>
           )}
@@ -189,29 +205,29 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             src={media.coverImage.large || ""}
             alt="Cover Image"
           /> */}
-          {/* Opaque Background */}
-          <div className="z-10 absolute w-full h-fit bg-slate-900 bottom-0 opacity-70 p-3 md:p-4">
-            {/* used as a spacer for the opaque background */}
+          {/* Opaque Background, used as a spacer for the opaque background  */}
+          {/* <div className="z-10 absolute w-full h-fit bg-slate-900 bottom-0 opacity-70 p-3 md:p-4">
+        
             <h3 className="w-full flex flex-col gap-2 opacity-0 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
               <span className="text-xs">{studioName}</span>
             </h3>
-          </div>
+          </div>  */}
           {/*  Anime Title Text */}
-          <div className="z-20 absolute h-fit bottom-0 p-3 md:p-4">
+          {/* <div className="z-20 absolute h-fit bottom-0 p-3 md:p-4">
             <h3 className="w-full flex flex-col gap-2 text-white font-semibold text-sm">
               {media.title.english || media.title.native}
               <span className="text-blue-300 text-xs text-left ">
                 {studioName}
               </span>
             </h3>
-          </div>
+          </div> */}
         </div>
         {/* Right Side */}
         <div
-          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass}`}
+          className={`w-full grid grid-rows-[3fr 1fr] bg-white ${descriptionClass} overflow-hidden`}
         >
-          <div className="overflow-y-auto px-4 pt-4 md:px-6 md:pt-6">
+          <div className="overflow-y-auto px-2 sm:px-4 pt-4 md:px-6 md:pt-6">
             <AnimatePresence key={media?.id + "animate"}>
               <div
                 className={`${
@@ -235,8 +251,15 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                 >
                   <div className="min-h-[75px] w-full flex  justify-between font-medium">
                     <div className="flex flex-col gap-1 ">
-                      <div className="flex">
-                        <h6 className="flex items-center text-xxs md:text-xs text-grey-500">
+                      <div className="flex flex-col text-xxs md:text-xs text-grey-500">
+                        {convertSecondsToDHMS(seconds) !== "0s" && (
+                          <>
+                            <h3 className="hidden">
+                              Ep {episode}: {convertSecondsToDHMS(seconds)}
+                            </h3>
+                          </>
+                        )}
+                        <div className="flex items-center">
                           {episodes && !!season
                             ? `${episodes} ${
                                 episodes != 1 ? "episodes" : "episode"
@@ -247,20 +270,31 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                               : "Ongoing"
                             : `Unknown`}
                           <span>
-                            <DotFilledIcon className="w-2 h-2 mx-1" />
+                            <DotFilledIcon className="w-2 h-2" />
                           </span>
-                          <span className={seasonClass}>{seasonText}</span>
-                        </h6>
+                          <h3 className={`${seasonTextClass} font-semibold`}>
+                            {seasonText.toUpperCase()}
+                          </h3>
+                          {convertSecondsToDHMS(seconds) !== "0s" && (
+                            <>
+                              <h3 className="ml-2 hidden md:block">
+                                Ep {episode}: {convertSecondsToDHMS(seconds)}
+                              </h3>
+                            </>
+                          )}
+                        </div>
+
+                        {/* {!!season &&
+                        season?.split("")[0] + season?.slice(1).toLowerCase()} */}
                       </div>
-                      <div className="flex gap-1 text-lg">
-                        <h6 className="text-xs sm:text-sm md:text-base text-grey-700">
-                          {!!startDate?.month
-                            ? `${getMonthName(startDate?.month)} ${
-                                startDate?.day
-                              } ${startDate?.year}`
-                            : "Not yet released"}
-                        </h6>
-                      </div>
+
+                      <h3 className="text-xs sm:text-sm md:text-base text-grey-700">
+                        {!!startDate?.month
+                          ? `${getMonthName(startDate?.month)} ${
+                              startDate?.day
+                            } ${startDate?.year}`
+                          : "Not yet released"}
+                      </h3>
                     </div>
                     <div className="flex justify-end">
                       <p className="text-xs sm:text-sm md:text-base">
@@ -370,7 +404,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
             </AnimatePresence>
           </div>
           {/* Genres */}
-          <div className="w-full flex items-center justify-between px-4 md:px-6 py-2 mt-auto bg-genre">
+          <div className="w-full flex items-center justify-between px-1 sm:px-4 md:px-6 py-2 mt-auto bg-genre">
             <div className="flex flex-wrap items-center mr-2 gap-1 md:gap-2">
               {genres.slice(0, 4).map((genre, i) => (
                 <span
