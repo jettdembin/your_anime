@@ -65,7 +65,7 @@ export const GET_SEASON = gql`
     Page(page: $page, perPage: $perPage) {
       media(
         type: ANIME
-        season: WINTER
+        season: SPRING
         sort: POPULARITY_DESC
         seasonYear: 2024
         isAdult: false

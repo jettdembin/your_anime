@@ -21,7 +21,7 @@ export default function Home() {
           <SearchWrapper />
 
           <div className="mx-2 md:mx-0">
-            <ContentLayout title="WINTER 2024" category="THIS_SEASON">
+            <ContentLayout title="SPRING 2024" category="THIS_SEASON">
               <ThisSeason />
             </ContentLayout>
 
