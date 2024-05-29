@@ -60,12 +60,14 @@ export const usePopularAnime = (page: number = 1, perPage: number = 50) => {
   return { error, loading, data };
 };
 
+
+
 export const GET_SEASON = gql`
-  query GetSeason($page: Int, $perPage: Int) {
+  query GetSeason($page: Int, $perPage: Int, $season: MediaSeason) {
     Page(page: $page, perPage: $perPage) {
       media(
         type: ANIME
-        season: SPRING
+        season: $season
         sort: POPULARITY_DESC
         seasonYear: 2024
         isAdult: false

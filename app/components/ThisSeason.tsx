@@ -2,6 +2,7 @@
 
 import { GET_SEASON } from "@/graphql/queries";
 import { Media } from "@/types/anime";
+import { getThisSeason } from "@/util";
 
 import { useAnilistAPI } from "@/hooks/useAnilistAPI";
 
@@ -12,7 +13,8 @@ import AnimeCard from "@/ui/Card/AnimeCard";
 import { CardSectionLoader } from "@/ui/LoadingSection";
 
 export default function ThisSeason({}) {
-  const { error, loading, data } = useAnilistAPI(GET_SEASON);
+  const season = getThisSeason();
+  const { error, loading, data } = useAnilistAPI(GET_SEASON, { season });
 
   if (loading) return <CardSectionLoader />;
   if (error) {

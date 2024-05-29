@@ -75,5 +75,12 @@ function showModal(modalId: string): void {
   }
 };
 
-export { convertTimeUntilAiring, debounce, getEmoji, getMonthName, showModal };
+function getThisSeason(): string {
+  const date = new Date();
+  const month = date.getMonth();
+  const seasons = ["WINTER", "SPRING", "SUMMER", "FALL"];
+  return seasons[Math.floor(month / 3)];
+}
+
+export { convertTimeUntilAiring, debounce, getEmoji, getMonthName, getThisSeason, showModal };
 
