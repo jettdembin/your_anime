@@ -391,7 +391,7 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
               {/* <AnimeHoverOptions /> */}
               {!!id && site === "youtube" && (
                 <button
-                  className="p-2 md:p-3 md:hidden bg-white rounded-full cursor-pointer shadow-md mr-1 md:mr-2"
+                  className="p-2 md:p-3  bg-white rounded-full cursor-pointer shadow-md mr-1 md:mr-2"
                   onClick={() => {
                     handleTrailerClick();
                   }}
