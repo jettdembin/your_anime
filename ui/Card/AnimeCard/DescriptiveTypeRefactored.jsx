@@ -197,14 +197,24 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
           <div className="z-10 absolute w-full h-fit bg-slate-900 bottom-0 opacity-70 p-3 md:p-4">
             {/* used as a spacer for the opaque background */}
             <h3 className="w-full flex flex-col gap-2 opacity-0 text-white font-semibold text-sm">
-              {media.title.english || media.title.native}
+              {/* {media.title.english || media.title.native} */}
+              {/* {!!startDate?.month
+                ? `${getMonthName(startDate?.month)} ${startDate?.day} ${
+                    startDate?.year
+                  }`
+                : "Not yet released"} */}
               <span className="text-xs">{studioName}</span>
             </h3>
           </div>
           {/*  Anime Title Text */}
           <div className="z-20 absolute h-fit bottom-0 p-3 md:p-4">
             <h3 className="w-full flex flex-col gap-2 text-white font-semibold text-sm">
-              {media.title.english || media.title.native}
+              {/* {media.title.english || media.title.native} */}
+              {/* {!!startDate?.month
+                ? `${getMonthName(startDate?.month)} ${startDate?.day} ${
+                    startDate?.year
+                  }`
+                : "Not yet released"} */}
               <span className="text-blue-300 text-xs text-left ">
                 {studioName}
               </span>
@@ -255,12 +265,13 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                         </h6>
                       </div>
                       <div className="flex gap-1 text-lg">
-                        <h6 className="text-xs sm:text-sm md:text-base text-grey-700">
-                          {!!startDate?.month
+                        <h6 className="text-xs sm:text-sm md:text-base text-grey-700 max-w-xs">
+                          {/* {!!startDate?.month
                             ? `${getMonthName(startDate?.month)} ${
                                 startDate?.day
                               } ${startDate?.year}`
-                            : "Not yet released"}
+                            : "Not yet released"} */}
+                          {title?.english || title?.native}
                         </h6>
                       </div>
                     </div>
@@ -312,7 +323,9 @@ const DescriptiveTypeRefactored = ({ media, isCardHovered }) => {
                   )}
                 </motion.div>
                 <div
-                  className={`${!!thumbnail ? "" : "mt-4"} text-xxs md:text-sm`}
+                  className={`${
+                    !!thumbnail ? "mt-4" : "mt-4"
+                  } text-xxs md:text-sm`}
                 >
                   <div
                     className={`${
